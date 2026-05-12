@@ -52,26 +52,21 @@
     "intro": "Filter the property by the school you're visiting, then plan around the New Zealand school calendar."
   },
   "SchoolSearch": {
-    "title": "Find by school",
-    "subtitle": "Search by school name, or drill down: Region → City → District → School.",
-    "byName": "Search by school name",
-    "byNamePlaceholder": "e.g. Auckland Grammar, Westlake",
-    "or": "or",
-    "region": "Region",
-    "city": "City",
-    "district": "District",
-    "school": "School",
-    "anyRegion": "Choose a region",
-    "anyCity": "Choose a city",
-    "anyDistrict": "Choose a district",
-    "pickRegionFirst": "Pick a region first",
-    "pickCityFirst": "Pick a city first",
-    "pickDistrictFirst": "Pick a district first",
-    "pickSchool": "Choose a school",
-    "clear": "Clear"
+    "title": "Schools near the home",
+    "subtitle": "Schools within {radius} km of the home, sorted nearest first.",
+    "filterLabel": "Filter by school name",
+    "filterPlaceholder": "Filter the list (English or Chinese)",
+    "noMatches": "No matches — try a different keyword.",
+    "clear": "Clear",
+    "zone": {
+      "in-zone": "✓ In zone",
+      "nearby": "Nearby",
+      "further": "Far",
+      "out-of-region": "Other"
+    }
   },
   "SchoolMatch": {
-    "noSelection": "Choose a school and we'll show how the property relates — zone, distance, and travel context.",
+    "noSelection": "Pick a school on the left to see the home's zone match and travel context.",
     "distance": "Distance from the home",
     "advice": "Host advice",
     "zone": {
@@ -81,10 +76,10 @@
       "out-of-region": "Different region"
     },
     "adviceText": {
-      "in-zone": "The home sits inside this school's zone — walking or a short drive. Great for longer enrolment stays.",
-      "nearby": "Close to this school, about a 10–20 minute drive. Good for short visits and trial-day trips.",
-      "further": "A longer commute — plan a full day for the visit, or a hotel night near the school if needed.",
-      "out-of-region": "This school is in another region. Our home covers Auckland trips; consider a stay closer to the school for that part of the journey."
+      "in-zone": "The home sits inside this school's zone — a walk or short drive. Great for longer enrolment stays.",
+      "nearby": "Close to this school, about a 10–20 minute drive. Workable for private or out-of-zone enrolments.",
+      "further": "A longer cross-city commute. Plan a full day for the visit, or a different stay for that leg of the trip.",
+      "out-of-region": "This school is in another region. Our home serves Christchurch trips; consider a stay closer to the school instead."
     }
   },
   "Seasons": {

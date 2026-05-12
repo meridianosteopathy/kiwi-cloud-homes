@@ -8,18 +8,19 @@ import type {
 
 const MOCK_LISTING: HostawayListing = {
   id: "mock-1",
-  name: "Auckland Garden Retreat",
+  name: "Halswell Garden Retreat",
   description:
-    "A bright four-bedroom family home in Epsom, Auckland — in zone for Auckland Grammar and Epsom Girls Grammar, walking distance to parks, an easy drive to the CBD. Designed for longer stays: full kitchen, study nook, fast Wi-Fi.",
+    "A bright four-bedroom family home in Halswell, southwest Christchurch — in zone for Cashmere High and Halswell School, with easy access to Riccarton, the CBD, and Lincoln. Designed for longer stays: full kitchen, study nook, fast Wi-Fi.",
   bedrooms: 4,
   bathrooms: 2,
   maxGuests: 8,
   basePrice: { amount: 420, currency: "NZD" },
   images: [],
   address: {
-    line1: "—",
-    city: "Epsom, Auckland",
-    region: "Auckland",
+    // Exact address kept internal — short-stay sites typically reveal it after booking.
+    line1: "16 Sunbeam Place",
+    city: "Halswell, Christchurch",
+    region: "Canterbury",
     country: "New Zealand",
   },
 };
