@@ -33,14 +33,23 @@ interface HostawayApiListing {
   bathroomsNumber?: number;
   personCapacity?: number;
   price?: number;
+  cleaningFee?: number;
   currencyCode?: string;
   address?: string;
   street?: string;
   city?: string;
   state?: string;
   country?: string;
-  listingImages?: Array<{ url?: string }>;
+  thumbnailUrl?: string;
+  /**
+   * Only populated when the listing is fetched with `?includeResources=1`.
+   * Otherwise returned as an empty array.
+   */
+  listingImages?: Array<{ url?: string; sortOrder?: number }>;
 }
+
+/** Query string Hostaway needs to populate sub-resources like listingImages. */
+const LISTING_INCLUDE = "?includeResources=1";
 
 interface HostawayApiCalendarDay {
   date: string;
@@ -62,7 +71,9 @@ export function createLiveClient(): HostawayClient {
   return {
     async getListing() {
       const id = await resolveListingId();
-      const payload = await apiGet<HostawayApiListing>(`/listings/${id}`);
+      const payload = await apiGet<HostawayApiListing>(
+        `/listings/${id}${LISTING_INCLUDE}`,
+      );
       return mapListing(payload);
     },
 
@@ -186,6 +197,21 @@ async function readSnippet(res: Response): Promise<string> {
 
 function mapListing(api: HostawayApiListing): HostawayListing {
   const currency = api.currencyCode || "NZD";
+
+  const orderedImages = [...(api.listingImages ?? [])]
+    .sort((a, b) => (a.sortOrder ?? 0) - (b.sortOrder ?? 0))
+    .map((i) => i.url)
+    .filter((u): u is string => Boolean(u));
+
+  // Fall back to the top-level thumbnail when the resources aren't included
+  // (e.g. a different fetch path or an account quirk).
+  const images =
+    orderedImages.length > 0
+      ? orderedImages
+      : api.thumbnailUrl
+        ? [api.thumbnailUrl]
+        : [];
+
   return {
     id: String(api.id),
     name: api.publicName || api.name || api.internalListingName || "Listing",
@@ -194,9 +220,8 @@ function mapListing(api: HostawayApiListing): HostawayListing {
     bathrooms: api.bathroomsNumber ?? 0,
     maxGuests: api.personCapacity ?? 0,
     basePrice: { amount: api.price ?? 0, currency },
-    images: (api.listingImages ?? [])
-      .map((i) => i.url)
-      .filter((u): u is string => Boolean(u)),
+    cleaningFee: api.cleaningFee ?? 0,
+    images,
     address: {
       line1: api.street || api.address || "—",
       city: api.city || "",
