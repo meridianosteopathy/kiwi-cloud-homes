@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { useFormatter, useLocale, useTranslations } from "next-intl";
+import { CheckoutDialog } from "./CheckoutDialog";
 import { InquiryDialog } from "./InquiryDialog";
 
 type Props = {
@@ -52,8 +53,10 @@ export function BookingForm({
   );
   const [guests, setGuests] = useState(Math.min(2, maxGuests || 2));
   const [showInquiry, setShowInquiry] = useState(false);
+  const [showCheckout, setShowCheckout] = useState(false);
 
   const nights = useMemo(() => nightsBetween(checkIn, checkOut), [checkIn, checkOut]);
+  const canBook = nights > 0;
 
   const subtotal = nights * basePrice.amount;
   const priceLabel = (amount: number) =>
@@ -154,9 +157,9 @@ export function BookingForm({
       <div className="mt-4 flex flex-col gap-2 sm:flex-row">
         <button
           type="button"
-          disabled
-          title={t("bookComingSoon")}
-          className="flex-1 cursor-not-allowed rounded-full bg-kiwi-300 px-4 py-2 text-sm font-medium text-white opacity-70"
+          onClick={() => setShowCheckout(true)}
+          disabled={!canBook}
+          className="flex-1 rounded-full bg-kiwi-600 px-4 py-2 text-sm font-medium text-white hover:bg-kiwi-700 disabled:cursor-not-allowed disabled:bg-kiwi-300"
         >
           {t("bookNow")}
         </button>
@@ -170,7 +173,7 @@ export function BookingForm({
       </div>
 
       <p className="mt-2 text-center text-[11px] text-kiwi-500">
-        {t("bookComingSoon")}
+        {t("testModeNotice")}
       </p>
 
       {showInquiry && (
@@ -183,6 +186,17 @@ export function BookingForm({
           initialGuests={guests}
           locale={locale}
           onClose={() => setShowInquiry(false)}
+        />
+      )}
+
+      {showCheckout && (
+        <CheckoutDialog
+          listingId={listingId}
+          listingName={listingName}
+          initialCheckIn={checkIn}
+          initialCheckOut={checkOut}
+          initialGuests={guests}
+          onClose={() => setShowCheckout(false)}
         />
       )}
     </section>

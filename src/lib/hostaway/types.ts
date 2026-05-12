@@ -25,6 +25,8 @@ export interface HostawayListing {
   bathrooms: number;
   maxGuests: number;
   basePrice: HostawayPrice;
+  /** Flat cleaning fee charged per booking, in the listing's currency. */
+  cleaningFee: number;
   images: string[];
   address: HostawayAddress;
   /** Optional 360° tour URL (Matterport, Kuula, etc.). */

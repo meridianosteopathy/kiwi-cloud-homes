@@ -15,6 +15,7 @@ const MOCK_LISTING: HostawayListing = {
   bathrooms: 2,
   maxGuests: 8,
   basePrice: { amount: 420, currency: "NZD" },
+  cleaningFee: 120,
   images: [],
   address: {
     // Exact address kept internal — short-stay sites typically reveal it after booking.

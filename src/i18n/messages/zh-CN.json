@@ -148,10 +148,44 @@
     "guestCount": "{count} 位客人",
     "breakdown": "{price} × {nights} 晚",
     "estimatedTotal": "预计总价",
-    "estimateNote": "上述为基础价格预估;最终含税费、清洁费等以结账时为准。",
+    "estimateNote": "上述为基础价格预估,清洁费等会在结账时显示。",
     "bookNow": "立即预订",
     "inquire": "发送询问",
-    "bookComingSoon": "在线支付即将开通 — 暂请通过\"发送询问\"联系房东。"
+    "testModeNotice": "测试模式 · 暂不会扣款,可使用 Stripe 测试卡 4242 4242 4242 4242。"
+  },
+  "Checkout": {
+    "title": {
+      "review": "确认预订信息",
+      "pay": "支付",
+      "done": "支付完成"
+    },
+    "subtitle": "预订对象:{listing}",
+    "calculating": "正在为您计算价格...",
+    "stay": "入住日期",
+    "guests": "入住人数",
+    "lineLabel": {
+      "nightly": "住宿费",
+      "cleaning": "清洁费"
+    },
+    "nightlyBreakdown": "{price} × {nights} 晚",
+    "total": "总计",
+    "yourName": "您的姓名",
+    "yourEmail": "您的邮箱",
+    "testModeNotice": "测试模式 · 这是 Stripe 测试环境,使用测试卡号 4242 4242 4242 4242(任意有效期与 CVC),不会发生真实扣款。",
+    "missingStripeKey": "未配置 Stripe 密钥(NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY)。请联系网站管理员。",
+    "continueToPayment": "前往支付",
+    "starting": "正在准备...",
+    "back": "返回",
+    "payNow": "支付 {amount}",
+    "paying": "支付中...",
+    "paymentIncomplete": "支付未完成(状态:{status}),请重试。",
+    "paymentCaptured": "测试支付 {amount} 已成功(未实际扣款)。",
+    "reservationPending": "提示:订单尚未写入房东的预订系统。本网站目前还未上线 Hostaway 写入功能(PR C),所以这只是支付流程的演练。",
+    "nextSteps": "下一步:",
+    "stayDates": "入住时间:{checkIn} 至 {checkOut}",
+    "guestsLine": "入住人数:{count} 人",
+    "cancel": "取消",
+    "close": "关闭"
   },
   "Inquiry": {
     "title": "向房东发送询问",

@@ -148,10 +148,44 @@
     "guestCount": "{count, plural, one {# guest} other {# guests}}",
     "breakdown": "{price} × {nights, plural, one {# night} other {# nights}}",
     "estimatedTotal": "Estimated total",
-    "estimateNote": "Estimate based on the base nightly rate. Final total incl. taxes and cleaning is confirmed at checkout.",
+    "estimateNote": "Estimate based on the base nightly rate. Cleaning fee is added at checkout.",
     "bookNow": "Book now",
     "inquire": "Send inquiry",
-    "bookComingSoon": "Online checkout is coming soon — use \"Send inquiry\" to talk to the host in the meantime."
+    "testModeNotice": "Test mode — no real charges. Use Stripe test card 4242 4242 4242 4242 to try the flow."
+  },
+  "Checkout": {
+    "title": {
+      "review": "Review your booking",
+      "pay": "Payment",
+      "done": "Payment complete"
+    },
+    "subtitle": "For: {listing}",
+    "calculating": "Calculating your quote...",
+    "stay": "Stay",
+    "guests": "Guests",
+    "lineLabel": {
+      "nightly": "Accommodation",
+      "cleaning": "Cleaning fee"
+    },
+    "nightlyBreakdown": "{price} × {nights, plural, one {# night} other {# nights}}",
+    "total": "Total",
+    "yourName": "Your name",
+    "yourEmail": "Your email",
+    "testModeNotice": "Test mode — this is the Stripe test environment. Use card 4242 4242 4242 4242 with any future expiry and any CVC. No real money moves.",
+    "missingStripeKey": "Stripe publishable key (NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY) isn't configured. Please contact the site admin.",
+    "continueToPayment": "Continue to payment",
+    "starting": "Preparing...",
+    "back": "Back",
+    "payNow": "Pay {amount}",
+    "paying": "Processing...",
+    "paymentIncomplete": "Payment didn't complete (status: {status}). Please try again.",
+    "paymentCaptured": "Test payment of {amount} succeeded (no real charge).",
+    "reservationPending": "Heads up: the booking hasn't been written to the host's calendar yet. Reservation creation lands in PR C — this is the payment flow rehearsal.",
+    "nextSteps": "Next steps:",
+    "stayDates": "Stay: {checkIn} → {checkOut}",
+    "guestsLine": "Guests: {count}",
+    "cancel": "Cancel",
+    "close": "Close"
   },
   "Inquiry": {
     "title": "Message the host",

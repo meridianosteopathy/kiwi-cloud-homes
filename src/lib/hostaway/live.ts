@@ -33,6 +33,7 @@ interface HostawayApiListing {
   bathroomsNumber?: number;
   personCapacity?: number;
   price?: number;
+  cleaningFee?: number;
   currencyCode?: string;
   address?: string;
   street?: string;
@@ -219,6 +220,7 @@ function mapListing(api: HostawayApiListing): HostawayListing {
     bathrooms: api.bathroomsNumber ?? 0,
     maxGuests: api.personCapacity ?? 0,
     basePrice: { amount: api.price ?? 0, currency },
+    cleaningFee: api.cleaningFee ?? 0,
     images,
     address: {
       line1: api.street || api.address || "—",
