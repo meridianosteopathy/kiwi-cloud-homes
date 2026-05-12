@@ -52,26 +52,21 @@
     "intro": "为来新西兰看校的家长,提供按学校筛选房源,以及四季入住建议。"
   },
   "SchoolSearch": {
-    "title": "按学校查找",
-    "subtitle": "可直接搜索学校名,也可按 大区 → 城市 → 学区 → 学校 一层层筛选。",
-    "byName": "按学校名称搜索",
-    "byNamePlaceholder": "如:Auckland Grammar、奥克兰文法",
-    "or": "或",
-    "region": "大区",
-    "city": "城市",
-    "district": "学区",
-    "school": "学校",
-    "anyRegion": "选择大区",
-    "anyCity": "选择城市",
-    "anyDistrict": "选择学区",
-    "pickRegionFirst": "请先选择大区",
-    "pickCityFirst": "请先选择城市",
-    "pickDistrictFirst": "请先选择学区",
-    "pickSchool": "选择学校",
-    "clear": "清除选择"
+    "title": "房源附近的学校",
+    "subtitle": "以下学校均在房源 {radius} 公里范围内,按距离由近到远排列。",
+    "filterLabel": "按学校名称筛选",
+    "filterPlaceholder": "输入学校名筛选(中英文均可)",
+    "noMatches": "没有匹配的学校,试着调整关键词。",
+    "clear": "取消选择",
+    "zone": {
+      "in-zone": "✓ 学区内",
+      "nearby": "邻近",
+      "further": "较远",
+      "out-of-region": "外区"
+    }
   },
   "SchoolMatch": {
-    "noSelection": "选择一所学校后,这里会显示房源与该学校的距离与学区匹配。",
+    "noSelection": "在左侧选择一所学校,这里会显示房源与该学校的学区与距离信息。",
     "distance": "距离房源",
     "advice": "房东建议",
     "zone": {
@@ -82,9 +77,9 @@
     },
     "adviceText": {
       "in-zone": "房源位于该校学区内,步行或短车程即可到达,适合长期陪读。",
-      "nearby": "房源邻近该校,自驾约 10–20 分钟,适合短期看校与试读。",
-      "further": "距离该校稍远,建议安排一天的看校行程或考虑机场到学校之间的过夜方案。",
-      "out-of-region": "此校位于其他大区,本房源主要服务奥克兰行程,建议另行安排该地住宿。"
+      "nearby": "房源邻近该校,自驾约 10–20 分钟。私立或跨学区入读时,这段通勤完全可行。",
+      "further": "距离该校稍远,横穿基督城。建议安排整天的看校行程,或评估是否需要换住所。",
+      "out-of-region": "此校位于其他大区,本房源主要服务基督城行程,建议另行安排该地住宿。"
     }
   },
   "Seasons": {

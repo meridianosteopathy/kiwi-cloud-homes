@@ -1,8 +1,17 @@
-import { CITIES, DISTRICTS, REGIONS, SCHOOLS } from "./data";
+import { CITIES, DISTRICTS, RADIUS_KM, REGIONS, SCHOOLS } from "./data";
 import type { City, District, Region, School } from "./types";
 
 export type { City, District, LocalizedName, Region, School, ZoneStatus } from "./types";
-export { CITIES, DISTRICTS, REGIONS, SCHOOLS } from "./data";
+export { CITIES, DISTRICTS, RADIUS_KM, REGIONS, SCHOOLS } from "./data";
+
+/**
+ * Schools within {@link RADIUS_KM} of the home, sorted nearest first.
+ */
+export function nearbySchools(maxKm: number = RADIUS_KM): School[] {
+  return SCHOOLS.filter((s) => s.distanceKm <= maxKm).sort(
+    (a, b) => a.distanceKm - b.distanceKm,
+  );
+}
 
 export type AppLocale = "zh-CN" | "en";
 
@@ -33,27 +42,3 @@ export function findSchool(id: string): School | undefined {
   return SCHOOLS.find((s) => s.id === id);
 }
 
-export function citiesIn(regionId: string): City[] {
-  return CITIES.filter((c) => c.regionId === regionId);
-}
-
-export function districtsIn(cityId: string): District[] {
-  return DISTRICTS.filter((d) => d.cityId === cityId);
-}
-
-export function schoolsIn(districtId: string): School[] {
-  return SCHOOLS.filter((s) => s.districtId === districtId);
-}
-
-/**
- * Case-insensitive substring search across school names in both locales.
- */
-export function searchSchools(query: string, limit = 8): School[] {
-  const q = query.trim().toLowerCase();
-  if (!q) return [];
-  return SCHOOLS.filter(
-    (s) =>
-      s.name.en.toLowerCase().includes(q) ||
-      s.name.zhCN.toLowerCase().includes(q),
-  ).slice(0, limit);
-}
