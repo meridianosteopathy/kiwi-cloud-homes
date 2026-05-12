@@ -10,7 +10,7 @@ const MOCK_LISTING: HostawayListing = {
   id: "mock-1",
   name: "Auckland Garden Retreat",
   description:
-    "A bright four-bedroom family home in a quiet Auckland suburb, close to top schools, parks, and the city centre. Designed for longer stays — full kitchen, study nook, fast Wi-Fi.",
+    "A bright four-bedroom family home in Epsom, Auckland — in zone for Auckland Grammar and Epsom Girls Grammar, walking distance to parks, an easy drive to the CBD. Designed for longer stays: full kitchen, study nook, fast Wi-Fi.",
   bedrooms: 4,
   bathrooms: 2,
   maxGuests: 8,
@@ -18,7 +18,7 @@ const MOCK_LISTING: HostawayListing = {
   images: [],
   address: {
     line1: "—",
-    city: "Auckland",
+    city: "Epsom, Auckland",
     region: "Auckland",
     country: "New Zealand",
   },
