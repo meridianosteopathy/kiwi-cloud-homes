@@ -1,0 +1,76 @@
+{
+  "Site": {
+    "name": "Kiwi Cloud Homes",
+    "tagline": "Short-stay homes in New Zealand for Chinese guests"
+  },
+  "Nav": {
+    "home": "Home",
+    "tourist": "Tourist stay",
+    "school": "School visit",
+    "language": "Language"
+  },
+  "LanguageToggle": {
+    "label": "Language",
+    "zh-CN": "中文",
+    "en": "English"
+  },
+  "Landing": {
+    "title": "Settle in, then explore New Zealand",
+    "subtitle": "A trusted, comfortable whole-home stay — designed with Chinese travellers in mind.",
+    "personaPrompt": "Tell us why you're coming to New Zealand.",
+    "personaHint": "We'll tailor the journey — from search filters to seasonal advice."
+  },
+  "Persona": {
+    "tourist": {
+      "title": "Tourist stay",
+      "blurb": "Visiting New Zealand for sightseeing, business, or family — settle in like a local.",
+      "cta": "I'm a tourist"
+    },
+    "school": {
+      "title": "School visit",
+      "blurb": "Visiting schools or accompanying your child for enrolment? Filter by region and school.",
+      "cta": "I'm here to visit schools"
+    },
+    "relocation": {
+      "title": "Relocation",
+      "blurb": "For families relocating long-term or on an immigration path. Long-stay options coming soon.",
+      "comingSoon": "Phase 2"
+    }
+  },
+  "Tourist": {
+    "title": "A cloud home for your trip",
+    "intro": "Whether you're sightseeing, on business, or visiting family, this is a comfortable base in New Zealand.",
+    "features": {
+      "dates": "Pick check-in and check-out dates, with live pricing and availability",
+      "tour": "Walk through every room with a 360° tour before you book",
+      "inquiry": "Book direct, or message the host to negotiate"
+    },
+    "cta": "View the property"
+  },
+  "School": {
+    "title": "School-visit journey",
+    "intro": "Visiting schools is about more than a bed — it's about the right zone, the right season, and trusted information.",
+    "features": {
+      "drillDown": "Drill down: region → city → district → school. Anchor your stay to a school.",
+      "seasonal": "See price and availability by season; we'll flag peak and tight periods.",
+      "tour": "360° tours plus a direct line to the host — plan with confidence from afar."
+    },
+    "cta": "Start filtering by school (coming soon)"
+  },
+  "Property": {
+    "perNight": "per night",
+    "bedrooms": "{count} bedrooms",
+    "bathrooms": "{count} bathrooms",
+    "maxGuests": "Sleeps up to {count}",
+    "viewDetails": "View property",
+    "inquire": "Message the host",
+    "bookNow": "Book now"
+  },
+  "Footer": {
+    "rights": "© {year} Kiwi Cloud Homes · Powered by Hostaway"
+  },
+  "Common": {
+    "comingSoon": "Coming soon",
+    "phaseTwo": "Phase 2"
+  }
+}

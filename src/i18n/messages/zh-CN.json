@@ -1,0 +1,76 @@
+{
+  "Site": {
+    "name": "Kiwi Cloud Homes",
+    "tagline": "新西兰短租 · 您的云端之家"
+  },
+  "Nav": {
+    "home": "首页",
+    "tourist": "旅行短住",
+    "school": "陪读看校",
+    "language": "语言"
+  },
+  "LanguageToggle": {
+    "label": "语言",
+    "zh-CN": "中文",
+    "en": "English"
+  },
+  "Landing": {
+    "title": "在新西兰，安顿您的旅程",
+    "subtitle": "云端之家专为华人旅客打造,提供舒适、可信赖的整套住宿体验。",
+    "personaPrompt": "请告诉我们,您此行的目的是？",
+    "personaHint": "我们将为您推荐最合适的入住方案与行程信息。"
+  },
+  "Persona": {
+    "tourist": {
+      "title": "旅行短住",
+      "blurb": "短期来新西兰旅游、商务或探亲,享受一个像家一样的落脚点。",
+      "cta": "我是旅客"
+    },
+    "school": {
+      "title": "陪读 · 看校之旅",
+      "blurb": "为孩子的留学考察或入学陪读出行,按学区与学校筛选合适的住所。",
+      "cta": "我为孩子看校而来"
+    },
+    "relocation": {
+      "title": "移居新西兰",
+      "blurb": "为长期定居或办理移民的家庭,提供长租与社区相关信息。",
+      "comingSoon": "二期上线"
+    }
+  },
+  "Tourist": {
+    "title": "为旅客准备的云端之家",
+    "intro": "无论您是来观光、商务出差,还是来探望亲友,这里都将是您在新西兰理想的落脚点。",
+    "features": {
+      "dates": "灵活选择入住与退房日期,实时查看价格与空房",
+      "tour": "通过 360° 全景,提前感受住所的每一个角落",
+      "inquiry": "可直接预订,也可与房东沟通议价"
+    },
+    "cta": "查看房源详情"
+  },
+  "School": {
+    "title": "陪读 · 看校之旅",
+    "intro": "我们了解陪孩子来新西兰看校的家长,关心的不止是住宿,更是学区、季节与学校信息。",
+    "features": {
+      "drillDown": "按地区 → 城市 → 学区 → 学校层层筛选,直接以学校为锚点选择住宿",
+      "seasonal": "按季节查看价格与空房趋势,我们会标出旺季与紧张时段",
+      "tour": "360° 看房 + 与房东直接沟通,远距离也能放心安排"
+    },
+    "cta": "开始按学校筛选(即将上线)"
+  },
+  "Property": {
+    "perNight": "每晚",
+    "bedrooms": "{count} 间卧室",
+    "bathrooms": "{count} 间卫浴",
+    "maxGuests": "最多入住 {count} 人",
+    "viewDetails": "查看房源",
+    "inquire": "联系房东",
+    "bookNow": "立即预订"
+  },
+  "Footer": {
+    "rights": "© {year} Kiwi Cloud Homes · 服务由 Hostaway 提供"
+  },
+  "Common": {
+    "comingSoon": "即将上线",
+    "phaseTwo": "二期"
+  }
+}
