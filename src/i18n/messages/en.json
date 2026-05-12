@@ -49,13 +49,91 @@
   },
   "School": {
     "title": "School-visit journey",
-    "intro": "Visiting schools is about more than a bed — it's about the right zone, the right season, and trusted information.",
-    "features": {
-      "drillDown": "Drill down: region → city → district → school. Anchor your stay to a school.",
-      "seasonal": "See price and availability by season; we'll flag peak and tight periods.",
-      "tour": "360° tours plus a direct line to the host — plan with confidence from afar."
+    "intro": "Filter the property by the school you're visiting, then plan around the New Zealand school calendar."
+  },
+  "SchoolSearch": {
+    "title": "Find by school",
+    "subtitle": "Search by school name, or drill down: Region → City → District → School.",
+    "byName": "Search by school name",
+    "byNamePlaceholder": "e.g. Auckland Grammar, Westlake",
+    "or": "or",
+    "region": "Region",
+    "city": "City",
+    "district": "District",
+    "school": "School",
+    "anyRegion": "Choose a region",
+    "anyCity": "Choose a city",
+    "anyDistrict": "Choose a district",
+    "pickRegionFirst": "Pick a region first",
+    "pickCityFirst": "Pick a city first",
+    "pickDistrictFirst": "Pick a district first",
+    "pickSchool": "Choose a school",
+    "clear": "Clear"
+  },
+  "SchoolMatch": {
+    "noSelection": "Choose a school and we'll show how the property relates — zone, distance, and travel context.",
+    "distance": "Distance from the home",
+    "advice": "Host advice",
+    "zone": {
+      "in-zone": "✓ In zone",
+      "nearby": "Nearby",
+      "further": "Commute required",
+      "out-of-region": "Different region"
     },
-    "cta": "Start filtering by school (coming soon)"
+    "adviceText": {
+      "in-zone": "The home sits inside this school's zone — walking or a short drive. Great for longer enrolment stays.",
+      "nearby": "Close to this school, about a 10–20 minute drive. Good for short visits and trial-day trips.",
+      "further": "A longer commute — plan a full day for the visit, or a hotel night near the school if needed.",
+      "out-of-region": "This school is in another region. Our home covers Auckland trips; consider a stay closer to the school for that part of the journey."
+    }
+  },
+  "Seasons": {
+    "title": "Seasons · price + availability",
+    "subtitle": "New Zealand's school year and visitor calendar drive price and availability. Pick a season for our advice.",
+    "monthPicker": "Default month (adjust if needed)",
+    "names": {
+      "spring": "Spring",
+      "summer": "Summer",
+      "autumn": "Autumn",
+      "winter": "Winter"
+    },
+    "monthsShort": {
+      "spring": "Sep–Nov",
+      "summer": "Dec–Feb",
+      "autumn": "Mar–May",
+      "winter": "Jun–Aug"
+    },
+    "monthsLong": {
+      "1": "January",
+      "2": "February",
+      "3": "March",
+      "4": "April",
+      "5": "May",
+      "6": "June",
+      "7": "July",
+      "8": "August",
+      "9": "September",
+      "10": "October",
+      "11": "November",
+      "12": "December"
+    },
+    "priceBand": {
+      "low": "Price · Low",
+      "medium": "Price · Medium",
+      "high": "Price · High",
+      "peak": "Price · Peak"
+    },
+    "availabilityBand": {
+      "open": "Availability · Open",
+      "tight": "Availability · Tight",
+      "very-tight": "Availability · Very tight"
+    },
+    "advice": {
+      "spring": "Pre-school-year prep — enrolment families start arriving. Book 4–6 weeks ahead.",
+      "summer": "Peak season — Christmas, New Year, and Feb intake. Highest prices, tightest availability. Book 8–12 weeks ahead.",
+      "autumn": "Best window for actual school visits — schools are in session, easy to observe and meet staff.",
+      "winter": "Lowest prices. Ski-trip dates push some weekends higher; confirm school holidays before planning visits."
+    }
   },
   "Property": {
     "perNight": "per night",

@@ -1,23 +1,69 @@
 import { setRequestLocale } from "next-intl/server";
 import { useTranslations } from "next-intl";
 import { PropertyCard } from "@/components/PropertyCard";
+import { SchoolMatch } from "@/components/SchoolMatch";
+import { SchoolSearch } from "@/components/SchoolSearch";
+import { SeasonalGuide } from "@/components/SeasonalGuide";
 import { getHostawayClient, type HostawayListing } from "@/lib/hostaway";
+import { findSchool } from "@/lib/schools";
+import { findSeason, type SeasonId } from "@/lib/seasons";
+
+type SearchParams = Record<string, string | string[] | undefined>;
+
+function pickString(sp: SearchParams, key: string): string | null {
+  const v = sp[key];
+  return typeof v === "string" && v.length > 0 ? v : null;
+}
 
 export default async function SchoolPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ locale: string }>;
+  searchParams: Promise<SearchParams>;
 }) {
   const { locale } = await params;
   setRequestLocale(locale);
 
+  const sp = await searchParams;
+  const schoolIdRaw = pickString(sp, "school");
+  const seasonRaw = pickString(sp, "season");
+  const monthRaw = pickString(sp, "month");
+
+  const schoolId = schoolIdRaw && findSchool(schoolIdRaw) ? schoolIdRaw : null;
+  const seasonId: SeasonId | null = seasonRaw
+    ? (findSeason(seasonRaw)?.id ?? null)
+    : null;
+  const monthNum = monthRaw ? Number(monthRaw) : null;
+  const month =
+    monthNum && Number.isInteger(monthNum) && monthNum >= 1 && monthNum <= 12
+      ? monthNum
+      : null;
+
   const listing = await getHostawayClient().getListing();
-  return <SchoolJourney listing={listing} />;
+
+  return (
+    <SchoolJourney
+      listing={listing}
+      schoolId={schoolId}
+      seasonId={seasonId}
+      month={month}
+    />
+  );
 }
 
-function SchoolJourney({ listing }: { listing: HostawayListing }) {
+function SchoolJourney({
+  listing,
+  schoolId,
+  seasonId,
+  month,
+}: {
+  listing: HostawayListing;
+  schoolId: string | null;
+  seasonId: SeasonId | null;
+  month: number | null;
+}) {
   const t = useTranslations("School");
-  const common = useTranslations("Common");
 
   return (
     <div className="mx-auto max-w-6xl px-4 pb-20 pt-12">
@@ -28,25 +74,16 @@ function SchoolJourney({ listing }: { listing: HostawayListing }) {
         <p className="mt-4 text-base text-kiwi-700">{t("intro")}</p>
       </header>
 
-      <ul className="mx-auto mt-10 grid max-w-3xl gap-3 text-sm text-kiwi-800">
-        <li className="rounded-xl border border-kiwi-100 bg-white p-4">
-          {t("features.drillDown")}
-        </li>
-        <li className="rounded-xl border border-kiwi-100 bg-white p-4">
-          {t("features.seasonal")}
-        </li>
-        <li className="rounded-xl border border-kiwi-100 bg-white p-4">
-          {t("features.tour")}
-        </li>
-      </ul>
-
-      <div className="mx-auto mt-6 flex max-w-3xl items-center justify-center">
-        <span className="rounded-full bg-kiwi-100 px-3 py-1 text-xs font-medium text-kiwi-700">
-          {common("comingSoon")}
-        </span>
+      <div className="mt-10 grid gap-5 lg:grid-cols-2">
+        <SchoolSearch selectedSchoolId={schoolId} />
+        <SeasonalGuide selectedSeasonId={seasonId} selectedMonth={month} />
       </div>
 
-      <section className="mt-12">
+      <div className="mt-5">
+        <SchoolMatch schoolId={schoolId} />
+      </div>
+
+      <section className="mt-10">
         <PropertyCard listing={listing} />
       </section>
     </div>
