@@ -56,8 +56,35 @@ export interface InquiryResult {
   receivedAt: string;
 }
 
+export interface ReservationInput {
+  /** Hostaway listing/listingMap id. */
+  listingId: string;
+  guestFirstName: string;
+  guestLastName: string;
+  guestEmail: string;
+  guestPhone?: string;
+  /** YYYY-MM-DD. */
+  arrivalDate: string;
+  /** YYYY-MM-DD. */
+  departureDate: string;
+  numberOfGuests: number;
+  totalPrice: number;
+  currency: Currency;
+  /** Stripe payment intent id — sent as channelReservationId for traceability. */
+  externalRef: string;
+}
+
+export interface ReservationResult {
+  /** Hostaway reservation id (numeric in Hostaway, kept as string for safety). */
+  id: string;
+  /** Whether Hostaway recognised this externalRef and returned an existing
+   *  reservation rather than creating a new one. */
+  alreadyExisted?: boolean;
+}
+
 export interface HostawayClient {
   getListing(): Promise<HostawayListing>;
   getAvailability(start: string, end: string): Promise<AvailabilityDay[]>;
   createInquiry(input: InquiryInput): Promise<InquiryResult>;
+  createReservation(input: ReservationInput): Promise<ReservationResult>;
 }

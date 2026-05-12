@@ -11,6 +11,8 @@ export type {
   HostawayPrice,
   InquiryInput,
   InquiryResult,
+  ReservationInput,
+  ReservationResult,
 } from "./types";
 
 let cached: HostawayClient | null = null;
