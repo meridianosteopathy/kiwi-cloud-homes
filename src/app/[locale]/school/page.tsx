@@ -4,6 +4,7 @@ import { PropertyCard } from "@/components/PropertyCard";
 import { SchoolMatch } from "@/components/SchoolMatch";
 import { SchoolSearch } from "@/components/SchoolSearch";
 import { SeasonalGuide } from "@/components/SeasonalGuide";
+import { defaultDatesForMonth } from "@/lib/dates";
 import { getHostawayClient, type HostawayListing } from "@/lib/hostaway";
 import { findSchool } from "@/lib/schools";
 import { findSeason, type SeasonId } from "@/lib/seasons";
@@ -40,7 +41,9 @@ export default async function SchoolPage({
       ? monthNum
       : null;
 
+  const { checkIn, checkOut } = defaultDatesForMonth(month);
   const listing = await getHostawayClient().getListing();
+  const inquiryEmail = process.env.INQUIRY_EMAIL || null;
 
   return (
     <SchoolJourney
@@ -48,6 +51,9 @@ export default async function SchoolPage({
       schoolId={schoolId}
       seasonId={seasonId}
       month={month}
+      defaultCheckIn={checkIn}
+      defaultCheckOut={checkOut}
+      inquiryEmail={inquiryEmail}
     />
   );
 }
@@ -57,11 +63,17 @@ function SchoolJourney({
   schoolId,
   seasonId,
   month,
+  defaultCheckIn,
+  defaultCheckOut,
+  inquiryEmail,
 }: {
   listing: HostawayListing;
   schoolId: string | null;
   seasonId: SeasonId | null;
   month: number | null;
+  defaultCheckIn: string | null;
+  defaultCheckOut: string | null;
+  inquiryEmail: string | null;
 }) {
   const t = useTranslations("School");
 
@@ -84,8 +96,14 @@ function SchoolJourney({
       </div>
 
       <section className="mt-10">
-        <PropertyCard listing={listing} />
+        <PropertyCard
+          listing={listing}
+          inquiryEmail={inquiryEmail}
+          defaultCheckIn={defaultCheckIn}
+          defaultCheckOut={defaultCheckOut}
+        />
       </section>
     </div>
   );
 }
+

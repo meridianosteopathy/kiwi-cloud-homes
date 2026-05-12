@@ -16,10 +16,17 @@ export default async function TouristPage({
   setRequestLocale(locale);
 
   const listing = await getHostawayClient().getListing();
-  return <TouristJourney listing={listing} />;
+  const inquiryEmail = process.env.INQUIRY_EMAIL || null;
+  return <TouristJourney listing={listing} inquiryEmail={inquiryEmail} />;
 }
 
-function TouristJourney({ listing }: { listing: HostawayListing }) {
+function TouristJourney({
+  listing,
+  inquiryEmail,
+}: {
+  listing: HostawayListing;
+  inquiryEmail: string | null;
+}) {
   const t = useTranslations("Tourist");
 
   return (
@@ -44,7 +51,7 @@ function TouristJourney({ listing }: { listing: HostawayListing }) {
       </ul>
 
       <section className="mt-12">
-        <PropertyCard listing={listing} />
+        <PropertyCard listing={listing} inquiryEmail={inquiryEmail} />
       </section>
     </div>
   );

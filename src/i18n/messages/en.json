@@ -139,6 +139,39 @@
     "inquire": "Message the host",
     "bookNow": "Book now"
   },
+  "Booking": {
+    "title": "Book your stay",
+    "perNight": "per night",
+    "checkIn": "Check-in",
+    "checkOut": "Check-out",
+    "guests": "Guests",
+    "guestCount": "{count, plural, one {# guest} other {# guests}}",
+    "breakdown": "{price} × {nights, plural, one {# night} other {# nights}}",
+    "estimatedTotal": "Estimated total",
+    "estimateNote": "Estimate based on the base nightly rate. Final total incl. taxes and cleaning is confirmed at checkout.",
+    "bookNow": "Book now",
+    "inquire": "Send inquiry",
+    "bookComingSoon": "Online checkout is coming soon — use \"Send inquiry\" to talk to the host in the meantime."
+  },
+  "Inquiry": {
+    "title": "Message the host",
+    "subtitle": "Your message goes to the host by email. About: {listing}",
+    "yourName": "Your name",
+    "yourEmail": "Your email",
+    "yourPhone": "Phone (optional)",
+    "checkIn": "Check-in",
+    "checkOut": "Check-out",
+    "guests": "Guests",
+    "message": "Message",
+    "messagePlaceholder": "Tell the host about your trip: purpose, kids' ages, schools of interest, price flexibility, etc.",
+    "emailSubject": "[Kiwi Cloud Homes] Inquiry about {listing}",
+    "emailBody": "Hello,\n\nI'd like to enquire about staying at {listing} (listing {listingId}).\n\nName: {name}\nEmail: {email}\nPhone: {phone}\nCheck-in: {checkIn}\nCheck-out: {checkOut}\nGuests: {guests}\n\nMessage:\n{message}\n\n—\nSent from the Kiwi Cloud Homes website ({locale})",
+    "openEmail": "Open my email app",
+    "cancel": "Cancel",
+    "close": "Close",
+    "missingHostEmail": "Host inbox (INQUIRY_EMAIL) isn't configured yet, so submit is disabled. Please contact the site admin.",
+    "mailtoNote": "Clicking \"Open my email app\" opens a pre-filled message in your default email app — you can review it before hitting send."
+  },
   "Footer": {
     "rights": "© {year} Kiwi Cloud Homes · Powered by Hostaway"
   },
