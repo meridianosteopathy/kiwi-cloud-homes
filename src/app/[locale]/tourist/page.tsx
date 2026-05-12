@@ -3,6 +3,10 @@ import { useTranslations } from "next-intl";
 import { PropertyCard } from "@/components/PropertyCard";
 import { getHostawayClient, type HostawayListing } from "@/lib/hostaway";
 
+// Listing/price/availability are live data — render per request so the page
+// reflects the current Hostaway state and the build never blocks on the API.
+export const dynamic = "force-dynamic";
+
 export default async function TouristPage({
   params,
 }: {

@@ -1,4 +1,9 @@
-export type Currency = "NZD" | "USD" | "CNY";
+/**
+ * ISO 4217 currency code returned by Hostaway (e.g. "NZD"). Kept open since
+ * Intl.NumberFormat accepts any valid code and Hostaway accounts can be
+ * configured to any currency.
+ */
+export type Currency = string;
 
 export interface HostawayPrice {
   amount: number;
