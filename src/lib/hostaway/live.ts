@@ -39,8 +39,16 @@ interface HostawayApiListing {
   city?: string;
   state?: string;
   country?: string;
-  listingImages?: Array<{ url?: string }>;
+  thumbnailUrl?: string;
+  /**
+   * Only populated when the listing is fetched with `?includeResources=1`.
+   * Otherwise returned as an empty array.
+   */
+  listingImages?: Array<{ url?: string; sortOrder?: number }>;
 }
+
+/** Query string Hostaway needs to populate sub-resources like listingImages. */
+const LISTING_INCLUDE = "?includeResources=1";
 
 interface HostawayApiCalendarDay {
   date: string;
@@ -62,41 +70,9 @@ export function createLiveClient(): HostawayClient {
   return {
     async getListing() {
       const id = await resolveListingId();
-      const payload = await apiGet<HostawayApiListing>(`/listings/${id}`);
-
-      // TEMP DIAGNOSTIC — three probes to find where images live for this account.
-      const raw = payload as unknown as Record<string, unknown>;
-      console.log("[Hostaway][diag-A] all top-level keys:", JSON.stringify(Object.keys(raw)));
-      console.log("[Hostaway][diag-A] thumbnailUrl:", raw.thumbnailUrl);
-
-      try {
-        const probeB = await apiGet<HostawayApiListing>(
-          `/listings/${id}?includeResources=1`,
-        );
-        const rawB = probeB as unknown as Record<string, unknown>;
-        const imgsB = rawB.listingImages;
-        console.log(
-          "[Hostaway][diag-B includeResources=1] listingImages:",
-          Array.isArray(imgsB)
-            ? { count: imgsB.length, first: imgsB[0] ?? null }
-            : imgsB,
-        );
-      } catch (e) {
-        console.log("[Hostaway][diag-B] error:", e instanceof Error ? e.message : e);
-      }
-
-      try {
-        const probeC = await apiGet<unknown>(`/listings/${id}/listingImages`);
-        console.log(
-          "[Hostaway][diag-C /listingImages] result:",
-          Array.isArray(probeC)
-            ? { count: probeC.length, first: probeC[0] ?? null }
-            : probeC,
-        );
-      } catch (e) {
-        console.log("[Hostaway][diag-C] error:", e instanceof Error ? e.message : e);
-      }
-
+      const payload = await apiGet<HostawayApiListing>(
+        `/listings/${id}${LISTING_INCLUDE}`,
+      );
       return mapListing(payload);
     },
 
@@ -220,6 +196,21 @@ async function readSnippet(res: Response): Promise<string> {
 
 function mapListing(api: HostawayApiListing): HostawayListing {
   const currency = api.currencyCode || "NZD";
+
+  const orderedImages = [...(api.listingImages ?? [])]
+    .sort((a, b) => (a.sortOrder ?? 0) - (b.sortOrder ?? 0))
+    .map((i) => i.url)
+    .filter((u): u is string => Boolean(u));
+
+  // Fall back to the top-level thumbnail when the resources aren't included
+  // (e.g. a different fetch path or an account quirk).
+  const images =
+    orderedImages.length > 0
+      ? orderedImages
+      : api.thumbnailUrl
+        ? [api.thumbnailUrl]
+        : [];
+
   return {
     id: String(api.id),
     name: api.publicName || api.name || api.internalListingName || "Listing",
@@ -228,9 +219,7 @@ function mapListing(api: HostawayApiListing): HostawayListing {
     bathrooms: api.bathroomsNumber ?? 0,
     maxGuests: api.personCapacity ?? 0,
     basePrice: { amount: api.price ?? 0, currency },
-    images: (api.listingImages ?? [])
-      .map((i) => i.url)
-      .filter((u): u is string => Boolean(u)),
+    images,
     address: {
       line1: api.street || api.address || "—",
       city: api.city || "",
