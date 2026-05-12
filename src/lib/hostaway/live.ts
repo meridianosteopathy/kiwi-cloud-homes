@@ -63,6 +63,23 @@ export function createLiveClient(): HostawayClient {
     async getListing() {
       const id = await resolveListingId();
       const payload = await apiGet<HostawayApiListing>(`/listings/${id}`);
+      // TEMP DIAGNOSTIC — remove once image mapping is confirmed.
+      // Helps identify which field Hostaway is returning images under for this account.
+      const raw = payload as unknown as Record<string, unknown>;
+      const imageLikeKeys = Object.keys(raw).filter((k) =>
+        /(image|photo|picture|media)/i.test(k),
+      );
+      const previews = Object.fromEntries(
+        imageLikeKeys.map((k) => {
+          const v = raw[k];
+          if (Array.isArray(v)) {
+            return [k, { count: v.length, first: v[0] ?? null }];
+          }
+          return [k, v];
+        }),
+      );
+      console.log("[Hostaway][diag] listing top-level keys:", Object.keys(raw));
+      console.log("[Hostaway][diag] image-like fields:", JSON.stringify(previews, null, 2));
       return mapListing(payload);
     },
 
