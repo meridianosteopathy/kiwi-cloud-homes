@@ -63,23 +63,40 @@ export function createLiveClient(): HostawayClient {
     async getListing() {
       const id = await resolveListingId();
       const payload = await apiGet<HostawayApiListing>(`/listings/${id}`);
-      // TEMP DIAGNOSTIC — remove once image mapping is confirmed.
-      // Helps identify which field Hostaway is returning images under for this account.
+
+      // TEMP DIAGNOSTIC — three probes to find where images live for this account.
       const raw = payload as unknown as Record<string, unknown>;
-      const imageLikeKeys = Object.keys(raw).filter((k) =>
-        /(image|photo|picture|media)/i.test(k),
-      );
-      const previews = Object.fromEntries(
-        imageLikeKeys.map((k) => {
-          const v = raw[k];
-          if (Array.isArray(v)) {
-            return [k, { count: v.length, first: v[0] ?? null }];
-          }
-          return [k, v];
-        }),
-      );
-      console.log("[Hostaway][diag] listing top-level keys:", Object.keys(raw));
-      console.log("[Hostaway][diag] image-like fields:", JSON.stringify(previews, null, 2));
+      console.log("[Hostaway][diag-A] all top-level keys:", JSON.stringify(Object.keys(raw)));
+      console.log("[Hostaway][diag-A] thumbnailUrl:", raw.thumbnailUrl);
+
+      try {
+        const probeB = await apiGet<HostawayApiListing>(
+          `/listings/${id}?includeResources=1`,
+        );
+        const rawB = probeB as unknown as Record<string, unknown>;
+        const imgsB = rawB.listingImages;
+        console.log(
+          "[Hostaway][diag-B includeResources=1] listingImages:",
+          Array.isArray(imgsB)
+            ? { count: imgsB.length, first: imgsB[0] ?? null }
+            : imgsB,
+        );
+      } catch (e) {
+        console.log("[Hostaway][diag-B] error:", e instanceof Error ? e.message : e);
+      }
+
+      try {
+        const probeC = await apiGet<unknown>(`/listings/${id}/listingImages`);
+        console.log(
+          "[Hostaway][diag-C /listingImages] result:",
+          Array.isArray(probeC)
+            ? { count: probeC.length, first: probeC[0] ?? null }
+            : probeC,
+        );
+      } catch (e) {
+        console.log("[Hostaway][diag-C] error:", e instanceof Error ? e.message : e);
+      }
+
       return mapListing(payload);
     },
 
