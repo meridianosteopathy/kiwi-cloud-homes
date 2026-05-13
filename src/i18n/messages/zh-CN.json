@@ -52,23 +52,34 @@
     "intro": "为来新西兰看校的家长,提供按学校筛选房源,以及四季入住建议。"
   },
   "SchoolSearch": {
-    "title": "房源附近的学校",
+    "title": "房源附近的学校与幼儿园",
     "subtitle": "以下学校均在房源 {radius} 公里范围内,按距离由近到远排列。",
-    "filterLabel": "按学校名称筛选",
-    "filterPlaceholder": "输入学校名筛选(中英文均可)",
-    "noMatches": "没有匹配的学校,试着调整关键词。",
+    "filterLabel": "按名称筛选",
+    "filterPlaceholder": "输入学校或幼儿园名(中英文均可)",
+    "noMatches": "没有匹配的结果,试着调整关键词。",
     "clear": "取消选择",
     "zone": {
       "in-zone": "✓ 学区内",
       "nearby": "邻近",
       "further": "较远",
       "out-of-region": "外区"
+    },
+    "level": {
+      "kindergarten": "幼儿园",
+      "primary": "小学",
+      "secondary": "中学"
     }
   },
   "SchoolMatch": {
-    "noSelection": "在左侧选择一所学校,这里会显示房源与该学校的学区与距离信息。",
+    "noSelection": "在左侧选择一所学校或幼儿园,这里会显示与房源之间的距离、步行/驾车时间。",
     "distance": "距离房源",
+    "walking": "步行约",
+    "driving": "驾车约",
     "advice": "房东建议",
+    "estimateNote": "步行/驾车时间为按平均速度估算(步行 5 km/h、驾车 40 km/h),实际以路况为准。",
+    "durationMin": "{min} 分钟",
+    "durationHour": "{h} 小时",
+    "durationHourMin": "{h} 小时 {min} 分钟",
     "zone": {
       "in-zone": "✓ 在学区内",
       "nearby": "邻近学校",
@@ -172,7 +183,19 @@
     "close": "关闭",
     "backToListing": "返回房源",
     "photoCount": "共 {count} 张照片",
-    "photoIndex": "第 {n} / {total} 张"
+    "photoIndex": "第 {n} / {total} 张",
+    "categories": "按区域分类",
+    "category": {
+      "exterior": "外景",
+      "living": "客厅",
+      "kitchen": "厨房",
+      "dining": "餐厅",
+      "bedroom": "卧室",
+      "bathroom": "浴室",
+      "office": "书房 / 办公区",
+      "outdoor": "户外 / 花园",
+      "other": "其他"
+    }
   },
   "Checkout": {
     "title": {
@@ -226,6 +249,12 @@
     "close": "关闭",
     "missingHostEmail": "暂未配置房东邮箱(INQUIRY_EMAIL),发送按钮已禁用。请联系网站管理员。",
     "mailtoNote": "点击\"打开邮件应用发送\",您本机的邮件应用会打开一封预填好的邮件;您可以再次审核后点发送。"
+  },
+  "Amenities": {
+    "title": "房源配套",
+    "showAll": "查看全部 {count} 项配套",
+    "modalTitle": "全部配套设施",
+    "close": "关闭"
   },
   "Footer": {
     "rights": "© {year} Kiwi Cloud Homes · 服务由 Hostaway 提供"

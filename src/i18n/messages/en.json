@@ -52,10 +52,10 @@
     "intro": "Filter the property by the school you're visiting, then plan around the New Zealand school calendar."
   },
   "SchoolSearch": {
-    "title": "Schools near the home",
-    "subtitle": "Schools within {radius} km of the home, sorted nearest first.",
-    "filterLabel": "Filter by school name",
-    "filterPlaceholder": "Filter the list (English or Chinese)",
+    "title": "Schools & kindergartens near the home",
+    "subtitle": "Within {radius} km of the home, sorted nearest first.",
+    "filterLabel": "Filter by name",
+    "filterPlaceholder": "Filter (English or Chinese)",
     "noMatches": "No matches — try a different keyword.",
     "clear": "Clear",
     "zone": {
@@ -63,12 +63,23 @@
       "nearby": "Nearby",
       "further": "Far",
       "out-of-region": "Other"
+    },
+    "level": {
+      "kindergarten": "Kindy",
+      "primary": "Primary",
+      "secondary": "Secondary"
     }
   },
   "SchoolMatch": {
-    "noSelection": "Pick a school on the left to see the home's zone match and travel context.",
+    "noSelection": "Pick a school or kindergarten on the left to see distance, walking and driving times from the home.",
     "distance": "Distance from the home",
+    "walking": "Walking",
+    "driving": "Driving",
     "advice": "Host advice",
+    "estimateNote": "Walking and driving times are estimates from average pace (5 km/h walking, 40 km/h urban driving). Real times vary with traffic.",
+    "durationMin": "{min, plural, one {# min} other {# min}}",
+    "durationHour": "{h, plural, one {# h} other {# h}}",
+    "durationHourMin": "{h, plural, one {# h} other {# h}} {min} min",
     "zone": {
       "in-zone": "✓ In zone",
       "nearby": "Nearby",
@@ -172,7 +183,19 @@
     "close": "Close",
     "backToListing": "Back to listing",
     "photoCount": "{count, plural, one {# photo} other {# photos}}",
-    "photoIndex": "{n} of {total}"
+    "photoIndex": "{n} of {total}",
+    "categories": "Jump to area",
+    "category": {
+      "exterior": "Exterior",
+      "living": "Living room",
+      "kitchen": "Kitchen",
+      "dining": "Dining",
+      "bedroom": "Bedrooms",
+      "bathroom": "Bathrooms",
+      "office": "Workspace",
+      "outdoor": "Outdoor & garden",
+      "other": "Other"
+    }
   },
   "Checkout": {
     "title": {
@@ -226,6 +249,12 @@
     "close": "Close",
     "missingHostEmail": "Host inbox (INQUIRY_EMAIL) isn't configured yet, so submit is disabled. Please contact the site admin.",
     "mailtoNote": "Clicking \"Open my email app\" opens a pre-filled message in your default email app — you can review it before hitting send."
+  },
+  "Amenities": {
+    "title": "What this place offers",
+    "showAll": "Show all {count, plural, one {# amenity} other {# amenities}}",
+    "modalTitle": "All amenities",
+    "close": "Close"
   },
   "Footer": {
     "rights": "© {year} Kiwi Cloud Homes · Powered by Hostaway"

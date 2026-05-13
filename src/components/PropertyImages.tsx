@@ -2,10 +2,11 @@
 
 import { useState } from "react";
 import { useTranslations } from "next-intl";
+import type { ListingImage } from "@/lib/hostaway";
 import { PhotoLightbox } from "./PhotoLightbox";
 
 type Props = {
-  images: string[];
+  images: ListingImage[];
   alt: string;
 };
 
@@ -30,12 +31,10 @@ export function PropertyImages({ images, alt }: Props) {
   }
 
   // Airbnb-style 5-photo collage on tablet+; single hero on mobile.
-  // Hero spans the left half (2 cols × 2 rows); right side has a 2×2 grid.
   const grid = images.slice(0, 5);
   const hero = grid[0];
   const thumbs = grid.slice(1);
-  const moreCount = Math.max(0, images.length - grid.length);
-  const hasMoreOverlay = moreCount > 0 || images.length > 1;
+  const hasMoreOverlay = images.length > 1;
 
   return (
     <>
@@ -49,8 +48,8 @@ export function PropertyImages({ images, alt }: Props) {
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src={hero}
-            alt={alt}
+            src={hero.url}
+            alt={hero.caption || alt}
             loading="eager"
             className="aspect-[16/10] w-full object-cover"
           />
@@ -66,21 +65,20 @@ export function PropertyImages({ images, alt }: Props) {
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src={hero}
-              alt={alt}
+              src={hero.url}
+              alt={hero.caption || alt}
               loading="eager"
               className="h-full w-full object-cover"
             />
           </button>
 
-          {thumbs.map((url, i) => {
-            const index = i + 1; // index in full images[] list
-            // Corner rounds: top-right thumb (i===1) and bottom-right thumb (i===3).
+          {thumbs.map((img, i) => {
+            const index = i + 1;
             const rounding =
               i === 1 ? "rounded-tr-xl" : i === 3 ? "rounded-br-xl" : "";
             return (
               <button
-                key={url + index}
+                key={img.url + index}
                 type="button"
                 onClick={() => openAt(index)}
                 aria-label={t("openPhoto", { n: index + 1 })}
@@ -88,8 +86,8 @@ export function PropertyImages({ images, alt }: Props) {
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src={url}
-                  alt=""
+                  src={img.url}
+                  alt={img.caption || ""}
                   loading="lazy"
                   className="h-full w-full object-cover"
                 />
@@ -98,7 +96,6 @@ export function PropertyImages({ images, alt }: Props) {
           })}
         </div>
 
-        {/* "Show all photos" pill — sits over the bottom-right corner. */}
         {hasMoreOverlay && (
           <button
             type="button"

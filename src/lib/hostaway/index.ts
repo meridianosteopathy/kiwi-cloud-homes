@@ -4,6 +4,7 @@ import type { HostawayClient } from "./types";
 
 export type { HostawayClient } from "./types";
 export type {
+  Amenity,
   AvailabilityDay,
   Currency,
   HostawayAddress,
@@ -11,6 +12,7 @@ export type {
   HostawayPrice,
   InquiryInput,
   InquiryResult,
+  ListingImage,
   ReservationInput,
   ReservationResult,
 } from "./types";

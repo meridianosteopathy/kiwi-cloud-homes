@@ -1,7 +1,15 @@
 import { CITIES, DISTRICTS, RADIUS_KM, REGIONS, SCHOOLS } from "./data";
 import type { City, District, Region, School } from "./types";
 
-export type { City, District, LocalizedName, Region, School, ZoneStatus } from "./types";
+export type {
+  City,
+  District,
+  LocalizedName,
+  Region,
+  School,
+  SchoolLevel,
+  ZoneStatus,
+} from "./types";
 export { CITIES, DISTRICTS, RADIUS_KM, REGIONS, SCHOOLS } from "./data";
 
 /**

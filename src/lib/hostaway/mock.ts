@@ -19,6 +19,22 @@ const MOCK_LISTING: HostawayListing = {
   basePrice: { amount: 420, currency: "NZD" },
   cleaningFee: 120,
   images: [],
+  amenities: [
+    { id: "wifi", name: "Wifi" },
+    { id: "kitchen", name: "Kitchen" },
+    { id: "washer", name: "Washer" },
+    { id: "dryer", name: "Dryer" },
+    { id: "heating", name: "Heating" },
+    { id: "free-parking", name: "Free parking on premises" },
+    { id: "workspace", name: "Dedicated workspace" },
+    { id: "tv", name: "TV" },
+    { id: "dishwasher", name: "Dishwasher" },
+    { id: "microwave", name: "Microwave" },
+    { id: "iron", name: "Iron" },
+    { id: "hair-dryer", name: "Hair dryer" },
+    { id: "bbq", name: "BBQ grill" },
+    { id: "smoke-alarm", name: "Smoke alarm" },
+  ],
   address: {
     // Exact address kept internal — short-stay sites typically reveal it after booking.
     line1: "16 Sunbeam Place",

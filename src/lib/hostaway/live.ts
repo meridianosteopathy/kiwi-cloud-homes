@@ -15,12 +15,14 @@ import {
   HostawayAuthError,
   readCredentials,
 } from "./auth";
+import { categorizeImage } from "@/lib/photos";
 import type {
   AvailabilityDay,
   HostawayClient,
   HostawayListing,
   InquiryInput,
   InquiryResult,
+  ListingImage,
   ReservationInput,
   ReservationResult,
 } from "./types";
@@ -47,7 +49,25 @@ interface HostawayApiListing {
    * Only populated when the listing is fetched with `?includeResources=1`.
    * Otherwise returned as an empty array.
    */
-  listingImages?: Array<{ url?: string; sortOrder?: number }>;
+  listingImages?: Array<{
+    url?: string;
+    sortOrder?: number;
+    caption?: string;
+    bookingEngineCaption?: string;
+    airbnbCaption?: string;
+    vrboCaption?: string;
+  }>;
+  /**
+   * Same: populated with `?includeResources=1`. Shape per Hostaway docs is
+   * `{ amenityId, amenityName, ... }`; we read a couple of alternate names
+   * defensively in case the field rename ever happens.
+   */
+  listingAmenities?: Array<{
+    amenityId?: number | string;
+    amenityName?: string;
+    id?: number | string;
+    name?: string;
+  }>;
 }
 
 /** Query string Hostaway needs to populate sub-resources like listingImages. */
@@ -247,19 +267,34 @@ async function readSnippet(res: Response): Promise<string> {
 function mapListing(api: HostawayApiListing): HostawayListing {
   const currency = api.currencyCode || "NZD";
 
-  const orderedImages = [...(api.listingImages ?? [])]
+  const orderedImages: ListingImage[] = [...(api.listingImages ?? [])]
     .sort((a, b) => (a.sortOrder ?? 0) - (b.sortOrder ?? 0))
-    .map((i) => i.url)
-    .filter((u): u is string => Boolean(u));
+    .map((i) => {
+      const caption =
+        i.caption ?? i.bookingEngineCaption ?? i.airbnbCaption ?? i.vrboCaption ?? "";
+      return {
+        url: i.url ?? "",
+        caption,
+        category: categorizeImage(caption),
+      };
+    })
+    .filter((i) => Boolean(i.url));
 
   // Fall back to the top-level thumbnail when the resources aren't included
   // (e.g. a different fetch path or an account quirk).
-  const images =
+  const images: ListingImage[] =
     orderedImages.length > 0
       ? orderedImages
       : api.thumbnailUrl
-        ? [api.thumbnailUrl]
+        ? [{ url: api.thumbnailUrl, category: "other" as const }]
         : [];
+
+  const amenities = (api.listingAmenities ?? [])
+    .map((a) => ({
+      id: String(a.amenityId ?? a.id ?? ""),
+      name: String(a.amenityName ?? a.name ?? "").trim(),
+    }))
+    .filter((a) => a.name);
 
   return {
     id: String(api.id),
@@ -271,6 +306,7 @@ function mapListing(api: HostawayApiListing): HostawayListing {
     basePrice: { amount: api.price ?? 0, currency },
     cleaningFee: api.cleaningFee ?? 0,
     images,
+    amenities,
     address: {
       line1: api.street || api.address || "—",
       city: api.city || "",
