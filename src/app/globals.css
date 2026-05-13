@@ -13,3 +13,56 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
 }
+
+/* react-day-picker theme — kiwi green accents, Airbnb-style range visuals. */
+.rdp-kiwi {
+  --rdp-accent-color: #306330; /* kiwi-600 */
+  --rdp-accent-background-color: #f1f7f1; /* kiwi-50 */
+  --rdp-day-font: inherit;
+  --rdp-day-height: 2.5rem;
+  --rdp-day-width: 2.5rem;
+  --rdp-selected-border: 0;
+  --rdp-disabled-opacity: 0.45;
+  margin: 0;
+}
+
+.rdp-kiwi .rdp-day_button {
+  border-radius: 9999px;
+}
+
+/* Past / unavailable dates get a strikethrough — matches Airbnb. */
+.rdp-kiwi .rdp-disabled .rdp-day_button {
+  text-decoration: line-through;
+  color: #8ebd8e; /* kiwi-300 */
+}
+
+/* Range edges (check-in / check-out): solid kiwi pill. */
+.rdp-kiwi .rdp-range_start .rdp-day_button,
+.rdp-kiwi .rdp-range_end .rdp-day_button {
+  background-color: var(--rdp-accent-color);
+  color: white;
+}
+
+/* In-range dates: tinted background, square (not pill) so they merge. */
+.rdp-kiwi .rdp-range_middle .rdp-day_button {
+  background-color: var(--rdp-accent-background-color);
+  color: #1f3e1f;
+  border-radius: 0;
+}
+
+/* Hover preview while picking checkout. */
+.rdp-kiwi .rdp-day_button:hover:not(.rdp-disabled .rdp-day_button) {
+  outline: 1px solid var(--rdp-accent-color);
+  outline-offset: -2px;
+}
+
+.rdp-kiwi .rdp-month_caption {
+  font-weight: 600;
+  color: #1a331a; /* kiwi-900 */
+}
+
+.rdp-kiwi .rdp-weekday {
+  color: #306330; /* kiwi-600 */
+  font-weight: 500;
+  font-size: 0.75rem;
+}

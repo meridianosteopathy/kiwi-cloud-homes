@@ -144,6 +144,7 @@
     "perNight": "每晚",
     "checkIn": "入住日期",
     "checkOut": "退房日期",
+    "pickDate": "选择日期",
     "guests": "入住人数",
     "guestCount": "{count} 位客人",
     "breakdown": "{price} × {nights} 晚",
@@ -152,6 +153,17 @@
     "bookNow": "立即预订",
     "inquire": "发送询问",
     "testModeNotice": "测试模式 · 暂不会扣款,可使用 Stripe 测试卡 4242 4242 4242 4242。"
+  },
+  "DatePicker": {
+    "title": "选择日期",
+    "subtitle": "选择入住与退房日期以查看准确价格",
+    "checkIn": "入住",
+    "checkOut": "退房",
+    "addDate": "添加日期",
+    "clear": "清除日期",
+    "cancel": "取消",
+    "apply": "确定",
+    "close": "关闭"
   },
   "Checkout": {
     "title": {

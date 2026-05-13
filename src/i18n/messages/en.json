@@ -144,6 +144,7 @@
     "perNight": "per night",
     "checkIn": "Check-in",
     "checkOut": "Check-out",
+    "pickDate": "Add date",
     "guests": "Guests",
     "guestCount": "{count, plural, one {# guest} other {# guests}}",
     "breakdown": "{price} × {nights, plural, one {# night} other {# nights}}",
@@ -152,6 +153,17 @@
     "bookNow": "Book now",
     "inquire": "Send inquiry",
     "testModeNotice": "Test mode — no real charges. Use Stripe test card 4242 4242 4242 4242 to try the flow."
+  },
+  "DatePicker": {
+    "title": "Select dates",
+    "subtitle": "Add your travel dates for exact pricing",
+    "checkIn": "Check-in",
+    "checkOut": "Check-out",
+    "addDate": "Add date",
+    "clear": "Clear dates",
+    "cancel": "Cancel",
+    "apply": "Apply",
+    "close": "Close"
   },
   "Checkout": {
     "title": {
