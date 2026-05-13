@@ -165,6 +165,15 @@
     "apply": "确定",
     "close": "关闭"
   },
+  "PropertyImages": {
+    "openGallery": "查看全部照片",
+    "openPhoto": "查看第 {n} 张照片",
+    "showAll": "查看全部 {count} 张照片",
+    "close": "关闭",
+    "backToListing": "返回房源",
+    "photoCount": "共 {count} 张照片",
+    "photoIndex": "第 {n} / {total} 张"
+  },
   "Checkout": {
     "title": {
       "review": "确认预订信息",

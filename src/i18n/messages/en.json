@@ -165,6 +165,15 @@
     "apply": "Apply",
     "close": "Close"
   },
+  "PropertyImages": {
+    "openGallery": "View all photos",
+    "openPhoto": "View photo {n}",
+    "showAll": "Show all {count} photos",
+    "close": "Close",
+    "backToListing": "Back to listing",
+    "photoCount": "{count, plural, one {# photo} other {# photos}}",
+    "photoIndex": "{n} of {total}"
+  },
   "Checkout": {
     "title": {
       "review": "Review your booking",

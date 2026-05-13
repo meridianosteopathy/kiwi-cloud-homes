@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useFormatter, useLocale, useTranslations } from "next-intl";
 import { CheckoutDialog } from "./CheckoutDialog";
 import { DateRangeModal } from "./DateRangeModal";
@@ -54,6 +54,14 @@ export function BookingForm({
   const [showInquiry, setShowInquiry] = useState(false);
   const [showCheckout, setShowCheckout] = useState(false);
   const [showDates, setShowDates] = useState(false);
+
+  // When the school journey changes ?month, the page passes new defaults
+  // through. Sync our state so the date pills reflect the new selection
+  // without forcing the guest to re-pick.
+  useEffect(() => {
+    setCheckIn(defaultCheckIn ?? "");
+    setCheckOut(defaultCheckOut ?? "");
+  }, [defaultCheckIn, defaultCheckOut]);
 
   const nights = useMemo(() => nightsBetween(checkIn, checkOut), [checkIn, checkOut]);
   const canBook = nights > 0;
