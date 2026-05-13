@@ -1,8 +1,9 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useFormatter, useLocale, useTranslations } from "next-intl";
 import { CheckoutDialog } from "./CheckoutDialog";
+import { DateRangeModal } from "./DateRangeModal";
 import { InquiryDialog } from "./InquiryDialog";
 
 type Props = {
@@ -15,22 +16,23 @@ type Props = {
   defaultCheckOut: string | null;
 };
 
-function todayISO(): string {
-  return new Date().toISOString().slice(0, 10);
-}
-
-function addDays(iso: string, days: number): string {
-  const d = new Date(iso + "T00:00:00Z");
-  d.setUTCDate(d.getUTCDate() + days);
-  return d.toISOString().slice(0, 10);
-}
-
 function nightsBetween(checkIn: string, checkOut: string): number {
   if (!checkIn || !checkOut) return 0;
   const a = new Date(checkIn + "T00:00:00Z").getTime();
   const b = new Date(checkOut + "T00:00:00Z").getTime();
   const diff = Math.round((b - a) / 86_400_000);
   return diff > 0 ? diff : 0;
+}
+
+function formatDate(iso: string, locale: string): string {
+  if (!iso) return "";
+  const [y, m, d] = iso.split("-").map(Number);
+  if (!y || !m || !d) return iso;
+  return new Date(y, m - 1, d).toLocaleDateString(locale, {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  });
 }
 
 export function BookingForm({
@@ -46,14 +48,20 @@ export function BookingForm({
   const format = useFormatter();
   const locale = useLocale();
 
-  const minDate = todayISO();
   const [checkIn, setCheckIn] = useState(defaultCheckIn ?? "");
-  const [checkOut, setCheckOut] = useState(
-    defaultCheckOut ?? (defaultCheckIn ? addDays(defaultCheckIn, 7) : ""),
-  );
+  const [checkOut, setCheckOut] = useState(defaultCheckOut ?? "");
   const [guests, setGuests] = useState(Math.min(2, maxGuests || 2));
   const [showInquiry, setShowInquiry] = useState(false);
   const [showCheckout, setShowCheckout] = useState(false);
+  const [showDates, setShowDates] = useState(false);
+
+  // When the school journey changes ?month, the page passes new defaults
+  // through. Sync our state so the date pills reflect the new selection
+  // without forcing the guest to re-pick.
+  useEffect(() => {
+    setCheckIn(defaultCheckIn ?? "");
+    setCheckOut(defaultCheckOut ?? "");
+  }, [defaultCheckIn, defaultCheckOut]);
 
   const nights = useMemo(() => nightsBetween(checkIn, checkOut), [checkIn, checkOut]);
   const canBook = nights > 0;
@@ -69,13 +77,13 @@ export function BookingForm({
   const inputClass =
     "w-full rounded-lg border border-kiwi-200 bg-white px-3 py-2 text-sm text-kiwi-900 shadow-sm focus:border-kiwi-500 focus:outline-none focus:ring-2 focus:ring-kiwi-200";
 
-  // Auto-bump checkout if check-in moves past it.
-  function onCheckInChange(value: string) {
-    setCheckIn(value);
-    if (!checkOut || value >= checkOut) {
-      setCheckOut(addDays(value, 7));
-    }
+  function applyDates(from: string | null, to: string | null) {
+    setCheckIn(from ?? "");
+    setCheckOut(to ?? "");
   }
+
+  const datePill =
+    "flex flex-col items-start rounded-xl border px-3 py-2 text-left transition focus:outline-none focus:ring-2 focus:ring-kiwi-200";
 
   return (
     <section className="rounded-2xl border border-kiwi-200 bg-white p-5 shadow-sm">
@@ -89,31 +97,43 @@ export function BookingForm({
         </div>
       </header>
 
-      <div className="grid grid-cols-2 gap-3">
-        <label className="block">
-          <span className="mb-1 block text-xs font-medium text-kiwi-700">
+      <div className="grid grid-cols-2 gap-2">
+        <button
+          type="button"
+          onClick={() => setShowDates(true)}
+          className={
+            datePill +
+            " " +
+            (checkIn
+              ? "border-kiwi-600 bg-white hover:bg-kiwi-50"
+              : "border-kiwi-200 bg-white hover:border-kiwi-400")
+          }
+        >
+          <span className="text-[10px] font-semibold uppercase tracking-wider text-kiwi-700">
             {t("checkIn")}
           </span>
-          <input
-            type="date"
-            value={checkIn}
-            min={minDate}
-            onChange={(e) => onCheckInChange(e.target.value)}
-            className={inputClass}
-          />
-        </label>
-        <label className="block">
-          <span className="mb-1 block text-xs font-medium text-kiwi-700">
+          <span className="text-sm text-kiwi-900">
+            {checkIn ? formatDate(checkIn, locale) : t("pickDate")}
+          </span>
+        </button>
+        <button
+          type="button"
+          onClick={() => setShowDates(true)}
+          className={
+            datePill +
+            " " +
+            (checkOut
+              ? "border-kiwi-600 bg-white hover:bg-kiwi-50"
+              : "border-kiwi-200 bg-white hover:border-kiwi-400")
+          }
+        >
+          <span className="text-[10px] font-semibold uppercase tracking-wider text-kiwi-700">
             {t("checkOut")}
           </span>
-          <input
-            type="date"
-            value={checkOut}
-            min={checkIn || minDate}
-            onChange={(e) => setCheckOut(e.target.value)}
-            className={inputClass}
-          />
-        </label>
+          <span className="text-sm text-kiwi-900">
+            {checkOut ? formatDate(checkOut, locale) : t("pickDate")}
+          </span>
+        </button>
       </div>
 
       <label className="mt-3 block">
@@ -175,6 +195,15 @@ export function BookingForm({
       <p className="mt-2 text-center text-[11px] text-kiwi-500">
         {t("testModeNotice")}
       </p>
+
+      {showDates && (
+        <DateRangeModal
+          initialCheckIn={checkIn || null}
+          initialCheckOut={checkOut || null}
+          onClose={() => setShowDates(false)}
+          onApply={applyDates}
+        />
+      )}
 
       {showInquiry && (
         <InquiryDialog
