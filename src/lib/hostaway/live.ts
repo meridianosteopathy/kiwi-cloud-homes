@@ -48,6 +48,17 @@ interface HostawayApiListing {
    * Otherwise returned as an empty array.
    */
   listingImages?: Array<{ url?: string; sortOrder?: number }>;
+  /**
+   * Same: populated with `?includeResources=1`. Shape per Hostaway docs is
+   * `{ amenityId, amenityName, ... }`; we read a couple of alternate names
+   * defensively in case the field rename ever happens.
+   */
+  listingAmenities?: Array<{
+    amenityId?: number | string;
+    amenityName?: string;
+    id?: number | string;
+    name?: string;
+  }>;
 }
 
 /** Query string Hostaway needs to populate sub-resources like listingImages. */
@@ -261,6 +272,13 @@ function mapListing(api: HostawayApiListing): HostawayListing {
         ? [api.thumbnailUrl]
         : [];
 
+  const amenities = (api.listingAmenities ?? [])
+    .map((a) => ({
+      id: String(a.amenityId ?? a.id ?? ""),
+      name: String(a.amenityName ?? a.name ?? "").trim(),
+    }))
+    .filter((a) => a.name);
+
   return {
     id: String(api.id),
     name: api.publicName || api.name || api.internalListingName || "Listing",
@@ -271,6 +289,7 @@ function mapListing(api: HostawayApiListing): HostawayListing {
     basePrice: { amount: api.price ?? 0, currency },
     cleaningFee: api.cleaningFee ?? 0,
     images,
+    amenities,
     address: {
       line1: api.street || api.address || "—",
       city: api.city || "",

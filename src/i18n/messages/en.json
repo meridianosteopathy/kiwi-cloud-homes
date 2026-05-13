@@ -238,6 +238,12 @@
     "missingHostEmail": "Host inbox (INQUIRY_EMAIL) isn't configured yet, so submit is disabled. Please contact the site admin.",
     "mailtoNote": "Clicking \"Open my email app\" opens a pre-filled message in your default email app — you can review it before hitting send."
   },
+  "Amenities": {
+    "title": "What this place offers",
+    "showAll": "Show all {count, plural, one {# amenity} other {# amenities}}",
+    "modalTitle": "All amenities",
+    "close": "Close"
+  },
   "Footer": {
     "rights": "© {year} Kiwi Cloud Homes · Powered by Hostaway"
   },

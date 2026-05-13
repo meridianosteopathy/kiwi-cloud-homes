@@ -1,6 +1,8 @@
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
+import { resolveDescription } from "@/content/listing-content";
 import type { HostawayListing } from "@/lib/hostaway";
 import { BookingForm } from "./BookingForm";
+import { PropertyAmenities } from "./PropertyAmenities";
 import { PropertyImages } from "./PropertyImages";
 
 type Props = {
@@ -17,6 +19,8 @@ export function PropertyCard({
   defaultCheckOut = null,
 }: Props) {
   const t = useTranslations("Property");
+  const locale = useLocale();
+  const description = resolveDescription(locale, listing.description);
 
   return (
     <article className="overflow-hidden rounded-2xl border border-kiwi-200 bg-white shadow-sm">
@@ -43,9 +47,9 @@ export function PropertyCard({
             <li>{t("maxGuests", { count: listing.maxGuests })}</li>
           </ul>
 
-          {listing.description && (
+          {description && (
             <p className="whitespace-pre-line text-sm leading-relaxed text-kiwi-800">
-              {listing.description}
+              {description}
             </p>
           )}
         </div>
@@ -60,6 +64,8 @@ export function PropertyCard({
           defaultCheckOut={defaultCheckOut}
         />
       </div>
+
+      <PropertyAmenities amenities={listing.amenities} />
     </article>
   );
 }

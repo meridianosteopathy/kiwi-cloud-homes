@@ -17,6 +17,13 @@ export interface HostawayAddress {
   country: string;
 }
 
+export interface Amenity {
+  /** Hostaway amenityId (numeric in their API). */
+  id: string;
+  /** Display name as returned by Hostaway, typically English. */
+  name: string;
+}
+
 export interface HostawayListing {
   id: string;
   name: string;
@@ -28,6 +35,7 @@ export interface HostawayListing {
   /** Flat cleaning fee charged per booking, in the listing's currency. */
   cleaningFee: number;
   images: string[];
+  amenities: Amenity[];
   address: HostawayAddress;
   /** Optional 360° tour URL (Matterport, Kuula, etc.). */
   tourUrl?: string;

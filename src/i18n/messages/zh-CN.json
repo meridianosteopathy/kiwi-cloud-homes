@@ -238,6 +238,12 @@
     "missingHostEmail": "暂未配置房东邮箱(INQUIRY_EMAIL),发送按钮已禁用。请联系网站管理员。",
     "mailtoNote": "点击\"打开邮件应用发送\",您本机的邮件应用会打开一封预填好的邮件;您可以再次审核后点发送。"
   },
+  "Amenities": {
+    "title": "房源配套",
+    "showAll": "查看全部 {count} 项配套",
+    "modalTitle": "全部配套设施",
+    "close": "关闭"
+  },
   "Footer": {
     "rights": "© {year} Kiwi Cloud Homes · 服务由 Hostaway 提供"
   },
