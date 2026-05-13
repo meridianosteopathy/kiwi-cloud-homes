@@ -12,6 +12,7 @@ export type {
   HostawayPrice,
   InquiryInput,
   InquiryResult,
+  ListingImage,
   ReservationInput,
   ReservationResult,
 } from "./types";

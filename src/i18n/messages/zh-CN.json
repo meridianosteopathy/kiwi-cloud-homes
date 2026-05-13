@@ -183,7 +183,19 @@
     "close": "关闭",
     "backToListing": "返回房源",
     "photoCount": "共 {count} 张照片",
-    "photoIndex": "第 {n} / {total} 张"
+    "photoIndex": "第 {n} / {total} 张",
+    "categories": "按区域分类",
+    "category": {
+      "exterior": "外景",
+      "living": "客厅",
+      "kitchen": "厨房",
+      "dining": "餐厅",
+      "bedroom": "卧室",
+      "bathroom": "浴室",
+      "office": "书房 / 办公区",
+      "outdoor": "户外 / 花园",
+      "other": "其他"
+    }
   },
   "Checkout": {
     "title": {

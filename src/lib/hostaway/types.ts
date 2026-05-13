@@ -24,6 +24,16 @@ export interface Amenity {
   name: string;
 }
 
+import type { ImageCategory } from "@/lib/photos";
+
+export interface ListingImage {
+  url: string;
+  /** Hostaway-supplied caption (English). May be empty. */
+  caption?: string;
+  /** Derived from the caption — used to group photos in the lightbox. */
+  category: ImageCategory;
+}
+
 export interface HostawayListing {
   id: string;
   name: string;
@@ -34,7 +44,7 @@ export interface HostawayListing {
   basePrice: HostawayPrice;
   /** Flat cleaning fee charged per booking, in the listing's currency. */
   cleaningFee: number;
-  images: string[];
+  images: ListingImage[];
   amenities: Amenity[];
   address: HostawayAddress;
   /** Optional 360° tour URL (Matterport, Kuula, etc.). */

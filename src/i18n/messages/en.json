@@ -183,7 +183,19 @@
     "close": "Close",
     "backToListing": "Back to listing",
     "photoCount": "{count, plural, one {# photo} other {# photos}}",
-    "photoIndex": "{n} of {total}"
+    "photoIndex": "{n} of {total}",
+    "categories": "Jump to area",
+    "category": {
+      "exterior": "Exterior",
+      "living": "Living room",
+      "kitchen": "Kitchen",
+      "dining": "Dining",
+      "bedroom": "Bedrooms",
+      "bathroom": "Bathrooms",
+      "office": "Workspace",
+      "outdoor": "Outdoor & garden",
+      "other": "Other"
+    }
   },
   "Checkout": {
     "title": {
