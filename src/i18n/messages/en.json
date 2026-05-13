@@ -52,10 +52,10 @@
     "intro": "Filter the property by the school you're visiting, then plan around the New Zealand school calendar."
   },
   "SchoolSearch": {
-    "title": "Schools near the home",
-    "subtitle": "Schools within {radius} km of the home, sorted nearest first.",
-    "filterLabel": "Filter by school name",
-    "filterPlaceholder": "Filter the list (English or Chinese)",
+    "title": "Schools & kindergartens near the home",
+    "subtitle": "Within {radius} km of the home, sorted nearest first.",
+    "filterLabel": "Filter by name",
+    "filterPlaceholder": "Filter (English or Chinese)",
     "noMatches": "No matches — try a different keyword.",
     "clear": "Clear",
     "zone": {
@@ -63,12 +63,23 @@
       "nearby": "Nearby",
       "further": "Far",
       "out-of-region": "Other"
+    },
+    "level": {
+      "kindergarten": "Kindy",
+      "primary": "Primary",
+      "secondary": "Secondary"
     }
   },
   "SchoolMatch": {
-    "noSelection": "Pick a school on the left to see the home's zone match and travel context.",
+    "noSelection": "Pick a school or kindergarten on the left to see distance, walking and driving times from the home.",
     "distance": "Distance from the home",
+    "walking": "Walking",
+    "driving": "Driving",
     "advice": "Host advice",
+    "estimateNote": "Walking and driving times are estimates from average pace (5 km/h walking, 40 km/h urban driving). Real times vary with traffic.",
+    "durationMin": "{min, plural, one {# min} other {# min}}",
+    "durationHour": "{h, plural, one {# h} other {# h}}",
+    "durationHourMin": "{h, plural, one {# h} other {# h}} {min} min",
     "zone": {
       "in-zone": "✓ In zone",
       "nearby": "Nearby",

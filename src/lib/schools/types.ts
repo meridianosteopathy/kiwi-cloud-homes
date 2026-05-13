@@ -5,6 +5,8 @@ export interface LocalizedName {
 
 export type ZoneStatus = "in-zone" | "nearby" | "further" | "out-of-region";
 
+export type SchoolLevel = "kindergarten" | "primary" | "secondary";
+
 export interface Region {
   id: string;
   name: LocalizedName;
@@ -29,6 +31,7 @@ export interface School {
   cityId: string;
   regionId: string;
   name: LocalizedName;
+  level: SchoolLevel;
   /** Approx straight-line distance from the property, km. */
   distanceKm: number;
   zone: ZoneStatus;

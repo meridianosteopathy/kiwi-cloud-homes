@@ -101,6 +101,7 @@ export function SchoolSearch({ selectedSchoolId }: Props) {
             selected={s.id === selectedSchoolId}
             locale={locale}
             zoneLabel={t(`zone.${s.zone}`)}
+            levelLabel={t(`level.${s.level}`)}
             onSelect={() => setSelected(s.id)}
           />
         ))}
@@ -109,17 +110,25 @@ export function SchoolSearch({ selectedSchoolId }: Props) {
   );
 }
 
+const LEVEL_PILL: Record<School["level"], string> = {
+  kindergarten: "bg-sky-50 text-sky-700 border-sky-200",
+  primary: "bg-violet-50 text-violet-700 border-violet-200",
+  secondary: "bg-indigo-50 text-indigo-700 border-indigo-200",
+};
+
 function SchoolRow({
   school,
   selected,
   locale,
   zoneLabel,
+  levelLabel,
   onSelect,
 }: {
   school: School;
   selected: boolean;
   locale: AppLocale;
   zoneLabel: string;
+  levelLabel: string;
   onSelect: () => void;
 }) {
   const district = findDistrict(school.districtId);
@@ -136,8 +145,15 @@ function SchoolRow({
         }
       >
         <div className="min-w-0 flex-1">
-          <div className="truncate text-sm font-medium text-kiwi-900">
-            {localizedName(school, locale)}
+          <div className="flex items-center gap-2">
+            <span className="truncate text-sm font-medium text-kiwi-900">
+              {localizedName(school, locale)}
+            </span>
+            <span
+              className={`shrink-0 rounded-full border px-1.5 py-0.5 text-[9px] font-medium uppercase tracking-wide ${LEVEL_PILL[school.level]}`}
+            >
+              {levelLabel}
+            </span>
           </div>
           {district && (
             <div className="truncate text-xs text-kiwi-600">
