@@ -17,3 +17,8 @@ npm-debug.log*
 next-env.d.ts
 .tsbuildinfo
 *.tsbuildinfo
+
+# Raw MoE CSV downloads (regenerable, not ours to redistribute).
+data/raw/*.csv
+data/raw/*.xlsx
+!data/raw/.gitkeep
