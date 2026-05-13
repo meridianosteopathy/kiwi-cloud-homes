@@ -21,6 +21,8 @@ import type {
   HostawayListing,
   InquiryInput,
   InquiryResult,
+  ReservationInput,
+  ReservationResult,
 } from "./types";
 
 interface HostawayApiListing {
@@ -92,7 +94,54 @@ export function createLiveClient(): HostawayClient {
           "Set HOSTAWAY_USE_MOCK=true for inquiry flows until the messaging integration ships.",
       );
     },
+
+    async createReservation(input: ReservationInput): Promise<ReservationResult> {
+      // Hostaway POST /v1/reservations. Direct-channel = 2000.
+      // Documented at https://api.hostaway.com/documentation#tag/Reservations
+      const body = {
+        listingMapId: Number(input.listingId),
+        channelId: 2000,
+        channelName: "Direct",
+        guestFirstName: input.guestFirstName,
+        guestLastName: input.guestLastName,
+        guestEmail: input.guestEmail,
+        guestPhone: input.guestPhone ?? "",
+        arrivalDate: input.arrivalDate,
+        departureDate: input.departureDate,
+        nights: nightsBetween(input.arrivalDate, input.departureDate),
+        numberOfGuests: input.numberOfGuests,
+        totalPrice: input.totalPrice,
+        currency: input.currency,
+        status: "new",
+        isPaid: 1,
+        channelReservationId: input.externalRef,
+      } as const;
+
+      const created = await apiRequest<HostawayApiReservation>(
+        "POST",
+        "/reservations",
+        body,
+      );
+      if (!created || created.id === undefined) {
+        throw new HostawayApiError(
+          "Hostaway POST /reservations succeeded but the response had no id.",
+        );
+      }
+      return { id: String(created.id) };
+    },
   };
+}
+
+interface HostawayApiReservation {
+  id: number;
+  channelReservationId?: string;
+}
+
+function nightsBetween(arrivalISO: string, departureISO: string): number {
+  const a = new Date(arrivalISO + "T00:00:00Z").getTime();
+  const b = new Date(departureISO + "T00:00:00Z").getTime();
+  const n = Math.round((b - a) / 86_400_000);
+  return n > 0 ? n : 0;
 }
 
 let cachedListingId: string | null = null;

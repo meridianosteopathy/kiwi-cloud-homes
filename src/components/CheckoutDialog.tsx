@@ -458,14 +458,12 @@ function DoneStep({ quote, onClose }: { quote: Quote; onClose: () => void }) {
       <div className="rounded-lg border border-emerald-200 bg-emerald-50 p-3 text-emerald-800">
         {t("paymentCaptured", { amount: total })}
       </div>
-      <div className="rounded-lg border border-amber-200 bg-amber-50 p-3 text-amber-800">
-        {t("reservationPending")}
-      </div>
       <div className="rounded-lg border border-kiwi-100 bg-white p-3">
         <p className="text-kiwi-800">{t("nextSteps")}</p>
         <ul className="mt-2 list-disc pl-5 text-kiwi-700">
           <li>{t("stayDates", { checkIn: quote.checkIn, checkOut: quote.checkOut })}</li>
           <li>{t("guestsLine", { count: quote.guests })}</li>
+          <li>{t("reservationProcessing")}</li>
         </ul>
       </div>
       <div className="flex justify-end">

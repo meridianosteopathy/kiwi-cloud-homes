@@ -4,6 +4,8 @@ import type {
   HostawayListing,
   InquiryInput,
   InquiryResult,
+  ReservationInput,
+  ReservationResult,
 } from "./types";
 
 const MOCK_LISTING: HostawayListing = {
@@ -66,6 +68,14 @@ export function createMockClient(): HostawayClient {
       return {
         id: `mock-inquiry-${Date.now()}`,
         receivedAt: new Date().toISOString(),
+      };
+    },
+
+    async createReservation(input: ReservationInput): Promise<ReservationResult> {
+      console.log("[hostaway/mock] createReservation:", input);
+      return {
+        id: `mock-res-${input.externalRef}`,
+        alreadyExisted: false,
       };
     },
   };
