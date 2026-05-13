@@ -5,7 +5,11 @@ export interface LocalizedName {
 
 export type ZoneStatus = "in-zone" | "nearby" | "further" | "out-of-region";
 
-export type SchoolLevel = "kindergarten" | "primary" | "secondary";
+export type SchoolLevel =
+  | "kindergarten"
+  | "primary"
+  | "intermediate"
+  | "secondary";
 
 export interface Region {
   id: string;

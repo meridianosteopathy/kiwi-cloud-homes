@@ -33,6 +33,7 @@ export const DISTRICTS: District[] = [
   { id: "aidanfield", cityId: "christchurch", regionId: "canterbury", name: { zhCN: "Aidanfield 学区", en: "Aidanfield" } },
   { id: "oaklands", cityId: "christchurch", regionId: "canterbury", name: { zhCN: "Oaklands 学区", en: "Oaklands" } },
   { id: "spreydon", cityId: "christchurch", regionId: "canterbury", name: { zhCN: "Spreydon 学区", en: "Spreydon" } },
+  { id: "sydenham", cityId: "christchurch", regionId: "canterbury", name: { zhCN: "Sydenham 学区", en: "Sydenham" } },
   { id: "cashmere", cityId: "christchurch", regionId: "canterbury", name: { zhCN: "Cashmere 学区", en: "Cashmere" } },
   { id: "hoon-hay", cityId: "christchurch", regionId: "canterbury", name: { zhCN: "Hoon Hay 学区", en: "Hoon Hay" } },
   { id: "riccarton", cityId: "christchurch", regionId: "canterbury", name: { zhCN: "Riccarton 学区", en: "Riccarton" } },
@@ -148,6 +149,40 @@ export const SCHOOLS: School[] = [
     level: "secondary",
     distanceKm: 4.2,
     zone: "in-zone",
+  },
+
+  // Intermediates (Y7–8) — Halswell School itself is full primary (Y1–8),
+  // so most local kids skip intermediate, but Chinese families ask about
+  // these standalone intermediates when comparing options.
+  {
+    id: "south-intermediate",
+    districtId: "sydenham",
+    cityId: "christchurch",
+    regionId: "canterbury",
+    name: { zhCN: "South Intermediate (Y7–8)", en: "South Intermediate" },
+    level: "intermediate",
+    distanceKm: 5.1,
+    zone: "nearby",
+  },
+  {
+    id: "heaton-normal-intermediate",
+    districtId: "merivale",
+    cityId: "christchurch",
+    regionId: "canterbury",
+    name: { zhCN: "Heaton Normal Intermediate (Y7–8)", en: "Heaton Normal Intermediate" },
+    level: "intermediate",
+    distanceKm: 9.4,
+    zone: "nearby",
+  },
+  {
+    id: "cobham-intermediate",
+    districtId: "burnside",
+    cityId: "christchurch",
+    regionId: "canterbury",
+    name: { zhCN: "Cobham Intermediate (Y7–8)", en: "Cobham Intermediate" },
+    level: "intermediate",
+    distanceKm: 12.0,
+    zone: "further",
   },
 
   // Nearby — short drive, often private / open-enrolment or a neighbouring zone

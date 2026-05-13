@@ -67,8 +67,11 @@
     "level": {
       "kindergarten": "Kindy",
       "primary": "Primary",
-      "secondary": "Secondary"
-    }
+      "intermediate": "Intermediate",
+      "secondary": "High school"
+    },
+    "levelFilterLabel": "Filter by school type",
+    "levelFilterAria": "School type"
   },
   "SchoolMatch": {
     "noSelection": "Pick a school or kindergarten on the left to see distance, walking and driving times from the home.",

@@ -11,6 +11,7 @@ import {
   RADIUS_KM,
   type AppLocale,
   type School,
+  type SchoolLevel,
   type ZoneStatus,
 } from "@/lib/schools";
 
@@ -18,11 +19,33 @@ type Props = {
   selectedSchoolId: string | null;
 };
 
+const LEVEL_ORDER: SchoolLevel[] = [
+  "kindergarten",
+  "primary",
+  "intermediate",
+  "secondary",
+];
+
 const ZONE_PILL: Record<ZoneStatus, string> = {
   "in-zone": "bg-emerald-50 text-emerald-700 border-emerald-200",
   nearby: "bg-amber-50 text-amber-800 border-amber-200",
   further: "bg-orange-50 text-orange-800 border-orange-200",
   "out-of-region": "bg-rose-50 text-rose-800 border-rose-200",
+};
+
+const LEVEL_PILL: Record<SchoolLevel, string> = {
+  kindergarten: "bg-sky-50 text-sky-700 border-sky-200",
+  primary: "bg-violet-50 text-violet-700 border-violet-200",
+  intermediate: "bg-teal-50 text-teal-700 border-teal-200",
+  secondary: "bg-indigo-50 text-indigo-700 border-indigo-200",
+};
+
+// "Active" variant for chip-row level filter — same hue, stronger fill.
+const LEVEL_CHIP_ACTIVE: Record<SchoolLevel, string> = {
+  kindergarten: "bg-sky-600 text-white border-sky-600 hover:bg-sky-700",
+  primary: "bg-violet-600 text-white border-violet-600 hover:bg-violet-700",
+  intermediate: "bg-teal-600 text-white border-teal-600 hover:bg-teal-700",
+  secondary: "bg-indigo-600 text-white border-indigo-600 hover:bg-indigo-700",
 };
 
 export function SchoolSearch({ selectedSchoolId }: Props) {
@@ -34,17 +57,24 @@ export function SchoolSearch({ selectedSchoolId }: Props) {
   const [, startTransition] = useTransition();
 
   const [filter, setFilter] = useState("");
+  const [levels, setLevels] = useState<Set<SchoolLevel>>(new Set());
 
   const all = useMemo(() => nearbySchools(), []);
   const visible = useMemo(() => {
+    let list = all;
+    if (levels.size > 0) {
+      list = list.filter((s) => levels.has(s.level));
+    }
     const q = filter.trim().toLowerCase();
-    if (!q) return all;
-    return all.filter(
-      (s) =>
-        s.name.en.toLowerCase().includes(q) ||
-        s.name.zhCN.toLowerCase().includes(q),
-    );
-  }, [all, filter]);
+    if (q) {
+      list = list.filter(
+        (s) =>
+          s.name.en.toLowerCase().includes(q) ||
+          s.name.zhCN.toLowerCase().includes(q),
+      );
+    }
+    return list;
+  }, [all, filter, levels]);
 
   function setSelected(id: string | null) {
     const params = new URLSearchParams(searchParams.toString());
@@ -53,6 +83,15 @@ export function SchoolSearch({ selectedSchoolId }: Props) {
     const next = params.toString();
     startTransition(() => {
       router.replace(next ? `${pathname}?${next}` : pathname);
+    });
+  }
+
+  function toggleLevel(level: SchoolLevel) {
+    setLevels((prev) => {
+      const next = new Set(prev);
+      if (next.has(level)) next.delete(level);
+      else next.add(level);
+      return next;
     });
   }
 
@@ -75,6 +114,31 @@ export function SchoolSearch({ selectedSchoolId }: Props) {
           </button>
         )}
       </header>
+
+      <div role="group" aria-label={t("levelFilterAria")} className="mb-3">
+        <span className="sr-only">{t("levelFilterLabel")}</span>
+        <div className="flex flex-wrap gap-2">
+          {LEVEL_ORDER.map((level) => {
+            const active = levels.has(level);
+            return (
+              <button
+                key={level}
+                type="button"
+                onClick={() => toggleLevel(level)}
+                aria-pressed={active}
+                className={
+                  "rounded-full border px-3 py-1 text-xs font-medium transition " +
+                  (active
+                    ? LEVEL_CHIP_ACTIVE[level]
+                    : `${LEVEL_PILL[level]} hover:brightness-95`)
+                }
+              >
+                {t(`level.${level}`)}
+              </button>
+            );
+          })}
+        </div>
+      </div>
 
       <label className="block">
         <span className="sr-only">{t("filterLabel")}</span>
@@ -109,12 +173,6 @@ export function SchoolSearch({ selectedSchoolId }: Props) {
     </section>
   );
 }
-
-const LEVEL_PILL: Record<School["level"], string> = {
-  kindergarten: "bg-sky-50 text-sky-700 border-sky-200",
-  primary: "bg-violet-50 text-violet-700 border-violet-200",
-  secondary: "bg-indigo-50 text-indigo-700 border-indigo-200",
-};
 
 function SchoolRow({
   school,
