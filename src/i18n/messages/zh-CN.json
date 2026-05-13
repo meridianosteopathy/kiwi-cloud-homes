@@ -67,8 +67,11 @@
     "level": {
       "kindergarten": "幼儿园",
       "primary": "小学",
-      "secondary": "中学"
-    }
+      "intermediate": "初中",
+      "secondary": "高中"
+    },
+    "levelFilterLabel": "按学校类型筛选",
+    "levelFilterAria": "学校类型"
   },
   "SchoolMatch": {
     "noSelection": "在左侧选择一所学校或幼儿园,这里会显示与房源之间的距离、步行/驾车时间。",
