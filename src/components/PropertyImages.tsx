@@ -4,16 +4,28 @@ import { useState } from "react";
 import { useTranslations } from "next-intl";
 import type { ListingImage } from "@/lib/hostaway";
 import { PhotoLightbox } from "./PhotoLightbox";
+import { PropertyTour } from "./PropertyTour";
 
 type Props = {
   images: ListingImage[];
   alt: string;
+  /** Optional 360° tour URL. When present, a "Tour" button is shown. */
+  tourUrl?: string | null;
+  /** Used in the tour modal's title. */
+  listingName?: string;
 };
 
-export function PropertyImages({ images, alt }: Props) {
+export function PropertyImages({
+  images,
+  alt,
+  tourUrl,
+  listingName,
+}: Props) {
   const t = useTranslations("PropertyImages");
+  const tt = useTranslations("Tour");
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxStart, setLightboxStart] = useState(0);
+  const [tourOpen, setTourOpen] = useState(false);
 
   if (images.length === 0) {
     return (
@@ -35,6 +47,7 @@ export function PropertyImages({ images, alt }: Props) {
   const hero = grid[0];
   const thumbs = grid.slice(1);
   const hasMoreOverlay = images.length > 1;
+  const hasTour = Boolean(tourUrl && tourUrl.trim());
 
   return (
     <>
@@ -96,28 +109,54 @@ export function PropertyImages({ images, alt }: Props) {
           })}
         </div>
 
-        {hasMoreOverlay && (
-          <button
-            type="button"
-            onClick={() => openAt(0)}
-            className="absolute bottom-3 right-3 flex items-center gap-2 rounded-full border border-kiwi-900/20 bg-white px-3 py-1.5 text-sm font-medium text-kiwi-900 shadow hover:bg-kiwi-50"
-          >
-            <svg
-              aria-hidden
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              className="h-4 w-4"
+        {/* Bottom-right pill cluster: 360° Tour + Show all photos. */}
+        <div className="absolute bottom-3 right-3 flex flex-wrap items-center justify-end gap-2">
+          {hasTour && (
+            <button
+              type="button"
+              onClick={() => setTourOpen(true)}
+              className="flex items-center gap-2 rounded-full border border-kiwi-900/20 bg-white px-3 py-1.5 text-sm font-medium text-kiwi-900 shadow hover:bg-kiwi-50"
             >
-              <rect x="3" y="3" width="7" height="7" rx="1" />
-              <rect x="14" y="3" width="7" height="7" rx="1" />
-              <rect x="3" y="14" width="7" height="7" rx="1" />
-              <rect x="14" y="14" width="7" height="7" rx="1" />
-            </svg>
-            {t("showAll", { count: images.length })}
-          </button>
-        )}
+              <svg
+                aria-hidden
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="h-4 w-4"
+              >
+                <circle cx="12" cy="12" r="9" />
+                <ellipse cx="12" cy="12" rx="9" ry="3.5" />
+                <path d="M12 3v18" />
+              </svg>
+              {tt("openTour")}
+            </button>
+          )}
+          {hasMoreOverlay && (
+            <button
+              type="button"
+              onClick={() => openAt(0)}
+              className="flex items-center gap-2 rounded-full border border-kiwi-900/20 bg-white px-3 py-1.5 text-sm font-medium text-kiwi-900 shadow hover:bg-kiwi-50"
+            >
+              <svg
+                aria-hidden
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                className="h-4 w-4"
+              >
+                <rect x="3" y="3" width="7" height="7" rx="1" />
+                <rect x="14" y="3" width="7" height="7" rx="1" />
+                <rect x="3" y="14" width="7" height="7" rx="1" />
+                <rect x="14" y="14" width="7" height="7" rx="1" />
+              </svg>
+              {t("showAll", { count: images.length })}
+            </button>
+          )}
+        </div>
       </div>
 
       {lightboxOpen && (
@@ -126,6 +165,14 @@ export function PropertyImages({ images, alt }: Props) {
           alt={alt}
           initialIndex={lightboxStart}
           onClose={() => setLightboxOpen(false)}
+        />
+      )}
+
+      {tourOpen && hasTour && tourUrl && (
+        <PropertyTour
+          tourUrl={tourUrl}
+          listingName={listingName ?? alt}
+          onClose={() => setTourOpen(false)}
         />
       )}
     </>
