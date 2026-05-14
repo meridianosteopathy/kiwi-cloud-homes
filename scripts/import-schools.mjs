@@ -141,12 +141,28 @@ function readCsv(filePath) {
     return { rows: [], missing: true };
   }
   const buf = fs.readFileSync(filePath);
-  // Strip BOM if present.
-  const text = buf.toString("utf8").replace(/^﻿/, "");
+  let text = buf.toString("utf8").replace(/^﻿/, ""); // strip BOM
+
+  // MoE CSVs often start with a title row ("New Zealand Schools Directory")
+  // and a few blank rows before the real header. Skip ahead until we find a
+  // line whose first column looks like one of our known ID columns.
+  const knownIds = [...SCHOOL_COLUMNS.id, ...ECE_COLUMNS.id]
+    .map((s) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"))
+    .join("|");
+  const headerRegex = new RegExp(`^"?(${knownIds})"?[,\\s]`, "i");
+  const lines = text.split(/\r?\n/);
+  const headerIdx = lines.findIndex((line) => headerRegex.test(line));
+  if (headerIdx > 0) {
+    text = lines.slice(headerIdx).join("\n");
+  }
+
   const rows = parse(text, {
     columns: true,
     skip_empty_lines: true,
     relax_quotes: true,
+    // MoE adds/removes trailing columns each year — accept rows that don't
+    // exactly match the header width.
+    relax_column_count: true,
     trim: true,
   });
   return { rows, missing: false };
