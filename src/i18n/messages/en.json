@@ -177,7 +177,9 @@
     "clear": "Clear dates",
     "cancel": "Cancel",
     "apply": "Apply",
-    "close": "Close"
+    "close": "Close",
+    "loadingAvailability": "Loading availability…",
+    "availabilityFallback": "Availability couldn't load — your dates will be confirmed at checkout."
   },
   "PropertyImages": {
     "openGallery": "View all photos",
