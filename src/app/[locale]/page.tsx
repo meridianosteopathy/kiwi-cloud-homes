@@ -43,7 +43,8 @@ function Landing() {
             </p>
           </div>
 
-          <div className="grid gap-4 md:grid-cols-3">
+          {/* Relocation persona is intentionally omitted for now — revisit later. */}
+          <div className="mx-auto grid max-w-3xl gap-4 md:grid-cols-2">
             <PersonaCard
               href="/tourist"
               title={t("Persona.tourist.title")}
@@ -55,12 +56,6 @@ function Landing() {
               title={t("Persona.school.title")}
               blurb={t("Persona.school.blurb")}
               cta={t("Persona.school.cta")}
-            />
-            <PersonaCard
-              disabled
-              badge={t("Persona.relocation.comingSoon")}
-              title={t("Persona.relocation.title")}
-              blurb={t("Persona.relocation.blurb")}
             />
           </div>
         </section>

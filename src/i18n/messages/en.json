@@ -207,6 +207,12 @@
     "backToListing": "Back to listing",
     "close": "Close"
   },
+  "DirectBooking": {
+    "title": "You're booking direct with us",
+    "subtitle": "Typically around 10–15% cheaper than Airbnb / Booking.com — no platform fees added on top.",
+    "savingsBadge": "Save ~10–15%",
+    "disclaimer": "Airbnb adds a ~14–16% guest service fee, and Booking.com bakes platform commission into the displayed price. Booking direct here skips both."
+  },
   "Checkout": {
     "title": {
       "review": "Review your booking",
