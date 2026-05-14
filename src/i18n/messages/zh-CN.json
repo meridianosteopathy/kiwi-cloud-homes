@@ -177,7 +177,9 @@
     "clear": "清除日期",
     "cancel": "取消",
     "apply": "确定",
-    "close": "关闭"
+    "close": "关闭",
+    "loadingAvailability": "正在加载房态…",
+    "availabilityFallback": "暂时无法加载房态,所选日期将在预订时再次确认。"
   },
   "PropertyImages": {
     "openGallery": "查看全部照片",

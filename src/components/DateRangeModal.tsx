@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect, useId, useRef, useState } from "react";
+import { useEffect, useId, useMemo, useRef, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
-import { DayPicker, type DateRange } from "react-day-picker";
+import { DayPicker, type DateRange, type Matcher } from "react-day-picker";
 import { enUS, zhCN } from "date-fns/locale";
 import "react-day-picker/style.css";
 
@@ -35,6 +35,14 @@ function startOfToday(): Date {
   return d;
 }
 
+function addDays(d: Date, days: number): Date {
+  const out = new Date(d);
+  out.setDate(out.getDate() + days);
+  return out;
+}
+
+const AVAILABILITY_DAYS = 365; // ~12 months from today
+
 export function DateRangeModal({
   initialCheckIn,
   initialCheckOut,
@@ -50,6 +58,10 @@ export function DateRangeModal({
     to: parseISO(initialCheckOut),
   });
 
+  const [unavailable, setUnavailable] = useState<Date[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [loadError, setLoadError] = useState(false);
+
   const closeBtnRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
@@ -60,6 +72,45 @@ export function DateRangeModal({
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [onClose]);
+
+  // Fetch host calendar so unavailable nights can be greyed out upfront.
+  useEffect(() => {
+    let cancelled = false;
+    const start = toISO(startOfToday());
+    const end = toISO(addDays(startOfToday(), AVAILABILITY_DAYS));
+    if (!start || !end) {
+      setLoading(false);
+      return;
+    }
+
+    fetch(`/api/booking/availability?start=${start}&end=${end}`)
+      .then(async (res) => {
+        if (!res.ok) throw new Error(`${res.status}`);
+        return (await res.json()) as { unavailable: string[] };
+      })
+      .then((data) => {
+        if (cancelled) return;
+        const dates = data.unavailable
+          .map((iso) => parseISO(iso))
+          .filter((d): d is Date => Boolean(d));
+        setUnavailable(dates);
+        setLoading(false);
+      })
+      .catch(() => {
+        if (cancelled) return;
+        setLoadError(true);
+        setLoading(false);
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  const disabled: Matcher[] = useMemo(
+    () => [{ before: startOfToday() }, ...unavailable],
+    [unavailable],
+  );
 
   function clear() {
     setRange(undefined);
@@ -131,12 +182,23 @@ export function DateRangeModal({
             </div>
           </div>
 
+          {loading && (
+            <p className="mb-2 text-center text-xs text-kiwi-600">
+              {t("loadingAvailability")}
+            </p>
+          )}
+          {loadError && (
+            <p className="mb-2 text-center text-xs text-amber-700">
+              {t("availabilityFallback")}
+            </p>
+          )}
+
           <DayPicker
             mode="range"
             selected={range}
             onSelect={setRange}
             numberOfMonths={2}
-            disabled={{ before: startOfToday() }}
+            disabled={disabled}
             locale={locale === "zh-CN" ? zhCN : enUS}
             weekStartsOn={1}
             className="rdp-kiwi"
