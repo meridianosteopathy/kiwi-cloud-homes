@@ -200,6 +200,13 @@
       "other": "Other"
     }
   },
+  "Tour": {
+    "openTour": "360° Tour",
+    "title": "360° Tour",
+    "iframeTitle": "360° virtual tour of {listing}",
+    "backToListing": "Back to listing",
+    "close": "Close"
+  },
   "Checkout": {
     "title": {
       "review": "Review your booking",

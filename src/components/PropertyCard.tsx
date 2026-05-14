@@ -1,5 +1,5 @@
 import { useLocale, useTranslations } from "next-intl";
-import { resolveDescription } from "@/content/listing-content";
+import { resolveDescription, resolveTourUrl } from "@/content/listing-content";
 import type { HostawayListing } from "@/lib/hostaway";
 import { BookingForm } from "./BookingForm";
 import { PropertyAmenities } from "./PropertyAmenities";
@@ -21,11 +21,17 @@ export function PropertyCard({
   const t = useTranslations("Property");
   const locale = useLocale();
   const description = resolveDescription(locale, listing.description);
+  const tourUrl = resolveTourUrl(listing.tourUrl);
 
   return (
     <article className="overflow-hidden rounded-2xl border border-kiwi-200 bg-white shadow-sm">
       <div className="p-5">
-        <PropertyImages images={listing.images} alt={listing.name} />
+        <PropertyImages
+          images={listing.images}
+          alt={listing.name}
+          tourUrl={tourUrl}
+          listingName={listing.name}
+        />
       </div>
 
       <div className="grid gap-5 px-5 pb-5 lg:grid-cols-[1.4fr_1fr]">

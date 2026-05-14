@@ -200,6 +200,13 @@
       "other": "其他"
     }
   },
+  "Tour": {
+    "openTour": "360° 看房",
+    "title": "360° 看房",
+    "iframeTitle": "{listing} 的 360° 虚拟看房",
+    "backToListing": "返回房源",
+    "close": "关闭"
+  },
   "Checkout": {
     "title": {
       "review": "确认预订信息",
