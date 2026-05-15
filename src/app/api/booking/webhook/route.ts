@@ -4,6 +4,8 @@ import {
   reserveFromPaymentIntent,
   ReservationMetadataError,
 } from "@/lib/booking/reservation";
+import { sendBookingConfirmation } from "@/lib/email/booking-confirmation";
+import { getHostawayClient } from "@/lib/hostaway";
 import { getStripe, StripeConfigError } from "@/lib/stripe/server";
 
 export const dynamic = "force-dynamic";
@@ -20,6 +22,16 @@ export const dynamic = "force-dynamic";
 const SEEN: Set<string> = new Set();
 const SEEN_MAX = 1000; // bound memory; oldest pruned in arrival order
 const SEEN_FIFO: string[] = [];
+
+/** Stripe takes/returns minor units for normal currencies, but a handful are
+ *  zero-decimal (no cent subdivision). NZD/USD/AUD/etc. are 2-decimal. */
+const ZERO_DECIMAL_CURRENCIES = new Set([
+  "bif", "clp", "djf", "gnf", "jpy", "kmf", "krw", "mga", "pyg",
+  "rwf", "ugx", "vnd", "vuv", "xaf", "xof", "xpf",
+]);
+function isZeroDecimal(currency: string): boolean {
+  return ZERO_DECIMAL_CURRENCIES.has(currency.toLowerCase());
+}
 
 function rememberEvent(id: string): boolean {
   if (SEEN.has(id)) return false;
@@ -91,6 +103,44 @@ export async function POST(req: Request) {
     console.log(
       `[booking/webhook] reservation ${reservation.id} created for PaymentIntent ${pi.id}`,
     );
+
+    // Send confirmation email. Failures here are logged but don't fail the
+    // webhook — the booking is already created; we don't want Stripe to retry
+    // and double-create.
+    try {
+      const meta = pi.metadata ?? {};
+      const listing = await getHostawayClient().getListing();
+      const total =
+        pi.currency && pi.amount_received
+          ? isZeroDecimal(pi.currency)
+            ? pi.amount_received
+            : pi.amount_received / 100
+          : 0;
+      const result = await sendBookingConfirmation({
+        guestName: meta.guest_name ?? "",
+        guestEmail: meta.guest_email ?? "",
+        locale: meta.locale === "en" ? "en" : "zh-CN",
+        listing,
+        checkIn: meta.check_in ?? "",
+        checkOut: meta.check_out ?? "",
+        nights: Number(meta.nights) || 0,
+        guests: Number(meta.guests) || 0,
+        total,
+        currency: pi.currency?.toUpperCase() ?? "NZD",
+        reservationId: reservation.id,
+        paymentIntentId: pi.id,
+      });
+      if (result.skipped) {
+        console.log(`[booking/webhook] confirmation email skipped: ${result.skipped}`);
+      } else if (result.error) {
+        console.error(`[booking/webhook] confirmation email failed: ${result.error}`);
+      } else {
+        console.log(`[booking/webhook] confirmation email sent: ${result.id}`);
+      }
+    } catch (emailErr) {
+      console.error("[booking/webhook] confirmation email threw:", emailErr);
+    }
+
     return NextResponse.json({ ok: true, reservationId: reservation.id });
   } catch (err) {
     // Drop the dedup entry so a retry can re-attempt; Stripe will redeliver.

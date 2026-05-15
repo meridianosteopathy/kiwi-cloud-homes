@@ -66,6 +66,7 @@ export async function POST(req: Request) {
         guests: String(quote.guests),
         guest_name: parsed.guestName,
         guest_email: parsed.guestEmail,
+        locale: parsed.locale,
       },
     });
 
@@ -93,6 +94,7 @@ function parseBody(
       guests: number;
       guestName: string;
       guestEmail: string;
+      locale: "zh-CN" | "en";
     }
   | { error: string } {
   if (!body || typeof body !== "object") {
@@ -112,11 +114,13 @@ function parseBody(
   if (typeof b.guestEmail !== "string" || !b.guestEmail.trim()) {
     return { error: "guestEmail is required." };
   }
+  const locale: "zh-CN" | "en" = b.locale === "en" ? "en" : "zh-CN";
   return {
     checkIn: b.checkIn,
     checkOut: b.checkOut,
     guests,
     guestName: b.guestName.trim(),
     guestEmail: b.guestEmail.trim(),
+    locale,
   };
 }
