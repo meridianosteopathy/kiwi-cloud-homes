@@ -142,7 +142,11 @@ export function DateRangeModal({
             <h2 id={titleId} className="text-lg font-semibold text-kiwi-900">
               {t("title")}
             </h2>
-            <p className="mt-1 text-xs text-kiwi-600">{t("subtitle")}</p>
+            <p className="mt-1 text-xs text-kiwi-600">
+              {minNights > 1
+                ? t("minNightsHint", { count: minNights })
+                : t("subtitle")}
+            </p>
           </div>
           <button
             ref={closeBtnRef}
@@ -193,12 +197,6 @@ export function DateRangeModal({
           {loadError && (
             <p className="mb-2 text-center text-xs text-amber-700">
               {t("availabilityFallback")}
-            </p>
-          )}
-
-          {minNights > 1 && (
-            <p className="mb-2 text-center text-[11px] text-kiwi-600">
-              {t("minNightsHint", { count: minNights })}
             </p>
           )}
 

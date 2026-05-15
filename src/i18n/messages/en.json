@@ -166,7 +166,7 @@
     "estimateNote": "Estimate based on the base nightly rate. Cleaning fee is added at checkout.",
     "bookNow": "Book now",
     "inquire": "Send inquiry",
-    "minNightsHint": "Minimum {count, plural, one {# night} other {# nights}} stay",
+    "minNightsHint": "Minimum stay: {count, plural, one {# night} other {# nights}}",
     "testModeNotice": "Test mode — no real charges. Use Stripe test card 4242 4242 4242 4242 to try the flow."
   },
   "DatePicker": {
@@ -181,7 +181,7 @@
     "close": "Close",
     "loadingAvailability": "Loading availability…",
     "availabilityFallback": "Availability couldn't load — your dates will be confirmed at checkout.",
-    "minNightsHint": "Minimum {count, plural, one {# night} other {# nights}} stay"
+    "minNightsHint": "Minimum stay: {count, plural, one {# night} other {# nights}}"
   },
   "PropertyImages": {
     "openGallery": "View all photos",
