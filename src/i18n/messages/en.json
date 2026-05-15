@@ -181,7 +181,8 @@
     "close": "Close",
     "loadingAvailability": "Loading availability…",
     "availabilityFallback": "Availability couldn't load — your dates will be confirmed at checkout.",
-    "minNightsHint": "Minimum stay: {count, plural, one {# night} other {# nights}}"
+    "minNightsHint": "Minimum stay: {count, plural, one {# night} other {# nights}}",
+    "minNightsTooltip": "{count}-night minimum"
   },
   "PropertyImages": {
     "openGallery": "View all photos",

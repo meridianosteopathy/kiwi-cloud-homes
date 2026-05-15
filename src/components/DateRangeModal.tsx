@@ -115,6 +115,41 @@ export function DateRangeModal({
     [unavailable],
   );
 
+  // When the guest has clicked a check-in but not a check-out, mark the
+  // candidate checkout dates that would make a too-short stay so we can
+  // outline them and show an Airbnb-style "N-night minimum" tooltip.
+  const tooShortDates = useMemo(() => {
+    if (!range?.from || range.to) return [];
+    const out: Date[] = [];
+    for (let i = 1; i < minNights; i++) {
+      out.push(addDays(range.from, i));
+    }
+    return out;
+  }, [range, minNights]);
+
+  const tooltipText = t("minNightsTooltip", { count: minNights });
+
+  // Custom DayButton: wraps the library's default button with a tooltip
+  // span that becomes visible on hover/focus when the day is too-short.
+  const dayComponents = useMemo(
+    () => ({
+      DayButton: ({ day, modifiers, ...buttonProps }: {
+        day: { date: Date };
+        modifiers: Record<string, boolean | undefined>;
+      } & React.ButtonHTMLAttributes<HTMLButtonElement>) => (
+        <button {...buttonProps}>
+          {buttonProps.children}
+          {modifiers?.tooShort ? (
+            <span className="rdp-too-short-tooltip" role="tooltip">
+              {tooltipText}
+            </span>
+          ) : null}
+        </button>
+      ),
+    }),
+    [tooltipText],
+  );
+
   function clear() {
     setRange(undefined);
   }
@@ -207,6 +242,9 @@ export function DateRangeModal({
             numberOfMonths={2}
             min={minNights + 1}
             disabled={disabled}
+            modifiers={{ tooShort: tooShortDates }}
+            modifiersClassNames={{ tooShort: "rdp-too-short" }}
+            components={dayComponents}
             locale={locale === "zh-CN" ? zhCN : enUS}
             weekStartsOn={1}
             className="rdp-kiwi"

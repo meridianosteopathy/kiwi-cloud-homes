@@ -181,7 +181,8 @@
     "close": "关闭",
     "loadingAvailability": "正在加载房态…",
     "availabilityFallback": "暂时无法加载房态,所选日期将在预订时再次确认。",
-    "minNightsHint": "至少入住 {count} 晚"
+    "minNightsHint": "至少入住 {count} 晚",
+    "minNightsTooltip": "至少 {count} 晚"
   },
   "PropertyImages": {
     "openGallery": "查看全部照片",
