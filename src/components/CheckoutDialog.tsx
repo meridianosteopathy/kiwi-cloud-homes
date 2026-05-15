@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useId, useRef, useState } from "react";
-import { useFormatter, useTranslations } from "next-intl";
+import { useFormatter, useLocale, useTranslations } from "next-intl";
 import { loadStripe, type Stripe } from "@stripe/stripe-js";
 import {
   Elements,
@@ -55,6 +55,7 @@ export function CheckoutDialog({
   onClose,
 }: Props) {
   const t = useTranslations("Checkout");
+  const locale = useLocale();
   const titleId = useId();
   const closeBtnRef = useRef<HTMLButtonElement>(null);
 
@@ -119,6 +120,7 @@ export function CheckoutDialog({
           guests: quote.guests,
           guestName: name.trim(),
           guestEmail: email.trim(),
+          locale,
         }),
       });
       const data = await res.json();
