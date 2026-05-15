@@ -38,6 +38,8 @@ interface HostawayApiListing {
   personCapacity?: number;
   price?: number;
   cleaningFee?: number;
+  minNights?: number;
+  maxNights?: number;
   currencyCode?: string;
   address?: string;
   street?: string;
@@ -305,6 +307,8 @@ function mapListing(api: HostawayApiListing): HostawayListing {
     maxGuests: api.personCapacity ?? 0,
     basePrice: { amount: api.price ?? 0, currency },
     cleaningFee: api.cleaningFee ?? 0,
+    minNights: Math.max(1, api.minNights ?? 1),
+    maxNights: api.maxNights && api.maxNights > 0 ? api.maxNights : 365,
     images,
     amenities,
     address: {

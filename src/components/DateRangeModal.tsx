@@ -9,6 +9,8 @@ import "react-day-picker/style.css";
 type Props = {
   initialCheckIn: string | null;
   initialCheckOut: string | null;
+  /** Minimum nights enforced by Hostaway; default 1. */
+  minNights?: number;
   onClose: () => void;
   /** Called with ISO YYYY-MM-DD strings (or null to clear). */
   onApply: (checkIn: string | null, checkOut: string | null) => void;
@@ -46,6 +48,7 @@ const AVAILABILITY_DAYS = 365; // ~12 months from today
 export function DateRangeModal({
   initialCheckIn,
   initialCheckOut,
+  minNights = 1,
   onClose,
   onApply,
 }: Props) {
@@ -193,11 +196,18 @@ export function DateRangeModal({
             </p>
           )}
 
+          {minNights > 1 && (
+            <p className="mb-2 text-center text-[11px] text-kiwi-600">
+              {t("minNightsHint", { count: minNights })}
+            </p>
+          )}
+
           <DayPicker
             mode="range"
             selected={range}
             onSelect={setRange}
             numberOfMonths={2}
+            min={minNights + 1}
             disabled={disabled}
             locale={locale === "zh-CN" ? zhCN : enUS}
             weekStartsOn={1}

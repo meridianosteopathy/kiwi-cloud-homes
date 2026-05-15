@@ -44,6 +44,10 @@ export interface HostawayListing {
   basePrice: HostawayPrice;
   /** Flat cleaning fee charged per booking, in the listing's currency. */
   cleaningFee: number;
+  /** Minimum nights per booking (Hostaway `minNights`). 1 if not set. */
+  minNights: number;
+  /** Maximum nights per booking (Hostaway `maxNights`). 0 / Infinity if not set. */
+  maxNights: number;
   images: ListingImage[];
   amenities: Amenity[];
   address: HostawayAddress;

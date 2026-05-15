@@ -18,6 +18,8 @@ const MOCK_LISTING: HostawayListing = {
   maxGuests: 8,
   basePrice: { amount: 420, currency: "NZD" },
   cleaningFee: 120,
+  minNights: 2,
+  maxNights: 90,
   images: [],
   amenities: [
     { id: "wifi", name: "Wifi" },

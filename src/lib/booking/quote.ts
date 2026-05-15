@@ -36,6 +36,8 @@ export class QuoteError extends Error {
       | "checkout_before_checkin"
       | "guests_invalid"
       | "guests_over_capacity"
+      | "below_min_nights"
+      | "above_max_nights"
       | "unavailable",
     message: string,
   ) {
@@ -73,6 +75,18 @@ export async function computeQuote(input: QuoteInput): Promise<Quote> {
   const nights = bookedNights.length;
   if (nights <= 0) {
     throw new QuoteError("checkout_before_checkin", "Pick a check-out after check-in.");
+  }
+  if (nights < listing.minNights) {
+    throw new QuoteError(
+      "below_min_nights",
+      `Minimum stay for this home is ${listing.minNights} night${listing.minNights === 1 ? "" : "s"}.`,
+    );
+  }
+  if (listing.maxNights > 0 && nights > listing.maxNights) {
+    throw new QuoteError(
+      "above_max_nights",
+      `Maximum stay for this home is ${listing.maxNights} night${listing.maxNights === 1 ? "" : "s"}.`,
+    );
   }
 
   const currency = listing.basePrice.currency;

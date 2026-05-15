@@ -9,6 +9,7 @@ import {
   useElements,
   useStripe,
 } from "@stripe/react-stripe-js";
+import { isStripeTestMode } from "@/lib/stripe/mode";
 
 type Quote = {
   listingId: string;
@@ -310,9 +311,11 @@ function ReviewStep(props: {
         />
       </label>
 
-      <div className="rounded-lg border border-amber-200 bg-amber-50 p-3 text-[11px] text-amber-800">
-        {t("testModeNotice")}
-      </div>
+      {isStripeTestMode() && (
+        <div className="rounded-lg border border-amber-200 bg-amber-50 p-3 text-[11px] text-amber-800">
+          {t("testModeNotice")}
+        </div>
+      )}
 
       <div className="flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
         <button
