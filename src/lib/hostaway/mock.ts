@@ -78,6 +78,7 @@ export function createMockClient(): HostawayClient {
             amount: weekend ? 480 : 420,
             currency: "NZD",
           },
+          minimumStay: MOCK_LISTING.minNights,
         };
       });
     },

@@ -240,7 +240,7 @@ export function DateRangeModal({
             selected={range}
             onSelect={setRange}
             numberOfMonths={2}
-            min={minNights + 1}
+            min={minNights}
             disabled={disabled}
             modifiers={{ tooShort: tooShortDates }}
             modifiersClassNames={{ tooShort: "rdp-too-short" }}

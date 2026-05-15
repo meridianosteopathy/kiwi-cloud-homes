@@ -80,6 +80,7 @@ interface HostawayApiCalendarDay {
   status?: string;
   isAvailable?: boolean | 0 | 1;
   price?: number;
+  minimumStay?: number;
 }
 
 interface HostawayApiEnvelope<T> {
@@ -98,7 +99,28 @@ export function createLiveClient(): HostawayClient {
       const payload = await apiGet<HostawayApiListing>(
         `/listings/${id}${LISTING_INCLUDE}`,
       );
-      return mapListing(payload);
+      const listing = mapListing(payload);
+      // Hostaway lets hosts set the min-nights rule in two places: the
+      // listing-level `minNights` field, or as per-day `minimumStay`
+      // overrides on the calendar. The dashboard's "Stay restrictions"
+      // workflow writes to the calendar, leaving listing.minNights at 1.
+      // Reconcile here so the booking UI sees the rule that's actually
+      // being enforced.
+      const calendarMin = await calendarTypicalMinStay(id).catch((err) => {
+        console.warn(
+          "[hostaway] calendar min-stay lookup failed; falling back to listing.minNights:",
+          err instanceof Error ? err.message : err,
+        );
+        return 0;
+      });
+      const effectiveMin = Math.max(listing.minNights, calendarMin);
+      if (effectiveMin !== listing.minNights) {
+        console.log(
+          `[hostaway] effective minNights ${effectiveMin} (listing=${listing.minNights}, calendar=${calendarMin})`,
+        );
+        return { ...listing, minNights: effectiveMin };
+      }
+      return listing;
     },
 
     async getAvailability(start, end) {
@@ -168,6 +190,56 @@ function nightsBetween(arrivalISO: string, departureISO: string): number {
 
 let cachedListingId: string | null = null;
 let cachedCurrency: { listingId: string; currency: string } | null = null;
+let cachedCalendarMin: { listingId: string; value: number; expiresAt: number } | null = null;
+const CALENDAR_MIN_TTL_MS = 5 * 60 * 1000;
+const CALENDAR_MIN_WINDOW_DAYS = 60;
+
+/**
+ * Returns the typical (mode) per-day minimumStay across the next
+ * CALENDAR_MIN_WINDOW_DAYS days of the calendar. Falls back to 0 when the
+ * calendar doesn't carry any per-day rules (so the caller keeps the
+ * listing-level minNights).
+ */
+async function calendarTypicalMinStay(listingId: string): Promise<number> {
+  const now = Date.now();
+  if (
+    cachedCalendarMin &&
+    cachedCalendarMin.listingId === listingId &&
+    cachedCalendarMin.expiresAt > now
+  ) {
+    return cachedCalendarMin.value;
+  }
+  const today = new Date();
+  today.setUTCHours(0, 0, 0, 0);
+  const end = new Date(today);
+  end.setUTCDate(end.getUTCDate() + CALENDAR_MIN_WINDOW_DAYS);
+  const startIso = today.toISOString().slice(0, 10);
+  const endIso = end.toISOString().slice(0, 10);
+  const days = await apiGet<HostawayApiCalendarDay[]>(
+    `/listings/${listingId}/calendar?startDate=${encodeURIComponent(startIso)}&endDate=${encodeURIComponent(endIso)}`,
+  );
+  // Mode over positive values: lets a single one-off override (e.g. a
+  // weekend with minStay=14) not displace the property's normal rule.
+  const counts = new Map<number, number>();
+  for (const d of days) {
+    const v = typeof d.minimumStay === "number" ? d.minimumStay : 0;
+    if (v >= 1) counts.set(v, (counts.get(v) ?? 0) + 1);
+  }
+  let mode = 0;
+  let modeCount = 0;
+  for (const [v, c] of counts) {
+    if (c > modeCount) {
+      mode = v;
+      modeCount = c;
+    }
+  }
+  cachedCalendarMin = {
+    listingId,
+    value: mode,
+    expiresAt: now + CALENDAR_MIN_TTL_MS,
+  };
+  return mode;
+}
 
 async function resolveListingId(): Promise<string> {
   if (cachedListingId) return cachedListingId;
@@ -336,6 +408,10 @@ function mapCalendarDay(
     date: d.date,
     available,
     price: { amount: d.price ?? 0, currency },
+    minimumStay:
+      typeof d.minimumStay === "number" && d.minimumStay > 0
+        ? d.minimumStay
+        : undefined,
   };
 }
 

@@ -60,6 +60,8 @@ export interface AvailabilityDay {
   date: string;
   available: boolean;
   price: HostawayPrice;
+  /** Per-day minimum stay rule (Hostaway `minimumStay`); 0/undefined = use listing default. */
+  minimumStay?: number;
 }
 
 export interface InquiryInput {
