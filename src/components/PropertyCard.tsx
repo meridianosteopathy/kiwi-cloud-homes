@@ -65,6 +65,8 @@ export function PropertyCard({
           listingName={listing.name}
           basePrice={listing.basePrice}
           maxGuests={listing.maxGuests}
+          minNights={listing.minNights}
+          maxNights={listing.maxNights}
           inquiryEmail={inquiryEmail}
           defaultCheckIn={defaultCheckIn}
           defaultCheckOut={defaultCheckOut}

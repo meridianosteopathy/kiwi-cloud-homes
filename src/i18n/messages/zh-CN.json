@@ -166,6 +166,7 @@
     "estimateNote": "上述为基础价格预估,清洁费等会在结账时显示。",
     "bookNow": "立即预订",
     "inquire": "发送询问",
+    "minNightsHint": "至少入住 {count} 晚",
     "testModeNotice": "测试模式 · 暂不会扣款,可使用 Stripe 测试卡 4242 4242 4242 4242。"
   },
   "DatePicker": {
@@ -179,7 +180,9 @@
     "apply": "确定",
     "close": "关闭",
     "loadingAvailability": "正在加载房态…",
-    "availabilityFallback": "暂时无法加载房态,所选日期将在预订时再次确认。"
+    "availabilityFallback": "暂时无法加载房态,所选日期将在预订时再次确认。",
+    "minNightsHint": "至少入住 {count} 晚",
+    "minNightsTooltip": "至少 {count} 晚"
   },
   "PropertyImages": {
     "openGallery": "查看全部照片",

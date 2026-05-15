@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { useFormatter, useLocale, useTranslations } from "next-intl";
+import { isStripeTestMode } from "@/lib/stripe/mode";
 import { CheckoutDialog } from "./CheckoutDialog";
 import { DateRangeModal } from "./DateRangeModal";
 import { InquiryDialog } from "./InquiryDialog";
@@ -11,6 +12,8 @@ type Props = {
   listingName: string;
   basePrice: { amount: number; currency: string };
   maxGuests: number;
+  minNights: number;
+  maxNights: number;
   inquiryEmail: string | null;
   defaultCheckIn: string | null;
   defaultCheckOut: string | null;
@@ -40,6 +43,8 @@ export function BookingForm({
   listingName,
   basePrice,
   maxGuests,
+  minNights,
+  maxNights,
   inquiryEmail,
   defaultCheckIn,
   defaultCheckOut,
@@ -47,6 +52,7 @@ export function BookingForm({
   const t = useTranslations("Booking");
   const format = useFormatter();
   const locale = useLocale();
+  const testMode = isStripeTestMode();
 
   const [checkIn, setCheckIn] = useState(defaultCheckIn ?? "");
   const [checkOut, setCheckOut] = useState(defaultCheckOut ?? "");
@@ -64,7 +70,9 @@ export function BookingForm({
   }, [defaultCheckIn, defaultCheckOut]);
 
   const nights = useMemo(() => nightsBetween(checkIn, checkOut), [checkIn, checkOut]);
-  const canBook = nights > 0;
+  const meetsMin = nights >= minNights;
+  const meetsMax = !(maxNights > 0 && nights > maxNights);
+  const canBook = nights > 0 && meetsMin && meetsMax;
 
   const subtotal = nights * basePrice.amount;
   const priceLabel = (amount: number) =>
@@ -136,6 +144,17 @@ export function BookingForm({
         </button>
       </div>
 
+      {minNights > 1 && (
+        <p
+          className={
+            "mt-2 text-[11px] " +
+            (nights > 0 && !meetsMin ? "text-rose-700" : "text-kiwi-600")
+          }
+        >
+          {t("minNightsHint", { count: minNights })}
+        </p>
+      )}
+
       <label className="mt-3 block">
         <span className="mb-1 block text-xs font-medium text-kiwi-700">
           {t("guests")}
@@ -192,14 +211,17 @@ export function BookingForm({
         </button>
       </div>
 
-      <p className="mt-2 text-center text-[11px] text-kiwi-500">
-        {t("testModeNotice")}
-      </p>
+      {testMode && (
+        <p className="mt-2 text-center text-[11px] text-amber-700">
+          {t("testModeNotice")}
+        </p>
+      )}
 
       {showDates && (
         <DateRangeModal
           initialCheckIn={checkIn || null}
           initialCheckOut={checkOut || null}
+          minNights={minNights}
           onClose={() => setShowDates(false)}
           onApply={applyDates}
         />

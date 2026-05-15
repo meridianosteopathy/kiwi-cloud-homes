@@ -66,3 +66,38 @@ body {
   font-weight: 500;
   font-size: 0.75rem;
 }
+
+/* "Too short" days — Airbnb-style: thin outline + hover tooltip telling
+   the guest why this date isn't a valid checkout (would violate the
+   listing's min-nights rule). */
+.rdp-kiwi .rdp-day_button {
+  position: relative;
+}
+.rdp-kiwi .rdp-too-short .rdp-day_button {
+  outline: 1px solid var(--rdp-accent-color);
+  outline-offset: -2px;
+  color: #1f3e1f; /* kiwi-900 — keep readable, not greyed */
+}
+.rdp-too-short-tooltip {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  background: white;
+  color: #1f3e1f;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  padding: 4px 8px;
+  font-size: 11px;
+  font-weight: 500;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 100ms;
+  z-index: 50;
+}
+.rdp-kiwi .rdp-too-short .rdp-day_button:hover .rdp-too-short-tooltip,
+.rdp-kiwi .rdp-too-short .rdp-day_button:focus .rdp-too-short-tooltip {
+  opacity: 1;
+}

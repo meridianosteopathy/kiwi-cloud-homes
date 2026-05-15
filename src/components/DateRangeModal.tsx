@@ -9,6 +9,8 @@ import "react-day-picker/style.css";
 type Props = {
   initialCheckIn: string | null;
   initialCheckOut: string | null;
+  /** Minimum nights enforced by Hostaway; default 1. */
+  minNights?: number;
   onClose: () => void;
   /** Called with ISO YYYY-MM-DD strings (or null to clear). */
   onApply: (checkIn: string | null, checkOut: string | null) => void;
@@ -46,6 +48,7 @@ const AVAILABILITY_DAYS = 365; // ~12 months from today
 export function DateRangeModal({
   initialCheckIn,
   initialCheckOut,
+  minNights = 1,
   onClose,
   onApply,
 }: Props) {
@@ -112,6 +115,41 @@ export function DateRangeModal({
     [unavailable],
   );
 
+  // When the guest has clicked a check-in but not a check-out, mark the
+  // candidate checkout dates that would make a too-short stay so we can
+  // outline them and show an Airbnb-style "N-night minimum" tooltip.
+  const tooShortDates = useMemo(() => {
+    if (!range?.from || range.to) return [];
+    const out: Date[] = [];
+    for (let i = 1; i < minNights; i++) {
+      out.push(addDays(range.from, i));
+    }
+    return out;
+  }, [range, minNights]);
+
+  const tooltipText = t("minNightsTooltip", { count: minNights });
+
+  // Custom DayButton: wraps the library's default button with a tooltip
+  // span that becomes visible on hover/focus when the day is too-short.
+  const dayComponents = useMemo(
+    () => ({
+      DayButton: ({ day, modifiers, ...buttonProps }: {
+        day: { date: Date };
+        modifiers: Record<string, boolean | undefined>;
+      } & React.ButtonHTMLAttributes<HTMLButtonElement>) => (
+        <button {...buttonProps}>
+          {buttonProps.children}
+          {modifiers?.tooShort ? (
+            <span className="rdp-too-short-tooltip" role="tooltip">
+              {tooltipText}
+            </span>
+          ) : null}
+        </button>
+      ),
+    }),
+    [tooltipText],
+  );
+
   function clear() {
     setRange(undefined);
   }
@@ -139,7 +177,11 @@ export function DateRangeModal({
             <h2 id={titleId} className="text-lg font-semibold text-kiwi-900">
               {t("title")}
             </h2>
-            <p className="mt-1 text-xs text-kiwi-600">{t("subtitle")}</p>
+            <p className="mt-1 text-xs text-kiwi-600">
+              {minNights > 1
+                ? t("minNightsHint", { count: minNights })
+                : t("subtitle")}
+            </p>
           </div>
           <button
             ref={closeBtnRef}
@@ -198,7 +240,11 @@ export function DateRangeModal({
             selected={range}
             onSelect={setRange}
             numberOfMonths={2}
+            min={minNights + 1}
             disabled={disabled}
+            modifiers={{ tooShort: tooShortDates }}
+            modifiersClassNames={{ tooShort: "rdp-too-short" }}
+            components={dayComponents}
             locale={locale === "zh-CN" ? zhCN : enUS}
             weekStartsOn={1}
             className="rdp-kiwi"
