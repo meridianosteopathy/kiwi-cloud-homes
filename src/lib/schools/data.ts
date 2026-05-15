@@ -208,224 +208,211 @@ export const DISTRICTS: District[] = [
 
 export const SCHOOLS: School[] = [
   {
-    "id": "wigram-primary-school-te-piki-k-hu-3505",
+    "id": "beststart-nottingham-avenue-70549",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "Wigram Primary School - Te Piki Kāhu",
-      "en": "Wigram Primary School - Te Piki Kāhu"
+      "zhCN": "BestStart Nottingham Avenue",
+      "en": "BestStart Nottingham Avenue"
     },
-    "level": "primary",
-    "distanceKm": 0.2,
+    "level": "kindergarten",
+    "distanceKm": 0.4,
     "zone": "in-zone"
   },
   {
-    "id": "beststart-wigram-65158",
+    "id": "kidsfirst-kindergartens-wales-street-5462",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "BestStart Wigram",
-      "en": "BestStart Wigram"
+      "zhCN": "Kidsfirst Kindergartens Wales Street",
+      "en": "Kidsfirst Kindergartens Wales Street"
     },
     "level": "kindergarten",
     "distanceKm": 0.5,
     "zone": "in-zone"
   },
   {
-    "id": "pandas-home-care-46806",
+    "id": "kidsfirst-kindergartens-halswell-5545",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "Pandas Home Care",
-      "en": "Pandas Home Care"
+      "zhCN": "Kidsfirst Kindergartens Halswell",
+      "en": "Kidsfirst Kindergartens Halswell"
     },
     "level": "kindergarten",
     "distanceKm": 0.6,
     "zone": "in-zone"
   },
   {
-    "id": "pandas-home-based-childcare-47632",
+    "id": "te-whare-rama-light-house-early-learning-centre-balcairn-street-70364",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "Pandas Home-Based Childcare",
-      "en": "Pandas Home-Based Childcare"
+      "zhCN": "Te Whare Rama | Light House Early Learning Centre Balcairn Street",
+      "en": "Te Whare Rama | Light House Early Learning Centre Balcairn Street"
     },
     "level": "kindergarten",
     "distanceKm": 0.6,
     "zone": "in-zone"
   },
   {
-    "id": "kindercare-learning-centres-wigram-skies-219-46757",
+    "id": "beststart-halswell-road-45051",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "Kindercare Learning Centres - Wigram Skies (219)",
-      "en": "Kindercare Learning Centres - Wigram Skies (219)"
+      "zhCN": "BestStart Halswell Road",
+      "en": "BestStart Halswell Road"
     },
     "level": "kindergarten",
     "distanceKm": 0.7,
     "zone": "in-zone"
   },
   {
-    "id": "kidsfirst-kindergartens-wigram-5463",
+    "id": "halswell-learning-tree-46387",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "Kidsfirst Kindergartens Wigram",
-      "en": "Kidsfirst Kindergartens Wigram"
+      "zhCN": "Halswell Learning Tree",
+      "en": "Halswell Learning Tree"
+    },
+    "level": "kindergarten",
+    "distanceKm": 0.8,
+    "zone": "in-zone"
+  },
+  {
+    "id": "oaklands-te-kura-o-waka-3450",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Oaklands Te Kura o Ōwaka",
+      "en": "Oaklands Te Kura o Ōwaka"
+    },
+    "level": "primary",
+    "distanceKm": 0.8,
+    "zone": "in-zone"
+  },
+  {
+    "id": "halswell-playcentre-70060",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Halswell Playcentre",
+      "en": "Halswell Playcentre"
     },
     "level": "kindergarten",
     "distanceKm": 0.9,
     "zone": "in-zone"
   },
   {
-    "id": "educare-wigram-45380",
+    "id": "te-m-taitihi-proposed-opening-date-2027-01-25-554",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "Educare Wigram",
-      "en": "Educare Wigram"
+      "zhCN": "Te Mātaitihi (Proposed opening date: 2027-01-25)",
+      "en": "Te Mātaitihi (Proposed opening date: 2027-01-25)"
     },
-    "level": "kindergarten",
+    "level": "primary",
     "distanceKm": 0.9,
     "zone": "in-zone"
   },
   {
-    "id": "an-nur-childcare-centre-65070",
+    "id": "seedlings-early-learning-centre-46309",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "An Nur Childcare Centre",
-      "en": "An Nur Childcare Centre"
-    },
-    "level": "kindergarten",
-    "distanceKm": 0.9,
-    "zone": "in-zone"
-  },
-  {
-    "id": "little-house-montessori-zinnia-way-48096",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Little House Montessori Zinnia Way",
-      "en": "Little House Montessori Zinnia Way"
-    },
-    "level": "kindergarten",
-    "distanceKm": 1,
-    "zone": "in-zone"
-  },
-  {
-    "id": "little-house-montessori-47194",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Little House Montessori",
-      "en": "Little House Montessori"
+      "zhCN": "Seedlings Early Learning Centre",
+      "en": "Seedlings Early Learning Centre"
     },
     "level": "kindergarten",
     "distanceKm": 1.1,
     "zone": "in-zone"
   },
   {
-    "id": "trillium-montessori-school-ltd-47227",
+    "id": "halswell-nest-early-learning-46767",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "Trillium Montessori School Ltd.",
-      "en": "Trillium Montessori School Ltd."
+      "zhCN": "Halswell Nest Early Learning",
+      "en": "Halswell Nest Early Learning"
     },
     "level": "kindergarten",
     "distanceKm": 1.2,
     "zone": "in-zone"
   },
   {
-    "id": "brynley-street-nursery-and-preschool-70119",
+    "id": "te-k-hanga-reo-o-te-wh-nau-tahi-70613",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "Brynley Street Nursery & Preschool",
-      "en": "Brynley Street Nursery & Preschool"
+      "zhCN": "Te Kōhanga Reo o Te Whānau Tahi",
+      "en": "Te Kōhanga Reo o Te Whānau Tahi"
     },
     "level": "kindergarten",
-    "distanceKm": 1.4,
+    "distanceKm": 1.2,
     "zone": "in-zone"
   },
   {
-    "id": "te-manu-tukutuku-south-hornby-school-3507",
+    "id": "halswell-quarry-preschool-47894",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "Te Manu Tukutuku South Hornby School",
-      "en": "Te Manu Tukutuku South Hornby School"
+      "zhCN": "Halswell Quarry Preschool",
+      "en": "Halswell Quarry Preschool"
+    },
+    "level": "kindergarten",
+    "distanceKm": 1.3,
+    "zone": "in-zone"
+  },
+  {
+    "id": "stables-montessori-sparks-road-48289",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Stables Montessori - Sparks Road",
+      "en": "Stables Montessori - Sparks Road"
+    },
+    "level": "kindergarten",
+    "distanceKm": 1.5,
+    "zone": "in-zone"
+  },
+  {
+    "id": "beststart-aidanfield-65135",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "BestStart Aidanfield",
+      "en": "BestStart Aidanfield"
+    },
+    "level": "kindergarten",
+    "distanceKm": 1.5,
+    "zone": "in-zone"
+  },
+  {
+    "id": "te-kura-o-te-tauawa-halswell-school-3366",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Te Kura o te Tauawa Halswell School",
+      "en": "Te Kura o te Tauawa Halswell School"
     },
     "level": "primary",
-    "distanceKm": 1.7,
-    "zone": "in-zone"
-  },
-  {
-    "id": "beststart-halswell-junction-47928",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "BestStart Halswell Junction",
-      "en": "BestStart Halswell Junction"
-    },
-    "level": "kindergarten",
-    "distanceKm": 1.8,
-    "zone": "in-zone"
-  },
-  {
-    "id": "kidsfirst-kindergartens-hornby-5425",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Kidsfirst Kindergartens Hornby",
-      "en": "Kidsfirst Kindergartens Hornby"
-    },
-    "level": "kindergarten",
-    "distanceKm": 1.9,
-    "zone": "in-zone"
-  },
-  {
-    "id": "springs-community-early-learning-centre-70371",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Springs Community Early Learning Centre",
-      "en": "Springs Community Early Learning Centre"
-    },
-    "level": "kindergarten",
-    "distanceKm": 1.9,
-    "zone": "in-zone"
-  },
-  {
-    "id": "our-lady-of-victories-3463",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Our Lady of Victories",
-      "en": "Our Lady of Victories"
-    },
-    "level": "primary",
-    "distanceKm": 2,
+    "distanceKm": 1.5,
     "zone": "in-zone"
   },
   {
@@ -438,21 +425,8 @@ export const SCHOOLS: School[] = [
       "en": "Aidanfield Christian Preschool"
     },
     "level": "kindergarten",
-    "distanceKm": 2.1,
-    "zone": "nearby"
-  },
-  {
-    "id": "beststart-aidanfield-65135",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "BestStart Aidanfield",
-      "en": "BestStart Aidanfield"
-    },
-    "level": "kindergarten",
-    "distanceKm": 2.1,
-    "zone": "nearby"
+    "distanceKm": 1.8,
+    "zone": "in-zone"
   },
   {
     "id": "aidanfield-christian-school-82",
@@ -464,6 +438,19 @@ export const SCHOOLS: School[] = [
       "en": "Aidanfield Christian School"
     },
     "level": "secondary",
+    "distanceKm": 1.8,
+    "zone": "in-zone"
+  },
+  {
+    "id": "knights-stream-school-mingimingi-hautoa-579",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Knights Stream School- Mingimingi Hautoa",
+      "en": "Knights Stream School- Mingimingi Hautoa"
+    },
+    "level": "primary",
     "distanceKm": 2.1,
     "zone": "nearby"
   },
@@ -481,198 +468,16 @@ export const SCHOOLS: School[] = [
     "zone": "nearby"
   },
   {
-    "id": "riccarton-park-montessori-preschool-65011",
+    "id": "educare-wigram-45380",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "Riccarton Park Montessori Preschool",
-      "en": "Riccarton Park Montessori Preschool"
-    },
-    "level": "kindergarten",
-    "distanceKm": 2.2,
-    "zone": "nearby"
-  },
-  {
-    "id": "st-thomas-of-canterbury-college-331",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "St Thomas of Canterbury College",
-      "en": "St Thomas of Canterbury College"
-    },
-    "level": "secondary",
-    "distanceKm": 2.2,
-    "zone": "nearby"
-  },
-  {
-    "id": "knights-stream-school-mingimingi-hautoa-579",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Knights Stream School- Mingimingi Hautoa",
-      "en": "Knights Stream School- Mingimingi Hautoa"
-    },
-    "level": "primary",
-    "distanceKm": 2.2,
-    "zone": "nearby"
-  },
-  {
-    "id": "sancta-maria-montessori-preschool-46127",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Sancta Maria Montessori Preschool",
-      "en": "Sancta Maria Montessori Preschool"
+      "zhCN": "Educare Wigram",
+      "en": "Educare Wigram"
     },
     "level": "kindergarten",
     "distanceKm": 2.3,
-    "zone": "nearby"
-  },
-  {
-    "id": "riccarton-high-school-334",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Riccarton High School",
-      "en": "Riccarton High School"
-    },
-    "level": "secondary",
-    "distanceKm": 2.4,
-    "zone": "nearby"
-  },
-  {
-    "id": "hornby-high-school-338",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Hornby High School",
-      "en": "Hornby High School"
-    },
-    "level": "secondary",
-    "distanceKm": 2.4,
-    "zone": "nearby"
-  },
-  {
-    "id": "oaklands-te-kura-o-waka-3450",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Oaklands Te Kura o Ōwaka",
-      "en": "Oaklands Te Kura o Ōwaka"
-    },
-    "level": "primary",
-    "distanceKm": 2.4,
-    "zone": "nearby"
-  },
-  {
-    "id": "church-corner-nest-46443",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Church Corner Nest",
-      "en": "Church Corner Nest"
-    },
-    "level": "kindergarten",
-    "distanceKm": 2.5,
-    "zone": "nearby"
-  },
-  {
-    "id": "barnardos-hornby-pasifika-early-learning-centre-47214",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Barnardos Hornby Pasifika Early Learning Centre",
-      "en": "Barnardos Hornby Pasifika Early Learning Centre"
-    },
-    "level": "kindergarten",
-    "distanceKm": 2.5,
-    "zone": "nearby"
-  },
-  {
-    "id": "te-k-pehu-riccarton-school-3485",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Te Kāpehu Riccarton School",
-      "en": "Te Kāpehu Riccarton School"
-    },
-    "level": "primary",
-    "distanceKm": 2.5,
-    "zone": "nearby"
-  },
-  {
-    "id": "kidsfirst-kindergartens-wales-street-5462",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Kidsfirst Kindergartens Wales Street",
-      "en": "Kidsfirst Kindergartens Wales Street"
-    },
-    "level": "kindergarten",
-    "distanceKm": 2.7,
-    "zone": "nearby"
-  },
-  {
-    "id": "kindercare-learning-centres-aidanfield-47421",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Kindercare Learning Centres - Aidanfield",
-      "en": "Kindercare Learning Centres - Aidanfield"
-    },
-    "level": "kindergarten",
-    "distanceKm": 2.7,
-    "zone": "nearby"
-  },
-  {
-    "id": "beststart-hei-hei-70008",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "BestStart Hei Hei",
-      "en": "BestStart Hei Hei"
-    },
-    "level": "kindergarten",
-    "distanceKm": 2.7,
-    "zone": "nearby"
-  },
-  {
-    "id": "hornby-primary-school-3380",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Hornby Primary School",
-      "en": "Hornby Primary School"
-    },
-    "level": "primary",
-    "distanceKm": 2.7,
-    "zone": "nearby"
-  },
-  {
-    "id": "seedlings-early-learning-centre-46309",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Seedlings Early Learning Centre",
-      "en": "Seedlings Early Learning Centre"
-    },
-    "level": "kindergarten",
-    "distanceKm": 2.8,
     "zone": "nearby"
   },
   {
@@ -685,202 +490,46 @@ export const SCHOOLS: School[] = [
       "en": "The Stables Montessori"
     },
     "level": "kindergarten",
-    "distanceKm": 2.8,
+    "distanceKm": 2.3,
     "zone": "nearby"
   },
   {
-    "id": "te-whare-rama-light-house-early-learning-centre-balcairn-street-70364",
+    "id": "beststart-halswell-junction-47928",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "Te Whare Rama | Light House Early Learning Centre Balcairn Street",
-      "en": "Te Whare Rama | Light House Early Learning Centre Balcairn Street"
+      "zhCN": "BestStart Halswell Junction",
+      "en": "BestStart Halswell Junction"
     },
     "level": "kindergarten",
-    "distanceKm": 2.8,
+    "distanceKm": 2.3,
     "zone": "nearby"
   },
   {
-    "id": "beststart-nottingham-avenue-70549",
+    "id": "kindercare-learning-centres-aidanfield-47421",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "BestStart Nottingham Avenue",
-      "en": "BestStart Nottingham Avenue"
+      "zhCN": "Kindercare Learning Centres - Aidanfield",
+      "en": "Kindercare Learning Centres - Aidanfield"
     },
     "level": "kindergarten",
-    "distanceKm": 2.8,
+    "distanceKm": 2.4,
     "zone": "nearby"
   },
   {
-    "id": "kidsfirst-kindergartens-hei-hei-5422",
+    "id": "little-house-montessori-zinnia-way-48096",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "Kidsfirst Kindergartens Hei Hei",
-      "en": "Kidsfirst Kindergartens Hei Hei"
+      "zhCN": "Little House Montessori Zinnia Way",
+      "en": "Little House Montessori Zinnia Way"
     },
     "level": "kindergarten",
-    "distanceKm": 2.9,
-    "zone": "nearby"
-  },
-  {
-    "id": "kidsfirst-kindergartens-broomfield-5549",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Kidsfirst Kindergartens Broomfield",
-      "en": "Kidsfirst Kindergartens Broomfield"
-    },
-    "level": "kindergarten",
-    "distanceKm": 2.9,
-    "zone": "nearby"
-  },
-  {
-    "id": "beststart-halswell-road-45051",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "BestStart Halswell Road",
-      "en": "BestStart Halswell Road"
-    },
-    "level": "kindergarten",
-    "distanceKm": 2.9,
-    "zone": "nearby"
-  },
-  {
-    "id": "st-peter-s-anglican-preschool-47728",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "St Peter's Anglican Preschool",
-      "en": "St Peter's Anglican Preschool"
-    },
-    "level": "kindergarten",
-    "distanceKm": 2.9,
-    "zone": "nearby"
-  },
-  {
-    "id": "portobelo-avonhead-70033",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Portobelo Avonhead",
-      "en": "Portobelo Avonhead"
-    },
-    "level": "kindergarten",
-    "distanceKm": 2.9,
-    "zone": "nearby"
-  },
-  {
-    "id": "cornerstone-christian-early-learning-centre-middleton-70385",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Cornerstone Christian Early Learning Centre Middleton",
-      "en": "Cornerstone Christian Early Learning Centre Middleton"
-    },
-    "level": "kindergarten",
-    "distanceKm": 2.9,
-    "zone": "nearby"
-  },
-  {
-    "id": "middleton-grange-school-335",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Middleton Grange School",
-      "en": "Middleton Grange School"
-    },
-    "level": "secondary",
-    "distanceKm": 2.9,
-    "zone": "nearby"
-  },
-  {
-    "id": "st-bernadette-s-school-hornby-3521",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "St Bernadette's School (Hornby)",
-      "en": "St Bernadette's School (Hornby)"
-    },
-    "level": "primary",
-    "distanceKm": 2.9,
-    "zone": "nearby"
-  },
-  {
-    "id": "kindercare-learning-centres-avonhead-211-70163",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Kindercare Learning Centres - Avonhead (211)",
-      "en": "Kindercare Learning Centres - Avonhead (211)"
-    },
-    "level": "kindergarten",
-    "distanceKm": 3,
-    "zone": "nearby"
-  },
-  {
-    "id": "busy-bees-avonhead-70381",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Busy Bees Avonhead",
-      "en": "Busy Bees Avonhead"
-    },
-    "level": "kindergarten",
-    "distanceKm": 3,
-    "zone": "nearby"
-  },
-  {
-    "id": "te-k-hanga-reo-o-te-horomako-o-te-huruhuru-70609",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Te Kōhanga Reo o Te Horomako o Te Huruhuru",
-      "en": "Te Kōhanga Reo o Te Horomako o Te Huruhuru"
-    },
-    "level": "kindergarten",
-    "distanceKm": 3.1,
-    "zone": "nearby"
-  },
-  {
-    "id": "villa-maria-college-326",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Villa Maria College",
-      "en": "Villa Maria College"
-    },
-    "level": "secondary",
-    "distanceKm": 3.1,
-    "zone": "nearby"
-  },
-  {
-    "id": "te-m-taitihi-proposed-opening-date-2027-01-25-554",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Te Mātaitihi (Proposed opening date: 2027-01-25)",
-      "en": "Te Mātaitihi (Proposed opening date: 2027-01-25)"
-    },
-    "level": "primary",
-    "distanceKm": 3.1,
+    "distanceKm": 2.6,
     "zone": "nearby"
   },
   {
@@ -893,111 +542,20 @@ export const SCHOOLS: School[] = [
       "en": "Kidsfirst Kindergartens Hoon Hay"
     },
     "level": "kindergarten",
-    "distanceKm": 3.3,
+    "distanceKm": 2.7,
     "zone": "nearby"
   },
   {
-    "id": "airdmhor-montessori-65048",
+    "id": "kindercare-learning-centres-wigram-skies-219-46757",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "Airdmhor Montessori",
-      "en": "Airdmhor Montessori"
+      "zhCN": "Kindercare Learning Centres - Wigram Skies (219)",
+      "en": "Kindercare Learning Centres - Wigram Skies (219)"
     },
     "level": "kindergarten",
-    "distanceKm": 3.3,
-    "zone": "nearby"
-  },
-  {
-    "id": "te-k-hanga-reo-o-te-wh-nau-tahi-70613",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Te Kōhanga Reo o Te Whānau Tahi",
-      "en": "Te Kōhanga Reo o Te Whānau Tahi"
-    },
-    "level": "kindergarten",
-    "distanceKm": 3.3,
-    "zone": "nearby"
-  },
-  {
-    "id": "avonhead-school-rakipaoa-3287",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Avonhead School - Rakipaoa",
-      "en": "Avonhead School - Rakipaoa"
-    },
-    "level": "primary",
-    "distanceKm": 3.3,
-    "zone": "nearby"
-  },
-  {
-    "id": "te-k-manawa-rowley-school-3492",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Te Kōmanawa Rowley School",
-      "en": "Te Kōmanawa Rowley School"
-    },
-    "level": "primary",
-    "distanceKm": 3.3,
-    "zone": "nearby"
-  },
-  {
-    "id": "kidsfirst-kindergartens-halswell-5545",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Kidsfirst Kindergartens Halswell",
-      "en": "Kidsfirst Kindergartens Halswell"
-    },
-    "level": "kindergarten",
-    "distanceKm": 3.4,
-    "zone": "nearby"
-  },
-  {
-    "id": "annabel-s-educare-avonhead-ltd-45248",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Annabel's Educare Avonhead Ltd",
-      "en": "Annabel's Educare Avonhead Ltd"
-    },
-    "level": "kindergarten",
-    "distanceKm": 3.4,
-    "zone": "nearby"
-  },
-  {
-    "id": "kiwi-kids-preschool-70479",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Kiwi Kids Preschool",
-      "en": "Kiwi Kids Preschool"
-    },
-    "level": "kindergarten",
-    "distanceKm": 3.4,
-    "zone": "nearby"
-  },
-  {
-    "id": "beststart-riccarton-park-48274",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "BestStart Riccarton Park",
-      "en": "BestStart Riccarton Park"
-    },
-    "level": "kindergarten",
-    "distanceKm": 3.5,
+    "distanceKm": 2.8,
     "zone": "nearby"
   },
   {
@@ -1010,7 +568,20 @@ export const SCHOOLS: School[] = [
       "en": "Hoon Hay Community Pre-School"
     },
     "level": "kindergarten",
-    "distanceKm": 3.5,
+    "distanceKm": 2.8,
+    "zone": "nearby"
+  },
+  {
+    "id": "te-k-manawa-rowley-school-3492",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Te Kōmanawa Rowley School",
+      "en": "Te Kōmanawa Rowley School"
+    },
+    "level": "primary",
+    "distanceKm": 2.8,
     "zone": "nearby"
   },
   {
@@ -1023,7 +594,33 @@ export const SCHOOLS: School[] = [
       "en": "Kidsfirst Kindergartens Mathers Road"
     },
     "level": "kindergarten",
-    "distanceKm": 3.6,
+    "distanceKm": 2.9,
+    "zone": "nearby"
+  },
+  {
+    "id": "wigram-primary-school-te-piki-k-hu-3505",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Wigram Primary School - Te Piki Kāhu",
+      "en": "Wigram Primary School - Te Piki Kāhu"
+    },
+    "level": "primary",
+    "distanceKm": 2.9,
+    "zone": "nearby"
+  },
+  {
+    "id": "little-house-montessori-47194",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Little House Montessori",
+      "en": "Little House Montessori"
+    },
+    "level": "kindergarten",
+    "distanceKm": 3.1,
     "zone": "nearby"
   },
   {
@@ -1036,20 +633,46 @@ export const SCHOOLS: School[] = [
       "en": "Hillmorton Nest"
     },
     "level": "kindergarten",
-    "distanceKm": 3.6,
+    "distanceKm": 3.3,
     "zone": "nearby"
   },
   {
-    "id": "ilam-early-learning-centre-70493",
+    "id": "pandas-home-care-46806",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "Ilam Early Learning Centre",
-      "en": "Ilam Early Learning Centre"
+      "zhCN": "Pandas Home Care",
+      "en": "Pandas Home Care"
     },
     "level": "kindergarten",
-    "distanceKm": 3.6,
+    "distanceKm": 3.4,
+    "zone": "nearby"
+  },
+  {
+    "id": "pandas-home-based-childcare-47632",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Pandas Home-Based Childcare",
+      "en": "Pandas Home-Based Childcare"
+    },
+    "level": "kindergarten",
+    "distanceKm": 3.4,
+    "zone": "nearby"
+  },
+  {
+    "id": "airdmhor-montessori-65048",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Airdmhor Montessori",
+      "en": "Airdmhor Montessori"
+    },
+    "level": "kindergarten",
+    "distanceKm": 3.4,
     "zone": "nearby"
   },
   {
@@ -1062,72 +685,72 @@ export const SCHOOLS: School[] = [
       "en": "Hillmorton High School"
     },
     "level": "secondary",
+    "distanceKm": 3.4,
+    "zone": "nearby"
+  },
+  {
+    "id": "beststart-wigram-65158",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "BestStart Wigram",
+      "en": "BestStart Wigram"
+    },
+    "level": "kindergarten",
+    "distanceKm": 3.5,
+    "zone": "nearby"
+  },
+  {
+    "id": "prebbleton-playcentre-70104",
+    "districtId": "prebbleton",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Prebbleton Playcentre",
+      "en": "Prebbleton Playcentre"
+    },
+    "level": "kindergarten",
     "distanceKm": 3.6,
     "zone": "nearby"
   },
   {
-    "id": "kidsfirst-kindergartens-avonhead-5409",
+    "id": "trillium-montessori-school-ltd-47227",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "Kidsfirst Kindergartens Avonhead",
-      "en": "Kidsfirst Kindergartens Avonhead"
+      "zhCN": "Trillium Montessori School Ltd.",
+      "en": "Trillium Montessori School Ltd."
     },
     "level": "kindergarten",
     "distanceKm": 3.7,
     "zone": "nearby"
   },
   {
-    "id": "halswell-learning-tree-46387",
+    "id": "te-kura-o-m-kihi-spreydon-school-3512",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "Halswell Learning Tree",
-      "en": "Halswell Learning Tree"
-    },
-    "level": "kindergarten",
-    "distanceKm": 3.7,
-    "zone": "nearby"
-  },
-  {
-    "id": "stem-montessori-48230",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Stem Montessori",
-      "en": "Stem Montessori"
-    },
-    "level": "kindergarten",
-    "distanceKm": 3.7,
-    "zone": "nearby"
-  },
-  {
-    "id": "gilberthorpe-school-3346",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Gilberthorpe School",
-      "en": "Gilberthorpe School"
+      "zhCN": "Te Kura o Mōkihi Spreydon School",
+      "en": "Te Kura o Mōkihi Spreydon School"
     },
     "level": "primary",
     "distanceKm": 3.7,
     "zone": "nearby"
   },
   {
-    "id": "beststart-buchanans-road-45132",
+    "id": "kidsfirst-kindergartens-wigram-5463",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "BestStart Buchanans Road",
-      "en": "BestStart Buchanans Road"
+      "zhCN": "Kidsfirst Kindergartens Wigram",
+      "en": "Kidsfirst Kindergartens Wigram"
     },
     "level": "kindergarten",
-    "distanceKm": 3.9,
+    "distanceKm": 3.8,
     "zone": "nearby"
   },
   {
@@ -1140,45 +763,84 @@ export const SCHOOLS: School[] = [
       "en": "Prebbleton Early Learners"
     },
     "level": "kindergarten",
-    "distanceKm": 3.9,
+    "distanceKm": 3.8,
     "zone": "nearby"
   },
   {
-    "id": "halswell-playcentre-70060",
+    "id": "cashmere-early-learning-centre-45406",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "Halswell Playcentre",
-      "en": "Halswell Playcentre"
+      "zhCN": "Cashmere Early Learning Centre",
+      "en": "Cashmere Early Learning Centre"
     },
     "level": "kindergarten",
     "distanceKm": 3.9,
     "zone": "nearby"
   },
   {
-    "id": "ilam-school-3384",
+    "id": "pennylane-early-childhood-centre-45635",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "Ilam School",
-      "en": "Ilam School"
+      "zhCN": "Pennylane Early Childhood Centre",
+      "en": "Pennylane Early Childhood Centre"
     },
-    "level": "primary",
+    "level": "kindergarten",
     "distanceKm": 3.9,
     "zone": "nearby"
   },
   {
-    "id": "kahikatea-kirkwood-intermediate-3396",
+    "id": "stem-montessori-48230",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "Kahikatea Kirkwood Intermediate",
-      "en": "Kahikatea Kirkwood Intermediate"
+      "zhCN": "Stem Montessori",
+      "en": "Stem Montessori"
     },
-    "level": "intermediate",
+    "level": "kindergarten",
+    "distanceKm": 3.9,
+    "zone": "nearby"
+  },
+  {
+    "id": "an-nur-childcare-centre-65070",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "An Nur Childcare Centre",
+      "en": "An Nur Childcare Centre"
+    },
+    "level": "kindergarten",
+    "distanceKm": 3.9,
+    "zone": "nearby"
+  },
+  {
+    "id": "kiwi-kids-preschool-70479",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Kiwi Kids Preschool",
+      "en": "Kiwi Kids Preschool"
+    },
+    "level": "kindergarten",
+    "distanceKm": 3.9,
+    "zone": "nearby"
+  },
+  {
+    "id": "hoon-hay-te-kura-k-aka-3379",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Hoon Hay Te Kura Kōaka",
+      "en": "Hoon Hay Te Kura Kōaka"
+    },
+    "level": "primary",
     "distanceKm": 3.9,
     "zone": "nearby"
   },
@@ -1196,409 +858,6 @@ export const SCHOOLS: School[] = [
     "zone": "nearby"
   },
   {
-    "id": "te-parito-k-whai-russley-school-3496",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Te Parito Kōwhai Russley School",
-      "en": "Te Parito Kōwhai Russley School"
-    },
-    "level": "primary",
-    "distanceKm": 3.9,
-    "zone": "nearby"
-  },
-  {
-    "id": "kindercare-learning-centres-riccarton-70575",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Kindercare Learning Centres - Riccarton",
-      "en": "Kindercare Learning Centres - Riccarton"
-    },
-    "level": "kindergarten",
-    "distanceKm": 4,
-    "zone": "nearby"
-  },
-  {
-    "id": "te-kura-o-m-kihi-spreydon-school-3512",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Te Kura o Mōkihi Spreydon School",
-      "en": "Te Kura o Mōkihi Spreydon School"
-    },
-    "level": "primary",
-    "distanceKm": 4,
-    "zone": "nearby"
-  },
-  {
-    "id": "jigsaw-preschool-yaldhurst-48073",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Jigsaw Preschool Yaldhurst",
-      "en": "Jigsaw Preschool Yaldhurst"
-    },
-    "level": "kindergarten",
-    "distanceKm": 4.1,
-    "zone": "nearby"
-  },
-  {
-    "id": "stables-montessori-sparks-road-48289",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Stables Montessori - Sparks Road",
-      "en": "Stables Montessori - Sparks Road"
-    },
-    "level": "kindergarten",
-    "distanceKm": 4.1,
-    "zone": "nearby"
-  },
-  {
-    "id": "russley-playcentre-70114",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Russley Playcentre",
-      "en": "Russley Playcentre"
-    },
-    "level": "kindergarten",
-    "distanceKm": 4.1,
-    "zone": "nearby"
-  },
-  {
-    "id": "kidsfirst-kindergartens-mckenzie-5435",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Kidsfirst Kindergartens McKenzie",
-      "en": "Kidsfirst Kindergartens McKenzie"
-    },
-    "level": "kindergarten",
-    "distanceKm": 4.2,
-    "zone": "nearby"
-  },
-  {
-    "id": "te-whare-rama-light-house-early-learning-centre-edinburgh-street-45785",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Te Whare Rama | Light House Early Learning Centre Edinburgh Street",
-      "en": "Te Whare Rama | Light House Early Learning Centre Edinburgh Street"
-    },
-    "level": "kindergarten",
-    "distanceKm": 4.2,
-    "zone": "nearby"
-  },
-  {
-    "id": "hatch-early-learning-centre-47797",
-    "districtId": "prebbleton",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Hatch Early Learning Centre",
-      "en": "Hatch Early Learning Centre"
-    },
-    "level": "kindergarten",
-    "distanceKm": 4.2,
-    "zone": "nearby"
-  },
-  {
-    "id": "pennylane-early-childhood-centre-45635",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Pennylane Early Childhood Centre",
-      "en": "Pennylane Early Childhood Centre"
-    },
-    "level": "kindergarten",
-    "distanceKm": 4.3,
-    "zone": "nearby"
-  },
-  {
-    "id": "halswell-nest-early-learning-46767",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Halswell Nest Early Learning",
-      "en": "Halswell Nest Early Learning"
-    },
-    "level": "kindergarten",
-    "distanceKm": 4.3,
-    "zone": "nearby"
-  },
-  {
-    "id": "halswell-quarry-preschool-47894",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Halswell Quarry Preschool",
-      "en": "Halswell Quarry Preschool"
-    },
-    "level": "kindergarten",
-    "distanceKm": 4.3,
-    "zone": "nearby"
-  },
-  {
-    "id": "prebbleton-childcare-and-education-centre-65063",
-    "districtId": "prebbleton",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Prebbleton Childcare & Education Centre",
-      "en": "Prebbleton Childcare & Education Centre"
-    },
-    "level": "kindergarten",
-    "distanceKm": 4.3,
-    "zone": "nearby"
-  },
-  {
-    "id": "beststart-riccarton-65098",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "BestStart Riccarton",
-      "en": "BestStart Riccarton"
-    },
-    "level": "kindergarten",
-    "distanceKm": 4.3,
-    "zone": "nearby"
-  },
-  {
-    "id": "prebbleton-nursery-and-education-centre-65177",
-    "districtId": "prebbleton",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Prebbleton Nursery & Education Centre",
-      "en": "Prebbleton Nursery & Education Centre"
-    },
-    "level": "kindergarten",
-    "distanceKm": 4.3,
-    "zone": "nearby"
-  },
-  {
-    "id": "avonhead-playcentre-70022",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Avonhead Playcentre",
-      "en": "Avonhead Playcentre"
-    },
-    "level": "kindergarten",
-    "distanceKm": 4.3,
-    "zone": "nearby"
-  },
-  {
-    "id": "kindercare-learning-centres-addington-70071",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Kindercare learning Centres - Addington",
-      "en": "Kindercare learning Centres - Addington"
-    },
-    "level": "kindergarten",
-    "distanceKm": 4.3,
-    "zone": "nearby"
-  },
-  {
-    "id": "early-childhood-learning-centre-70491",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Early Childhood Learning Centre",
-      "en": "Early Childhood Learning Centre"
-    },
-    "level": "kindergarten",
-    "distanceKm": 4.3,
-    "zone": "nearby"
-  },
-  {
-    "id": "st-teresa-s-school-riccarton-3543",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "St Teresa's School (Riccarton)",
-      "en": "St Teresa's School (Riccarton)"
-    },
-    "level": "primary",
-    "distanceKm": 4.3,
-    "zone": "nearby"
-  },
-  {
-    "id": "wharenui-school-3591",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Wharenui School",
-      "en": "Wharenui School"
-    },
-    "level": "primary",
-    "distanceKm": 4.3,
-    "zone": "nearby"
-  },
-  {
-    "id": "the-wilderness-48123",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "The Wilderness",
-      "en": "The Wilderness"
-    },
-    "level": "kindergarten",
-    "distanceKm": 4.4,
-    "zone": "nearby"
-  },
-  {
-    "id": "children-s-house-montessori-preschool-48394",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Children's House Montessori Preschool",
-      "en": "Children's House Montessori Preschool"
-    },
-    "level": "kindergarten",
-    "distanceKm": 4.4,
-    "zone": "nearby"
-  },
-  {
-    "id": "montana-early-learning-centre-70021",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Montana Early Learning Centre",
-      "en": "Montana Early Learning Centre"
-    },
-    "level": "kindergarten",
-    "distanceKm": 4.4,
-    "zone": "nearby"
-  },
-  {
-    "id": "avonhead-early-edventurers-47972",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Avonhead Early Edventurers",
-      "en": "Avonhead Early Edventurers"
-    },
-    "level": "kindergarten",
-    "distanceKm": 4.5,
-    "zone": "nearby"
-  },
-  {
-    "id": "prebbleton-playcentre-70104",
-    "districtId": "prebbleton",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Prebbleton Playcentre",
-      "en": "Prebbleton Playcentre"
-    },
-    "level": "kindergarten",
-    "distanceKm": 4.5,
-    "zone": "nearby"
-  },
-  {
-    "id": "te-kura-o-te-tauawa-halswell-school-3366",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Te Kura o te Tauawa Halswell School",
-      "en": "Te Kura o te Tauawa Halswell School"
-    },
-    "level": "primary",
-    "distanceKm": 4.5,
-    "zone": "nearby"
-  },
-  {
-    "id": "ilam-montessori-preschool-47787",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Ilam Montessori Preschool",
-      "en": "Ilam Montessori Preschool"
-    },
-    "level": "kindergarten",
-    "distanceKm": 4.6,
-    "zone": "nearby"
-  },
-  {
-    "id": "new-zealand-it-college-proposed-4539",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "New Zealand IT College (Proposed)",
-      "en": "New Zealand IT College (Proposed)"
-    },
-    "level": "secondary",
-    "distanceKm": 4.6,
-    "zone": "nearby"
-  },
-  {
-    "id": "te-whare-rama-light-house-early-learning-centre-cobham-street-65167",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Te Whare Rama | Light House Early Learning Centre Cobham Street",
-      "en": "Te Whare Rama | Light House Early Learning Centre Cobham Street"
-    },
-    "level": "kindergarten",
-    "distanceKm": 4.7,
-    "zone": "nearby"
-  },
-  {
-    "id": "te-whare-rama-light-house-early-learning-centre-lyttelton-street-70451",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Te Whare Rama | Light House Early Learning Centre Lyttelton Street",
-      "en": "Te Whare Rama | Light House Early Learning Centre Lyttelton Street"
-    },
-    "level": "kindergarten",
-    "distanceKm": 4.7,
-    "zone": "nearby"
-  },
-  {
-    "id": "medbury-preparatory-school-4118",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Medbury Preparatory School",
-      "en": "Medbury Preparatory School"
-    },
-    "level": "primary",
-    "distanceKm": 4.7,
-    "zone": "nearby"
-  },
-  {
     "id": "cherry-s-on-maryhill-45151",
     "districtId": "christchurch",
     "cityId": "christchurch",
@@ -1608,59 +867,7 @@ export const SCHOOLS: School[] = [
       "en": "Cherry's on Maryhill"
     },
     "level": "kindergarten",
-    "distanceKm": 4.8,
-    "zone": "nearby"
-  },
-  {
-    "id": "hoon-hay-te-kura-k-aka-3379",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Hoon Hay Te Kura Kōaka",
-      "en": "Hoon Hay Te Kura Kōaka"
-    },
-    "level": "primary",
-    "distanceKm": 4.8,
-    "zone": "nearby"
-  },
-  {
-    "id": "merrin-school-ng-whet-kohara-3434",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Merrin School Ngā Whetū Kohara",
-      "en": "Merrin School Ngā Whetū Kohara"
-    },
-    "level": "primary",
-    "distanceKm": 4.8,
-    "zone": "nearby"
-  },
-  {
-    "id": "kidsfirst-kindergartens-hawthornden-road-5628",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Kidsfirst Kindergartens Hawthornden Road",
-      "en": "Kidsfirst Kindergartens Hawthornden Road"
-    },
-    "level": "kindergarten",
-    "distanceKm": 4.9,
-    "zone": "nearby"
-  },
-  {
-    "id": "kindercare-learning-centres-fendalton-70543",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Kindercare Learning Centres - Fendalton",
-      "en": "Kindercare Learning Centres - Fendalton"
-    },
-    "level": "kindergarten",
-    "distanceKm": 4.9,
+    "distanceKm": 4,
     "zone": "nearby"
   },
   {
@@ -1673,32 +880,305 @@ export const SCHOOLS: School[] = [
       "en": "Our Lady of the Assumption School (Chch)"
     },
     "level": "primary",
-    "distanceKm": 4.9,
+    "distanceKm": 4,
     "zone": "nearby"
   },
   {
-    "id": "westburn-te-kura-o-hereora-3589",
+    "id": "hatch-early-learning-centre-47797",
+    "districtId": "prebbleton",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Hatch Early Learning Centre",
+      "en": "Hatch Early Learning Centre"
+    },
+    "level": "kindergarten",
+    "distanceKm": 4.1,
+    "zone": "nearby"
+  },
+  {
+    "id": "prebbleton-childcare-and-education-centre-65063",
+    "districtId": "prebbleton",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Prebbleton Childcare & Education Centre",
+      "en": "Prebbleton Childcare & Education Centre"
+    },
+    "level": "kindergarten",
+    "distanceKm": 4.1,
+    "zone": "nearby"
+  },
+  {
+    "id": "prebbleton-nursery-and-education-centre-65177",
+    "districtId": "prebbleton",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Prebbleton Nursery & Education Centre",
+      "en": "Prebbleton Nursery & Education Centre"
+    },
+    "level": "kindergarten",
+    "distanceKm": 4.1,
+    "zone": "nearby"
+  },
+  {
+    "id": "brynley-street-nursery-and-preschool-70119",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "Westburn Te Kura O Hereora",
-      "en": "Westburn Te Kura O Hereora"
+      "zhCN": "Brynley Street Nursery & Preschool",
+      "en": "Brynley Street Nursery & Preschool"
+    },
+    "level": "kindergarten",
+    "distanceKm": 4.1,
+    "zone": "nearby"
+  },
+  {
+    "id": "te-whare-rama-light-house-early-learning-centre-edinburgh-street-45785",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Te Whare Rama | Light House Early Learning Centre Edinburgh Street",
+      "en": "Te Whare Rama | Light House Early Learning Centre Edinburgh Street"
+    },
+    "level": "kindergarten",
+    "distanceKm": 4.3,
+    "zone": "nearby"
+  },
+  {
+    "id": "te-whare-rama-light-house-early-learning-centre-cobham-street-65167",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Te Whare Rama | Light House Early Learning Centre Cobham Street",
+      "en": "Te Whare Rama | Light House Early Learning Centre Cobham Street"
+    },
+    "level": "kindergarten",
+    "distanceKm": 4.4,
+    "zone": "nearby"
+  },
+  {
+    "id": "te-whare-rama-light-house-early-learning-centre-lyttelton-street-70451",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Te Whare Rama | Light House Early Learning Centre Lyttelton Street",
+      "en": "Te Whare Rama | Light House Early Learning Centre Lyttelton Street"
+    },
+    "level": "kindergarten",
+    "distanceKm": 4.4,
+    "zone": "nearby"
+  },
+  {
+    "id": "te-manu-tukutuku-south-hornby-school-3507",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Te Manu Tukutuku South Hornby School",
+      "en": "Te Manu Tukutuku South Hornby School"
+    },
+    "level": "primary",
+    "distanceKm": 4.4,
+    "zone": "nearby"
+  },
+  {
+    "id": "lyttelton-street-playcentre-70084",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Lyttelton Street Playcentre",
+      "en": "Lyttelton Street Playcentre"
+    },
+    "level": "kindergarten",
+    "distanceKm": 4.5,
+    "zone": "nearby"
+  },
+  {
+    "id": "beststart-pioneer-70429",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "BestStart Pioneer",
+      "en": "BestStart Pioneer"
+    },
+    "level": "kindergarten",
+    "distanceKm": 4.5,
+    "zone": "nearby"
+  },
+  {
+    "id": "tkkm-o-te-whanau-tahi-1618",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "TKKM o Te Whanau Tahi",
+      "en": "TKKM o Te Whanau Tahi"
+    },
+    "level": "secondary",
+    "distanceKm": 4.5,
+    "zone": "nearby"
+  },
+  {
+    "id": "te-ara-koropiko-west-spreydon-school-3588",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Te Ara Koropiko West Spreydon School",
+      "en": "Te Ara Koropiko West Spreydon School"
+    },
+    "level": "primary",
+    "distanceKm": 4.5,
+    "zone": "nearby"
+  },
+  {
+    "id": "sancta-maria-montessori-preschool-46127",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Sancta Maria Montessori Preschool",
+      "en": "Sancta Maria Montessori Preschool"
+    },
+    "level": "kindergarten",
+    "distanceKm": 4.6,
+    "zone": "nearby"
+  },
+  {
+    "id": "kidsfirst-kindergartens-hornby-5425",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Kidsfirst Kindergartens Hornby",
+      "en": "Kidsfirst Kindergartens Hornby"
+    },
+    "level": "kindergarten",
+    "distanceKm": 4.7,
+    "zone": "nearby"
+  },
+  {
+    "id": "kidditech-early-learning-centre-70095",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Kidditech Early Learning Centre",
+      "en": "Kidditech Early Learning Centre"
+    },
+    "level": "kindergarten",
+    "distanceKm": 4.7,
+    "zone": "nearby"
+  },
+  {
+    "id": "springs-community-early-learning-centre-70371",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Springs Community Early Learning Centre",
+      "en": "Springs Community Early Learning Centre"
+    },
+    "level": "kindergarten",
+    "distanceKm": 4.7,
+    "zone": "nearby"
+  },
+  {
+    "id": "our-lady-of-victories-3463",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Our Lady of Victories",
+      "en": "Our Lady of Victories"
+    },
+    "level": "primary",
+    "distanceKm": 4.7,
+    "zone": "nearby"
+  },
+  {
+    "id": "riccarton-high-school-334",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Riccarton High School",
+      "en": "Riccarton High School"
+    },
+    "level": "secondary",
+    "distanceKm": 4.8,
+    "zone": "nearby"
+  },
+  {
+    "id": "middleton-grange-school-335",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Middleton Grange School",
+      "en": "Middleton Grange School"
+    },
+    "level": "secondary",
+    "distanceKm": 4.9,
+    "zone": "nearby"
+  },
+  {
+    "id": "ladbrooks-school-3402",
+    "districtId": "ladbrooks",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Ladbrooks School",
+      "en": "Ladbrooks School"
     },
     "level": "primary",
     "distanceKm": 4.9,
     "zone": "nearby"
   },
   {
-    "id": "kidsfirst-kindergartens-ilam-5419",
+    "id": "church-corner-nest-46443",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "Kidsfirst Kindergartens Ilam",
-      "en": "Kidsfirst Kindergartens Ilam"
+      "zhCN": "Church Corner Nest",
+      "en": "Church Corner Nest"
     },
     "level": "kindergarten",
+    "distanceKm": 5,
+    "zone": "nearby"
+  },
+  {
+    "id": "cornerstone-christian-early-learning-centre-middleton-70385",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Cornerstone Christian Early Learning Centre Middleton",
+      "en": "Cornerstone Christian Early Learning Centre Middleton"
+    },
+    "level": "kindergarten",
+    "distanceKm": 5,
+    "zone": "nearby"
+  },
+  {
+    "id": "st-thomas-of-canterbury-college-331",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "St Thomas of Canterbury College",
+      "en": "St Thomas of Canterbury College"
+    },
+    "level": "secondary",
     "distanceKm": 5,
     "zone": "nearby"
   },
@@ -1716,406 +1196,42 @@ export const SCHOOLS: School[] = [
     "zone": "nearby"
   },
   {
-    "id": "christchurch-boys-high-school-327",
+    "id": "te-k-pehu-riccarton-school-3485",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "Christchurch Boys' High School",
-      "en": "Christchurch Boys' High School"
-    },
-    "level": "secondary",
-    "distanceKm": 5.1,
-    "zone": "nearby"
-  },
-  {
-    "id": "te-ara-koropiko-west-spreydon-school-3588",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Te Ara Koropiko West Spreydon School",
-      "en": "Te Ara Koropiko West Spreydon School"
+      "zhCN": "Te Kāpehu Riccarton School",
+      "en": "Te Kāpehu Riccarton School"
     },
     "level": "primary",
     "distanceKm": 5.1,
     "zone": "nearby"
   },
   {
-    "id": "sacred-heart-school-christchurch-3270",
+    "id": "new-zealand-it-college-proposed-4539",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "Sacred Heart School (Christchurch)",
-      "en": "Sacred Heart School (Christchurch)"
+      "zhCN": "New Zealand IT College (Proposed)",
+      "en": "New Zealand IT College (Proposed)"
     },
-    "level": "primary",
+    "level": "secondary",
+    "distanceKm": 5.1,
+    "zone": "nearby"
+  },
+  {
+    "id": "riccarton-park-montessori-preschool-65011",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Riccarton Park Montessori Preschool",
+      "en": "Riccarton Park Montessori Preschool"
+    },
+    "level": "kindergarten",
     "distanceKm": 5.2,
-    "zone": "nearby"
-  },
-  {
-    "id": "tuia-burnside-primary-school-3305",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Tuia Burnside Primary School",
-      "en": "Tuia Burnside Primary School"
-    },
-    "level": "primary",
-    "distanceKm": 5.2,
-    "zone": "nearby"
-  },
-  {
-    "id": "t-ora-fendalton-school-3338",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Tūora Fendalton School",
-      "en": "Tūora Fendalton School"
-    },
-    "level": "primary",
-    "distanceKm": 5.2,
-    "zone": "nearby"
-  },
-  {
-    "id": "kidsfirst-kindergartens-riccarton-5450",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Kidsfirst Kindergartens Riccarton",
-      "en": "Kidsfirst Kindergartens Riccarton"
-    },
-    "level": "kindergarten",
-    "distanceKm": 5.3,
-    "zone": "nearby"
-  },
-  {
-    "id": "kidditech-early-learning-centre-70095",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Kidditech Early Learning Centre",
-      "en": "Kidditech Early Learning Centre"
-    },
-    "level": "kindergarten",
-    "distanceKm": 5.3,
-    "zone": "nearby"
-  },
-  {
-    "id": "deb-s-place-early-learning-centre-48027",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Deb's Place Early Learning Centre",
-      "en": "Deb's Place Early Learning Centre"
-    },
-    "level": "kindergarten",
-    "distanceKm": 5.4,
-    "zone": "nearby"
-  },
-  {
-    "id": "fendalton-playcentre-70052",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Fendalton Playcentre",
-      "en": "Fendalton Playcentre"
-    },
-    "level": "kindergarten",
-    "distanceKm": 5.4,
-    "zone": "nearby"
-  },
-  {
-    "id": "beststart-pioneer-70429",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "BestStart Pioneer",
-      "en": "BestStart Pioneer"
-    },
-    "level": "kindergarten",
-    "distanceKm": 5.4,
-    "zone": "nearby"
-  },
-  {
-    "id": "tkkm-o-te-whanau-tahi-1618",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "TKKM o Te Whanau Tahi",
-      "en": "TKKM o Te Whanau Tahi"
-    },
-    "level": "secondary",
-    "distanceKm": 5.4,
-    "zone": "nearby"
-  },
-  {
-    "id": "christ-the-king-school-burnside-3316",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Christ The King School (Burnside)",
-      "en": "Christ The King School (Burnside)"
-    },
-    "level": "primary",
-    "distanceKm": 5.4,
-    "zone": "nearby"
-  },
-  {
-    "id": "cashmere-early-learning-centre-45406",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Cashmere Early Learning Centre",
-      "en": "Cashmere Early Learning Centre"
-    },
-    "level": "kindergarten",
-    "distanceKm": 5.5,
-    "zone": "nearby"
-  },
-  {
-    "id": "lyttelton-street-playcentre-70084",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Lyttelton Street Playcentre",
-      "en": "Lyttelton Street Playcentre"
-    },
-    "level": "kindergarten",
-    "distanceKm": 5.5,
-    "zone": "nearby"
-  },
-  {
-    "id": "wairarapa-cobham-intermediate-3323",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Wairarapa Cobham Intermediate",
-      "en": "Wairarapa Cobham Intermediate"
-    },
-    "level": "intermediate",
-    "distanceKm": 5.5,
-    "zone": "nearby"
-  },
-  {
-    "id": "conductive-education-canterbury-inc-70350",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Conductive Education Canterbury Inc",
-      "en": "Conductive Education Canterbury Inc"
-    },
-    "level": "kindergarten",
-    "distanceKm": 5.6,
-    "zone": "nearby"
-  },
-  {
-    "id": "burnside-high-school-319",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Burnside High School",
-      "en": "Burnside High School"
-    },
-    "level": "secondary",
-    "distanceKm": 5.6,
-    "zone": "nearby"
-  },
-  {
-    "id": "addington-te-kura-taumatua-3271",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Addington Te Kura Taumatua",
-      "en": "Addington Te Kura Taumatua"
-    },
-    "level": "primary",
-    "distanceKm": 5.6,
-    "zone": "nearby"
-  },
-  {
-    "id": "lalaga-preschool-65088",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Lalaga Preschool",
-      "en": "Lalaga Preschool"
-    },
-    "level": "kindergarten",
-    "distanceKm": 5.7,
-    "zone": "nearby"
-  },
-  {
-    "id": "kidsfirst-kindergartens-trengrove-5460",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Kidsfirst Kindergartens Trengrove",
-      "en": "Kidsfirst Kindergartens Trengrove"
-    },
-    "level": "kindergarten",
-    "distanceKm": 5.8,
-    "zone": "nearby"
-  },
-  {
-    "id": "the-rabbit-patch-preschool-70426",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "The Rabbit Patch Preschool",
-      "en": "The Rabbit Patch Preschool"
-    },
-    "level": "kindergarten",
-    "distanceKm": 5.8,
-    "zone": "nearby"
-  },
-  {
-    "id": "kidsfirst-kindergartens-selwyn-street-5454",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Kidsfirst Kindergartens Selwyn Street",
-      "en": "Kidsfirst Kindergartens Selwyn Street"
-    },
-    "level": "kindergarten",
-    "distanceKm": 5.9,
-    "zone": "nearby"
-  },
-  {
-    "id": "beststart-fendalton-46567",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "BestStart Fendalton",
-      "en": "BestStart Fendalton"
-    },
-    "level": "kindergarten",
-    "distanceKm": 5.9,
-    "zone": "nearby"
-  },
-  {
-    "id": "beststart-parkside-70551",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "BestStart Parkside",
-      "en": "BestStart Parkside"
-    },
-    "level": "kindergarten",
-    "distanceKm": 5.9,
-    "zone": "nearby"
-  },
-  {
-    "id": "christchurch-girls-high-school-te-kura-o-hine-waiora-328",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Christchurch Girls' High School -Te Kura o Hine Waiora",
-      "en": "Christchurch Girls' High School -Te Kura o Hine Waiora"
-    },
-    "level": "secondary",
-    "distanceKm": 6,
-    "zone": "nearby"
-  },
-  {
-    "id": "kidsfirst-kindergartens-templeton-5459",
-    "districtId": "templeton",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Kidsfirst Kindergartens Templeton",
-      "en": "Kidsfirst Kindergartens Templeton"
-    },
-    "level": "kindergarten",
-    "distanceKm": 6.1,
-    "zone": "nearby"
-  },
-  {
-    "id": "yaldhurst-school-t-tara-t-kaha-3602",
-    "districtId": "yaldhurst",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Yaldhurst School – Tōtara Tūkaha",
-      "en": "Yaldhurst School – Tōtara Tūkaha"
-    },
-    "level": "primary",
-    "distanceKm": 6.1,
-    "zone": "nearby"
-  },
-  {
-    "id": "te-pito-o-te-puna-wai-o-waipapa-hagley-community-preschool-48026",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Te Pito o te Puna Wai o Waipapa - Hagley Community Preschool",
-      "en": "Te Pito o te Puna Wai o Waipapa - Hagley Community Preschool"
-    },
-    "level": "kindergarten",
-    "distanceKm": 6.2,
-    "zone": "nearby"
-  },
-  {
-    "id": "rosy-cheeks-early-learning-centre-70151",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Rosy Cheeks Early Learning Centre",
-      "en": "Rosy Cheeks Early Learning Centre"
-    },
-    "level": "kindergarten",
-    "distanceKm": 6.2,
-    "zone": "nearby"
-  },
-  {
-    "id": "fairleigh-kindergarten-70357",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Fairleigh Kindergarten",
-      "en": "Fairleigh Kindergarten"
-    },
-    "level": "kindergarten",
-    "distanceKm": 6.2,
-    "zone": "nearby"
-  },
-  {
-    "id": "te-puna-wai-o-waipapa-hagley-college-336",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Te Puna Wai o Waipapa - Hagley College",
-      "en": "Te Puna Wai o Waipapa - Hagley College"
-    },
-    "level": "secondary",
-    "distanceKm": 6.2,
     "zone": "nearby"
   },
   {
@@ -2128,332 +1244,7 @@ export const SCHOOLS: School[] = [
       "en": "Cashmere High School"
     },
     "level": "secondary",
-    "distanceKm": 6.2,
-    "zone": "nearby"
-  },
-  {
-    "id": "christchurch-south-karamata-intermediate-school-3318",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Christchurch South Karamata Intermediate School",
-      "en": "Christchurch South Karamata Intermediate School"
-    },
-    "level": "intermediate",
-    "distanceKm": 6.2,
-    "zone": "nearby"
-  },
-  {
-    "id": "te-kura-o-r-t-templeton-school-3555",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Te Kura o Rātā Templeton School",
-      "en": "Te Kura o Rātā Templeton School"
-    },
-    "level": "primary",
-    "distanceKm": 6.2,
-    "zone": "nearby"
-  },
-  {
-    "id": "templeton-nursery-and-preschool-65072",
-    "districtId": "templeton",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Templeton Nursery and Preschool",
-      "en": "Templeton Nursery and Preschool"
-    },
-    "level": "kindergarten",
-    "distanceKm": 6.3,
-    "zone": "nearby"
-  },
-  {
-    "id": "somerfield-community-playcentre-70120",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Somerfield Community Playcentre",
-      "en": "Somerfield Community Playcentre"
-    },
-    "level": "kindergarten",
-    "distanceKm": 6.3,
-    "zone": "nearby"
-  },
-  {
-    "id": "kidsfirst-kindergartens-kendal-avenue-5429",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Kidsfirst Kindergartens Kendal Avenue",
-      "en": "Kidsfirst Kindergartens Kendal Avenue"
-    },
-    "level": "kindergarten",
-    "distanceKm": 6.4,
-    "zone": "nearby"
-  },
-  {
-    "id": "grow-active-balfour-terrace-47550",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Grow Active Balfour Terrace",
-      "en": "Grow Active Balfour Terrace"
-    },
-    "level": "kindergarten",
-    "distanceKm": 6.4,
-    "zone": "nearby"
-  },
-  {
-    "id": "jeffrey-giraffe-early-learning-centre-65092",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Jeffrey Giraffe Early Learning Centre",
-      "en": "Jeffrey Giraffe Early Learning Centre"
-    },
-    "level": "kindergarten",
-    "distanceKm": 6.4,
-    "zone": "nearby"
-  },
-  {
-    "id": "the-activity-room-70544",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "The Activity Room",
-      "en": "The Activity Room"
-    },
-    "level": "kindergarten",
-    "distanceKm": 6.4,
-    "zone": "nearby"
-  },
-  {
-    "id": "st-patrick-s-school-bryndwr-3537",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "St Patrick's School (Bryndwr)",
-      "en": "St Patrick's School (Bryndwr)"
-    },
-    "level": "primary",
-    "distanceKm": 6.4,
-    "zone": "nearby"
-  },
-  {
-    "id": "annabel-s-educare-somerfield-46316",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Annabel's Educare - Somerfield",
-      "en": "Annabel's Educare - Somerfield"
-    },
-    "level": "kindergarten",
-    "distanceKm": 6.5,
-    "zone": "nearby"
-  },
-  {
-    "id": "somerfield-te-kura-wairepo-3506",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Somerfield Te Kura Wairepo",
-      "en": "Somerfield Te Kura Wairepo"
-    },
-    "level": "primary",
-    "distanceKm": 6.5,
-    "zone": "nearby"
-  },
-  {
-    "id": "the-willows-47281",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "The Willows",
-      "en": "The Willows"
-    },
-    "level": "kindergarten",
-    "distanceKm": 6.6,
-    "zone": "nearby"
-  },
-  {
-    "id": "kindercare-learning-centres-spreydon-65114",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Kindercare Learning Centres - Spreydon",
-      "en": "Kindercare Learning Centres - Spreydon"
-    },
-    "level": "kindergarten",
-    "distanceKm": 6.6,
-    "zone": "nearby"
-  },
-  {
-    "id": "minnies-pre-school-70411",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Minnies Pre-School",
-      "en": "Minnies Pre-School"
-    },
-    "level": "kindergarten",
-    "distanceKm": 6.6,
-    "zone": "nearby"
-  },
-  {
-    "id": "the-enchanted-garden-70461",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "The Enchanted Garden",
-      "en": "The Enchanted Garden"
-    },
-    "level": "kindergarten",
-    "distanceKm": 6.6,
-    "zone": "nearby"
-  },
-  {
-    "id": "beststart-burnside-70547",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "BestStart Burnside",
-      "en": "BestStart Burnside"
-    },
-    "level": "kindergarten",
-    "distanceKm": 6.6,
-    "zone": "nearby"
-  },
-  {
-    "id": "te-ara-maurea-roydvale-school-3493",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Te Ara Maurea Roydvale School",
-      "en": "Te Ara Maurea Roydvale School"
-    },
-    "level": "primary",
-    "distanceKm": 6.6,
-    "zone": "nearby"
-  },
-  {
-    "id": "p-manawa-papa-hou-48253",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Pūmanawa Papa Hou",
-      "en": "Pūmanawa Papa Hou"
-    },
-    "level": "kindergarten",
-    "distanceKm": 6.7,
-    "zone": "nearby"
-  },
-  {
-    "id": "waka-huia-childcare-70423",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Waka Huia Childcare",
-      "en": "Waka Huia Childcare"
-    },
-    "level": "kindergarten",
-    "distanceKm": 6.7,
-    "zone": "nearby"
-  },
-  {
-    "id": "rangi-ruru-girls-school-325",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Rangi Ruru Girls' School",
-      "en": "Rangi Ruru Girls' School"
-    },
-    "level": "secondary",
-    "distanceKm": 6.7,
-    "zone": "nearby"
-  },
-  {
-    "id": "wairakei-school-christchurch-3577",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Wairakei School (Christchurch)",
-      "en": "Wairakei School (Christchurch)"
-    },
-    "level": "primary",
-    "distanceKm": 6.7,
-    "zone": "nearby"
-  },
-  {
-    "id": "lollipops-blighs-road-70145",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Lollipops Blighs Road",
-      "en": "Lollipops Blighs Road"
-    },
-    "level": "kindergarten",
-    "distanceKm": 6.8,
-    "zone": "nearby"
-  },
-  {
-    "id": "montessori-courtyard-preschool-70475",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Montessori Courtyard Preschool",
-      "en": "Montessori Courtyard Preschool"
-    },
-    "level": "kindergarten",
-    "distanceKm": 6.8,
-    "zone": "nearby"
-  },
-  {
-    "id": "beststart-roydvale-70564",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "BestStart Roydvale",
-      "en": "BestStart Roydvale"
-    },
-    "level": "kindergarten",
-    "distanceKm": 6.8,
-    "zone": "nearby"
-  },
-  {
-    "id": "christ-s-college-330",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Christ's College",
-      "en": "Christ's College"
-    },
-    "level": "secondary",
-    "distanceKm": 6.8,
+    "distanceKm": 5.2,
     "zone": "nearby"
   },
   {
@@ -2466,241 +1257,228 @@ export const SCHOOLS: School[] = [
       "en": "Kidsfirst Kindergartens Cashmere"
     },
     "level": "kindergarten",
-    "distanceKm": 6.9,
+    "distanceKm": 5.3,
     "zone": "nearby"
   },
   {
-    "id": "the-rabbit-patch-saffron-street-45445",
+    "id": "st-peter-s-anglican-preschool-47728",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "The Rabbit Patch - Saffron Street",
-      "en": "The Rabbit Patch - Saffron Street"
+      "zhCN": "St Peter's Anglican Preschool",
+      "en": "St Peter's Anglican Preschool"
     },
     "level": "kindergarten",
-    "distanceKm": 6.9,
+    "distanceKm": 5.3,
     "zone": "nearby"
   },
   {
-    "id": "elmwood-normal-school-3334",
+    "id": "kindercare-learning-centres-addington-70071",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "Elmwood Normal School",
-      "en": "Elmwood Normal School"
+      "zhCN": "Kindercare learning Centres - Addington",
+      "en": "Kindercare learning Centres - Addington"
     },
-    "level": "primary",
-    "distanceKm": 6.9,
+    "level": "kindergarten",
+    "distanceKm": 5.3,
     "zone": "nearby"
   },
   {
-    "id": "christchurch-north-college-3684",
+    "id": "rosy-cheeks-early-learning-centre-70151",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "Christchurch North College",
-      "en": "Christchurch North College"
+      "zhCN": "Rosy Cheeks Early Learning Centre",
+      "en": "Rosy Cheeks Early Learning Centre"
+    },
+    "level": "kindergarten",
+    "distanceKm": 5.3,
+    "zone": "nearby"
+  },
+  {
+    "id": "hornby-high-school-338",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Hornby High School",
+      "en": "Hornby High School"
     },
     "level": "secondary",
-    "distanceKm": 6.9,
+    "distanceKm": 5.3,
     "zone": "nearby"
   },
   {
-    "id": "st-margaret-s-pre-school-46761",
+    "id": "barnardos-hornby-pasifika-early-learning-centre-47214",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "St Margaret's Pre-school",
-      "en": "St Margaret's Pre-school"
+      "zhCN": "Barnardos Hornby Pasifika Early Learning Centre",
+      "en": "Barnardos Hornby Pasifika Early Learning Centre"
     },
     "level": "kindergarten",
-    "distanceKm": 7,
+    "distanceKm": 5.4,
     "zone": "nearby"
   },
   {
-    "id": "beststart-wairakei-road-70093",
+    "id": "beststart-hei-hei-70008",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "BestStart Wairakei Road",
-      "en": "BestStart Wairakei Road"
+      "zhCN": "BestStart Hei Hei",
+      "en": "BestStart Hei Hei"
     },
     "level": "kindergarten",
-    "distanceKm": 7,
+    "distanceKm": 5.5,
     "zone": "nearby"
   },
   {
-    "id": "beststart-papanui-70427",
+    "id": "sacred-heart-school-christchurch-3270",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "BestStart Papanui",
-      "en": "BestStart Papanui"
+      "zhCN": "Sacred Heart School (Christchurch)",
+      "en": "Sacred Heart School (Christchurch)"
+    },
+    "level": "primary",
+    "distanceKm": 5.5,
+    "zone": "nearby"
+  },
+  {
+    "id": "hornby-primary-school-3380",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Hornby Primary School",
+      "en": "Hornby Primary School"
+    },
+    "level": "primary",
+    "distanceKm": 5.5,
+    "zone": "nearby"
+  },
+  {
+    "id": "wharenui-school-3591",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Wharenui School",
+      "en": "Wharenui School"
+    },
+    "level": "primary",
+    "distanceKm": 5.5,
+    "zone": "nearby"
+  },
+  {
+    "id": "deb-s-place-early-learning-centre-48027",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Deb's Place Early Learning Centre",
+      "en": "Deb's Place Early Learning Centre"
     },
     "level": "kindergarten",
-    "distanceKm": 7,
+    "distanceKm": 5.6,
     "zone": "nearby"
   },
   {
-    "id": "the-cathedral-grammar-school-pre-school-70472",
+    "id": "portobelo-avonhead-70033",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "The Cathedral Grammar School Pre-School",
-      "en": "The Cathedral Grammar School Pre-School"
+      "zhCN": "Portobelo Avonhead",
+      "en": "Portobelo Avonhead"
     },
     "level": "kindergarten",
-    "distanceKm": 7,
+    "distanceKm": 5.6,
     "zone": "nearby"
   },
   {
-    "id": "st-margaret-s-college-333",
+    "id": "somerfield-community-playcentre-70120",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "St Margaret's College",
-      "en": "St Margaret's College"
+      "zhCN": "Somerfield Community Playcentre",
+      "en": "Somerfield Community Playcentre"
+    },
+    "level": "kindergarten",
+    "distanceKm": 5.6,
+    "zone": "nearby"
+  },
+  {
+    "id": "villa-maria-college-326",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Villa Maria College",
+      "en": "Villa Maria College"
     },
     "level": "secondary",
-    "distanceKm": 7,
+    "distanceKm": 5.6,
     "zone": "nearby"
   },
   {
-    "id": "the-cathedral-grammar-school-368",
+    "id": "annabel-s-educare-somerfield-46316",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "The Cathedral Grammar School",
-      "en": "The Cathedral Grammar School"
+      "zhCN": "Annabel's Educare - Somerfield",
+      "en": "Annabel's Educare - Somerfield"
+    },
+    "level": "kindergarten",
+    "distanceKm": 5.7,
+    "zone": "nearby"
+  },
+  {
+    "id": "kindercare-learning-centres-avonhead-211-70163",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Kindercare Learning Centres - Avonhead (211)",
+      "en": "Kindercare Learning Centres - Avonhead (211)"
+    },
+    "level": "kindergarten",
+    "distanceKm": 5.7,
+    "zone": "nearby"
+  },
+  {
+    "id": "conductive-education-canterbury-inc-70350",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Conductive Education Canterbury Inc",
+      "en": "Conductive Education Canterbury Inc"
+    },
+    "level": "kindergarten",
+    "distanceKm": 5.7,
+    "zone": "nearby"
+  },
+  {
+    "id": "addington-te-kura-taumatua-3271",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Addington Te Kura Taumatua",
+      "en": "Addington Te Kura Taumatua"
     },
     "level": "primary",
-    "distanceKm": 7,
-    "zone": "nearby"
-  },
-  {
-    "id": "beststart-beckenham-65077",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "BestStart Beckenham",
-      "en": "BestStart Beckenham"
-    },
-    "level": "kindergarten",
-    "distanceKm": 7.1,
-    "zone": "nearby"
-  },
-  {
-    "id": "beststart-cashmere-70332",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "BestStart Cashmere",
-      "en": "BestStart Cashmere"
-    },
-    "level": "kindergarten",
-    "distanceKm": 7.1,
-    "zone": "nearby"
-  },
-  {
-    "id": "he-t-wai-m-tauranga-heaton-normal-intermediate-3372",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "He Tīwai Mātauranga Heaton Normal Intermediate",
-      "en": "He Tīwai Mātauranga Heaton Normal Intermediate"
-    },
-    "level": "intermediate",
-    "distanceKm": 7.1,
-    "zone": "nearby"
-  },
-  {
-    "id": "waimairi-school-3571",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Waimairi School",
-      "en": "Waimairi School"
-    },
-    "level": "primary",
-    "distanceKm": 7.1,
-    "zone": "nearby"
-  },
-  {
-    "id": "st-michael-s-church-school-4136",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "St Michael's Church School",
-      "en": "St Michael's Church School"
-    },
-    "level": "primary",
-    "distanceKm": 7.1,
-    "zone": "nearby"
-  },
-  {
-    "id": "pebbles-montessori-cashmere-46833",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Pebbles Montessori Cashmere",
-      "en": "Pebbles Montessori Cashmere"
-    },
-    "level": "kindergarten",
-    "distanceKm": 7.2,
-    "zone": "nearby"
-  },
-  {
-    "id": "buchan-street-playcentre-48366",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Buchan Street Playcentre",
-      "en": "Buchan Street Playcentre"
-    },
-    "level": "kindergarten",
-    "distanceKm": 7.2,
-    "zone": "nearby"
-  },
-  {
-    "id": "st-andrews-college-preschool-65068",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "St Andrews College Preschool",
-      "en": "St Andrews College Preschool"
-    },
-    "level": "kindergarten",
-    "distanceKm": 7.2,
-    "zone": "nearby"
-  },
-  {
-    "id": "selwyn-house-preschool-65087",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Selwyn House Preschool",
-      "en": "Selwyn House Preschool"
-    },
-    "level": "kindergarten",
-    "distanceKm": 7.2,
+    "distanceKm": 5.7,
     "zone": "nearby"
   },
   {
@@ -2713,33 +1491,293 @@ export const SCHOOLS: School[] = [
       "en": "Cashmere Primary Te Pae Kererū"
     },
     "level": "primary",
-    "distanceKm": 7.2,
+    "distanceKm": 5.7,
     "zone": "nearby"
   },
   {
-    "id": "te-kura-o-te-m-t-puna-isleworth-school-3385",
+    "id": "kahikatea-kirkwood-intermediate-3396",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "Te Kura o Te Mātāpuna Isleworth School",
-      "en": "Te Kura o Te Mātāpuna Isleworth School"
+      "zhCN": "Kahikatea Kirkwood Intermediate",
+      "en": "Kahikatea Kirkwood Intermediate"
     },
-    "level": "primary",
-    "distanceKm": 7.2,
+    "level": "intermediate",
+    "distanceKm": 5.7,
     "zone": "nearby"
   },
   {
-    "id": "st-peter-s-school-te-kura-haoika-3542",
+    "id": "somerfield-te-kura-wairepo-3506",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "St Peter's School Te Kura Haoika",
-      "en": "St Peter's School Te Kura Haoika"
+      "zhCN": "Somerfield Te Kura Wairepo",
+      "en": "Somerfield Te Kura Wairepo"
     },
     "level": "primary",
-    "distanceKm": 7.2,
+    "distanceKm": 5.7,
+    "zone": "nearby"
+  },
+  {
+    "id": "kidsfirst-kindergartens-hei-hei-5422",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Kidsfirst Kindergartens Hei Hei",
+      "en": "Kidsfirst Kindergartens Hei Hei"
+    },
+    "level": "kindergarten",
+    "distanceKm": 5.8,
+    "zone": "nearby"
+  },
+  {
+    "id": "kidsfirst-kindergartens-mckenzie-5435",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Kidsfirst Kindergartens McKenzie",
+      "en": "Kidsfirst Kindergartens McKenzie"
+    },
+    "level": "kindergarten",
+    "distanceKm": 5.8,
+    "zone": "nearby"
+  },
+  {
+    "id": "children-s-house-montessori-preschool-48394",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Children's House Montessori Preschool",
+      "en": "Children's House Montessori Preschool"
+    },
+    "level": "kindergarten",
+    "distanceKm": 5.8,
+    "zone": "nearby"
+  },
+  {
+    "id": "lalaga-preschool-65088",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Lalaga Preschool",
+      "en": "Lalaga Preschool"
+    },
+    "level": "kindergarten",
+    "distanceKm": 5.8,
+    "zone": "nearby"
+  },
+  {
+    "id": "beststart-riccarton-65098",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "BestStart Riccarton",
+      "en": "BestStart Riccarton"
+    },
+    "level": "kindergarten",
+    "distanceKm": 5.8,
+    "zone": "nearby"
+  },
+  {
+    "id": "kindercare-learning-centres-riccarton-70575",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Kindercare Learning Centres - Riccarton",
+      "en": "Kindercare Learning Centres - Riccarton"
+    },
+    "level": "kindergarten",
+    "distanceKm": 5.8,
+    "zone": "nearby"
+  },
+  {
+    "id": "te-k-hanga-reo-o-te-horomako-o-te-huruhuru-70609",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Te Kōhanga Reo o Te Horomako o Te Huruhuru",
+      "en": "Te Kōhanga Reo o Te Horomako o Te Huruhuru"
+    },
+    "level": "kindergarten",
+    "distanceKm": 5.8,
+    "zone": "nearby"
+  },
+  {
+    "id": "st-bernadette-s-school-hornby-3521",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "St Bernadette's School (Hornby)",
+      "en": "St Bernadette's School (Hornby)"
+    },
+    "level": "primary",
+    "distanceKm": 5.8,
+    "zone": "nearby"
+  },
+  {
+    "id": "busy-bees-avonhead-70381",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Busy Bees Avonhead",
+      "en": "Busy Bees Avonhead"
+    },
+    "level": "kindergarten",
+    "distanceKm": 5.9,
+    "zone": "nearby"
+  },
+  {
+    "id": "christchurch-south-karamata-intermediate-school-3318",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Christchurch South Karamata Intermediate School",
+      "en": "Christchurch South Karamata Intermediate School"
+    },
+    "level": "intermediate",
+    "distanceKm": 5.9,
+    "zone": "nearby"
+  },
+  {
+    "id": "kidsfirst-kindergartens-broomfield-5549",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Kidsfirst Kindergartens Broomfield",
+      "en": "Kidsfirst Kindergartens Broomfield"
+    },
+    "level": "kindergarten",
+    "distanceKm": 6,
+    "zone": "nearby"
+  },
+  {
+    "id": "waka-huia-childcare-70423",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Waka Huia Childcare",
+      "en": "Waka Huia Childcare"
+    },
+    "level": "kindergarten",
+    "distanceKm": 6,
+    "zone": "nearby"
+  },
+  {
+    "id": "ilam-school-3384",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Ilam School",
+      "en": "Ilam School"
+    },
+    "level": "primary",
+    "distanceKm": 6,
+    "zone": "nearby"
+  },
+  {
+    "id": "st-teresa-s-school-riccarton-3543",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "St Teresa's School (Riccarton)",
+      "en": "St Teresa's School (Riccarton)"
+    },
+    "level": "primary",
+    "distanceKm": 6,
+    "zone": "nearby"
+  },
+  {
+    "id": "kidsfirst-kindergartens-selwyn-street-5454",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Kidsfirst Kindergartens Selwyn Street",
+      "en": "Kidsfirst Kindergartens Selwyn Street"
+    },
+    "level": "kindergarten",
+    "distanceKm": 6.1,
+    "zone": "nearby"
+  },
+  {
+    "id": "annabel-s-educare-avonhead-ltd-45248",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Annabel's Educare Avonhead Ltd",
+      "en": "Annabel's Educare Avonhead Ltd"
+    },
+    "level": "kindergarten",
+    "distanceKm": 6.1,
+    "zone": "nearby"
+  },
+  {
+    "id": "montessori-courtyard-preschool-70475",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Montessori Courtyard Preschool",
+      "en": "Montessori Courtyard Preschool"
+    },
+    "level": "kindergarten",
+    "distanceKm": 6.1,
+    "zone": "nearby"
+  },
+  {
+    "id": "avonhead-school-rakipaoa-3287",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Avonhead School - Rakipaoa",
+      "en": "Avonhead School - Rakipaoa"
+    },
+    "level": "primary",
+    "distanceKm": 6.1,
+    "zone": "nearby"
+  },
+  {
+    "id": "pebbles-montessori-cashmere-46833",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Pebbles Montessori Cashmere",
+      "en": "Pebbles Montessori Cashmere"
+    },
+    "level": "kindergarten",
+    "distanceKm": 6.2,
+    "zone": "nearby"
+  },
+  {
+    "id": "ilam-early-learning-centre-70493",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Ilam Early Learning Centre",
+      "en": "Ilam Early Learning Centre"
+    },
+    "level": "kindergarten",
+    "distanceKm": 6.2,
     "zone": "nearby"
   },
   {
@@ -2752,97 +1790,591 @@ export const SCHOOLS: School[] = [
       "en": "Te Kura o Huriawa Thorrington"
     },
     "level": "primary",
-    "distanceKm": 7.2,
+    "distanceKm": 6.2,
     "zone": "nearby"
   },
   {
-    "id": "selwyn-house-school-4138",
+    "id": "kindercare-learning-centres-spreydon-65114",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "Selwyn House School",
-      "en": "Selwyn House School"
+      "zhCN": "Kindercare Learning Centres - Spreydon",
+      "en": "Kindercare Learning Centres - Spreydon"
+    },
+    "level": "kindergarten",
+    "distanceKm": 6.3,
+    "zone": "nearby"
+  },
+  {
+    "id": "landsdowne-terrace-playcentre-70032",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Landsdowne Terrace Playcentre",
+      "en": "Landsdowne Terrace Playcentre"
+    },
+    "level": "kindergarten",
+    "distanceKm": 6.3,
+    "zone": "nearby"
+  },
+  {
+    "id": "beststart-cashmere-70332",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "BestStart Cashmere",
+      "en": "BestStart Cashmere"
+    },
+    "level": "kindergarten",
+    "distanceKm": 6.3,
+    "zone": "nearby"
+  },
+  {
+    "id": "beststart-beckenham-65077",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "BestStart Beckenham",
+      "en": "BestStart Beckenham"
+    },
+    "level": "kindergarten",
+    "distanceKm": 6.4,
+    "zone": "nearby"
+  },
+  {
+    "id": "beststart-parkside-70551",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "BestStart Parkside",
+      "en": "BestStart Parkside"
+    },
+    "level": "kindergarten",
+    "distanceKm": 6.4,
+    "zone": "nearby"
+  },
+  {
+    "id": "beststart-riccarton-park-48274",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "BestStart Riccarton Park",
+      "en": "BestStart Riccarton Park"
+    },
+    "level": "kindergarten",
+    "distanceKm": 6.5,
+    "zone": "nearby"
+  },
+  {
+    "id": "st-peter-s-school-te-kura-haoika-3542",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "St Peter's School Te Kura Haoika",
+      "en": "St Peter's School Te Kura Haoika"
     },
     "level": "primary",
-    "distanceKm": 7.2,
+    "distanceKm": 6.5,
     "zone": "nearby"
   },
   {
-    "id": "wonderhub-early-learning-centre-47556",
+    "id": "kidsfirst-kindergartens-avonhead-5409",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "Wonderhub Early Learning Centre",
-      "en": "Wonderhub Early Learning Centre"
+      "zhCN": "Kidsfirst Kindergartens Avonhead",
+      "en": "Kidsfirst Kindergartens Avonhead"
     },
     "level": "kindergarten",
-    "distanceKm": 7.3,
+    "distanceKm": 6.6,
     "zone": "nearby"
   },
   {
-    "id": "grow-active-welles-st-47664",
+    "id": "montana-early-learning-centre-70021",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "Grow Active Welles St",
-      "en": "Grow Active Welles St"
+      "zhCN": "Montana Early Learning Centre",
+      "en": "Montana Early Learning Centre"
     },
     "level": "kindergarten",
-    "distanceKm": 7.3,
+    "distanceKm": 6.6,
     "zone": "nearby"
   },
   {
-    "id": "ao-tawhiti-unlimited-discovery-683",
+    "id": "cherry-s-early-learning-centre-70342",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "Ao Tawhiti Unlimited Discovery",
-      "en": "Ao Tawhiti Unlimited Discovery"
+      "zhCN": "Cherry's Early Learning Centre",
+      "en": "Cherry's Early Learning Centre"
+    },
+    "level": "kindergarten",
+    "distanceKm": 6.6,
+    "zone": "nearby"
+  },
+  {
+    "id": "early-childhood-learning-centre-70491",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Early Childhood Learning Centre",
+      "en": "Early Childhood Learning Centre"
+    },
+    "level": "kindergarten",
+    "distanceKm": 6.6,
+    "zone": "nearby"
+  },
+  {
+    "id": "gilberthorpe-school-3346",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Gilberthorpe School",
+      "en": "Gilberthorpe School"
+    },
+    "level": "primary",
+    "distanceKm": 6.6,
+    "zone": "nearby"
+  },
+  {
+    "id": "kidsfirst-kindergartens-riccarton-5450",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Kidsfirst Kindergartens Riccarton",
+      "en": "Kidsfirst Kindergartens Riccarton"
+    },
+    "level": "kindergarten",
+    "distanceKm": 6.7,
+    "zone": "nearby"
+  },
+  {
+    "id": "te-pito-o-te-puna-wai-o-waipapa-hagley-community-preschool-48026",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Te Pito o te Puna Wai o Waipapa - Hagley Community Preschool",
+      "en": "Te Pito o te Puna Wai o Waipapa - Hagley Community Preschool"
+    },
+    "level": "kindergarten",
+    "distanceKm": 6.7,
+    "zone": "nearby"
+  },
+  {
+    "id": "kindercare-learning-centres-fendalton-70543",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Kindercare Learning Centres - Fendalton",
+      "en": "Kindercare Learning Centres - Fendalton"
+    },
+    "level": "kindergarten",
+    "distanceKm": 6.7,
+    "zone": "nearby"
+  },
+  {
+    "id": "christchurch-boys-high-school-327",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Christchurch Boys' High School",
+      "en": "Christchurch Boys' High School"
     },
     "level": "secondary",
+    "distanceKm": 6.7,
+    "zone": "nearby"
+  },
+  {
+    "id": "te-puna-wai-o-waipapa-hagley-college-336",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Te Puna Wai o Waipapa - Hagley College",
+      "en": "Te Puna Wai o Waipapa - Hagley College"
+    },
+    "level": "secondary",
+    "distanceKm": 6.7,
+    "zone": "nearby"
+  },
+  {
+    "id": "medbury-preparatory-school-4118",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Medbury Preparatory School",
+      "en": "Medbury Preparatory School"
+    },
+    "level": "primary",
+    "distanceKm": 6.7,
+    "zone": "nearby"
+  },
+  {
+    "id": "beststart-buchanans-road-45132",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "BestStart Buchanans Road",
+      "en": "BestStart Buchanans Road"
+    },
+    "level": "kindergarten",
+    "distanceKm": 6.8,
+    "zone": "nearby"
+  },
+  {
+    "id": "grow-active-balfour-terrace-47550",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Grow Active Balfour Terrace",
+      "en": "Grow Active Balfour Terrace"
+    },
+    "level": "kindergarten",
+    "distanceKm": 6.8,
+    "zone": "nearby"
+  },
+  {
+    "id": "avonhead-playcentre-70022",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Avonhead Playcentre",
+      "en": "Avonhead Playcentre"
+    },
+    "level": "kindergarten",
+    "distanceKm": 6.8,
+    "zone": "nearby"
+  },
+  {
+    "id": "ilam-montessori-preschool-47787",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Ilam Montessori Preschool",
+      "en": "Ilam Montessori Preschool"
+    },
+    "level": "kindergarten",
+    "distanceKm": 6.9,
+    "zone": "nearby"
+  },
+  {
+    "id": "te-parito-k-whai-russley-school-3496",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Te Parito Kōwhai Russley School",
+      "en": "Te Parito Kōwhai Russley School"
+    },
+    "level": "primary",
+    "distanceKm": 6.9,
+    "zone": "nearby"
+  },
+  {
+    "id": "kidsfirst-kindergartens-beckenham-5411",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Kidsfirst Kindergartens Beckenham",
+      "en": "Kidsfirst Kindergartens Beckenham"
+    },
+    "level": "kindergarten",
+    "distanceKm": 7,
+    "zone": "nearby"
+  },
+  {
+    "id": "woodlands-preschool-limited-huntsbury-46342",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Woodlands Preschool Limited - Huntsbury",
+      "en": "Woodlands Preschool Limited - Huntsbury"
+    },
+    "level": "kindergarten",
+    "distanceKm": 7,
+    "zone": "nearby"
+  },
+  {
+    "id": "the-activity-room-70544",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "The Activity Room",
+      "en": "The Activity Room"
+    },
+    "level": "kindergarten",
+    "distanceKm": 7,
+    "zone": "nearby"
+  },
+  {
+    "id": "beckenham-te-kura-o-p-roto-3291",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Beckenham Te Kura o Pūroto",
+      "en": "Beckenham Te Kura o Pūroto"
+    },
+    "level": "primary",
+    "distanceKm": 7,
+    "zone": "nearby"
+  },
+  {
+    "id": "jigsaw-preschool-yaldhurst-48073",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Jigsaw Preschool Yaldhurst",
+      "en": "Jigsaw Preschool Yaldhurst"
+    },
+    "level": "kindergarten",
+    "distanceKm": 7.1,
+    "zone": "nearby"
+  },
+  {
+    "id": "buchan-street-playcentre-48366",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Buchan Street Playcentre",
+      "en": "Buchan Street Playcentre"
+    },
+    "level": "kindergarten",
+    "distanceKm": 7.1,
+    "zone": "nearby"
+  },
+  {
+    "id": "russley-playcentre-70114",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Russley Playcentre",
+      "en": "Russley Playcentre"
+    },
+    "level": "kindergarten",
+    "distanceKm": 7.1,
+    "zone": "nearby"
+  },
+  {
+    "id": "christchurch-girls-high-school-te-kura-o-hine-waiora-328",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Christchurch Girls' High School -Te Kura o Hine Waiora",
+      "en": "Christchurch Girls' High School -Te Kura o Hine Waiora"
+    },
+    "level": "secondary",
+    "distanceKm": 7.2,
+    "zone": "nearby"
+  },
+  {
+    "id": "avonhead-early-edventurers-47972",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Avonhead Early Edventurers",
+      "en": "Avonhead Early Edventurers"
+    },
+    "level": "kindergarten",
     "distanceKm": 7.3,
     "zone": "nearby"
   },
   {
-    "id": "ladbrooks-school-3402",
-    "districtId": "ladbrooks",
+    "id": "t-ora-fendalton-school-3338",
+    "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "Ladbrooks School",
-      "en": "Ladbrooks School"
+      "zhCN": "Tūora Fendalton School",
+      "en": "Tūora Fendalton School"
     },
     "level": "primary",
     "distanceKm": 7.3,
     "zone": "nearby"
   },
   {
-    "id": "millie-s-house-armagh-st-47700",
+    "id": "kidsfirst-kindergartens-ilam-5419",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "Millie's House - Armagh St",
-      "en": "Millie's House - Armagh St"
+      "zhCN": "Kidsfirst Kindergartens Ilam",
+      "en": "Kidsfirst Kindergartens Ilam"
     },
     "level": "kindergarten",
     "distanceKm": 7.4,
     "zone": "nearby"
   },
   {
-    "id": "fundamentals-merivale-46055",
+    "id": "globalkids-early-learning-centre-45566",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "Fundamentals Merivale",
-      "en": "Fundamentals Merivale"
+      "zhCN": "Globalkids Early Learning Centre",
+      "en": "Globalkids Early Learning Centre"
     },
     "level": "kindergarten",
+    "distanceKm": 7.4,
+    "zone": "nearby"
+  },
+  {
+    "id": "beststart-fendalton-46567",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "BestStart Fendalton",
+      "en": "BestStart Fendalton"
+    },
+    "level": "kindergarten",
+    "distanceKm": 7.4,
+    "zone": "nearby"
+  },
+  {
+    "id": "the-wilderness-48123",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "The Wilderness",
+      "en": "The Wilderness"
+    },
+    "level": "kindergarten",
+    "distanceKm": 7.4,
+    "zone": "nearby"
+  },
+  {
+    "id": "p-manawa-papa-hou-48253",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Pūmanawa Papa Hou",
+      "en": "Pūmanawa Papa Hou"
+    },
+    "level": "kindergarten",
+    "distanceKm": 7.4,
+    "zone": "nearby"
+  },
+  {
+    "id": "fendalton-playcentre-70052",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Fendalton Playcentre",
+      "en": "Fendalton Playcentre"
+    },
+    "level": "kindergarten",
+    "distanceKm": 7.4,
+    "zone": "nearby"
+  },
+  {
+    "id": "poppies-preschool-st-martins-70149",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Poppies Preschool St Martins",
+      "en": "Poppies Preschool St Martins"
+    },
+    "level": "kindergarten",
+    "distanceKm": 7.4,
+    "zone": "nearby"
+  },
+  {
+    "id": "huntsbury-preschool-incorporated-70373",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Huntsbury Preschool Incorporated",
+      "en": "Huntsbury Preschool Incorporated"
+    },
+    "level": "kindergarten",
+    "distanceKm": 7.4,
+    "zone": "nearby"
+  },
+  {
+    "id": "westburn-te-kura-o-hereora-3589",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Westburn Te Kura O Hereora",
+      "en": "Westburn Te Kura O Hereora"
+    },
+    "level": "primary",
+    "distanceKm": 7.4,
+    "zone": "nearby"
+  },
+  {
+    "id": "kidsfirst-kindergartens-hargest-crescent-5421",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Kidsfirst Kindergartens Hargest Crescent",
+      "en": "Kidsfirst Kindergartens Hargest Crescent"
+    },
+    "level": "kindergarten",
+    "distanceKm": 7.5,
+    "zone": "nearby"
+  },
+  {
+    "id": "tuia-burnside-primary-school-3305",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Tuia Burnside Primary School",
+      "en": "Tuia Burnside Primary School"
+    },
+    "level": "primary",
+    "distanceKm": 7.5,
+    "zone": "nearby"
+  },
+  {
+    "id": "st-michael-s-church-school-4136",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "St Michael's Church School",
+      "en": "St Michael's Church School"
+    },
+    "level": "primary",
     "distanceKm": 7.5,
     "zone": "nearby"
   },
@@ -2856,254 +2388,20 @@ export const SCHOOLS: School[] = [
       "en": "Co Kids Christchurch Limited"
     },
     "level": "kindergarten",
-    "distanceKm": 7.5,
-    "zone": "nearby"
-  },
-  {
-    "id": "st-andrew-s-college-christchurch-318",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "St Andrew's College (Christchurch)",
-      "en": "St Andrew's College (Christchurch)"
-    },
-    "level": "secondary",
-    "distanceKm": 7.5,
-    "zone": "nearby"
-  },
-  {
-    "id": "landsdowne-terrace-playcentre-70032",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Landsdowne Terrace Playcentre",
-      "en": "Landsdowne Terrace Playcentre"
-    },
-    "level": "kindergarten",
     "distanceKm": 7.6,
     "zone": "nearby"
   },
   {
-    "id": "cherry-s-early-learning-centre-70342",
+    "id": "grow-active-welles-st-47664",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "Cherry's Early Learning Centre",
-      "en": "Cherry's Early Learning Centre"
+      "zhCN": "Grow Active Welles St",
+      "en": "Grow Active Welles St"
     },
     "level": "kindergarten",
     "distanceKm": 7.6,
-    "zone": "nearby"
-  },
-  {
-    "id": "beststart-merivale-70405",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "BestStart Merivale",
-      "en": "BestStart Merivale"
-    },
-    "level": "kindergarten",
-    "distanceKm": 7.6,
-    "zone": "nearby"
-  },
-  {
-    "id": "breens-intermediate-3299",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Breens Intermediate",
-      "en": "Breens Intermediate"
-    },
-    "level": "intermediate",
-    "distanceKm": 7.6,
-    "zone": "nearby"
-  },
-  {
-    "id": "kidsfirst-kindergartens-papanui-5444",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Kidsfirst Kindergartens Papanui",
-      "en": "Kidsfirst Kindergartens Papanui"
-    },
-    "level": "kindergarten",
-    "distanceKm": 7.7,
-    "zone": "nearby"
-  },
-  {
-    "id": "p-manawa-bishopdale-70029",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Pūmanawa Bishopdale",
-      "en": "Pūmanawa Bishopdale"
-    },
-    "level": "kindergarten",
-    "distanceKm": 7.7,
-    "zone": "nearby"
-  },
-  {
-    "id": "bishopdale-community-preschool-70329",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Bishopdale Community  Preschool",
-      "en": "Bishopdale Community  Preschool"
-    },
-    "level": "kindergarten",
-    "distanceKm": 7.7,
-    "zone": "nearby"
-  },
-  {
-    "id": "kidsfirst-kindergartens-beckenham-5411",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Kidsfirst Kindergartens Beckenham",
-      "en": "Kidsfirst Kindergartens Beckenham"
-    },
-    "level": "kindergarten",
-    "distanceKm": 7.8,
-    "zone": "nearby"
-  },
-  {
-    "id": "kidsfirst-kindergartens-hargest-crescent-5421",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Kidsfirst Kindergartens Hargest Crescent",
-      "en": "Kidsfirst Kindergartens Hargest Crescent"
-    },
-    "level": "kindergarten",
-    "distanceKm": 7.8,
-    "zone": "nearby"
-  },
-  {
-    "id": "harewood-rd-montessori-by-busy-bees-46462",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Harewood Rd Montessori by Busy Bees",
-      "en": "Harewood Rd Montessori by Busy Bees"
-    },
-    "level": "kindergarten",
-    "distanceKm": 7.8,
-    "zone": "nearby"
-  },
-  {
-    "id": "footsteps-christian-community-preschool-65137",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Footsteps Christian Community Preschool",
-      "en": "Footsteps Christian Community Preschool"
-    },
-    "level": "kindergarten",
-    "distanceKm": 7.8,
-    "zone": "nearby"
-  },
-  {
-    "id": "ara-early-learning-centre-70341",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Ara Early Learning Centre",
-      "en": "Ara Early Learning Centre"
-    },
-    "level": "kindergarten",
-    "distanceKm": 7.8,
-    "zone": "nearby"
-  },
-  {
-    "id": "aratupu-preschool-and-wh-nau-hub-70407",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Aratupu Preschool and Whānau Hub",
-      "en": "Aratupu Preschool and Whānau Hub"
-    },
-    "level": "kindergarten",
-    "distanceKm": 7.8,
-    "zone": "nearby"
-  },
-  {
-    "id": "christchurch-adventist-school-317",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Christchurch Adventist School",
-      "en": "Christchurch Adventist School"
-    },
-    "level": "secondary",
-    "distanceKm": 7.8,
-    "zone": "nearby"
-  },
-  {
-    "id": "globalkids-early-learning-centre-45566",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Globalkids Early Learning Centre",
-      "en": "Globalkids Early Learning Centre"
-    },
-    "level": "kindergarten",
-    "distanceKm": 7.9,
-    "zone": "nearby"
-  },
-  {
-    "id": "te-waka-huruhurumanu-ki-otautahi-early-learning-centre-65143",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Te Waka Huruhurumanu ki Otautahi Early Learning Centre",
-      "en": "Te Waka Huruhurumanu ki Otautahi Early Learning Centre"
-    },
-    "level": "kindergarten",
-    "distanceKm": 7.9,
-    "zone": "nearby"
-  },
-  {
-    "id": "learning-curves-montessori-abberley-park-ltd-70301",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Learning Curves Montessori Abberley Park Ltd",
-      "en": "Learning Curves Montessori Abberley Park Ltd"
-    },
-    "level": "kindergarten",
-    "distanceKm": 7.9,
-    "zone": "nearby"
-  },
-  {
-    "id": "beststart-salisbury-street-70447",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "BestStart Salisbury Street",
-      "en": "BestStart Salisbury Street"
-    },
-    "level": "kindergarten",
-    "distanceKm": 7.9,
     "zone": "nearby"
   },
   {
@@ -3116,59 +2414,59 @@ export const SCHOOLS: School[] = [
       "en": "Sydenham Community Preschool"
     },
     "level": "kindergarten",
-    "distanceKm": 7.9,
+    "distanceKm": 7.6,
     "zone": "nearby"
   },
   {
-    "id": "beckenham-te-kura-o-p-roto-3291",
+    "id": "christ-s-college-330",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "Beckenham Te Kura o Pūroto",
-      "en": "Beckenham Te Kura o Pūroto"
-    },
-    "level": "primary",
-    "distanceKm": 7.9,
-    "zone": "nearby"
-  },
-  {
-    "id": "tafesilafa-i-early-learning-centre-telc-70550",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Tafesilafa'i Early Learning Centre (TELC)",
-      "en": "Tafesilafa'i Early Learning Centre (TELC)"
-    },
-    "level": "kindergarten",
-    "distanceKm": 8,
-    "zone": "nearby"
-  },
-  {
-    "id": "catholic-cathedral-college-531",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Catholic Cathedral College",
-      "en": "Catholic Cathedral College"
+      "zhCN": "Christ's College",
+      "en": "Christ's College"
     },
     "level": "secondary",
-    "distanceKm": 8,
+    "distanceKm": 7.6,
     "zone": "nearby"
   },
   {
-    "id": "st-mary-s-school-christchurch-3535",
+    "id": "ao-tawhiti-unlimited-discovery-683",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "St Mary's School (Christchurch)",
-      "en": "St Mary's School (Christchurch)"
+      "zhCN": "Ao Tawhiti Unlimited Discovery",
+      "en": "Ao Tawhiti Unlimited Discovery"
+    },
+    "level": "secondary",
+    "distanceKm": 7.6,
+    "zone": "nearby"
+  },
+  {
+    "id": "merrin-school-ng-whet-kohara-3434",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Merrin School Ngā Whetū Kohara",
+      "en": "Merrin School Ngā Whetū Kohara"
     },
     "level": "primary",
-    "distanceKm": 8,
+    "distanceKm": 7.6,
+    "zone": "nearby"
+  },
+  {
+    "id": "fairleigh-kindergarten-70357",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Fairleigh Kindergarten",
+      "en": "Fairleigh Kindergarten"
+    },
+    "level": "kindergarten",
+    "distanceKm": 7.7,
     "zone": "nearby"
   },
   {
@@ -3181,254 +2479,33 @@ export const SCHOOLS: School[] = [
       "en": "Waltham School"
     },
     "level": "primary",
-    "distanceKm": 8,
+    "distanceKm": 7.7,
     "zone": "nearby"
   },
   {
-    "id": "st-albans-nest-45683",
-    "districtId": "christchurch",
+    "id": "kidsfirst-kindergartens-templeton-5459",
+    "districtId": "templeton",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "St Albans Nest",
-      "en": "St Albans Nest"
+      "zhCN": "Kidsfirst Kindergartens Templeton",
+      "en": "Kidsfirst Kindergartens Templeton"
     },
     "level": "kindergarten",
-    "distanceKm": 8.1,
+    "distanceKm": 7.8,
     "zone": "nearby"
   },
   {
-    "id": "woodlands-preschool-limited-huntsbury-46342",
+    "id": "kidsfirst-kindergartens-hawthornden-road-5628",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "Woodlands Preschool Limited - Huntsbury",
-      "en": "Woodlands Preschool Limited - Huntsbury"
+      "zhCN": "Kidsfirst Kindergartens Hawthornden Road",
+      "en": "Kidsfirst Kindergartens Hawthornden Road"
     },
     "level": "kindergarten",
-    "distanceKm": 8.1,
-    "zone": "nearby"
-  },
-  {
-    "id": "learning-bee-montessori-47569",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Learning Bee Montessori",
-      "en": "Learning Bee Montessori"
-    },
-    "level": "kindergarten",
-    "distanceKm": 8.1,
-    "zone": "nearby"
-  },
-  {
-    "id": "papanui-preschool-70069",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Papanui Preschool",
-      "en": "Papanui Preschool"
-    },
-    "level": "kindergarten",
-    "distanceKm": 8.1,
-    "zone": "nearby"
-  },
-  {
-    "id": "poppies-preschool-st-martins-70149",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Poppies Preschool St Martins",
-      "en": "Poppies Preschool St Martins"
-    },
-    "level": "kindergarten",
-    "distanceKm": 8.1,
-    "zone": "nearby"
-  },
-  {
-    "id": "p-wakawaka-early-learning-centre-70338",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Pīwakawaka Early Learning Centre",
-      "en": "Pīwakawaka Early Learning Centre"
-    },
-    "level": "kindergarten",
-    "distanceKm": 8.1,
-    "zone": "nearby"
-  },
-  {
-    "id": "barnardos-early-learning-homebased-canterbury-one-70511",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Barnardos Early Learning Homebased Canterbury One",
-      "en": "Barnardos Early Learning Homebased Canterbury One"
-    },
-    "level": "kindergarten",
-    "distanceKm": 8.1,
-    "zone": "nearby"
-  },
-  {
-    "id": "harmony-haven-preschool-45158",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Harmony Haven Preschool",
-      "en": "Harmony Haven Preschool"
-    },
-    "level": "kindergarten",
-    "distanceKm": 8.2,
-    "zone": "nearby"
-  },
-  {
-    "id": "kindercare-learning-centres-christchurch-cbd-47366",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Kindercare Learning Centres - Christchurch CBD",
-      "en": "Kindercare Learning Centres - Christchurch CBD"
-    },
-    "level": "kindergarten",
-    "distanceKm": 8.2,
-    "zone": "nearby"
-  },
-  {
-    "id": "harewood-playcentre-70064",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Harewood Playcentre",
-      "en": "Harewood Playcentre"
-    },
-    "level": "kindergarten",
-    "distanceKm": 8.2,
-    "zone": "nearby"
-  },
-  {
-    "id": "cotswold-preschool-and-nursery-70457",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Cotswold Preschool and Nursery",
-      "en": "Cotswold Preschool and Nursery"
-    },
-    "level": "kindergarten",
-    "distanceKm": 8.2,
-    "zone": "nearby"
-  },
-  {
-    "id": "harewood-school-3370",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Harewood School",
-      "en": "Harewood School"
-    },
-    "level": "primary",
-    "distanceKm": 8.2,
-    "zone": "nearby"
-  },
-  {
-    "id": "paparoa-street-school-3467",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Paparoa Street School",
-      "en": "Paparoa Street School"
-    },
-    "level": "primary",
-    "distanceKm": 8.2,
-    "zone": "nearby"
-  },
-  {
-    "id": "st-albans-catholic-school-christchurch-3517",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "St Albans Catholic School (Christchurch)",
-      "en": "St Albans Catholic School (Christchurch)"
-    },
-    "level": "primary",
-    "distanceKm": 8.2,
-    "zone": "nearby"
-  },
-  {
-    "id": "sancta-maria-montessori-preschool-sherborne-47620",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Sancta Maria Montessori Preschool (Sherborne)",
-      "en": "Sancta Maria Montessori Preschool (Sherborne)"
-    },
-    "level": "kindergarten",
-    "distanceKm": 8.3,
-    "zone": "nearby"
-  },
-  {
-    "id": "papanui-high-school-316",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Papanui High School",
-      "en": "Papanui High School"
-    },
-    "level": "secondary",
-    "distanceKm": 8.3,
-    "zone": "nearby"
-  },
-  {
-    "id": "bishopdale-school-te-kura-o-papak-hatu-3293",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Bishopdale School Te Kura o Papakōhatu",
-      "en": "Bishopdale School Te Kura o Papakōhatu"
-    },
-    "level": "primary",
-    "distanceKm": 8.3,
-    "zone": "nearby"
-  },
-  {
-    "id": "kidsfirst-kindergartens-rutland-street-5453",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Kidsfirst Kindergartens Rutland Street",
-      "en": "Kidsfirst Kindergartens Rutland Street"
-    },
-    "level": "kindergarten",
-    "distanceKm": 8.4,
-    "zone": "nearby"
-  },
-  {
-    "id": "kidsfirst-kindergartens-sunbeam-5458",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Kidsfirst Kindergartens Sunbeam",
-      "en": "Kidsfirst Kindergartens Sunbeam"
-    },
-    "level": "kindergarten",
-    "distanceKm": 8.4,
+    "distanceKm": 7.8,
     "zone": "nearby"
   },
   {
@@ -3441,33 +2518,20 @@ export const SCHOOLS: School[] = [
       "en": "Fingerprints Christian Preschool"
     },
     "level": "kindergarten",
-    "distanceKm": 8.4,
+    "distanceKm": 7.8,
     "zone": "nearby"
   },
   {
-    "id": "beststart-montessori-st-albans-45307",
+    "id": "the-cathedral-grammar-school-pre-school-70472",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "BestStart Montessori St Albans",
-      "en": "BestStart Montessori St Albans"
+      "zhCN": "The Cathedral Grammar School Pre-School",
+      "en": "The Cathedral Grammar School Pre-School"
     },
     "level": "kindergarten",
-    "distanceKm": 8.4,
-    "zone": "nearby"
-  },
-  {
-    "id": "huntsbury-preschool-incorporated-70373",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Huntsbury Preschool Incorporated",
-      "en": "Huntsbury Preschool Incorporated"
-    },
-    "level": "kindergarten",
-    "distanceKm": 8.4,
+    "distanceKm": 7.8,
     "zone": "nearby"
   },
   {
@@ -3480,215 +2544,46 @@ export const SCHOOLS: School[] = [
       "en": "Hillview Christian School"
     },
     "level": "secondary",
-    "distanceKm": 8.4,
+    "distanceKm": 7.8,
     "zone": "nearby"
   },
   {
-    "id": "christchurch-east-school-3317",
+    "id": "the-cathedral-grammar-school-368",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "Christchurch East School",
-      "en": "Christchurch East School"
+      "zhCN": "The Cathedral Grammar School",
+      "en": "The Cathedral Grammar School"
     },
     "level": "primary",
-    "distanceKm": 8.4,
+    "distanceKm": 7.8,
     "zone": "nearby"
   },
   {
-    "id": "cotswold-m-t-hae-school-3324",
+    "id": "christ-the-king-school-burnside-3316",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "Cotswold Mātāhae School",
-      "en": "Cotswold Mātāhae School"
+      "zhCN": "Christ The King School (Burnside)",
+      "en": "Christ The King School (Burnside)"
     },
     "level": "primary",
-    "distanceKm": 8.4,
+    "distanceKm": 7.8,
     "zone": "nearby"
   },
   {
-    "id": "kidsfirst-kindergartens-cotswold-avenue-5417",
+    "id": "wairarapa-cobham-intermediate-3323",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "Kidsfirst Kindergartens Cotswold Avenue",
-      "en": "Kidsfirst Kindergartens Cotswold Avenue"
+      "zhCN": "Wairarapa Cobham Intermediate",
+      "en": "Wairarapa Cobham Intermediate"
     },
-    "level": "kindergarten",
-    "distanceKm": 8.5,
-    "zone": "nearby"
-  },
-  {
-    "id": "st-albans-school-3518",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "St Albans School",
-      "en": "St Albans School"
-    },
-    "level": "primary",
-    "distanceKm": 8.5,
-    "zone": "nearby"
-  },
-  {
-    "id": "grow-active-essex-street-47841",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Grow Active Essex Street",
-      "en": "Grow Active Essex Street"
-    },
-    "level": "kindergarten",
-    "distanceKm": 8.6,
-    "zone": "nearby"
-  },
-  {
-    "id": "house-of-wonder-christchurch-by-busy-bees-47950",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "House of Wonder Christchurch by Busy Bees",
-      "en": "House of Wonder Christchurch by Busy Bees"
-    },
-    "level": "kindergarten",
-    "distanceKm": 8.6,
-    "zone": "nearby"
-  },
-  {
-    "id": "te-k-hanga-reo-o-terepo-70606",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Te Kōhanga Reo o Ōterepo",
-      "en": "Te Kōhanga Reo o Ōterepo"
-    },
-    "level": "kindergarten",
-    "distanceKm": 8.6,
-    "zone": "nearby"
-  },
-  {
-    "id": "broadfield-school-3301",
-    "districtId": "rolleston",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Broadfield School",
-      "en": "Broadfield School"
-    },
-    "level": "primary",
-    "distanceKm": 8.6,
-    "zone": "nearby"
-  },
-  {
-    "id": "beststart-cranford-street-47166",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "BestStart Cranford Street",
-      "en": "BestStart Cranford Street"
-    },
-    "level": "kindergarten",
-    "distanceKm": 8.7,
-    "zone": "nearby"
-  },
-  {
-    "id": "little-house-montessori-preschool-central-47997",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Little House Montessori Preschool Central",
-      "en": "Little House Montessori Preschool Central"
-    },
-    "level": "kindergarten",
-    "distanceKm": 8.7,
-    "zone": "nearby"
-  },
-  {
-    "id": "montessori-stars-65039",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Montessori STARS",
-      "en": "Montessori STARS"
-    },
-    "level": "kindergarten",
-    "distanceKm": 8.7,
-    "zone": "nearby"
-  },
-  {
-    "id": "te-k-hanga-reo-o-te-hohepa-70608",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Te Kōhanga Reo o Te Hohepa",
-      "en": "Te Kōhanga Reo o Te Hohepa"
-    },
-    "level": "kindergarten",
-    "distanceKm": 8.7,
-    "zone": "nearby"
-  },
-  {
-    "id": "tkkm-o-waitaha-4212",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "TKKM o Waitaha",
-      "en": "TKKM o Waitaha"
-    },
-    "level": "secondary",
-    "distanceKm": 8.7,
-    "zone": "nearby"
-  },
-  {
-    "id": "kindercare-learning-centres-bishopdale-45054",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Kindercare Learning Centres - Bishopdale",
-      "en": "Kindercare Learning Centres - Bishopdale"
-    },
-    "level": "kindergarten",
-    "distanceKm": 8.8,
-    "zone": "nearby"
-  },
-  {
-    "id": "minerva-house-45565",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Minerva House",
-      "en": "Minerva House"
-    },
-    "level": "kindergarten",
-    "distanceKm": 8.8,
-    "zone": "nearby"
-  },
-  {
-    "id": "beststart-huntsbury-47961",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "BestStart Huntsbury",
-      "en": "BestStart Huntsbury"
-    },
-    "level": "kindergarten",
-    "distanceKm": 8.8,
+    "level": "intermediate",
+    "distanceKm": 7.8,
     "zone": "nearby"
   },
   {
@@ -3701,33 +2596,150 @@ export const SCHOOLS: School[] = [
       "en": "St Martins School"
     },
     "level": "primary",
-    "distanceKm": 8.8,
+    "distanceKm": 7.8,
     "zone": "nearby"
   },
   {
-    "id": "kidsfirst-kindergartens-northcote-5440",
+    "id": "beststart-huntsbury-47961",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "Kidsfirst Kindergartens Northcote",
-      "en": "Kidsfirst Kindergartens Northcote"
+      "zhCN": "BestStart Huntsbury",
+      "en": "BestStart Huntsbury"
     },
     "level": "kindergarten",
-    "distanceKm": 8.9,
+    "distanceKm": 7.9,
     "zone": "nearby"
   },
   {
-    "id": "small-world-preschool-and-nursery-65064",
+    "id": "templeton-nursery-and-preschool-65072",
+    "districtId": "templeton",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Templeton Nursery and Preschool",
+      "en": "Templeton Nursery and Preschool"
+    },
+    "level": "kindergarten",
+    "distanceKm": 7.9,
+    "zone": "nearby"
+  },
+  {
+    "id": "p-wakawaka-early-learning-centre-70338",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "Small World Preschool and Nursery",
-      "en": "Small World Preschool and Nursery"
+      "zhCN": "Pīwakawaka Early Learning Centre",
+      "en": "Pīwakawaka Early Learning Centre"
     },
     "level": "kindergarten",
-    "distanceKm": 8.9,
+    "distanceKm": 7.9,
+    "zone": "nearby"
+  },
+  {
+    "id": "ara-early-learning-centre-70341",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Ara Early Learning Centre",
+      "en": "Ara Early Learning Centre"
+    },
+    "level": "kindergarten",
+    "distanceKm": 7.9,
+    "zone": "nearby"
+  },
+  {
+    "id": "te-kura-o-r-t-templeton-school-3555",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Te Kura o Rātā Templeton School",
+      "en": "Te Kura o Rātā Templeton School"
+    },
+    "level": "primary",
+    "distanceKm": 7.9,
+    "zone": "nearby"
+  },
+  {
+    "id": "kidsfirst-kindergartens-trengrove-5460",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Kidsfirst Kindergartens Trengrove",
+      "en": "Kidsfirst Kindergartens Trengrove"
+    },
+    "level": "kindergarten",
+    "distanceKm": 8,
+    "zone": "nearby"
+  },
+  {
+    "id": "burnside-high-school-319",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Burnside High School",
+      "en": "Burnside High School"
+    },
+    "level": "secondary",
+    "distanceKm": 8,
+    "zone": "nearby"
+  },
+  {
+    "id": "rangi-ruru-girls-school-325",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Rangi Ruru Girls' School",
+      "en": "Rangi Ruru Girls' School"
+    },
+    "level": "secondary",
+    "distanceKm": 8,
+    "zone": "nearby"
+  },
+  {
+    "id": "broadfield-school-3301",
+    "districtId": "rolleston",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Broadfield School",
+      "en": "Broadfield School"
+    },
+    "level": "primary",
+    "distanceKm": 8,
+    "zone": "nearby"
+  },
+  {
+    "id": "millie-s-house-armagh-st-47700",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Millie's House - Armagh St",
+      "en": "Millie's House - Armagh St"
+    },
+    "level": "kindergarten",
+    "distanceKm": 8.1,
+    "zone": "nearby"
+  },
+  {
+    "id": "te-waka-huruhurumanu-ki-otautahi-early-learning-centre-65143",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Te Waka Huruhurumanu ki Otautahi Early Learning Centre",
+      "en": "Te Waka Huruhurumanu ki Otautahi Early Learning Centre"
+    },
+    "level": "kindergarten",
+    "distanceKm": 8.1,
     "zone": "nearby"
   },
   {
@@ -3740,7 +2752,20 @@ export const SCHOOLS: School[] = [
       "en": "Christchurch Rudolf Steiner Kindergarten"
     },
     "level": "kindergarten",
-    "distanceKm": 8.9,
+    "distanceKm": 8.1,
+    "zone": "nearby"
+  },
+  {
+    "id": "tafesilafa-i-early-learning-centre-telc-70550",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Tafesilafa'i Early Learning Centre (TELC)",
+      "en": "Tafesilafa'i Early Learning Centre (TELC)"
+    },
+    "level": "kindergarten",
+    "distanceKm": 8.1,
     "zone": "nearby"
   },
   {
@@ -3753,85 +2778,137 @@ export const SCHOOLS: School[] = [
       "en": "Rudolf Steiner School (Chch)"
     },
     "level": "secondary",
-    "distanceKm": 8.9,
+    "distanceKm": 8.1,
     "zone": "nearby"
   },
   {
-    "id": "emmanuel-christian-school-1168",
+    "id": "st-margaret-s-pre-school-46761",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "Emmanuel Christian School",
-      "en": "Emmanuel Christian School"
+      "zhCN": "St Margaret's Pre-school",
+      "en": "St Margaret's Pre-school"
+    },
+    "level": "kindergarten",
+    "distanceKm": 8.2,
+    "zone": "nearby"
+  },
+  {
+    "id": "giggles-and-scribbles-early-learning-centre-limited-46769",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Giggles and Scribbles Early Learning Centre Limited",
+      "en": "Giggles and Scribbles Early Learning Centre Limited"
+    },
+    "level": "kindergarten",
+    "distanceKm": 8.2,
+    "zone": "nearby"
+  },
+  {
+    "id": "learning-curves-montessori-lincoln-48144",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Learning Curves Montessori Lincoln",
+      "en": "Learning Curves Montessori Lincoln"
+    },
+    "level": "kindergarten",
+    "distanceKm": 8.2,
+    "zone": "nearby"
+  },
+  {
+    "id": "jeffrey-giraffe-early-learning-centre-65092",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Jeffrey Giraffe Early Learning Centre",
+      "en": "Jeffrey Giraffe Early Learning Centre"
+    },
+    "level": "kindergarten",
+    "distanceKm": 8.2,
+    "zone": "nearby"
+  },
+  {
+    "id": "the-rabbit-patch-preschool-70426",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "The Rabbit Patch Preschool",
+      "en": "The Rabbit Patch Preschool"
+    },
+    "level": "kindergarten",
+    "distanceKm": 8.2,
+    "zone": "nearby"
+  },
+  {
+    "id": "te-k-hanga-reo-o-terepo-70606",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Te Kōhanga Reo o Ōterepo",
+      "en": "Te Kōhanga Reo o Ōterepo"
+    },
+    "level": "kindergarten",
+    "distanceKm": 8.2,
+    "zone": "nearby"
+  },
+  {
+    "id": "st-margaret-s-college-333",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "St Margaret's College",
+      "en": "St Margaret's College"
     },
     "level": "secondary",
-    "distanceKm": 8.9,
+    "distanceKm": 8.2,
     "zone": "nearby"
   },
   {
-    "id": "st-joseph-s-school-papanui-3531",
+    "id": "catholic-cathedral-college-531",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "St Joseph's School (Papanui)",
-      "en": "St Joseph's School (Papanui)"
+      "zhCN": "Catholic Cathedral College",
+      "en": "Catholic Cathedral College"
+    },
+    "level": "secondary",
+    "distanceKm": 8.2,
+    "zone": "nearby"
+  },
+  {
+    "id": "st-patrick-s-school-bryndwr-3537",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "St Patrick's School (Bryndwr)",
+      "en": "St Patrick's School (Bryndwr)"
     },
     "level": "primary",
-    "distanceKm": 8.9,
+    "distanceKm": 8.2,
     "zone": "nearby"
   },
   {
-    "id": "st-mark-s-school-christchurch-4135",
+    "id": "tkkm-o-waitaha-4212",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "St Mark's School (Christchurch)",
-      "en": "St Mark's School (Christchurch)"
+      "zhCN": "TKKM o Waitaha",
+      "en": "TKKM o Waitaha"
     },
-    "level": "primary",
-    "distanceKm": 8.9,
-    "zone": "nearby"
-  },
-  {
-    "id": "forfar-nursery-and-preschool-70361",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Forfar Nursery And Preschool",
-      "en": "Forfar Nursery And Preschool"
-    },
-    "level": "kindergarten",
-    "distanceKm": 9,
-    "zone": "nearby"
-  },
-  {
-    "id": "haven-elc-70391",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Haven ELC",
-      "en": "Haven ELC"
-    },
-    "level": "kindergarten",
-    "distanceKm": 9,
-    "zone": "nearby"
-  },
-  {
-    "id": "beststart-st-albans-70521",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "BestStart St Albans",
-      "en": "BestStart St Albans"
-    },
-    "level": "kindergarten",
-    "distanceKm": 9,
+    "level": "secondary",
+    "distanceKm": 8.2,
     "zone": "nearby"
   },
   {
@@ -3844,7 +2921,423 @@ export const SCHOOLS: School[] = [
       "en": "Kidsfirst Kindergartens Opawa St Martins"
     },
     "level": "kindergarten",
-    "distanceKm": 9.1,
+    "distanceKm": 8.3,
+    "zone": "nearby"
+  },
+  {
+    "id": "minnies-pre-school-70411",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Minnies Pre-School",
+      "en": "Minnies Pre-School"
+    },
+    "level": "kindergarten",
+    "distanceKm": 8.3,
+    "zone": "nearby"
+  },
+  {
+    "id": "elmwood-normal-school-3334",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Elmwood Normal School",
+      "en": "Elmwood Normal School"
+    },
+    "level": "primary",
+    "distanceKm": 8.4,
+    "zone": "nearby"
+  },
+  {
+    "id": "st-mark-s-school-christchurch-4135",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "St Mark's School (Christchurch)",
+      "en": "St Mark's School (Christchurch)"
+    },
+    "level": "primary",
+    "distanceKm": 8.4,
+    "zone": "nearby"
+  },
+  {
+    "id": "discovery-junction-47599",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Discovery Junction",
+      "en": "Discovery Junction"
+    },
+    "level": "kindergarten",
+    "distanceKm": 8.5,
+    "zone": "nearby"
+  },
+  {
+    "id": "selwyn-house-preschool-65087",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Selwyn House Preschool",
+      "en": "Selwyn House Preschool"
+    },
+    "level": "kindergarten",
+    "distanceKm": 8.5,
+    "zone": "nearby"
+  },
+  {
+    "id": "selwyn-house-school-4138",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Selwyn House School",
+      "en": "Selwyn House School"
+    },
+    "level": "primary",
+    "distanceKm": 8.5,
+    "zone": "nearby"
+  },
+  {
+    "id": "beststart-salisbury-street-70447",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "BestStart Salisbury Street",
+      "en": "BestStart Salisbury Street"
+    },
+    "level": "kindergarten",
+    "distanceKm": 8.6,
+    "zone": "nearby"
+  },
+  {
+    "id": "te-kura-o-p-waho-opawa-school-3455",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Te Kura o Ōpāwaho – Opawa School",
+      "en": "Te Kura o Ōpāwaho – Opawa School"
+    },
+    "level": "primary",
+    "distanceKm": 8.6,
+    "zone": "nearby"
+  },
+  {
+    "id": "kidsfirst-kindergartens-lincoln-5548",
+    "districtId": "lincoln",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Kidsfirst Kindergartens Lincoln",
+      "en": "Kidsfirst Kindergartens Lincoln"
+    },
+    "level": "kindergarten",
+    "distanceKm": 8.7,
+    "zone": "nearby"
+  },
+  {
+    "id": "kindercare-learning-centres-christchurch-cbd-47366",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Kindercare Learning Centres - Christchurch CBD",
+      "en": "Kindercare Learning Centres - Christchurch CBD"
+    },
+    "level": "kindergarten",
+    "distanceKm": 8.7,
+    "zone": "nearby"
+  },
+  {
+    "id": "rhyme-and-reason-early-learning-centre-48107",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Rhyme and Reason - Early Learning Centre",
+      "en": "Rhyme and Reason - Early Learning Centre"
+    },
+    "level": "kindergarten",
+    "distanceKm": 8.7,
+    "zone": "nearby"
+  },
+  {
+    "id": "te-kura-o-hinetahi-governors-bay-3354",
+    "districtId": "governors-bay",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Te Kura o Ōhinetahi - Governors Bay",
+      "en": "Te Kura o Ōhinetahi - Governors Bay"
+    },
+    "level": "primary",
+    "distanceKm": 8.7,
+    "zone": "nearby"
+  },
+  {
+    "id": "he-t-wai-m-tauranga-heaton-normal-intermediate-3372",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "He Tīwai Mātauranga Heaton Normal Intermediate",
+      "en": "He Tīwai Mātauranga Heaton Normal Intermediate"
+    },
+    "level": "intermediate",
+    "distanceKm": 8.7,
+    "zone": "nearby"
+  },
+  {
+    "id": "little-cubs-early-learning-centre-48079",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Little Cubs Early Learning Centre",
+      "en": "Little Cubs Early Learning Centre"
+    },
+    "level": "kindergarten",
+    "distanceKm": 8.8,
+    "zone": "nearby"
+  },
+  {
+    "id": "lollipops-blighs-road-70145",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Lollipops Blighs Road",
+      "en": "Lollipops Blighs Road"
+    },
+    "level": "kindergarten",
+    "distanceKm": 8.8,
+    "zone": "nearby"
+  },
+  {
+    "id": "te-k-hanga-reo-o-te-hohepa-70608",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Te Kōhanga Reo o Te Hohepa",
+      "en": "Te Kōhanga Reo o Te Hohepa"
+    },
+    "level": "kindergarten",
+    "distanceKm": 8.8,
+    "zone": "nearby"
+  },
+  {
+    "id": "lincoln-high-school-347",
+    "districtId": "lincoln",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Lincoln High School",
+      "en": "Lincoln High School"
+    },
+    "level": "secondary",
+    "distanceKm": 8.8,
+    "zone": "nearby"
+  },
+  {
+    "id": "christchurch-east-school-3317",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Christchurch East School",
+      "en": "Christchurch East School"
+    },
+    "level": "primary",
+    "distanceKm": 8.8,
+    "zone": "nearby"
+  },
+  {
+    "id": "st-mary-s-school-christchurch-3535",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "St Mary's School (Christchurch)",
+      "en": "St Mary's School (Christchurch)"
+    },
+    "level": "primary",
+    "distanceKm": 8.8,
+    "zone": "nearby"
+  },
+  {
+    "id": "whippersnappers-early-learning-centre-45864",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Whippersnappers Early Learning Centre",
+      "en": "Whippersnappers Early Learning Centre"
+    },
+    "level": "kindergarten",
+    "distanceKm": 8.9,
+    "zone": "nearby"
+  },
+  {
+    "id": "the-willows-47281",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "The Willows",
+      "en": "The Willows"
+    },
+    "level": "kindergarten",
+    "distanceKm": 8.9,
+    "zone": "nearby"
+  },
+  {
+    "id": "grow-active-essex-street-47841",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Grow Active Essex Street",
+      "en": "Grow Active Essex Street"
+    },
+    "level": "kindergarten",
+    "distanceKm": 8.9,
+    "zone": "nearby"
+  },
+  {
+    "id": "st-andrews-college-preschool-65068",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "St Andrews College Preschool",
+      "en": "St Andrews College Preschool"
+    },
+    "level": "kindergarten",
+    "distanceKm": 8.9,
+    "zone": "nearby"
+  },
+  {
+    "id": "lincoln-primary-school-3412",
+    "districtId": "lincoln",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Lincoln Primary School",
+      "en": "Lincoln Primary School"
+    },
+    "level": "primary",
+    "distanceKm": 8.9,
+    "zone": "nearby"
+  },
+  {
+    "id": "kidsfirst-kindergartens-kendal-avenue-5429",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Kidsfirst Kindergartens Kendal Avenue",
+      "en": "Kidsfirst Kindergartens Kendal Avenue"
+    },
+    "level": "kindergarten",
+    "distanceKm": 9,
+    "zone": "nearby"
+  },
+  {
+    "id": "tai-tapu-playcentre-70132",
+    "districtId": "taitapu",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Tai Tapu Playcentre",
+      "en": "Tai Tapu Playcentre"
+    },
+    "level": "kindergarten",
+    "distanceKm": 9,
+    "zone": "nearby"
+  },
+  {
+    "id": "learning-curves-montessori-abberley-park-ltd-70301",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Learning Curves Montessori Abberley Park Ltd",
+      "en": "Learning Curves Montessori Abberley Park Ltd"
+    },
+    "level": "kindergarten",
+    "distanceKm": 9,
+    "zone": "nearby"
+  },
+  {
+    "id": "beststart-papanui-70427",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "BestStart Papanui",
+      "en": "BestStart Papanui"
+    },
+    "level": "kindergarten",
+    "distanceKm": 9,
+    "zone": "nearby"
+  },
+  {
+    "id": "the-enchanted-garden-70461",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "The Enchanted Garden",
+      "en": "The Enchanted Garden"
+    },
+    "level": "kindergarten",
+    "distanceKm": 9,
+    "zone": "nearby"
+  },
+  {
+    "id": "waimairi-school-3571",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Waimairi School",
+      "en": "Waimairi School"
+    },
+    "level": "primary",
+    "distanceKm": 9,
+    "zone": "nearby"
+  },
+  {
+    "id": "wairakei-school-christchurch-3577",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Wairakei School (Christchurch)",
+      "en": "Wairakei School (Christchurch)"
+    },
+    "level": "primary",
+    "distanceKm": 9,
+    "zone": "nearby"
+  },
+  {
+    "id": "yaldhurst-school-t-tara-t-kaha-3602",
+    "districtId": "yaldhurst",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Yaldhurst School – Tōtara Tūkaha",
+      "en": "Yaldhurst School – Tōtara Tūkaha"
+    },
+    "level": "primary",
+    "distanceKm": 9,
     "zone": "nearby"
   },
   {
@@ -3861,302 +3354,172 @@ export const SCHOOLS: School[] = [
     "zone": "nearby"
   },
   {
-    "id": "discovery-junction-47599",
+    "id": "harmony-haven-preschool-45158",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "Discovery Junction",
-      "en": "Discovery Junction"
+      "zhCN": "Harmony Haven Preschool",
+      "en": "Harmony Haven Preschool"
     },
     "level": "kindergarten",
     "distanceKm": 9.1,
     "zone": "nearby"
   },
   {
-    "id": "little-cubs-early-learning-centre-48079",
+    "id": "fundamentals-merivale-46055",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "Little Cubs Early Learning Centre",
-      "en": "Little Cubs Early Learning Centre"
+      "zhCN": "Fundamentals Merivale",
+      "en": "Fundamentals Merivale"
     },
     "level": "kindergarten",
     "distanceKm": 9.1,
     "zone": "nearby"
   },
   {
-    "id": "st-albans-community-preschool-70455",
+    "id": "house-of-wonder-christchurch-by-busy-bees-47950",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "St Albans Community Preschool",
-      "en": "St Albans Community Preschool"
+      "zhCN": "House of Wonder Christchurch by Busy Bees",
+      "en": "House of Wonder Christchurch by Busy Bees"
     },
     "level": "kindergarten",
     "distanceKm": 9.1,
     "zone": "nearby"
   },
   {
-    "id": "marian-college-343",
-    "districtId": "christchurch",
+    "id": "lincoln-playcentre-70077",
+    "districtId": "lincoln",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "Marian College",
-      "en": "Marian College"
+      "zhCN": "Lincoln Playcentre",
+      "en": "Lincoln Playcentre"
     },
-    "level": "secondary",
+    "level": "kindergarten",
     "distanceKm": 9.1,
     "zone": "nearby"
   },
   {
-    "id": "casebrook-intermediate-3309",
+    "id": "the-rabbit-patch-saffron-street-45445",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "Casebrook Intermediate",
-      "en": "Casebrook Intermediate"
-    },
-    "level": "intermediate",
-    "distanceKm": 9.1,
-    "zone": "nearby"
-  },
-  {
-    "id": "rhyme-and-reason-early-learning-centre-48107",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Rhyme and Reason - Early Learning Centre",
-      "en": "Rhyme and Reason - Early Learning Centre"
+      "zhCN": "The Rabbit Patch - Saffron Street",
+      "en": "The Rabbit Patch - Saffron Street"
     },
     "level": "kindergarten",
     "distanceKm": 9.2,
     "zone": "nearby"
   },
   {
-    "id": "papanui-primary-school-3466",
+    "id": "st-andrew-s-college-christchurch-318",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "Papanui Primary School",
-      "en": "Papanui Primary School"
+      "zhCN": "St Andrew's College (Christchurch)",
+      "en": "St Andrew's College (Christchurch)"
     },
-    "level": "primary",
+    "level": "secondary",
     "distanceKm": 9.2,
     "zone": "nearby"
   },
   {
-    "id": "little-beans-preschool-limited-47014",
+    "id": "educare-lincoln-village-45810",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "Little Beans Preschool Limited",
-      "en": "Little Beans Preschool Limited"
+      "zhCN": "Educare Lincoln Village",
+      "en": "Educare Lincoln Village"
     },
     "level": "kindergarten",
     "distanceKm": 9.3,
     "zone": "nearby"
   },
   {
-    "id": "te-kura-o-p-waho-opawa-school-3455",
-    "districtId": "christchurch",
+    "id": "aspire-preschool-70123",
+    "districtId": "taitapu",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "Te Kura o Ōpāwaho – Opawa School",
-      "en": "Te Kura o Ōpāwaho – Opawa School"
+      "zhCN": "Aspire Preschool",
+      "en": "Aspire Preschool"
     },
-    "level": "primary",
+    "level": "kindergarten",
     "distanceKm": 9.3,
     "zone": "nearby"
   },
   {
-    "id": "learning-curves-montessori-nursery-ltd-70143",
+    "id": "haven-elc-70391",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "Learning Curves Montessori Nursery Ltd",
-      "en": "Learning Curves Montessori Nursery Ltd"
+      "zhCN": "Haven ELC",
+      "en": "Haven ELC"
+    },
+    "level": "kindergarten",
+    "distanceKm": 9.3,
+    "zone": "nearby"
+  },
+  {
+    "id": "beststart-merivale-70405",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "BestStart Merivale",
+      "en": "BestStart Merivale"
+    },
+    "level": "kindergarten",
+    "distanceKm": 9.3,
+    "zone": "nearby"
+  },
+  {
+    "id": "st-albans-nest-45683",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "St Albans Nest",
+      "en": "St Albans Nest"
     },
     "level": "kindergarten",
     "distanceKm": 9.4,
     "zone": "nearby"
   },
   {
-    "id": "st-bede-s-college-315",
+    "id": "sancta-maria-montessori-preschool-sherborne-47620",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "St Bede's College",
-      "en": "St Bede's College"
+      "zhCN": "Sancta Maria Montessori Preschool (Sherborne)",
+      "en": "Sancta Maria Montessori Preschool (Sherborne)"
     },
-    "level": "secondary",
+    "level": "kindergarten",
     "distanceKm": 9.4,
     "zone": "nearby"
   },
   {
-    "id": "st-francis-of-assisi-catholic-school-738",
+    "id": "little-house-montessori-preschool-central-47997",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "St Francis of Assisi Catholic School",
-      "en": "St Francis of Assisi Catholic School"
+      "zhCN": "Little House Montessori Preschool Central",
+      "en": "Little House Montessori Preschool Central"
     },
-    "level": "primary",
+    "level": "kindergarten",
     "distanceKm": 9.4,
-    "zone": "nearby"
-  },
-  {
-    "id": "kidsfirst-kindergartens-mairehau-5436",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Kidsfirst Kindergartens Mairehau",
-      "en": "Kidsfirst Kindergartens Mairehau"
-    },
-    "level": "kindergarten",
-    "distanceKm": 9.5,
-    "zone": "nearby"
-  },
-  {
-    "id": "beststart-warrington-47302",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "BestStart Warrington",
-      "en": "BestStart Warrington"
-    },
-    "level": "kindergarten",
-    "distanceKm": 9.6,
-    "zone": "nearby"
-  },
-  {
-    "id": "stables-montessori-casebrook-48396",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Stables Montessori Casebrook",
-      "en": "Stables Montessori Casebrook"
-    },
-    "level": "kindergarten",
-    "distanceKm": 9.6,
-    "zone": "nearby"
-  },
-  {
-    "id": "tiny-tots-preschool-70481",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Tiny Tots Preschool",
-      "en": "Tiny Tots Preschool"
-    },
-    "level": "kindergarten",
-    "distanceKm": 9.6,
-    "zone": "nearby"
-  },
-  {
-    "id": "mairehau-primary-school-3425",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Mairehau Primary School",
-      "en": "Mairehau Primary School"
-    },
-    "level": "primary",
-    "distanceKm": 9.6,
-    "zone": "nearby"
-  },
-  {
-    "id": "kimihia-early-learning-centre-70003",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Kimihia Early Learning Centre",
-      "en": "Kimihia Early Learning Centre"
-    },
-    "level": "kindergarten",
-    "distanceKm": 9.7,
-    "zone": "nearby"
-  },
-  {
-    "id": "st-albans-playcentre-70128",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "St Albans Playcentre",
-      "en": "St Albans Playcentre"
-    },
-    "level": "kindergarten",
-    "distanceKm": 9.7,
-    "zone": "nearby"
-  },
-  {
-    "id": "avonside-early-childhood-centre-70321",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Avonside Early Childhood Centre",
-      "en": "Avonside Early Childhood Centre"
-    },
-    "level": "kindergarten",
-    "distanceKm": 9.7,
-    "zone": "nearby"
-  },
-  {
-    "id": "te-aratai-college-337",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Te Aratai College",
-      "en": "Te Aratai College"
-    },
-    "level": "secondary",
-    "distanceKm": 9.7,
-    "zone": "nearby"
-  },
-  {
-    "id": "te-kura-o-matarangi-northcote-school-3449",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Te Kura o Matarangi - Northcote School",
-      "en": "Te Kura o Matarangi - Northcote School"
-    },
-    "level": "primary",
-    "distanceKm": 9.7,
-    "zone": "nearby"
-  },
-  {
-    "id": "stables-montessori-avonside-48375",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Stables Montessori Avonside",
-      "en": "Stables Montessori Avonside"
-    },
-    "level": "kindergarten",
-    "distanceKm": 9.8,
     "zone": "nearby"
   },
   {
@@ -4169,124 +3532,137 @@ export const SCHOOLS: School[] = [
       "en": "Abacus Montessori Preschool"
     },
     "level": "kindergarten",
-    "distanceKm": 9.8,
+    "distanceKm": 9.4,
     "zone": "nearby"
   },
   {
-    "id": "shirley-playcentre-70118",
+    "id": "beststart-burnside-70547",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "Shirley Playcentre",
-      "en": "Shirley Playcentre"
+      "zhCN": "BestStart Burnside",
+      "en": "BestStart Burnside"
     },
     "level": "kindergarten",
-    "distanceKm": 9.8,
+    "distanceKm": 9.4,
     "zone": "nearby"
   },
   {
-    "id": "te-hiwa-shirley-primary-school-3504",
+    "id": "te-ara-maurea-roydvale-school-3493",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "Te Hiwa Shirley Primary School",
-      "en": "Te Hiwa Shirley Primary School"
+      "zhCN": "Te Ara Maurea Roydvale School",
+      "en": "Te Ara Maurea Roydvale School"
     },
     "level": "primary",
-    "distanceKm": 9.8,
+    "distanceKm": 9.4,
     "zone": "nearby"
   },
   {
-    "id": "kidsfirst-kindergartens-linwood-5432",
+    "id": "kidsfirst-kindergartens-sunbeam-5458",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "Kidsfirst Kindergartens Linwood",
-      "en": "Kidsfirst Kindergartens Linwood"
+      "zhCN": "Kidsfirst Kindergartens Sunbeam",
+      "en": "Kidsfirst Kindergartens Sunbeam"
     },
     "level": "kindergarten",
-    "distanceKm": 9.9,
+    "distanceKm": 9.5,
     "zone": "nearby"
   },
   {
-    "id": "giggles-and-scribbles-early-learning-centre-limited-46769",
+    "id": "melodies-preschool-45697",
+    "districtId": "lincoln",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Melodies Preschool",
+      "en": "Melodies Preschool"
+    },
+    "level": "kindergarten",
+    "distanceKm": 9.5,
+    "zone": "nearby"
+  },
+  {
+    "id": "beststart-roydvale-70564",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "Giggles and Scribbles Early Learning Centre Limited",
-      "en": "Giggles and Scribbles Early Learning Centre Limited"
+      "zhCN": "BestStart Roydvale",
+      "en": "BestStart Roydvale"
     },
     "level": "kindergarten",
-    "distanceKm": 9.9,
+    "distanceKm": 9.5,
     "zone": "nearby"
   },
   {
-    "id": "ako-tahi-48088",
+    "id": "ararira-springs-primary-te-puna-o-ararira-585",
+    "districtId": "lincoln",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Ararira Springs Primary- Te Puna o Ararira",
+      "en": "Ararira Springs Primary- Te Puna o Ararira"
+    },
+    "level": "primary",
+    "distanceKm": 9.5,
+    "zone": "nearby"
+  },
+  {
+    "id": "tai-tapu-school-3549",
+    "districtId": "tai-tapu",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Tai Tapu School",
+      "en": "Tai Tapu School"
+    },
+    "level": "primary",
+    "distanceKm": 9.5,
+    "zone": "nearby"
+  },
+  {
+    "id": "mastery-schools-new-zealand-arapaki-3680",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "Ako Tahi",
-      "en": "Ako Tahi"
+      "zhCN": "Mastery Schools New Zealand - Arapaki",
+      "en": "Mastery Schools New Zealand - Arapaki"
     },
-    "level": "kindergarten",
-    "distanceKm": 9.9,
+    "level": "primary",
+    "distanceKm": 9.5,
     "zone": "nearby"
   },
   {
-    "id": "alpha-early-childhood-educational-centre-70430",
+    "id": "kimihia-early-learning-centre-70003",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "Alpha Early Childhood Educational Centre",
-      "en": "Alpha Early Childhood Educational Centre"
+      "zhCN": "Kimihia Early Learning Centre",
+      "en": "Kimihia Early Learning Centre"
     },
     "level": "kindergarten",
-    "distanceKm": 9.9,
+    "distanceKm": 9.6,
     "zone": "nearby"
   },
   {
-    "id": "kidsfirst-kindergartens-edmonds-smith-st-5418",
+    "id": "te-aratai-college-337",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "Kidsfirst Kindergartens Edmonds Smith St",
-      "en": "Kidsfirst Kindergartens Edmonds Smith St"
+      "zhCN": "Te Aratai College",
+      "en": "Te Aratai College"
     },
-    "level": "kindergarten",
-    "distanceKm": 10,
-    "zone": "nearby"
-  },
-  {
-    "id": "casa-dei-bambini-foundation-school-70333",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Casa Dei Bambini Foundation School",
-      "en": "Casa Dei Bambini Foundation School"
-    },
-    "level": "kindergarten",
-    "distanceKm": 10,
-    "zone": "nearby"
-  },
-  {
-    "id": "redwood-early-childhood-centre-70441",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Redwood Early Childhood Centre",
-      "en": "Redwood Early Childhood Centre"
-    },
-    "level": "kindergarten",
-    "distanceKm": 10,
+    "level": "secondary",
+    "distanceKm": 9.6,
     "zone": "nearby"
   },
   {
@@ -4299,47 +3675,73 @@ export const SCHOOLS: School[] = [
       "en": "Te Waka Unua School"
     },
     "level": "primary",
-    "distanceKm": 10,
+    "distanceKm": 9.6,
     "zone": "nearby"
   },
   {
-    "id": "pareawa-banks-avenue-school-3289",
+    "id": "st-albans-catholic-school-christchurch-3517",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "Pareawa Banks Avenue School",
-      "en": "Pareawa Banks Avenue School"
+      "zhCN": "St Albans Catholic School (Christchurch)",
+      "en": "St Albans Catholic School (Christchurch)"
     },
     "level": "primary",
-    "distanceKm": 10,
+    "distanceKm": 9.6,
     "zone": "nearby"
   },
   {
-    "id": "kidsfirst-kindergartens-redwood-5449",
+    "id": "kidsfirst-kindergartens-edmonds-smith-st-5418",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "Kidsfirst Kindergartens Redwood",
-      "en": "Kidsfirst Kindergartens Redwood"
+      "zhCN": "Kidsfirst Kindergartens Edmonds Smith St",
+      "en": "Kidsfirst Kindergartens Edmonds Smith St"
     },
     "level": "kindergarten",
-    "distanceKm": 10.1,
-    "zone": "further"
+    "distanceKm": 9.7,
+    "zone": "nearby"
   },
   {
-    "id": "beststart-redwood-45134",
+    "id": "kidsfirst-kindergartens-papanui-5444",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "BestStart Redwood",
-      "en": "BestStart Redwood"
+      "zhCN": "Kidsfirst Kindergartens Papanui",
+      "en": "Kidsfirst Kindergartens Papanui"
     },
     "level": "kindergarten",
-    "distanceKm": 10.1,
-    "zone": "further"
+    "distanceKm": 9.7,
+    "zone": "nearby"
+  },
+  {
+    "id": "beststart-montessori-st-albans-45307",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "BestStart Montessori St Albans",
+      "en": "BestStart Montessori St Albans"
+    },
+    "level": "kindergarten",
+    "distanceKm": 9.7,
+    "zone": "nearby"
+  },
+  {
+    "id": "wonderhub-early-learning-centre-47556",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Wonderhub Early Learning Centre",
+      "en": "Wonderhub Early Learning Centre"
+    },
+    "level": "kindergarten",
+    "distanceKm": 9.7,
+    "zone": "nearby"
   },
   {
     "id": "beststart-ferry-road-48003",
@@ -4351,17 +3753,238 @@ export const SCHOOLS: School[] = [
       "en": "BestStart Ferry Road"
     },
     "level": "kindergarten",
-    "distanceKm": 10.1,
-    "zone": "further"
+    "distanceKm": 9.7,
+    "zone": "nearby"
   },
   {
-    "id": "learning-curves-montessori-lincoln-48144",
+    "id": "footsteps-christian-community-preschool-65137",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "Learning Curves Montessori Lincoln",
-      "en": "Learning Curves Montessori Lincoln"
+      "zhCN": "Footsteps Christian Community Preschool",
+      "en": "Footsteps Christian Community Preschool"
+    },
+    "level": "kindergarten",
+    "distanceKm": 9.7,
+    "zone": "nearby"
+  },
+  {
+    "id": "beststart-wairakei-road-70093",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "BestStart Wairakei Road",
+      "en": "BestStart Wairakei Road"
+    },
+    "level": "kindergarten",
+    "distanceKm": 9.7,
+    "zone": "nearby"
+  },
+  {
+    "id": "christchurch-adventist-school-317",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Christchurch Adventist School",
+      "en": "Christchurch Adventist School"
+    },
+    "level": "secondary",
+    "distanceKm": 9.7,
+    "zone": "nearby"
+  },
+  {
+    "id": "te-kura-o-te-m-t-puna-isleworth-school-3385",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Te Kura o Te Mātāpuna Isleworth School",
+      "en": "Te Kura o Te Mātāpuna Isleworth School"
+    },
+    "level": "primary",
+    "distanceKm": 9.7,
+    "zone": "nearby"
+  },
+  {
+    "id": "st-albans-school-3518",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "St Albans School",
+      "en": "St Albans School"
+    },
+    "level": "primary",
+    "distanceKm": 9.7,
+    "zone": "nearby"
+  },
+  {
+    "id": "christchurch-north-college-3684",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Christchurch North College",
+      "en": "Christchurch North College"
+    },
+    "level": "secondary",
+    "distanceKm": 9.7,
+    "zone": "nearby"
+  },
+  {
+    "id": "beststart-te-wh-riki-48013",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "BestStart Te Whāriki",
+      "en": "BestStart Te Whāriki"
+    },
+    "level": "kindergarten",
+    "distanceKm": 9.8,
+    "zone": "nearby"
+  },
+  {
+    "id": "beststart-st-albans-70521",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "BestStart St Albans",
+      "en": "BestStart St Albans"
+    },
+    "level": "kindergarten",
+    "distanceKm": 9.8,
+    "zone": "nearby"
+  },
+  {
+    "id": "harewood-rd-montessori-by-busy-bees-46462",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Harewood Rd Montessori by Busy Bees",
+      "en": "Harewood Rd Montessori by Busy Bees"
+    },
+    "level": "kindergarten",
+    "distanceKm": 9.9,
+    "zone": "nearby"
+  },
+  {
+    "id": "aratupu-preschool-and-wh-nau-hub-70407",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Aratupu Preschool and Whānau Hub",
+      "en": "Aratupu Preschool and Whānau Hub"
+    },
+    "level": "kindergarten",
+    "distanceKm": 9.9,
+    "zone": "nearby"
+  },
+  {
+    "id": "tiny-tots-preschool-70481",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Tiny Tots Preschool",
+      "en": "Tiny Tots Preschool"
+    },
+    "level": "kindergarten",
+    "distanceKm": 9.9,
+    "zone": "nearby"
+  },
+  {
+    "id": "paparoa-street-school-3467",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Paparoa Street School",
+      "en": "Paparoa Street School"
+    },
+    "level": "primary",
+    "distanceKm": 9.9,
+    "zone": "nearby"
+  },
+  {
+    "id": "kidsfirst-kindergartens-rutland-street-5453",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Kidsfirst Kindergartens Rutland Street",
+      "en": "Kidsfirst Kindergartens Rutland Street"
+    },
+    "level": "kindergarten",
+    "distanceKm": 10,
+    "zone": "nearby"
+  },
+  {
+    "id": "beststart-cranford-street-47166",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "BestStart Cranford Street",
+      "en": "BestStart Cranford Street"
+    },
+    "level": "kindergarten",
+    "distanceKm": 10,
+    "zone": "nearby"
+  },
+  {
+    "id": "little-beans-preschool-limited-47014",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Little Beans Preschool Limited",
+      "en": "Little Beans Preschool Limited"
+    },
+    "level": "kindergarten",
+    "distanceKm": 10.1,
+    "zone": "further"
+  },
+  {
+    "id": "p-manawa-bishopdale-70029",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Pūmanawa Bishopdale",
+      "en": "Pūmanawa Bishopdale"
+    },
+    "level": "kindergarten",
+    "distanceKm": 10.1,
+    "zone": "further"
+  },
+  {
+    "id": "kindercare-learning-centres-woolston-70107",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Kindercare Learning Centres - Woolston",
+      "en": "Kindercare Learning Centres - Woolston"
+    },
+    "level": "kindergarten",
+    "distanceKm": 10.1,
+    "zone": "further"
+  },
+  {
+    "id": "avonside-early-childhood-centre-70321",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Avonside Early Childhood Centre",
+      "en": "Avonside Early Childhood Centre"
     },
     "level": "kindergarten",
     "distanceKm": 10.1,
@@ -4381,93 +4004,171 @@ export const SCHOOLS: School[] = [
     "zone": "further"
   },
   {
-    "id": "dudley-creek-preschool-ltd-45546",
+    "id": "kidsfirst-kindergartens-linwood-5432",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "Dudley Creek Preschool Ltd",
-      "en": "Dudley Creek Preschool Ltd"
+      "zhCN": "Kidsfirst Kindergartens Linwood",
+      "en": "Kidsfirst Kindergartens Linwood"
     },
     "level": "kindergarten",
     "distanceKm": 10.2,
     "zone": "further"
   },
   {
-    "id": "kidsfirst-kindergartens-macfarlane-park-5434",
+    "id": "learning-bee-montessori-47569",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "Kidsfirst Kindergartens MacFarlane Park",
-      "en": "Kidsfirst Kindergartens MacFarlane Park"
+      "zhCN": "Learning Bee Montessori",
+      "en": "Learning Bee Montessori"
+    },
+    "level": "kindergarten",
+    "distanceKm": 10.2,
+    "zone": "further"
+  },
+  {
+    "id": "stables-montessori-avonside-48375",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Stables Montessori Avonside",
+      "en": "Stables Montessori Avonside"
+    },
+    "level": "kindergarten",
+    "distanceKm": 10.2,
+    "zone": "further"
+  },
+  {
+    "id": "forfar-nursery-and-preschool-70361",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Forfar Nursery And Preschool",
+      "en": "Forfar Nursery And Preschool"
+    },
+    "level": "kindergarten",
+    "distanceKm": 10.2,
+    "zone": "further"
+  },
+  {
+    "id": "lincoln-university-early-childhood-centre-70557",
+    "districtId": "lincoln",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Lincoln University Early Childhood Centre",
+      "en": "Lincoln University Early Childhood Centre"
+    },
+    "level": "kindergarten",
+    "distanceKm": 10.2,
+    "zone": "further"
+  },
+  {
+    "id": "breens-intermediate-3299",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Breens Intermediate",
+      "en": "Breens Intermediate"
+    },
+    "level": "intermediate",
+    "distanceKm": 10.2,
+    "zone": "further"
+  },
+  {
+    "id": "minerva-house-45565",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Minerva House",
+      "en": "Minerva House"
     },
     "level": "kindergarten",
     "distanceKm": 10.3,
     "zone": "further"
   },
   {
-    "id": "n-ku-te-ao-ki-te-p-46782",
+    "id": "montessori-stars-65039",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "Nōku Te Ao Ki Te Pā",
-      "en": "Nōku Te Ao Ki Te Pā"
+      "zhCN": "Montessori STARS",
+      "en": "Montessori STARS"
     },
     "level": "kindergarten",
     "distanceKm": 10.3,
     "zone": "further"
   },
   {
-    "id": "millie-s-house-shirley-rd-48290",
+    "id": "papanui-preschool-70069",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "Millie's House Shirley Rd",
-      "en": "Millie's House Shirley Rd"
+      "zhCN": "Papanui Preschool",
+      "en": "Papanui Preschool"
     },
     "level": "kindergarten",
     "distanceKm": 10.3,
     "zone": "further"
   },
   {
-    "id": "linwood-playcentre-70080",
+    "id": "bishopdale-community-preschool-70329",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "Linwood Playcentre",
-      "en": "Linwood Playcentre"
+      "zhCN": "Bishopdale Community  Preschool",
+      "en": "Bishopdale Community  Preschool"
     },
     "level": "kindergarten",
     "distanceKm": 10.3,
     "zone": "further"
   },
   {
-    "id": "redwood-playcentre-70110",
+    "id": "st-albans-community-preschool-70455",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "Redwood Playcentre",
-      "en": "Redwood Playcentre"
+      "zhCN": "St Albans Community Preschool",
+      "en": "St Albans Community Preschool"
     },
     "level": "kindergarten",
     "distanceKm": 10.3,
     "zone": "further"
   },
   {
-    "id": "te-p-o-r-kaihaut-706",
+    "id": "woolston-preschool-inc-70505",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "Te Pā o Rākaihautū",
-      "en": "Te Pā o Rākaihautū"
+      "zhCN": "Woolston Preschool Inc",
+      "en": "Woolston Preschool Inc"
     },
-    "level": "secondary",
+    "level": "kindergarten",
+    "distanceKm": 10.3,
+    "zone": "further"
+  },
+  {
+    "id": "barnardos-early-learning-homebased-canterbury-one-70511",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Barnardos Early Learning Homebased Canterbury One",
+      "en": "Barnardos Early Learning Homebased Canterbury One"
+    },
+    "level": "kindergarten",
     "distanceKm": 10.3,
     "zone": "further"
   },
@@ -4485,266 +4186,6 @@ export const SCHOOLS: School[] = [
     "zone": "further"
   },
   {
-    "id": "mastery-schools-new-zealand-arapaki-3680",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Mastery Schools New Zealand - Arapaki",
-      "en": "Mastery Schools New Zealand - Arapaki"
-    },
-    "level": "primary",
-    "distanceKm": 10.3,
-    "zone": "further"
-  },
-  {
-    "id": "kidsfirst-kindergartens-lincoln-5548",
-    "districtId": "lincoln",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Kidsfirst Kindergartens Lincoln",
-      "en": "Kidsfirst Kindergartens Lincoln"
-    },
-    "level": "kindergarten",
-    "distanceKm": 10.4,
-    "zone": "further"
-  },
-  {
-    "id": "mairehau-high-school-320",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Mairehau High School",
-      "en": "Mairehau High School"
-    },
-    "level": "secondary",
-    "distanceKm": 10.4,
-    "zone": "further"
-  },
-  {
-    "id": "te-oraka-3503",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Te Oraka",
-      "en": "Te Oraka"
-    },
-    "level": "intermediate",
-    "distanceKm": 10.4,
-    "zone": "further"
-  },
-  {
-    "id": "kidsfirst-kindergartens-shirley-5455",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Kidsfirst Kindergartens Shirley",
-      "en": "Kidsfirst Kindergartens Shirley"
-    },
-    "level": "kindergarten",
-    "distanceKm": 10.5,
-    "zone": "further"
-  },
-  {
-    "id": "discovery-junction-styx-mill-ltd-47690",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Discovery Junction Styx Mill Ltd",
-      "en": "Discovery Junction Styx Mill Ltd"
-    },
-    "level": "kindergarten",
-    "distanceKm": 10.5,
-    "zone": "further"
-  },
-  {
-    "id": "kindercare-learning-centres-woolston-70107",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Kindercare Learning Centres - Woolston",
-      "en": "Kindercare Learning Centres - Woolston"
-    },
-    "level": "kindergarten",
-    "distanceKm": 10.5,
-    "zone": "further"
-  },
-  {
-    "id": "lincoln-high-school-347",
-    "districtId": "lincoln",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Lincoln High School",
-      "en": "Lincoln High School"
-    },
-    "level": "secondary",
-    "distanceKm": 10.5,
-    "zone": "further"
-  },
-  {
-    "id": "noku-te-ao-65132",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Noku te Ao",
-      "en": "Noku te Ao"
-    },
-    "level": "kindergarten",
-    "distanceKm": 10.6,
-    "zone": "further"
-  },
-  {
-    "id": "barnardos-early-learning-centre-te-puna-oraka-70099",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Barnardos Early Learning Centre Te Puna Oraka",
-      "en": "Barnardos Early Learning Centre Te Puna Oraka"
-    },
-    "level": "kindergarten",
-    "distanceKm": 10.6,
-    "zone": "further"
-  },
-  {
-    "id": "lincoln-primary-school-3412",
-    "districtId": "lincoln",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Lincoln Primary School",
-      "en": "Lincoln Primary School"
-    },
-    "level": "primary",
-    "distanceKm": 10.6,
-    "zone": "further"
-  },
-  {
-    "id": "redwood-school-christchurch-3484",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Redwood School (Christchurch)",
-      "en": "Redwood School (Christchurch)"
-    },
-    "level": "primary",
-    "distanceKm": 10.6,
-    "zone": "further"
-  },
-  {
-    "id": "beststart-marshland-road-45826",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "BestStart Marshland Road",
-      "en": "BestStart Marshland Road"
-    },
-    "level": "kindergarten",
-    "distanceKm": 10.7,
-    "zone": "further"
-  },
-  {
-    "id": "woodlands-preschool-limited-dallington-47672",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Woodlands Preschool Limited - Dallington",
-      "en": "Woodlands Preschool Limited - Dallington"
-    },
-    "level": "kindergarten",
-    "distanceKm": 10.7,
-    "zone": "further"
-  },
-  {
-    "id": "kidsfirst-kindergartens-niu-65083",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Kidsfirst Kindergartens Niu",
-      "en": "Kidsfirst Kindergartens Niu"
-    },
-    "level": "kindergarten",
-    "distanceKm": 10.7,
-    "zone": "further"
-  },
-  {
-    "id": "wh-tau-school-3415",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Whītau School",
-      "en": "Whītau School"
-    },
-    "level": "primary",
-    "distanceKm": 10.7,
-    "zone": "further"
-  },
-  {
-    "id": "lincoln-playcentre-70077",
-    "districtId": "lincoln",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Lincoln Playcentre",
-      "en": "Lincoln Playcentre"
-    },
-    "level": "kindergarten",
-    "distanceKm": 10.8,
-    "zone": "further"
-  },
-  {
-    "id": "woolston-preschool-inc-70505",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Woolston Preschool Inc",
-      "en": "Woolston Preschool Inc"
-    },
-    "level": "kindergarten",
-    "distanceKm": 10.8,
-    "zone": "further"
-  },
-  {
-    "id": "whippersnappers-early-learning-centre-45864",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Whippersnappers Early Learning Centre",
-      "en": "Whippersnappers Early Learning Centre"
-    },
-    "level": "kindergarten",
-    "distanceKm": 10.9,
-    "zone": "further"
-  },
-  {
-    "id": "poppies-preschool-gardiners-road-46634",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Poppies Preschool Gardiners Road",
-      "en": "Poppies Preschool Gardiners Road"
-    },
-    "level": "kindergarten",
-    "distanceKm": 10.9,
-    "zone": "further"
-  },
-  {
     "id": "woolston-playcentre-70152",
     "districtId": "christchurch",
     "cityId": "christchurch",
@@ -4754,20 +4195,20 @@ export const SCHOOLS: School[] = [
       "en": "Woolston Playcentre"
     },
     "level": "kindergarten",
-    "distanceKm": 10.9,
+    "distanceKm": 10.4,
     "zone": "further"
   },
   {
-    "id": "educational-child-care-centre-70353",
+    "id": "papanui-high-school-316",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "Educational Child Care Centre",
-      "en": "Educational Child Care Centre"
+      "zhCN": "Papanui High School",
+      "en": "Papanui High School"
     },
-    "level": "kindergarten",
-    "distanceKm": 10.9,
+    "level": "secondary",
+    "distanceKm": 10.4,
     "zone": "further"
   },
   {
@@ -4780,33 +4221,72 @@ export const SCHOOLS: School[] = [
       "en": "St Anne's School (Woolston)"
     },
     "level": "primary",
-    "distanceKm": 11,
+    "distanceKm": 10.4,
     "zone": "further"
   },
   {
-    "id": "educare-lincoln-village-45810",
+    "id": "n-ku-te-ao-ki-te-p-46782",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "Educare Lincoln Village",
-      "en": "Educare Lincoln Village"
+      "zhCN": "Nōku Te Ao Ki Te Pā",
+      "en": "Nōku Te Ao Ki Te Pā"
     },
     "level": "kindergarten",
-    "distanceKm": 11.1,
+    "distanceKm": 10.5,
     "zone": "further"
   },
   {
-    "id": "melodies-preschool-45697",
-    "districtId": "lincoln",
+    "id": "small-world-preschool-and-nursery-65064",
+    "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "Melodies Preschool",
-      "en": "Melodies Preschool"
+      "zhCN": "Small World Preschool and Nursery",
+      "en": "Small World Preschool and Nursery"
     },
     "level": "kindergarten",
-    "distanceKm": 11.2,
+    "distanceKm": 10.5,
+    "zone": "further"
+  },
+  {
+    "id": "linwood-playcentre-70080",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Linwood Playcentre",
+      "en": "Linwood Playcentre"
+    },
+    "level": "kindergarten",
+    "distanceKm": 10.5,
+    "zone": "further"
+  },
+  {
+    "id": "learning-curves-montessori-nursery-ltd-70143",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Learning Curves Montessori Nursery Ltd",
+      "en": "Learning Curves Montessori Nursery Ltd"
+    },
+    "level": "kindergarten",
+    "distanceKm": 10.5,
+    "zone": "further"
+  },
+  {
+    "id": "te-p-o-r-kaihaut-706",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Te Pā o Rākaihautū",
+      "en": "Te Pā o Rākaihautū"
+    },
+    "level": "secondary",
+    "distanceKm": 10.5,
     "zone": "further"
   },
   {
@@ -4819,59 +4299,189 @@ export const SCHOOLS: School[] = [
       "en": "Ngutuawa School"
     },
     "level": "primary",
-    "distanceKm": 11.2,
+    "distanceKm": 10.5,
     "zone": "further"
   },
   {
-    "id": "kidsfirst-kindergartens-bromley-5428",
+    "id": "alpha-early-childhood-educational-centre-70430",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "Kidsfirst Kindergartens Bromley",
-      "en": "Kidsfirst Kindergartens Bromley"
+      "zhCN": "Alpha Early Childhood Educational Centre",
+      "en": "Alpha Early Childhood Educational Centre"
     },
     "level": "kindergarten",
-    "distanceKm": 11.3,
+    "distanceKm": 10.6,
     "zone": "further"
   },
   {
-    "id": "little-owls-preschool-70035",
+    "id": "cotswold-preschool-and-nursery-70457",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "Little Owls Preschool",
-      "en": "Little Owls Preschool"
+      "zhCN": "Cotswold Preschool and Nursery",
+      "en": "Cotswold Preschool and Nursery"
     },
     "level": "kindergarten",
-    "distanceKm": 11.3,
+    "distanceKm": 10.6,
     "zone": "further"
   },
   {
-    "id": "te-ahuwai-bromley-school-3302",
+    "id": "bishopdale-school-te-kura-o-papak-hatu-3293",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "Te Ahuwai Bromley School",
-      "en": "Te Ahuwai Bromley School"
+      "zhCN": "Bishopdale School Te Kura o Papakōhatu",
+      "en": "Bishopdale School Te Kura o Papakōhatu"
     },
     "level": "primary",
-    "distanceKm": 11.3,
+    "distanceKm": 10.6,
     "zone": "further"
   },
   {
-    "id": "te-kura-o-hinetahi-governors-bay-3354",
-    "districtId": "governors-bay",
+    "id": "beststart-warrington-47302",
+    "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "Te Kura o Ōhinetahi - Governors Bay",
-      "en": "Te Kura o Ōhinetahi - Governors Bay"
+      "zhCN": "BestStart Warrington",
+      "en": "BestStart Warrington"
+    },
+    "level": "kindergarten",
+    "distanceKm": 10.7,
+    "zone": "further"
+  },
+  {
+    "id": "shirley-playcentre-70118",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Shirley Playcentre",
+      "en": "Shirley Playcentre"
+    },
+    "level": "kindergarten",
+    "distanceKm": 10.7,
+    "zone": "further"
+  },
+  {
+    "id": "casa-dei-bambini-foundation-school-70333",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Casa Dei Bambini Foundation School",
+      "en": "Casa Dei Bambini Foundation School"
+    },
+    "level": "kindergarten",
+    "distanceKm": 10.7,
+    "zone": "further"
+  },
+  {
+    "id": "kidsfirst-kindergartens-mairehau-5436",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Kidsfirst Kindergartens Mairehau",
+      "en": "Kidsfirst Kindergartens Mairehau"
+    },
+    "level": "kindergarten",
+    "distanceKm": 10.8,
+    "zone": "further"
+  },
+  {
+    "id": "st-francis-of-assisi-catholic-school-738",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "St Francis of Assisi Catholic School",
+      "en": "St Francis of Assisi Catholic School"
     },
     "level": "primary",
-    "distanceKm": 11.3,
+    "distanceKm": 10.8,
+    "zone": "further"
+  },
+  {
+    "id": "pareawa-banks-avenue-school-3289",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Pareawa Banks Avenue School",
+      "en": "Pareawa Banks Avenue School"
+    },
+    "level": "primary",
+    "distanceKm": 10.8,
+    "zone": "further"
+  },
+  {
+    "id": "te-hiwa-shirley-primary-school-3504",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Te Hiwa Shirley Primary School",
+      "en": "Te Hiwa Shirley Primary School"
+    },
+    "level": "primary",
+    "distanceKm": 10.8,
+    "zone": "further"
+  },
+  {
+    "id": "kidsfirst-kindergartens-cotswold-avenue-5417",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Kidsfirst Kindergartens Cotswold Avenue",
+      "en": "Kidsfirst Kindergartens Cotswold Avenue"
+    },
+    "level": "kindergarten",
+    "distanceKm": 10.9,
+    "zone": "further"
+  },
+  {
+    "id": "kidsfirst-kindergartens-niu-65083",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Kidsfirst Kindergartens Niu",
+      "en": "Kidsfirst Kindergartens Niu"
+    },
+    "level": "kindergarten",
+    "distanceKm": 10.9,
+    "zone": "further"
+  },
+  {
+    "id": "cotswold-m-t-hae-school-3324",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Cotswold Mātāhae School",
+      "en": "Cotswold Mātāhae School"
+    },
+    "level": "primary",
+    "distanceKm": 10.9,
+    "zone": "further"
+  },
+  {
+    "id": "st-joseph-s-school-papanui-3531",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "St Joseph's School (Papanui)",
+      "en": "St Joseph's School (Papanui)"
+    },
+    "level": "primary",
+    "distanceKm": 10.9,
     "zone": "further"
   },
   {
@@ -4884,33 +4494,150 @@ export const SCHOOLS: School[] = [
       "en": "Tamariki School"
     },
     "level": "primary",
-    "distanceKm": 11.3,
+    "distanceKm": 10.9,
     "zone": "further"
   },
   {
-    "id": "ararira-springs-primary-te-puna-o-ararira-585",
-    "districtId": "lincoln",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Ararira Springs Primary- Te Puna o Ararira",
-      "en": "Ararira Springs Primary- Te Puna o Ararira"
-    },
-    "level": "primary",
-    "distanceKm": 11.5,
-    "zone": "further"
-  },
-  {
-    "id": "beststart-te-wh-riki-48013",
+    "id": "ako-tahi-48088",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "BestStart Te Whāriki",
-      "en": "BestStart Te Whāriki"
+      "zhCN": "Ako Tahi",
+      "en": "Ako Tahi"
     },
     "level": "kindergarten",
-    "distanceKm": 11.6,
+    "distanceKm": 11,
+    "zone": "further"
+  },
+  {
+    "id": "harewood-playcentre-70064",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Harewood Playcentre",
+      "en": "Harewood Playcentre"
+    },
+    "level": "kindergarten",
+    "distanceKm": 11,
+    "zone": "further"
+  },
+  {
+    "id": "harewood-school-3370",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Harewood School",
+      "en": "Harewood School"
+    },
+    "level": "primary",
+    "distanceKm": 11,
+    "zone": "further"
+  },
+  {
+    "id": "wh-tau-school-3415",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Whītau School",
+      "en": "Whītau School"
+    },
+    "level": "primary",
+    "distanceKm": 11,
+    "zone": "further"
+  },
+  {
+    "id": "mairehau-primary-school-3425",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Mairehau Primary School",
+      "en": "Mairehau Primary School"
+    },
+    "level": "primary",
+    "distanceKm": 11,
+    "zone": "further"
+  },
+  {
+    "id": "kidsfirst-kindergartens-bromley-5428",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Kidsfirst Kindergartens Bromley",
+      "en": "Kidsfirst Kindergartens Bromley"
+    },
+    "level": "kindergarten",
+    "distanceKm": 11.1,
+    "zone": "further"
+  },
+  {
+    "id": "kidsfirst-kindergartens-northcote-5440",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Kidsfirst Kindergartens Northcote",
+      "en": "Kidsfirst Kindergartens Northcote"
+    },
+    "level": "kindergarten",
+    "distanceKm": 11.1,
+    "zone": "further"
+  },
+  {
+    "id": "marian-college-343",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Marian College",
+      "en": "Marian College"
+    },
+    "level": "secondary",
+    "distanceKm": 11.1,
+    "zone": "further"
+  },
+  {
+    "id": "te-ahuwai-bromley-school-3302",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Te Ahuwai Bromley School",
+      "en": "Te Ahuwai Bromley School"
+    },
+    "level": "primary",
+    "distanceKm": 11.1,
+    "zone": "further"
+  },
+  {
+    "id": "papanui-primary-school-3466",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Papanui Primary School",
+      "en": "Papanui Primary School"
+    },
+    "level": "primary",
+    "distanceKm": 11.1,
+    "zone": "further"
+  },
+  {
+    "id": "millie-s-house-shirley-rd-48290",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Millie's House Shirley Rd",
+      "en": "Millie's House Shirley Rd"
+    },
+    "level": "kindergarten",
+    "distanceKm": 11.2,
     "zone": "further"
   },
   {
@@ -4923,254 +4650,46 @@ export const SCHOOLS: School[] = [
       "en": "Mapusaga Aoga Amata"
     },
     "level": "kindergarten",
-    "distanceKm": 11.7,
+    "distanceKm": 11.2,
     "zone": "further"
   },
   {
-    "id": "canterbury-educare-oakbridge-preschool-48405",
+    "id": "te-oraka-3503",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "Canterbury Educare Oakbridge Preschool",
-      "en": "Canterbury Educare Oakbridge Preschool"
-    },
-    "level": "kindergarten",
-    "distanceKm": 11.8,
-    "zone": "further"
-  },
-  {
-    "id": "beststart-northwood-65124",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "BestStart Northwood",
-      "en": "BestStart Northwood"
-    },
-    "level": "kindergarten",
-    "distanceKm": 11.8,
-    "zone": "further"
-  },
-  {
-    "id": "lincoln-university-early-childhood-centre-70557",
-    "districtId": "lincoln",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Lincoln University Early Childhood Centre",
-      "en": "Lincoln University Early Childhood Centre"
-    },
-    "level": "kindergarten",
-    "distanceKm": 11.8,
-    "zone": "further"
-  },
-  {
-    "id": "tai-tapu-playcentre-70132",
-    "districtId": "taitapu",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Tai Tapu Playcentre",
-      "en": "Tai Tapu Playcentre"
-    },
-    "level": "kindergarten",
-    "distanceKm": 11.9,
-    "zone": "further"
-  },
-  {
-    "id": "weedons-school-3585",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Weedons School",
-      "en": "Weedons School"
-    },
-    "level": "primary",
-    "distanceKm": 11.9,
-    "zone": "further"
-  },
-  {
-    "id": "ottawa-gardens-preschool-and-nursery-65043",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Ottawa Gardens Preschool and Nursery",
-      "en": "Ottawa Gardens Preschool and Nursery"
-    },
-    "level": "kindergarten",
-    "distanceKm": 12,
-    "zone": "further"
-  },
-  {
-    "id": "aspire-preschool-70123",
-    "districtId": "taitapu",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Aspire Preschool",
-      "en": "Aspire Preschool"
-    },
-    "level": "kindergarten",
-    "distanceKm": 12.1,
-    "zone": "further"
-  },
-  {
-    "id": "just-kids-house-70358",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Just Kids House",
-      "en": "Just Kids House"
-    },
-    "level": "kindergarten",
-    "distanceKm": 12.1,
-    "zone": "further"
-  },
-  {
-    "id": "the-owls-nest-preschool-limited-47188",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "The Owls Nest Preschool Limited",
-      "en": "The Owls Nest Preschool Limited"
-    },
-    "level": "kindergarten",
-    "distanceKm": 12.2,
-    "zone": "further"
-  },
-  {
-    "id": "just-kids-community-preschool-65155",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Just Kids Community Preschool",
-      "en": "Just Kids Community Preschool"
-    },
-    "level": "kindergarten",
-    "distanceKm": 12.2,
-    "zone": "further"
-  },
-  {
-    "id": "beststart-styx-mill-70011",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "BestStart Styx Mill",
-      "en": "BestStart Styx Mill"
-    },
-    "level": "kindergarten",
-    "distanceKm": 12.2,
-    "zone": "further"
-  },
-  {
-    "id": "busy-bees-lake-terrace-65139",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Busy Bees Lake Terrace",
-      "en": "Busy Bees Lake Terrace"
-    },
-    "level": "kindergarten",
-    "distanceKm": 12.3,
-    "zone": "further"
-  },
-  {
-    "id": "burwood-playcentre-70030",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Burwood Playcentre",
-      "en": "Burwood Playcentre"
-    },
-    "level": "kindergarten",
-    "distanceKm": 12.3,
-    "zone": "further"
-  },
-  {
-    "id": "chisnallwood-intermediate-3314",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Chisnallwood Intermediate",
-      "en": "Chisnallwood Intermediate"
+      "zhCN": "Te Oraka",
+      "en": "Te Oraka"
     },
     "level": "intermediate",
-    "distanceKm": 12.3,
+    "distanceKm": 11.2,
     "zone": "further"
   },
   {
-    "id": "tai-tapu-school-3549",
-    "districtId": "tai-tapu",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Tai Tapu School",
-      "en": "Tai Tapu School"
-    },
-    "level": "primary",
-    "distanceKm": 12.3,
-    "zone": "further"
-  },
-  {
-    "id": "fundamentals-marshland-46377",
+    "id": "kidsfirst-kindergartens-shirley-5455",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "Fundamentals Marshland",
-      "en": "Fundamentals Marshland"
+      "zhCN": "Kidsfirst Kindergartens Shirley",
+      "en": "Kidsfirst Kindergartens Shirley"
     },
     "level": "kindergarten",
-    "distanceKm": 12.4,
+    "distanceKm": 11.3,
     "zone": "further"
   },
   {
-    "id": "ferrymead-preschool-and-nursery-46822",
+    "id": "kindercare-learning-centres-bishopdale-45054",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "Ferrymead Preschool and Nursery",
-      "en": "Ferrymead Preschool and Nursery"
+      "zhCN": "Kindercare Learning Centres - Bishopdale",
+      "en": "Kindercare Learning Centres - Bishopdale"
     },
     "level": "kindergarten",
-    "distanceKm": 12.5,
-    "zone": "further"
-  },
-  {
-    "id": "tino-e-tasi-preschool-65086",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Tino E Tasi Preschool",
-      "en": "Tino E Tasi Preschool"
-    },
-    "level": "kindergarten",
-    "distanceKm": 12.5,
-    "zone": "further"
-  },
-  {
-    "id": "kidsfirst-kindergartens-belfast-5535",
-    "districtId": "belfast",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Kidsfirst Kindergartens Belfast",
-      "en": "Kidsfirst Kindergartens Belfast"
-    },
-    "level": "kindergarten",
-    "distanceKm": 12.6,
+    "distanceKm": 11.3,
     "zone": "further"
   },
   {
@@ -5183,215 +4702,176 @@ export const SCHOOLS: School[] = [
       "en": "Heathcote Valley Montessori Preschool"
     },
     "level": "kindergarten",
-    "distanceKm": 12.6,
+    "distanceKm": 11.3,
     "zone": "further"
   },
   {
-    "id": "haeata-community-campus-704",
+    "id": "st-albans-playcentre-70128",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "Haeata Community Campus",
-      "en": "Haeata Community Campus"
+      "zhCN": "St Albans Playcentre",
+      "en": "St Albans Playcentre"
+    },
+    "level": "kindergarten",
+    "distanceKm": 11.3,
+    "zone": "further"
+  },
+  {
+    "id": "emmanuel-christian-school-1168",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Emmanuel Christian School",
+      "en": "Emmanuel Christian School"
     },
     "level": "secondary",
-    "distanceKm": 12.6,
+    "distanceKm": 11.3,
     "zone": "further"
   },
   {
-    "id": "e-tipu-e-rea-early-learning-centre-70308",
+    "id": "casebrook-intermediate-3309",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "E Tipu e Rea Early Learning Centre",
-      "en": "E Tipu e Rea Early Learning Centre"
+      "zhCN": "Casebrook Intermediate",
+      "en": "Casebrook Intermediate"
+    },
+    "level": "intermediate",
+    "distanceKm": 11.3,
+    "zone": "further"
+  },
+  {
+    "id": "kidsfirst-kindergartens-macfarlane-park-5434",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Kidsfirst Kindergartens MacFarlane Park",
+      "en": "Kidsfirst Kindergartens MacFarlane Park"
     },
     "level": "kindergarten",
-    "distanceKm": 12.7,
+    "distanceKm": 11.4,
     "zone": "further"
   },
   {
-    "id": "p-tahi-belfast-school-3292",
+    "id": "woodlands-preschool-limited-dallington-47672",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "Pūtahi Belfast School",
-      "en": "Pūtahi Belfast School"
-    },
-    "level": "primary",
-    "distanceKm": 12.7,
-    "zone": "further"
-  },
-  {
-    "id": "little-blue-penguin-preschool-and-nursery-prestons-45639",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Little Blue Penguin Preschool and Nursery Prestons",
-      "en": "Little Blue Penguin Preschool and Nursery Prestons"
+      "zhCN": "Woodlands Preschool Limited - Dallington",
+      "en": "Woodlands Preschool Limited - Dallington"
     },
     "level": "kindergarten",
-    "distanceKm": 12.9,
+    "distanceKm": 11.4,
     "zone": "further"
   },
   {
-    "id": "busy-bees-burwood-65059",
+    "id": "educational-child-care-centre-70353",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "Busy Bees Burwood",
-      "en": "Busy Bees Burwood"
+      "zhCN": "Educational Child Care Centre",
+      "en": "Educational Child Care Centre"
     },
     "level": "kindergarten",
-    "distanceKm": 12.9,
+    "distanceKm": 11.4,
     "zone": "further"
   },
   {
-    "id": "belfast-playcentre-70026",
+    "id": "st-bede-s-college-315",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "Belfast Playcentre",
-      "en": "Belfast Playcentre"
+      "zhCN": "St Bede's College",
+      "en": "St Bede's College"
+    },
+    "level": "secondary",
+    "distanceKm": 11.4,
+    "zone": "further"
+  },
+  {
+    "id": "dudley-creek-preschool-ltd-45546",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Dudley Creek Preschool Ltd",
+      "en": "Dudley Creek Preschool Ltd"
     },
     "level": "kindergarten",
-    "distanceKm": 12.9,
+    "distanceKm": 11.5,
     "zone": "further"
   },
   {
-    "id": "little-explorers-preschool-70047",
+    "id": "little-owls-preschool-70035",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "Little Explorers Preschool",
-      "en": "Little Explorers Preschool"
+      "zhCN": "Little Owls Preschool",
+      "en": "Little Owls Preschool"
     },
     "level": "kindergarten",
-    "distanceKm": 12.9,
+    "distanceKm": 11.5,
     "zone": "further"
   },
   {
-    "id": "the-walnut-tree-preschool-70147",
+    "id": "beststart-marshland-road-45826",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "The Walnut Tree Preschool",
-      "en": "The Walnut Tree Preschool"
+      "zhCN": "BestStart Marshland Road",
+      "en": "BestStart Marshland Road"
     },
     "level": "kindergarten",
-    "distanceKm": 13,
+    "distanceKm": 11.7,
     "zone": "further"
   },
   {
-    "id": "wait-kiri-primary-school-685",
+    "id": "ferrymead-preschool-and-nursery-46822",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "Waitākiri Primary School",
-      "en": "Waitākiri Primary School"
-    },
-    "level": "primary",
-    "distanceKm": 13,
-    "zone": "further"
-  },
-  {
-    "id": "te-rito-harakeke-marshland-school-3429",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Te Rito Harakeke - Marshland School",
-      "en": "Te Rito Harakeke - Marshland School"
-    },
-    "level": "primary",
-    "distanceKm": 13,
-    "zone": "further"
-  },
-  {
-    "id": "kidsfirst-kindergartens-portsmouth-street-5447",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Kidsfirst Kindergartens Portsmouth Street",
-      "en": "Kidsfirst Kindergartens Portsmouth Street"
+      "zhCN": "Ferrymead Preschool and Nursery",
+      "en": "Ferrymead Preschool and Nursery"
     },
     "level": "kindergarten",
-    "distanceKm": 13.1,
+    "distanceKm": 11.7,
     "zone": "further"
   },
   {
-    "id": "beststart-wainoni-road-45477",
+    "id": "mairehau-high-school-320",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "BestStart Wainoni Road",
-      "en": "BestStart Wainoni Road"
+      "zhCN": "Mairehau High School",
+      "en": "Mairehau High School"
     },
-    "level": "kindergarten",
-    "distanceKm": 13.1,
+    "level": "secondary",
+    "distanceKm": 11.7,
     "zone": "further"
   },
   {
-    "id": "just-kids-merrington-47372",
+    "id": "barnardos-early-learning-centre-te-puna-oraka-70099",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "Just Kids Merrington",
-      "en": "Just Kids Merrington"
+      "zhCN": "Barnardos Early Learning Centre Te Puna Oraka",
+      "en": "Barnardos Early Learning Centre Te Puna Oraka"
     },
     "level": "kindergarten",
-    "distanceKm": 13.1,
-    "zone": "further"
-  },
-  {
-    "id": "wildheart-belfast-48346",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Wildheart Belfast",
-      "en": "Wildheart Belfast"
-    },
-    "level": "kindergarten",
-    "distanceKm": 13.1,
-    "zone": "further"
-  },
-  {
-    "id": "puanga-k-kaho-45128",
-    "districtId": "rolleston",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Puanga Kākaho",
-      "en": "Puanga Kākaho"
-    },
-    "level": "kindergarten",
-    "distanceKm": 13.2,
-    "zone": "further"
-  },
-  {
-    "id": "canterbury-educare-prestons-preschool-47201",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Canterbury Educare Prestons Preschool",
-      "en": "Canterbury Educare Prestons Preschool"
-    },
-    "level": "kindergarten",
-    "distanceKm": 13.2,
+    "distanceKm": 11.8,
     "zone": "further"
   },
   {
@@ -5404,17 +4884,355 @@ export const SCHOOLS: School[] = [
       "en": "Heathcote Valley School"
     },
     "level": "primary",
-    "distanceKm": 13.2,
+    "distanceKm": 11.8,
     "zone": "further"
   },
   {
-    "id": "beststart-prestons-46848",
+    "id": "te-kura-o-matarangi-northcote-school-3449",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "BestStart Prestons",
-      "en": "BestStart Prestons"
+      "zhCN": "Te Kura o Matarangi - Northcote School",
+      "en": "Te Kura o Matarangi - Northcote School"
+    },
+    "level": "primary",
+    "distanceKm": 11.8,
+    "zone": "further"
+  },
+  {
+    "id": "noku-te-ao-65132",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Noku te Ao",
+      "en": "Noku te Ao"
+    },
+    "level": "kindergarten",
+    "distanceKm": 11.9,
+    "zone": "further"
+  },
+  {
+    "id": "stables-montessori-casebrook-48396",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Stables Montessori Casebrook",
+      "en": "Stables Montessori Casebrook"
+    },
+    "level": "kindergarten",
+    "distanceKm": 12,
+    "zone": "further"
+  },
+  {
+    "id": "redwood-early-childhood-centre-70441",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Redwood Early Childhood Centre",
+      "en": "Redwood Early Childhood Centre"
+    },
+    "level": "kindergarten",
+    "distanceKm": 12.1,
+    "zone": "further"
+  },
+  {
+    "id": "kidsfirst-kindergartens-redwood-5449",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Kidsfirst Kindergartens Redwood",
+      "en": "Kidsfirst Kindergartens Redwood"
+    },
+    "level": "kindergarten",
+    "distanceKm": 12.2,
+    "zone": "further"
+  },
+  {
+    "id": "beststart-redwood-45134",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "BestStart Redwood",
+      "en": "BestStart Redwood"
+    },
+    "level": "kindergarten",
+    "distanceKm": 12.2,
+    "zone": "further"
+  },
+  {
+    "id": "ottawa-gardens-preschool-and-nursery-65043",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Ottawa Gardens Preschool and Nursery",
+      "en": "Ottawa Gardens Preschool and Nursery"
+    },
+    "level": "kindergarten",
+    "distanceKm": 12.3,
+    "zone": "further"
+  },
+  {
+    "id": "redwood-playcentre-70110",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Redwood Playcentre",
+      "en": "Redwood Playcentre"
+    },
+    "level": "kindergarten",
+    "distanceKm": 12.3,
+    "zone": "further"
+  },
+  {
+    "id": "just-kids-house-70358",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Just Kids House",
+      "en": "Just Kids House"
+    },
+    "level": "kindergarten",
+    "distanceKm": 12.3,
+    "zone": "further"
+  },
+  {
+    "id": "just-kids-community-preschool-65155",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Just Kids Community Preschool",
+      "en": "Just Kids Community Preschool"
+    },
+    "level": "kindergarten",
+    "distanceKm": 12.5,
+    "zone": "further"
+  },
+  {
+    "id": "mt-pleasant-school-3443",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Mt Pleasant School",
+      "en": "Mt Pleasant School"
+    },
+    "level": "primary",
+    "distanceKm": 12.5,
+    "zone": "further"
+  },
+  {
+    "id": "redwood-school-christchurch-3484",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Redwood School (Christchurch)",
+      "en": "Redwood School (Christchurch)"
+    },
+    "level": "primary",
+    "distanceKm": 12.7,
+    "zone": "further"
+  },
+  {
+    "id": "discovery-junction-styx-mill-ltd-47690",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Discovery Junction Styx Mill Ltd",
+      "en": "Discovery Junction Styx Mill Ltd"
+    },
+    "level": "kindergarten",
+    "distanceKm": 12.8,
+    "zone": "further"
+  },
+  {
+    "id": "tino-e-tasi-preschool-65086",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Tino E Tasi Preschool",
+      "en": "Tino E Tasi Preschool"
+    },
+    "level": "kindergarten",
+    "distanceKm": 12.8,
+    "zone": "further"
+  },
+  {
+    "id": "chisnallwood-intermediate-3314",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Chisnallwood Intermediate",
+      "en": "Chisnallwood Intermediate"
+    },
+    "level": "intermediate",
+    "distanceKm": 12.8,
+    "zone": "further"
+  },
+  {
+    "id": "weedons-school-3585",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Weedons School",
+      "en": "Weedons School"
+    },
+    "level": "primary",
+    "distanceKm": 12.8,
+    "zone": "further"
+  },
+  {
+    "id": "kidsfirst-kindergartens-lyttelton-5433",
+    "districtId": "lyttelton",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Kidsfirst Kindergartens Lyttelton",
+      "en": "Kidsfirst Kindergartens Lyttelton"
+    },
+    "level": "kindergarten",
+    "distanceKm": 13,
+    "zone": "further"
+  },
+  {
+    "id": "kidsfirst-kindergartens-the-bays-5438",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Kidsfirst Kindergartens The Bays",
+      "en": "Kidsfirst Kindergartens The Bays"
+    },
+    "level": "kindergarten",
+    "distanceKm": 13,
+    "zone": "further"
+  },
+  {
+    "id": "e-tipu-e-rea-early-learning-centre-70308",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "E Tipu e Rea Early Learning Centre",
+      "en": "E Tipu e Rea Early Learning Centre"
+    },
+    "level": "kindergarten",
+    "distanceKm": 13,
+    "zone": "further"
+  },
+  {
+    "id": "haeata-community-campus-704",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Haeata Community Campus",
+      "en": "Haeata Community Campus"
+    },
+    "level": "secondary",
+    "distanceKm": 13,
+    "zone": "further"
+  },
+  {
+    "id": "busy-bees-lake-terrace-65139",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Busy Bees Lake Terrace",
+      "en": "Busy Bees Lake Terrace"
+    },
+    "level": "kindergarten",
+    "distanceKm": 13.1,
+    "zone": "further"
+  },
+  {
+    "id": "burwood-playcentre-70030",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Burwood Playcentre",
+      "en": "Burwood Playcentre"
+    },
+    "level": "kindergarten",
+    "distanceKm": 13.1,
+    "zone": "further"
+  },
+  {
+    "id": "the-walnut-tree-preschool-70147",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "The Walnut Tree Preschool",
+      "en": "The Walnut Tree Preschool"
+    },
+    "level": "kindergarten",
+    "distanceKm": 13.2,
+    "zone": "further"
+  },
+  {
+    "id": "busy-c-s-preschool-lyttelton-70561",
+    "districtId": "lyttelton",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Busy C's Preschool Lyttelton",
+      "en": "Busy C's Preschool Lyttelton"
+    },
+    "level": "kindergarten",
+    "distanceKm": 13.2,
+    "zone": "further"
+  },
+  {
+    "id": "lyttelton-primary-school-686",
+    "districtId": "lyttelton",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Lyttelton Primary School",
+      "en": "Lyttelton Primary School"
+    },
+    "level": "primary",
+    "distanceKm": 13.2,
+    "zone": "further"
+  },
+  {
+    "id": "springston-school-3516",
+    "districtId": "springston",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Springston School",
+      "en": "Springston School"
+    },
+    "level": "primary",
+    "distanceKm": 13.2,
+    "zone": "further"
+  },
+  {
+    "id": "just-kids-merrington-47372",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Just Kids Merrington",
+      "en": "Just Kids Merrington"
     },
     "level": "kindergarten",
     "distanceKm": 13.3,
@@ -5434,68 +5252,16 @@ export const SCHOOLS: School[] = [
     "zone": "further"
   },
   {
-    "id": "kindercare-learning-centres-burwood-208-65183",
+    "id": "poppies-preschool-gardiners-road-46634",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "Kindercare Learning Centres - Burwood (208)",
-      "en": "Kindercare Learning Centres - Burwood (208)"
-    },
-    "level": "kindergarten",
-    "distanceKm": 13.3,
-    "zone": "further"
-  },
-  {
-    "id": "the-cats-pyjamas-preschool-70158",
-    "districtId": "rolleston",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "The Cats Pyjamas Preschool",
-      "en": "The Cats Pyjamas Preschool"
-    },
-    "level": "kindergarten",
-    "distanceKm": 13.3,
-    "zone": "further"
-  },
-  {
-    "id": "the-champion-centre-tamariki-toiora-70339",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "The Champion Centre Tamariki Toiora",
-      "en": "The Champion Centre Tamariki Toiora"
+      "zhCN": "Poppies Preschool Gardiners Road",
+      "en": "Poppies Preschool Gardiners Road"
     },
     "level": "kindergarten",
     "distanceKm": 13.4,
-    "zone": "further"
-  },
-  {
-    "id": "st-james-school-aranui-3523",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "St James School (Aranui)",
-      "en": "St James School (Aranui)"
-    },
-    "level": "primary",
-    "distanceKm": 13.4,
-    "zone": "further"
-  },
-  {
-    "id": "mt-pleasant-school-3443",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Mt Pleasant School",
-      "en": "Mt Pleasant School"
-    },
-    "level": "primary",
-    "distanceKm": 13.5,
     "zone": "further"
   },
   {
@@ -5508,20 +5274,20 @@ export const SCHOOLS: School[] = [
       "en": "WildHeart - Makuru Mātā"
     },
     "level": "kindergarten",
-    "distanceKm": 13.6,
+    "distanceKm": 13.4,
     "zone": "further"
   },
   {
-    "id": "creative-cubs-65009",
-    "districtId": "belfast",
+    "id": "kidsfirst-kindergartens-portsmouth-street-5447",
+    "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "Creative Cubs",
-      "en": "Creative Cubs"
+      "zhCN": "Kidsfirst Kindergartens Portsmouth Street",
+      "en": "Kidsfirst Kindergartens Portsmouth Street"
     },
     "level": "kindergarten",
-    "distanceKm": 13.6,
+    "distanceKm": 13.5,
     "zone": "further"
   },
   {
@@ -5534,72 +5300,46 @@ export const SCHOOLS: School[] = [
       "en": "Te Rōhutu Whio"
     },
     "level": "primary",
-    "distanceKm": 13.7,
+    "distanceKm": 13.5,
     "zone": "further"
   },
   {
-    "id": "kidsfirst-kindergartens-the-bays-5438",
+    "id": "beststart-wainoni-road-45477",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "Kidsfirst Kindergartens The Bays",
-      "en": "Kidsfirst Kindergartens The Bays"
+      "zhCN": "BestStart Wainoni Road",
+      "en": "BestStart Wainoni Road"
     },
     "level": "kindergarten",
-    "distanceKm": 13.8,
+    "distanceKm": 13.6,
     "zone": "further"
   },
   {
-    "id": "selwyn-kids-45427",
-    "districtId": "selwyn",
+    "id": "canterbury-educare-oakbridge-preschool-48405",
+    "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "Selwyn Kids",
-      "en": "Selwyn Kids"
+      "zhCN": "Canterbury Educare Oakbridge Preschool",
+      "en": "Canterbury Educare Oakbridge Preschool"
     },
     "level": "kindergarten",
-    "distanceKm": 13.9,
+    "distanceKm": 13.6,
     "zone": "further"
   },
   {
-    "id": "selwyn-kids-hb-2-48183",
+    "id": "the-cats-pyjamas-preschool-70158",
     "districtId": "rolleston",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "Selwyn Kids HB 2",
-      "en": "Selwyn Kids HB 2"
+      "zhCN": "The Cats Pyjamas Preschool",
+      "en": "The Cats Pyjamas Preschool"
     },
     "level": "kindergarten",
-    "distanceKm": 13.9,
-    "zone": "further"
-  },
-  {
-    "id": "busy-bees-bottle-lake-70063",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Busy Bees Bottle Lake",
-      "en": "Busy Bees Bottle Lake"
-    },
-    "level": "kindergarten",
-    "distanceKm": 13.9,
-    "zone": "further"
-  },
-  {
-    "id": "selwyn-kids-limited-70103",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Selwyn Kids Limited",
-      "en": "Selwyn Kids Limited"
-    },
-    "level": "kindergarten",
-    "distanceKm": 13.9,
+    "distanceKm": 13.6,
     "zone": "further"
   },
   {
@@ -5612,6 +5352,97 @@ export const SCHOOLS: School[] = [
       "en": "BestStart West Village"
     },
     "level": "kindergarten",
+    "distanceKm": 13.7,
+    "zone": "further"
+  },
+  {
+    "id": "little-explorers-preschool-70047",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Little Explorers Preschool",
+      "en": "Little Explorers Preschool"
+    },
+    "level": "kindergarten",
+    "distanceKm": 13.7,
+    "zone": "further"
+  },
+  {
+    "id": "st-james-school-aranui-3523",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "St James School (Aranui)",
+      "en": "St James School (Aranui)"
+    },
+    "level": "primary",
+    "distanceKm": 13.7,
+    "zone": "further"
+  },
+  {
+    "id": "puanga-k-kaho-45128",
+    "districtId": "rolleston",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Puanga Kākaho",
+      "en": "Puanga Kākaho"
+    },
+    "level": "kindergarten",
+    "distanceKm": 13.8,
+    "zone": "further"
+  },
+  {
+    "id": "busy-bees-burwood-65059",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Busy Bees Burwood",
+      "en": "Busy Bees Burwood"
+    },
+    "level": "kindergarten",
+    "distanceKm": 13.8,
+    "zone": "further"
+  },
+  {
+    "id": "beststart-northwood-65124",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "BestStart Northwood",
+      "en": "BestStart Northwood"
+    },
+    "level": "kindergarten",
+    "distanceKm": 13.9,
+    "zone": "further"
+  },
+  {
+    "id": "fundamentals-marshland-46377",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Fundamentals Marshland",
+      "en": "Fundamentals Marshland"
+    },
+    "level": "kindergarten",
+    "distanceKm": 14,
+    "zone": "further"
+  },
+  {
+    "id": "wait-kiri-primary-school-685",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Waitākiri Primary School",
+      "en": "Waitākiri Primary School"
+    },
+    "level": "primary",
     "distanceKm": 14,
     "zone": "further"
   },
@@ -5629,15 +5460,28 @@ export const SCHOOLS: School[] = [
     "zone": "further"
   },
   {
-    "id": "rolleston-college-654",
+    "id": "te-raekura-redcliffs-school-3483",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Te Raekura Redcliffs School",
+      "en": "Te Raekura Redcliffs School"
+    },
+    "level": "primary",
+    "distanceKm": 14,
+    "zone": "further"
+  },
+  {
+    "id": "kidsfirst-kindergartens-east-rolleston-48181",
     "districtId": "rolleston",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "Rolleston College",
-      "en": "Rolleston College"
+      "zhCN": "Kidsfirst Kindergartens East Rolleston",
+      "en": "Kidsfirst Kindergartens East Rolleston"
     },
-    "level": "secondary",
+    "level": "kindergarten",
     "distanceKm": 14.1,
     "zone": "further"
   },
@@ -5655,107 +5499,55 @@ export const SCHOOLS: School[] = [
     "zone": "further"
   },
   {
-    "id": "beststart-rolleston-65014",
-    "districtId": "rolleston",
+    "id": "the-james-street-pre-school-70542",
+    "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "BestStart Rolleston",
-      "en": "BestStart Rolleston"
+      "zhCN": "The James Street Pre-School",
+      "en": "The James Street Pre-School"
     },
     "level": "kindergarten",
     "distanceKm": 14.2,
     "zone": "further"
   },
   {
-    "id": "active-explorers-rolleston-65145",
+    "id": "rolleston-college-654",
     "districtId": "rolleston",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "Active Explorers Rolleston",
-      "en": "Active Explorers Rolleston"
+      "zhCN": "Rolleston College",
+      "en": "Rolleston College"
     },
-    "level": "kindergarten",
+    "level": "secondary",
     "distanceKm": 14.2,
     "zone": "further"
   },
   {
-    "id": "rolleston-school-3488",
-    "districtId": "rolleston",
+    "id": "selwyn-kids-45427",
+    "districtId": "selwyn",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "Rolleston School",
-      "en": "Rolleston School"
-    },
-    "level": "primary",
-    "distanceKm": 14.2,
-    "zone": "further"
-  },
-  {
-    "id": "springston-school-3516",
-    "districtId": "springston",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Springston School",
-      "en": "Springston School"
-    },
-    "level": "primary",
-    "distanceKm": 14.2,
-    "zone": "further"
-  },
-  {
-    "id": "kidsfirst-kindergartens-east-rolleston-48181",
-    "districtId": "rolleston",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Kidsfirst Kindergartens East Rolleston",
-      "en": "Kidsfirst Kindergartens East Rolleston"
+      "zhCN": "Selwyn Kids",
+      "en": "Selwyn Kids"
     },
     "level": "kindergarten",
     "distanceKm": 14.3,
     "zone": "further"
   },
   {
-    "id": "annabel-s-educare-west-melton-47434",
-    "districtId": "west-melton",
+    "id": "little-blue-penguin-preschool-and-nursery-prestons-45639",
+    "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "Annabel's Educare - West Melton",
-      "en": "Annabel's Educare - West Melton"
+      "zhCN": "Little Blue Penguin Preschool and Nursery Prestons",
+      "en": "Little Blue Penguin Preschool and Nursery Prestons"
     },
     "level": "kindergarten",
-    "distanceKm": 14.4,
-    "zone": "further"
-  },
-  {
-    "id": "shirley-boys-high-school-ng-tama-o-ruapaeroa-321",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Shirley Boys' High School - Ngā Tama o Ōruapaeroa",
-      "en": "Shirley Boys' High School - Ngā Tama o Ōruapaeroa"
-    },
-    "level": "secondary",
-    "distanceKm": 14.4,
-    "zone": "further"
-  },
-  {
-    "id": "avonside-girls-high-school-324",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Avonside Girls' High School",
-      "en": "Avonside Girls' High School"
-    },
-    "level": "secondary",
-    "distanceKm": 14.4,
+    "distanceKm": 14.3,
     "zone": "further"
   },
   {
@@ -5768,20 +5560,150 @@ export const SCHOOLS: School[] = [
       "en": "BestStart Faringdon"
     },
     "level": "kindergarten",
-    "distanceKm": 14.5,
+    "distanceKm": 14.3,
     "zone": "further"
   },
   {
-    "id": "stems-from-home-3-47151",
+    "id": "selwyn-kids-hb-2-48183",
     "districtId": "rolleston",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "Stems from Home 3",
-      "en": "Stems from Home 3"
+      "zhCN": "Selwyn Kids HB 2",
+      "en": "Selwyn Kids HB 2"
+    },
+    "level": "kindergarten",
+    "distanceKm": 14.3,
+    "zone": "further"
+  },
+  {
+    "id": "selwyn-kids-limited-70103",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Selwyn Kids Limited",
+      "en": "Selwyn Kids Limited"
+    },
+    "level": "kindergarten",
+    "distanceKm": 14.3,
+    "zone": "further"
+  },
+  {
+    "id": "kidsfirst-kindergartens-diamond-harbour-46636",
+    "districtId": "diamond-harbour",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Kidsfirst Kindergartens Diamond Harbour",
+      "en": "Kidsfirst Kindergartens Diamond Harbour"
+    },
+    "level": "kindergarten",
+    "distanceKm": 14.4,
+    "zone": "further"
+  },
+  {
+    "id": "the-owls-nest-preschool-limited-47188",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "The Owls Nest Preschool Limited",
+      "en": "The Owls Nest Preschool Limited"
+    },
+    "level": "kindergarten",
+    "distanceKm": 14.4,
+    "zone": "further"
+  },
+  {
+    "id": "diamond-harbour-school-3327",
+    "districtId": "diamond-harbour",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Diamond Harbour School",
+      "en": "Diamond Harbour School"
+    },
+    "level": "primary",
+    "distanceKm": 14.4,
+    "zone": "further"
+  },
+  {
+    "id": "beststart-rolleston-65014",
+    "districtId": "rolleston",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "BestStart Rolleston",
+      "en": "BestStart Rolleston"
     },
     "level": "kindergarten",
     "distanceKm": 14.5,
+    "zone": "further"
+  },
+  {
+    "id": "kindercare-learning-centres-burwood-208-65183",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Kindercare Learning Centres - Burwood (208)",
+      "en": "Kindercare Learning Centres - Burwood (208)"
+    },
+    "level": "kindergarten",
+    "distanceKm": 14.5,
+    "zone": "further"
+  },
+  {
+    "id": "beststart-styx-mill-70011",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "BestStart Styx Mill",
+      "en": "BestStart Styx Mill"
+    },
+    "level": "kindergarten",
+    "distanceKm": 14.5,
+    "zone": "further"
+  },
+  {
+    "id": "moa-kids-community-early-learning-centre-inc-70459",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Moa Kids Community Early Learning Centre Inc",
+      "en": "Moa Kids Community Early Learning Centre Inc"
+    },
+    "level": "kindergarten",
+    "distanceKm": 14.5,
+    "zone": "further"
+  },
+  {
+    "id": "te-rito-harakeke-marshland-school-3429",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Te Rito Harakeke - Marshland School",
+      "en": "Te Rito Harakeke - Marshland School"
+    },
+    "level": "primary",
+    "distanceKm": 14.5,
+    "zone": "further"
+  },
+  {
+    "id": "canterbury-educare-prestons-preschool-47201",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Canterbury Educare Prestons Preschool",
+      "en": "Canterbury Educare Prestons Preschool"
+    },
+    "level": "kindergarten",
+    "distanceKm": 14.6,
     "zone": "further"
   },
   {
@@ -5794,7 +5716,59 @@ export const SCHOOLS: School[] = [
       "en": "Curious Little Explorers Limited"
     },
     "level": "kindergarten",
-    "distanceKm": 14.5,
+    "distanceKm": 14.6,
+    "zone": "further"
+  },
+  {
+    "id": "active-explorers-rolleston-65145",
+    "districtId": "rolleston",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Active Explorers Rolleston",
+      "en": "Active Explorers Rolleston"
+    },
+    "level": "kindergarten",
+    "distanceKm": 14.6,
+    "zone": "further"
+  },
+  {
+    "id": "the-champion-centre-tamariki-toiora-70339",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "The Champion Centre Tamariki Toiora",
+      "en": "The Champion Centre Tamariki Toiora"
+    },
+    "level": "kindergarten",
+    "distanceKm": 14.6,
+    "zone": "further"
+  },
+  {
+    "id": "rolleston-school-3488",
+    "districtId": "rolleston",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Rolleston School",
+      "en": "Rolleston School"
+    },
+    "level": "primary",
+    "distanceKm": 14.6,
+    "zone": "further"
+  },
+  {
+    "id": "kidsfirst-kindergartens-belfast-5535",
+    "districtId": "belfast",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Kidsfirst Kindergartens Belfast",
+      "en": "Kidsfirst Kindergartens Belfast"
+    },
+    "level": "kindergarten",
+    "distanceKm": 14.8,
     "zone": "further"
   },
   {
@@ -5807,33 +5781,33 @@ export const SCHOOLS: School[] = [
       "en": "Kānuka Tāwharau/ Rolleston Playcentre"
     },
     "level": "kindergarten",
-    "distanceKm": 14.5,
+    "distanceKm": 14.8,
     "zone": "further"
   },
   {
-    "id": "stems-from-home-2-45819",
-    "districtId": "rolleston",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Stems From Home 2",
-      "en": "Stems From Home 2"
-    },
-    "level": "kindergarten",
-    "distanceKm": 14.6,
-    "zone": "further"
-  },
-  {
-    "id": "kidsfirst-kindergartens-north-new-brighton-5441",
+    "id": "beststart-prestons-46848",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "Kidsfirst Kindergartens North New Brighton",
-      "en": "Kidsfirst Kindergartens North New Brighton"
+      "zhCN": "BestStart Prestons",
+      "en": "BestStart Prestons"
     },
     "level": "kindergarten",
-    "distanceKm": 14.7,
+    "distanceKm": 14.9,
+    "zone": "further"
+  },
+  {
+    "id": "beststart-faringdon-east-47618",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "BestStart Faringdon East",
+      "en": "BestStart Faringdon East"
+    },
+    "level": "kindergarten",
+    "distanceKm": 14.9,
     "zone": "further"
   },
   {
@@ -5846,20 +5820,20 @@ export const SCHOOLS: School[] = [
       "en": "Little Ferns Early Learning Centre"
     },
     "level": "kindergarten",
-    "distanceKm": 14.7,
+    "distanceKm": 14.9,
     "zone": "further"
   },
   {
-    "id": "annabel-s-educare-new-brighton-70089",
+    "id": "p-tahi-belfast-school-3292",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "Annabel's Educare - New Brighton",
-      "en": "Annabel's Educare - New Brighton"
+      "zhCN": "Pūtahi Belfast School",
+      "en": "Pūtahi Belfast School"
     },
-    "level": "kindergarten",
-    "distanceKm": 14.7,
+    "level": "primary",
+    "distanceKm": 14.9,
     "zone": "further"
   },
   {
@@ -5872,280 +5846,33 @@ export const SCHOOLS: School[] = [
       "en": "Clearview Primary"
     },
     "level": "primary",
-    "distanceKm": 14.7,
-    "zone": "further"
-  },
-  {
-    "id": "kidsfirst-kindergartens-lyttelton-5433",
-    "districtId": "lyttelton",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Kidsfirst Kindergartens Lyttelton",
-      "en": "Kidsfirst Kindergartens Lyttelton"
-    },
-    "level": "kindergarten",
-    "distanceKm": 14.8,
-    "zone": "further"
-  },
-  {
-    "id": "kidsfirst-kindergartens-nuffield-5442",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Kidsfirst Kindergartens Nuffield",
-      "en": "Kidsfirst Kindergartens Nuffield"
-    },
-    "level": "kindergarten",
-    "distanceKm": 14.8,
-    "zone": "further"
-  },
-  {
-    "id": "kidsfirst-kindergartens-queenspark-5448",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Kidsfirst Kindergartens Queenspark",
-      "en": "Kidsfirst Kindergartens Queenspark"
-    },
-    "level": "kindergarten",
-    "distanceKm": 14.8,
-    "zone": "further"
-  },
-  {
-    "id": "parklands-playcentre-70097",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Parklands Playcentre",
-      "en": "Parklands Playcentre"
-    },
-    "level": "kindergarten",
-    "distanceKm": 14.8,
-    "zone": "further"
-  },
-  {
-    "id": "queenspark-te-hua-m-nuka-3479",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Queenspark Te Hua Mānuka",
-      "en": "Queenspark Te Hua Mānuka"
-    },
-    "level": "primary",
-    "distanceKm": 14.8,
-    "zone": "further"
-  },
-  {
-    "id": "ako-rolleston-65073",
-    "districtId": "rolleston",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Ako Rolleston",
-      "en": "Ako Rolleston"
-    },
-    "level": "kindergarten",
     "distanceKm": 14.9,
     "zone": "further"
   },
   {
-    "id": "west-melton-nursery-and-preschool-limited-65099",
-    "districtId": "west-melton",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "West Melton Nursery and Preschool Limited",
-      "en": "West Melton Nursery and Preschool Limited"
-    },
-    "level": "kindergarten",
-    "distanceKm": 14.9,
-    "zone": "further"
-  },
-  {
-    "id": "new-brighton-community-preschool-and-nursery-70417",
+    "id": "belfast-playcentre-70026",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "New Brighton Community Preschool & Nursery",
-      "en": "New Brighton Community Preschool & Nursery"
-    },
-    "level": "kindergarten",
-    "distanceKm": 14.9,
-    "zone": "further"
-  },
-  {
-    "id": "nova-montessori-school-1582",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Nova Montessori School",
-      "en": "Nova Montessori School"
-    },
-    "level": "primary",
-    "distanceKm": 14.9,
-    "zone": "further"
-  },
-  {
-    "id": "te-raekura-redcliffs-school-3483",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Te Raekura Redcliffs School",
-      "en": "Te Raekura Redcliffs School"
-    },
-    "level": "primary",
-    "distanceKm": 14.9,
-    "zone": "further"
-  },
-  {
-    "id": "west-melton-school-3587",
-    "districtId": "west-melton",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "West Melton School",
-      "en": "West Melton School"
-    },
-    "level": "primary",
-    "distanceKm": 14.9,
-    "zone": "further"
-  },
-  {
-    "id": "kidsfirst-kindergartens-parklands-5414",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Kidsfirst Kindergartens Parklands",
-      "en": "Kidsfirst Kindergartens Parklands"
+      "zhCN": "Belfast Playcentre",
+      "en": "Belfast Playcentre"
     },
     "level": "kindergarten",
     "distanceKm": 15,
     "zone": "further"
   },
   {
-    "id": "beststart-parklands-65096",
+    "id": "annabel-s-educare-new-brighton-70089",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "BestStart Parklands",
-      "en": "BestStart Parklands"
+      "zhCN": "Annabel's Educare - New Brighton",
+      "en": "Annabel's Educare - New Brighton"
     },
     "level": "kindergarten",
     "distanceKm": 15,
-    "zone": "further"
-  },
-  {
-    "id": "nova-montessori-children-s-house-70057",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Nova Montessori Children's House",
-      "en": "Nova Montessori Children's House"
-    },
-    "level": "kindergarten",
-    "distanceKm": 15,
-    "zone": "further"
-  },
-  {
-    "id": "north-beach-community-preschool-inc-70419",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "North Beach Community Preschool Inc",
-      "en": "North Beach Community Preschool Inc"
-    },
-    "level": "kindergarten",
-    "distanceKm": 15,
-    "zone": "further"
-  },
-  {
-    "id": "busy-c-s-preschool-lyttelton-70561",
-    "districtId": "lyttelton",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Busy C's Preschool Lyttelton",
-      "en": "Busy C's Preschool Lyttelton"
-    },
-    "level": "kindergarten",
-    "distanceKm": 15,
-    "zone": "further"
-  },
-  {
-    "id": "r-whiti-school-696",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Rāwhiti School",
-      "en": "Rāwhiti School"
-    },
-    "level": "primary",
-    "distanceKm": 15,
-    "zone": "further"
-  },
-  {
-    "id": "new-brighton-catholic-school-chch-3445",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "New Brighton Catholic School (Chch)",
-      "en": "New Brighton Catholic School (Chch)"
-    },
-    "level": "primary",
-    "distanceKm": 15,
-    "zone": "further"
-  },
-  {
-    "id": "uruhia-model-school-3464",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Ōuruhia Model School",
-      "en": "Ōuruhia Model School"
-    },
-    "level": "primary",
-    "distanceKm": 15,
-    "zone": "further"
-  },
-  {
-    "id": "parkview-p-rua-3470",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Parkview Pārua",
-      "en": "Parkview Pārua"
-    },
-    "level": "primary",
-    "distanceKm": 15,
-    "zone": "further"
-  },
-  {
-    "id": "north-beach-playcentre-70090",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "North Beach Playcentre",
-      "en": "North Beach Playcentre"
-    },
-    "level": "kindergarten",
-    "distanceKm": 15.1,
     "zone": "further"
   },
   {
@@ -6158,45 +5885,71 @@ export const SCHOOLS: School[] = [
       "en": "South Brighton Playcentre"
     },
     "level": "kindergarten",
-    "distanceKm": 15.1,
+    "distanceKm": 15,
     "zone": "further"
   },
   {
-    "id": "west-melton-playcentre-70148",
-    "districtId": "west-melton",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "West Melton Playcentre",
-      "en": "West Melton Playcentre"
-    },
-    "level": "kindergarten",
-    "distanceKm": 15.1,
-    "zone": "further"
-  },
-  {
-    "id": "the-james-street-pre-school-70542",
+    "id": "estuary-road-preschool-70582",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "The James Street Pre-School",
-      "en": "The James Street Pre-School"
+      "zhCN": "Estuary Road Preschool",
+      "en": "Estuary Road Preschool"
     },
     "level": "kindergarten",
-    "distanceKm": 15.1,
+    "distanceKm": 15,
     "zone": "further"
   },
   {
-    "id": "lyttelton-primary-school-686",
-    "districtId": "lyttelton",
+    "id": "avonside-girls-high-school-324",
+    "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "Lyttelton Primary School",
-      "en": "Lyttelton Primary School"
+      "zhCN": "Avonside Girls' High School",
+      "en": "Avonside Girls' High School"
+    },
+    "level": "secondary",
+    "distanceKm": 15,
+    "zone": "further"
+  },
+  {
+    "id": "south-new-brighton-school-3508",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "South New Brighton School",
+      "en": "South New Brighton School"
     },
     "level": "primary",
+    "distanceKm": 15,
+    "zone": "further"
+  },
+  {
+    "id": "lemonwood-grove-school-6967",
+    "districtId": "rolleston",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Lemonwood Grove School",
+      "en": "Lemonwood Grove School"
+    },
+    "level": "primary",
+    "distanceKm": 15,
+    "zone": "further"
+  },
+  {
+    "id": "kidsfirst-kindergartens-nuffield-5442",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Kidsfirst Kindergartens Nuffield",
+      "en": "Kidsfirst Kindergartens Nuffield"
+    },
+    "level": "kindergarten",
     "distanceKm": 15.1,
     "zone": "further"
   },
@@ -6210,82 +5963,108 @@ export const SCHOOLS: School[] = [
       "en": "Kidsfirst Kindergartens South Brighton"
     },
     "level": "kindergarten",
-    "distanceKm": 15.2,
+    "distanceKm": 15.1,
     "zone": "further"
   },
   {
-    "id": "beststart-west-melton-45907",
-    "districtId": "west-melton",
+    "id": "stems-from-home-2-45819",
+    "districtId": "rolleston",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "BestStart West Melton",
-      "en": "BestStart West Melton"
+      "zhCN": "Stems From Home 2",
+      "en": "Stems From Home 2"
+    },
+    "level": "kindergarten",
+    "distanceKm": 15.1,
+    "zone": "further"
+  },
+  {
+    "id": "stems-from-home-3-47151",
+    "districtId": "rolleston",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Stems from Home 3",
+      "en": "Stems from Home 3"
+    },
+    "level": "kindergarten",
+    "distanceKm": 15.1,
+    "zone": "further"
+  },
+  {
+    "id": "new-brighton-community-preschool-and-nursery-70417",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "New Brighton Community Preschool & Nursery",
+      "en": "New Brighton Community Preschool & Nursery"
+    },
+    "level": "kindergarten",
+    "distanceKm": 15.1,
+    "zone": "further"
+  },
+  {
+    "id": "shirley-boys-high-school-ng-tama-o-ruapaeroa-321",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Shirley Boys' High School - Ngā Tama o Ōruapaeroa",
+      "en": "Shirley Boys' High School - Ngā Tama o Ōruapaeroa"
+    },
+    "level": "secondary",
+    "distanceKm": 15.1,
+    "zone": "further"
+  },
+  {
+    "id": "nova-montessori-children-s-house-70057",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Nova Montessori Children's House",
+      "en": "Nova Montessori Children's House"
     },
     "level": "kindergarten",
     "distanceKm": 15.2,
     "zone": "further"
   },
   {
-    "id": "estuary-road-preschool-70582",
+    "id": "busy-bees-bottle-lake-70063",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "Estuary Road Preschool",
-      "en": "Estuary Road Preschool"
+      "zhCN": "Busy Bees Bottle Lake",
+      "en": "Busy Bees Bottle Lake"
     },
     "level": "kindergarten",
     "distanceKm": 15.2,
     "zone": "further"
   },
   {
-    "id": "south-new-brighton-school-3508",
+    "id": "nova-montessori-school-1582",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "South New Brighton School",
-      "en": "South New Brighton School"
+      "zhCN": "Nova Montessori School",
+      "en": "Nova Montessori School"
     },
     "level": "primary",
     "distanceKm": 15.2,
     "zone": "further"
   },
   {
-    "id": "lemonwood-grove-school-6967",
-    "districtId": "rolleston",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Lemonwood Grove School",
-      "en": "Lemonwood Grove School"
-    },
-    "level": "primary",
-    "distanceKm": 15.2,
-    "zone": "further"
-  },
-  {
-    "id": "little-wonders-rolleston-45493",
-    "districtId": "rolleston",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Little Wonders Rolleston",
-      "en": "Little Wonders Rolleston"
-    },
-    "level": "kindergarten",
-    "distanceKm": 15.3,
-    "zone": "further"
-  },
-  {
-    "id": "beststart-faringdon-east-47618",
+    "id": "kidsfirst-kindergartens-north-new-brighton-5441",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "BestStart Faringdon East",
-      "en": "BestStart Faringdon East"
+      "zhCN": "Kidsfirst Kindergartens North New Brighton",
+      "en": "Kidsfirst Kindergartens North New Brighton"
     },
     "level": "kindergarten",
     "distanceKm": 15.3,
@@ -6301,254 +6080,46 @@ export const SCHOOLS: School[] = [
       "en": "Neemo Childcare Centre"
     },
     "level": "kindergarten",
-    "distanceKm": 15.4,
+    "distanceKm": 15.3,
     "zone": "further"
   },
   {
-    "id": "moa-kids-community-early-learning-centre-inc-70459",
+    "id": "wildheart-belfast-48346",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "Moa Kids Community Early Learning Centre Inc",
-      "en": "Moa Kids Community Early Learning Centre Inc"
+      "zhCN": "Wildheart Belfast",
+      "en": "Wildheart Belfast"
     },
     "level": "kindergarten",
-    "distanceKm": 15.4,
+    "distanceKm": 15.3,
     "zone": "further"
   },
   {
-    "id": "bright-beginnings-montessori-45483",
+    "id": "ako-rolleston-65073",
     "districtId": "rolleston",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "Bright Beginnings Montessori",
-      "en": "Bright Beginnings Montessori"
+      "zhCN": "Ako Rolleston",
+      "en": "Ako Rolleston"
     },
     "level": "kindergarten",
-    "distanceKm": 15.8,
+    "distanceKm": 15.3,
     "zone": "further"
   },
   {
-    "id": "kiddz-homebased-childcare-2-45808",
+    "id": "new-brighton-catholic-school-chch-3445",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "Kiddz Homebased Childcare 2",
-      "en": "Kiddz Homebased Childcare 2"
-    },
-    "level": "kindergarten",
-    "distanceKm": 15.8,
-    "zone": "further"
-  },
-  {
-    "id": "kiddz-homebased-childcare-47087",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Kiddz Homebased Childcare",
-      "en": "Kiddz Homebased Childcare"
-    },
-    "level": "kindergarten",
-    "distanceKm": 15.8,
-    "zone": "further"
-  },
-  {
-    "id": "kiddz-homebased-childcare-1-47922",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Kiddz Homebased Childcare 1",
-      "en": "Kiddz Homebased Childcare 1"
-    },
-    "level": "kindergarten",
-    "distanceKm": 15.8,
-    "zone": "further"
-  },
-  {
-    "id": "kiddz-homebased-early-childhood-education-service-65071",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Kiddz Homebased Early Childhood Education Service",
-      "en": "Kiddz Homebased Early Childhood Education Service"
-    },
-    "level": "kindergarten",
-    "distanceKm": 15.8,
-    "zone": "further"
-  },
-  {
-    "id": "te-rau-horopito-962",
-    "districtId": "rolleston",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Te Rau Horopito",
-      "en": "Te Rau Horopito"
+      "zhCN": "New Brighton Catholic School (Chch)",
+      "en": "New Brighton Catholic School (Chch)"
     },
     "level": "primary",
-    "distanceKm": 16.2,
-    "zone": "further"
-  },
-  {
-    "id": "blossoms-educare-rolleston-limited-47205",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Blossoms Educare Rolleston Limited",
-      "en": "Blossoms Educare Rolleston Limited"
-    },
-    "level": "kindergarten",
-    "distanceKm": 16.6,
-    "zone": "further"
-  },
-  {
-    "id": "kidsfirst-kindergartens-west-rolleston-47354",
-    "districtId": "rolleston",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Kidsfirst Kindergartens West Rolleston",
-      "en": "Kidsfirst Kindergartens West Rolleston"
-    },
-    "level": "kindergarten",
-    "distanceKm": 16.6,
-    "zone": "further"
-  },
-  {
-    "id": "kidsfirst-kindergartens-diamond-harbour-46636",
-    "districtId": "diamond-harbour",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Kidsfirst Kindergartens Diamond Harbour",
-      "en": "Kidsfirst Kindergartens Diamond Harbour"
-    },
-    "level": "kindergarten",
-    "distanceKm": 16.7,
-    "zone": "further"
-  },
-  {
-    "id": "west-rolleston-primary-school-584",
-    "districtId": "rolleston",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "West Rolleston Primary School",
-      "en": "West Rolleston Primary School"
-    },
-    "level": "primary",
-    "distanceKm": 16.7,
-    "zone": "further"
-  },
-  {
-    "id": "diamond-harbour-school-3327",
-    "districtId": "diamond-harbour",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Diamond Harbour School",
-      "en": "Diamond Harbour School"
-    },
-    "level": "primary",
-    "distanceKm": 16.7,
-    "zone": "further"
-  },
-  {
-    "id": "pebbles-montessori-sumner-2-6-46378",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Pebbles Montessori  Sumner (2-6)",
-      "en": "Pebbles Montessori  Sumner (2-6)"
-    },
-    "level": "kindergarten",
-    "distanceKm": 17,
-    "zone": "further"
-  },
-  {
-    "id": "pebbles-montessori-sumner-0-3-45400",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Pebbles Montessori Sumner (0-3)",
-      "en": "Pebbles Montessori Sumner (0-3)"
-    },
-    "level": "kindergarten",
-    "distanceKm": 17.1,
-    "zone": "further"
-  },
-  {
-    "id": "sumner-school-3546",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Sumner School",
-      "en": "Sumner School"
-    },
-    "level": "primary",
-    "distanceKm": 17.1,
-    "zone": "further"
-  },
-  {
-    "id": "kidsfirst-kindergartens-sumner-5457",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Kidsfirst Kindergartens Sumner",
-      "en": "Kidsfirst Kindergartens Sumner"
-    },
-    "level": "kindergarten",
-    "distanceKm": 17.2,
-    "zone": "further"
-  },
-  {
-    "id": "clarkville-playcentre-70036",
-    "districtId": "clarkville",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Clarkville Playcentre",
-      "en": "Clarkville Playcentre"
-    },
-    "level": "kindergarten",
-    "distanceKm": 17.4,
-    "zone": "further"
-  },
-  {
-    "id": "clarkville-te-kura-ki-waim-tao-3321",
-    "districtId": "kaiapoi",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Clarkville Te Kura ki Waimātao",
-      "en": "Clarkville Te Kura ki Waimātao"
-    },
-    "level": "primary",
-    "distanceKm": 17.4,
-    "zone": "further"
-  },
-  {
-    "id": "our-lady-star-of-the-sea-school-christchurch-3544",
-    "districtId": "christchurch",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Our Lady Star of the Sea School (Christchurch)",
-      "en": "Our Lady Star of the Sea School (Christchurch)"
-    },
-    "level": "primary",
-    "distanceKm": 17.4,
+    "distanceKm": 15.3,
     "zone": "further"
   },
   {
@@ -6561,20 +6132,410 @@ export const SCHOOLS: School[] = [
       "en": "Diamond Harbour Playcentre"
     },
     "level": "kindergarten",
-    "distanceKm": 17.5,
+    "distanceKm": 15.4,
     "zone": "further"
   },
   {
-    "id": "organic-kids-limited-46641",
+    "id": "north-beach-community-preschool-inc-70419",
     "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "Organic Kids Limited",
-      "en": "Organic Kids Limited"
+      "zhCN": "North Beach Community Preschool Inc",
+      "en": "North Beach Community Preschool Inc"
     },
     "level": "kindergarten",
-    "distanceKm": 17.7,
+    "distanceKm": 15.6,
+    "zone": "further"
+  },
+  {
+    "id": "r-whiti-school-696",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Rāwhiti School",
+      "en": "Rāwhiti School"
+    },
+    "level": "primary",
+    "distanceKm": 15.6,
+    "zone": "further"
+  },
+  {
+    "id": "little-wonders-rolleston-45493",
+    "districtId": "rolleston",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Little Wonders Rolleston",
+      "en": "Little Wonders Rolleston"
+    },
+    "level": "kindergarten",
+    "distanceKm": 15.7,
+    "zone": "further"
+  },
+  {
+    "id": "pebbles-montessori-sumner-2-6-46378",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Pebbles Montessori  Sumner (2-6)",
+      "en": "Pebbles Montessori  Sumner (2-6)"
+    },
+    "level": "kindergarten",
+    "distanceKm": 15.7,
+    "zone": "further"
+  },
+  {
+    "id": "north-beach-playcentre-70090",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "North Beach Playcentre",
+      "en": "North Beach Playcentre"
+    },
+    "level": "kindergarten",
+    "distanceKm": 15.7,
+    "zone": "further"
+  },
+  {
+    "id": "parklands-playcentre-70097",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Parklands Playcentre",
+      "en": "Parklands Playcentre"
+    },
+    "level": "kindergarten",
+    "distanceKm": 15.7,
+    "zone": "further"
+  },
+  {
+    "id": "creative-cubs-65009",
+    "districtId": "belfast",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Creative Cubs",
+      "en": "Creative Cubs"
+    },
+    "level": "kindergarten",
+    "distanceKm": 15.8,
+    "zone": "further"
+  },
+  {
+    "id": "parkview-p-rua-3470",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Parkview Pārua",
+      "en": "Parkview Pārua"
+    },
+    "level": "primary",
+    "distanceKm": 15.9,
+    "zone": "further"
+  },
+  {
+    "id": "sumner-school-3546",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Sumner School",
+      "en": "Sumner School"
+    },
+    "level": "primary",
+    "distanceKm": 15.9,
+    "zone": "further"
+  },
+  {
+    "id": "kidsfirst-kindergartens-parklands-5414",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Kidsfirst Kindergartens Parklands",
+      "en": "Kidsfirst Kindergartens Parklands"
+    },
+    "level": "kindergarten",
+    "distanceKm": 16,
+    "zone": "further"
+  },
+  {
+    "id": "kidsfirst-kindergartens-queenspark-5448",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Kidsfirst Kindergartens Queenspark",
+      "en": "Kidsfirst Kindergartens Queenspark"
+    },
+    "level": "kindergarten",
+    "distanceKm": 16,
+    "zone": "further"
+  },
+  {
+    "id": "pebbles-montessori-sumner-0-3-45400",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Pebbles Montessori Sumner (0-3)",
+      "en": "Pebbles Montessori Sumner (0-3)"
+    },
+    "level": "kindergarten",
+    "distanceKm": 16,
+    "zone": "further"
+  },
+  {
+    "id": "bright-beginnings-montessori-45483",
+    "districtId": "rolleston",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Bright Beginnings Montessori",
+      "en": "Bright Beginnings Montessori"
+    },
+    "level": "kindergarten",
+    "distanceKm": 16,
+    "zone": "further"
+  },
+  {
+    "id": "beststart-parklands-65096",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "BestStart Parklands",
+      "en": "BestStart Parklands"
+    },
+    "level": "kindergarten",
+    "distanceKm": 16,
+    "zone": "further"
+  },
+  {
+    "id": "queenspark-te-hua-m-nuka-3479",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Queenspark Te Hua Mānuka",
+      "en": "Queenspark Te Hua Mānuka"
+    },
+    "level": "primary",
+    "distanceKm": 16,
+    "zone": "further"
+  },
+  {
+    "id": "kidsfirst-kindergartens-sumner-5457",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Kidsfirst Kindergartens Sumner",
+      "en": "Kidsfirst Kindergartens Sumner"
+    },
+    "level": "kindergarten",
+    "distanceKm": 16.1,
+    "zone": "further"
+  },
+  {
+    "id": "te-rau-horopito-962",
+    "districtId": "rolleston",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Te Rau Horopito",
+      "en": "Te Rau Horopito"
+    },
+    "level": "primary",
+    "distanceKm": 16.1,
+    "zone": "further"
+  },
+  {
+    "id": "annabel-s-educare-west-melton-47434",
+    "districtId": "west-melton",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Annabel's Educare - West Melton",
+      "en": "Annabel's Educare - West Melton"
+    },
+    "level": "kindergarten",
+    "distanceKm": 16.2,
+    "zone": "further"
+  },
+  {
+    "id": "our-lady-star-of-the-sea-school-christchurch-3544",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Our Lady Star of the Sea School (Christchurch)",
+      "en": "Our Lady Star of the Sea School (Christchurch)"
+    },
+    "level": "primary",
+    "distanceKm": 16.2,
+    "zone": "further"
+  },
+  {
+    "id": "kiddz-homebased-early-childhood-education-service-65071",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Kiddz Homebased Early Childhood Education Service",
+      "en": "Kiddz Homebased Early Childhood Education Service"
+    },
+    "level": "kindergarten",
+    "distanceKm": 16.5,
+    "zone": "further"
+  },
+  {
+    "id": "kiddz-homebased-childcare-2-45808",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Kiddz Homebased Childcare 2",
+      "en": "Kiddz Homebased Childcare 2"
+    },
+    "level": "kindergarten",
+    "distanceKm": 16.6,
+    "zone": "further"
+  },
+  {
+    "id": "kiddz-homebased-childcare-47087",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Kiddz Homebased Childcare",
+      "en": "Kiddz Homebased Childcare"
+    },
+    "level": "kindergarten",
+    "distanceKm": 16.6,
+    "zone": "further"
+  },
+  {
+    "id": "kiddz-homebased-childcare-1-47922",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Kiddz Homebased Childcare 1",
+      "en": "Kiddz Homebased Childcare 1"
+    },
+    "level": "kindergarten",
+    "distanceKm": 16.6,
+    "zone": "further"
+  },
+  {
+    "id": "west-melton-nursery-and-preschool-limited-65099",
+    "districtId": "west-melton",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "West Melton Nursery and Preschool Limited",
+      "en": "West Melton Nursery and Preschool Limited"
+    },
+    "level": "kindergarten",
+    "distanceKm": 16.7,
+    "zone": "further"
+  },
+  {
+    "id": "blossoms-educare-rolleston-limited-47205",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Blossoms Educare Rolleston Limited",
+      "en": "Blossoms Educare Rolleston Limited"
+    },
+    "level": "kindergarten",
+    "distanceKm": 16.8,
+    "zone": "further"
+  },
+  {
+    "id": "kidsfirst-kindergartens-west-rolleston-47354",
+    "districtId": "rolleston",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Kidsfirst Kindergartens West Rolleston",
+      "en": "Kidsfirst Kindergartens West Rolleston"
+    },
+    "level": "kindergarten",
+    "distanceKm": 16.8,
+    "zone": "further"
+  },
+  {
+    "id": "west-melton-school-3587",
+    "districtId": "west-melton",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "West Melton School",
+      "en": "West Melton School"
+    },
+    "level": "primary",
+    "distanceKm": 16.8,
+    "zone": "further"
+  },
+  {
+    "id": "west-melton-playcentre-70148",
+    "districtId": "west-melton",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "West Melton Playcentre",
+      "en": "West Melton Playcentre"
+    },
+    "level": "kindergarten",
+    "distanceKm": 16.9,
+    "zone": "further"
+  },
+  {
+    "id": "west-rolleston-primary-school-584",
+    "districtId": "rolleston",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "West Rolleston Primary School",
+      "en": "West Rolleston Primary School"
+    },
+    "level": "primary",
+    "distanceKm": 16.9,
+    "zone": "further"
+  },
+  {
+    "id": "uruhia-model-school-3464",
+    "districtId": "christchurch",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Ōuruhia Model School",
+      "en": "Ōuruhia Model School"
+    },
+    "level": "primary",
+    "distanceKm": 16.9,
+    "zone": "further"
+  },
+  {
+    "id": "beststart-west-melton-45907",
+    "districtId": "west-melton",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "BestStart West Melton",
+      "en": "BestStart West Melton"
+    },
+    "level": "kindergarten",
+    "distanceKm": 17.1,
     "zone": "further"
   },
   {
@@ -6587,125 +6548,47 @@ export const SCHOOLS: School[] = [
       "en": "Spencerville Playcentre"
     },
     "level": "kindergarten",
-    "distanceKm": 17.8,
+    "distanceKm": 19.5,
     "zone": "further"
   },
   {
-    "id": "little-diggers-ece-47484",
-    "districtId": "ohoka",
+    "id": "organic-kids-limited-46641",
+    "districtId": "christchurch",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "Little Diggers ECE",
-      "en": "Little Diggers ECE"
+      "zhCN": "Organic Kids Limited",
+      "en": "Organic Kids Limited"
     },
     "level": "kindergarten",
-    "distanceKm": 19.3,
+    "distanceKm": 19.8,
     "zone": "further"
   },
   {
-    "id": "karanga-mai-early-learning-centre-65058",
-    "districtId": "kaiapoi",
+    "id": "clarkville-playcentre-70036",
+    "districtId": "clarkville",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "Karanga Mai Early Learning Centre",
-      "en": "Karanga Mai Early Learning Centre"
+      "zhCN": "Clarkville Playcentre",
+      "en": "Clarkville Playcentre"
     },
     "level": "kindergarten",
-    "distanceKm": 19.9,
+    "distanceKm": 19.8,
     "zone": "further"
   },
   {
-    "id": "beststart-kaiapoi-70065",
+    "id": "clarkville-te-kura-ki-waim-tao-3321",
     "districtId": "kaiapoi",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "BestStart Kaiapoi",
-      "en": "BestStart Kaiapoi"
+      "zhCN": "Clarkville Te Kura ki Waimātao",
+      "en": "Clarkville Te Kura ki Waimātao"
     },
-    "level": "kindergarten",
-    "distanceKm": 19.9,
+    "level": "primary",
+    "distanceKm": 19.8,
     "zone": "further"
-  },
-  {
-    "id": "kidsfirst-kindergartens-vickery-street-5461",
-    "districtId": "kaiapoi",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Kidsfirst Kindergartens Vickery Street",
-      "en": "Kidsfirst Kindergartens Vickery Street"
-    },
-    "level": "kindergarten",
-    "distanceKm": 20,
-    "zone": "further"
-  },
-  {
-    "id": "the-rainbow-early-learning-centre-65085",
-    "districtId": "kaiapoi",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "The Rainbow Early Learning Centre",
-      "en": "The Rainbow Early Learning Centre"
-    },
-    "level": "kindergarten",
-    "distanceKm": 20,
-    "zone": "further"
-  },
-  {
-    "id": "kaiapoi-high-school-314",
-    "districtId": "kaiapoi",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Kaiapoi High School",
-      "en": "Kaiapoi High School"
-    },
-    "level": "secondary",
-    "distanceKm": 20,
-    "zone": "further"
-  },
-  {
-    "id": "beststart-silverstream-47361",
-    "districtId": "kaiapoi",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "BestStart Silverstream",
-      "en": "BestStart Silverstream"
-    },
-    "level": "kindergarten",
-    "distanceKm": 20.1,
-    "zone": "out-of-region"
-  },
-  {
-    "id": "bella-montessori-preschool-limited-47007",
-    "districtId": "kaiapoi",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Bella Montessori Preschool Limited",
-      "en": "Bella Montessori Preschool Limited"
-    },
-    "level": "kindergarten",
-    "distanceKm": 20.4,
-    "zone": "out-of-region"
-  },
-  {
-    "id": "portobelo-kaiapoi-45304",
-    "districtId": "kaiapoi",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Portobelo Kaiapoi",
-      "en": "Portobelo Kaiapoi"
-    },
-    "level": "kindergarten",
-    "distanceKm": 20.6,
-    "zone": "out-of-region"
   },
   {
     "id": "burnham-school-te-kura-o-tiori-3304",
@@ -6717,98 +6600,7 @@ export const SCHOOLS: School[] = [
       "en": "Burnham School - Te Kura o Tiori"
     },
     "level": "primary",
-    "distanceKm": 20.6,
-    "zone": "out-of-region"
-  },
-  {
-    "id": "hoka-school-3451",
-    "districtId": "kaiapoi",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Ōhoka School",
-      "en": "Ōhoka School"
-    },
-    "level": "primary",
-    "distanceKm": 20.6,
-    "zone": "out-of-region"
-  },
-  {
-    "id": "st-patrick-s-school-kaiapoi-3540",
-    "districtId": "kaiapoi",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "St Patrick's School (Kaiapoi)",
-      "en": "St Patrick's School (Kaiapoi)"
-    },
-    "level": "primary",
-    "distanceKm": 20.6,
-    "zone": "out-of-region"
-  },
-  {
-    "id": "swannanoa-preschool-70466",
-    "districtId": "rangiora",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Swannanoa Preschool",
-      "en": "Swannanoa Preschool"
-    },
-    "level": "kindergarten",
     "distanceKm": 20.8,
-    "zone": "out-of-region"
-  },
-  {
-    "id": "te-koromiko-swannanoa-school-3547",
-    "districtId": "rangiora",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Te Koromiko Swannanoa School",
-      "en": "Te Koromiko Swannanoa School"
-    },
-    "level": "primary",
-    "distanceKm": 20.9,
-    "zone": "out-of-region"
-  },
-  {
-    "id": "kaiapoi-borough-school-3388",
-    "districtId": "kaiapoi",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Kaiapoi Borough School",
-      "en": "Kaiapoi Borough School"
-    },
-    "level": "primary",
-    "distanceKm": 21,
-    "zone": "out-of-region"
-  },
-  {
-    "id": "honeybeez-preschool-and-nursery-45079",
-    "districtId": "kaiapoi",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Honeybeez Preschool & Nursery",
-      "en": "Honeybeez Preschool & Nursery"
-    },
-    "level": "kindergarten",
-    "distanceKm": 21.2,
-    "zone": "out-of-region"
-  },
-  {
-    "id": "educare-kaiapoi-47614",
-    "districtId": "kaiapoi",
-    "cityId": "christchurch",
-    "regionId": "canterbury",
-    "name": {
-      "zhCN": "Educare Kaiapoi",
-      "en": "Educare Kaiapoi"
-    },
-    "level": "kindergarten",
-    "distanceKm": 21.3,
     "zone": "out-of-region"
   },
   {
@@ -6821,33 +6613,98 @@ export const SCHOOLS: School[] = [
       "en": "Kidsfirst Kindergartens Burnham"
     },
     "level": "kindergarten",
-    "distanceKm": 21.5,
+    "distanceKm": 21.7,
     "zone": "out-of-region"
   },
   {
-    "id": "active-explorers-kaiapoi-47262",
-    "districtId": "kaiapoi",
+    "id": "little-diggers-ece-47484",
+    "districtId": "ohoka",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "Active Explorers - Kaiapoi",
-      "en": "Active Explorers - Kaiapoi"
+      "zhCN": "Little Diggers ECE",
+      "en": "Little Diggers ECE"
     },
     "level": "kindergarten",
-    "distanceKm": 21.6,
+    "distanceKm": 22.2,
     "zone": "out-of-region"
   },
   {
-    "id": "kaiapoi-north-school-3389",
+    "id": "karanga-mai-early-learning-centre-65058",
     "districtId": "kaiapoi",
     "cityId": "christchurch",
     "regionId": "canterbury",
     "name": {
-      "zhCN": "Kaiapoi North School",
-      "en": "Kaiapoi North School"
+      "zhCN": "Karanga Mai Early Learning Centre",
+      "en": "Karanga Mai Early Learning Centre"
     },
-    "level": "primary",
-    "distanceKm": 21.8,
+    "level": "kindergarten",
+    "distanceKm": 22.2,
+    "zone": "out-of-region"
+  },
+  {
+    "id": "beststart-kaiapoi-70065",
+    "districtId": "kaiapoi",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "BestStart Kaiapoi",
+      "en": "BestStart Kaiapoi"
+    },
+    "level": "kindergarten",
+    "distanceKm": 22.2,
+    "zone": "out-of-region"
+  },
+  {
+    "id": "kidsfirst-kindergartens-vickery-street-5461",
+    "districtId": "kaiapoi",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Kidsfirst Kindergartens Vickery Street",
+      "en": "Kidsfirst Kindergartens Vickery Street"
+    },
+    "level": "kindergarten",
+    "distanceKm": 22.3,
+    "zone": "out-of-region"
+  },
+  {
+    "id": "the-rainbow-early-learning-centre-65085",
+    "districtId": "kaiapoi",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "The Rainbow Early Learning Centre",
+      "en": "The Rainbow Early Learning Centre"
+    },
+    "level": "kindergarten",
+    "distanceKm": 22.4,
+    "zone": "out-of-region"
+  },
+  {
+    "id": "kaiapoi-high-school-314",
+    "districtId": "kaiapoi",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Kaiapoi High School",
+      "en": "Kaiapoi High School"
+    },
+    "level": "secondary",
+    "distanceKm": 22.4,
+    "zone": "out-of-region"
+  },
+  {
+    "id": "beststart-silverstream-47361",
+    "districtId": "kaiapoi",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "BestStart Silverstream",
+      "en": "BestStart Silverstream"
+    },
+    "level": "kindergarten",
+    "distanceKm": 22.5,
     "zone": "out-of-region"
   },
   {
@@ -6864,6 +6721,149 @@ export const SCHOOLS: School[] = [
     "zone": "out-of-region"
   },
   {
+    "id": "bella-montessori-preschool-limited-47007",
+    "districtId": "kaiapoi",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Bella Montessori Preschool Limited",
+      "en": "Bella Montessori Preschool Limited"
+    },
+    "level": "kindergarten",
+    "distanceKm": 22.7,
+    "zone": "out-of-region"
+  },
+  {
+    "id": "st-patrick-s-school-kaiapoi-3540",
+    "districtId": "kaiapoi",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "St Patrick's School (Kaiapoi)",
+      "en": "St Patrick's School (Kaiapoi)"
+    },
+    "level": "primary",
+    "distanceKm": 22.9,
+    "zone": "out-of-region"
+  },
+  {
+    "id": "portobelo-kaiapoi-45304",
+    "districtId": "kaiapoi",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Portobelo Kaiapoi",
+      "en": "Portobelo Kaiapoi"
+    },
+    "level": "kindergarten",
+    "distanceKm": 23,
+    "zone": "out-of-region"
+  },
+  {
+    "id": "hoka-school-3451",
+    "districtId": "kaiapoi",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Ōhoka School",
+      "en": "Ōhoka School"
+    },
+    "level": "primary",
+    "distanceKm": 23.3,
+    "zone": "out-of-region"
+  },
+  {
+    "id": "honeybeez-preschool-and-nursery-45079",
+    "districtId": "kaiapoi",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Honeybeez Preschool & Nursery",
+      "en": "Honeybeez Preschool & Nursery"
+    },
+    "level": "kindergarten",
+    "distanceKm": 23.4,
+    "zone": "out-of-region"
+  },
+  {
+    "id": "kaiapoi-borough-school-3388",
+    "districtId": "kaiapoi",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Kaiapoi Borough School",
+      "en": "Kaiapoi Borough School"
+    },
+    "level": "primary",
+    "distanceKm": 23.4,
+    "zone": "out-of-region"
+  },
+  {
+    "id": "educare-kaiapoi-47614",
+    "districtId": "kaiapoi",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Educare Kaiapoi",
+      "en": "Educare Kaiapoi"
+    },
+    "level": "kindergarten",
+    "distanceKm": 23.6,
+    "zone": "out-of-region"
+  },
+  {
+    "id": "active-explorers-kaiapoi-47262",
+    "districtId": "kaiapoi",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Active Explorers - Kaiapoi",
+      "en": "Active Explorers - Kaiapoi"
+    },
+    "level": "kindergarten",
+    "distanceKm": 23.8,
+    "zone": "out-of-region"
+  },
+  {
+    "id": "swannanoa-preschool-70466",
+    "districtId": "rangiora",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Swannanoa Preschool",
+      "en": "Swannanoa Preschool"
+    },
+    "level": "kindergarten",
+    "distanceKm": 23.8,
+    "zone": "out-of-region"
+  },
+  {
+    "id": "te-koromiko-swannanoa-school-3547",
+    "districtId": "rangiora",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Te Koromiko Swannanoa School",
+      "en": "Te Koromiko Swannanoa School"
+    },
+    "level": "primary",
+    "distanceKm": 23.9,
+    "zone": "out-of-region"
+  },
+  {
+    "id": "kaiapoi-north-school-3389",
+    "districtId": "kaiapoi",
+    "cityId": "christchurch",
+    "regionId": "canterbury",
+    "name": {
+      "zhCN": "Kaiapoi North School",
+      "en": "Kaiapoi North School"
+    },
+    "level": "primary",
+    "distanceKm": 24,
+    "zone": "out-of-region"
+  },
+  {
     "id": "sovereign-star-nursery-and-preschool-46610",
     "districtId": "kaiapoi",
     "cityId": "christchurch",
@@ -6873,7 +6873,7 @@ export const SCHOOLS: School[] = [
       "en": "Sovereign Star Nursery and Preschool"
     },
     "level": "kindergarten",
-    "distanceKm": 22.6,
+    "distanceKm": 24.9,
     "zone": "out-of-region"
   }
 ];

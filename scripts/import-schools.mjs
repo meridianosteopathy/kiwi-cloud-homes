@@ -42,8 +42,8 @@ const REPO_ROOT = path.resolve(__dirname, "..");
 // ---- Configuration -------------------------------------------------------
 
 /** Home property — approximate lat/lng for 16 Sunbeam Place, Halswell. */
-const HOME_LAT = -43.5530;
-const HOME_LNG = 172.5490;
+const HOME_LAT = -43.5788;
+const HOME_LNG = 172.5620;
 
 /** Schools beyond this distance are excluded from the snapshot. */
 const RADIUS_KM = 25;
