@@ -65,7 +65,20 @@ export function DateRangeModal({
   const [loading, setLoading] = useState(true);
   const [loadError, setLoadError] = useState(false);
 
+  // Airbnb-style: two months side-by-side on desktop, single month on
+  // narrow viewports where two months would either wrap (jarring) or
+  // overflow horizontally.
+  const [numberOfMonths, setNumberOfMonths] = useState(1);
+
   const closeBtnRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 768px)");
+    const sync = () => setNumberOfMonths(mq.matches ? 2 : 1);
+    sync();
+    mq.addEventListener("change", sync);
+    return () => mq.removeEventListener("change", sync);
+  }, []);
 
   useEffect(() => {
     closeBtnRef.current?.focus();
@@ -171,7 +184,7 @@ export function DateRangeModal({
       aria-labelledby={titleId}
       className="fixed inset-0 z-50 flex items-end justify-center bg-black/40 p-4 sm:items-center"
     >
-      <div className="relative max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-2xl bg-white shadow-xl">
+      <div className="relative max-h-[90vh] w-full max-w-3xl overflow-y-auto rounded-2xl bg-white shadow-xl">
         <header className="sticky top-0 z-10 flex items-start justify-between gap-4 border-b border-kiwi-100 bg-white px-5 py-4">
           <div>
             <h2 id={titleId} className="text-lg font-semibold text-kiwi-900">
@@ -239,9 +252,10 @@ export function DateRangeModal({
             mode="range"
             selected={range}
             onSelect={setRange}
-            numberOfMonths={2}
+            numberOfMonths={numberOfMonths}
             min={minNights}
             disabled={disabled}
+            excludeDisabled
             modifiers={{ tooShort: tooShortDates }}
             modifiersClassNames={{ tooShort: "rdp-too-short" }}
             components={dayComponents}

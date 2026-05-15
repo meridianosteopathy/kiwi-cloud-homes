@@ -30,6 +30,16 @@ body {
   border-radius: 9999px;
 }
 
+/* Keep the two months side-by-side in the multi-month view (the default
+   has flex-wrap: wrap, which silently stacks them vertically the moment
+   the container is even a few pixels short of fitting both). We pair
+   this with a JS media-query that drops to numberOfMonths=1 below md,
+   so this only ever applies when both months actually fit. */
+.rdp-kiwi .rdp-months {
+  flex-wrap: nowrap;
+  justify-content: center;
+}
+
 /* Past / unavailable dates get a strikethrough — matches Airbnb. */
 .rdp-kiwi .rdp-disabled .rdp-day_button {
   text-decoration: line-through;
