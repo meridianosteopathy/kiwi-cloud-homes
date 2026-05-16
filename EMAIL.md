@@ -1,63 +1,70 @@
 # Booking confirmation email setup
 
-Guests get a branded "your booking is confirmed" email automatically when the
-Hostaway reservation is created. This file walks through the one-time host
-setup on Resend.
+Guests get a branded "your booking is confirmed" email automatically when
+the Hostaway reservation is created. This file walks through the one-time
+host setup on **Brevo** (formerly Sendinblue).
 
-## Why Resend
+## Why Brevo
 
-- Free tier: 3,000 emails/month (well above realistic booking volume for a
-  single property)
-- Resend handles deliverability, DKIM/SPF, bounce-tracking
-- The site code only depends on the Resend SDK — swapping providers later is
-  one env-var change + one library swap
+- Free tier: 300 emails/day (~9,000/month) — comfortable headroom for a
+  single-property booking volume
+- Multiple sender domains allowed on free plan
+- Handles deliverability, DKIM/SPF, bounce-tracking
+- Code only depends on a single `fetch` to their API (no SDK), so swapping
+  providers later is one library swap + one env-var change
 
-## 1. Sign up at Resend
+## 1. Sign up at Brevo
 
-1. Go to **https://resend.com/signup**
-2. Sign up with your GitHub account or an email/password
-3. Verify the sign-up email if asked
+1. Go to **https://www.brevo.com/** and click **Sign up free**
+2. Use email/password or a Google account
+3. Confirm the sign-up email
+4. Skip the marketing onboarding wizard if it asks — we only need the
+   transactional API
 
 ## 2. Add `kiwicloudhomes.co.nz` as a sending domain
 
-In Resend dashboard:
+In the Brevo dashboard:
 
-1. Sidebar → **Domains** → **Add Domain**
-2. Enter `kiwicloudhomes.co.nz`
-3. Pick **Region: Asia Pacific (Sydney)** for closest to your NZ audience
-4. Resend shows **3 DNS records** to add — typically:
-   - 1 × MX record (e.g. `send` → `feedback-smtp.ap-southeast-2.amazonses.com`)
-   - 1 × TXT record (SPF, e.g. `send` → `v=spf1 include:amazonses.com ~all`)
-   - 1 × TXT record (DKIM, e.g. `resend._domainkey` → very long string)
+1. Top-right → **your account name** → **Senders, Domains & Dedicated IPs**
+   (also reachable under **Settings → Senders & IP**)
+2. **Domains** tab → **Add a Domain**
+3. Enter `kiwicloudhomes.co.nz` and confirm
+4. Brevo shows you **2–3 DNS records** to add. Typically:
+   - 1 × **TXT** record for the Brevo verification token (e.g. `@` →
+     `brevo-code:<long string>`)
+   - 1 × **TXT** record (DKIM) — usually `mail._domainkey` →
+     `k=rsa; p=<long key>`
+   - **SPF** — Brevo asks you to include `include:spf.brevo.com` in an
+     SPF TXT record on the apex (`@`). If you don't already have an SPF
+     record for the domain, add `v=spf1 include:spf.brevo.com mx ~all`.
+     If you already have one for another sender, **merge** the include —
+     never publish two SPF TXT records on the same name, that breaks SPF.
 
 ## 3. Add those DNS records in GoDaddy
 
 Same DNS panel you used for Vercel:
 
 1. GoDaddy → **My Products → kiwicloudhomes.co.nz → DNS**
-2. **Add New Record** for each of the three Resend gave you:
-   - For the **MX**: Type `MX`, Name `send`, Value/Server the host Resend
-     showed, Priority `10`, TTL `1 Hour`
-   - For the **SPF TXT**: Type `TXT`, Name `send`, Value the `v=spf1 …`
-     string, TTL `1 Hour`
-   - For the **DKIM TXT**: Type `TXT`, Name `resend._domainkey`, Value the
-     long DKIM string, TTL `1 Hour`
+2. **Add New Record** for each record Brevo showed:
+   - For each **TXT**: Type `TXT`, Name as Brevo specifies (`@` for apex,
+     `mail._domainkey` for DKIM), Value exactly as Brevo gave it, TTL
+     `1 Hour`
 3. Save
-4. Back in Resend → click **Verify DNS records**. Usually verifies within
-   a few minutes; can take up to a few hours.
+4. Back in Brevo → click **Authenticate** / **Verify Records**. DNS usually
+   propagates within a few minutes; can take up to a few hours.
 
-**Don't touch your existing MX records for email** (if `kiwicloudhomes.co.nz`
-is also where your inbox lives). The new MX is on the `send` subdomain
-specifically — it doesn't conflict with `@`/apex MX.
+**Don't touch your existing MX records** (the inbox you receive at
+`@kiwicloudhomes.co.nz`). Brevo's DKIM record uses a `_domainkey`
+sub-name so it won't collide with normal email routing.
 
 ## 4. Get an API key
 
-In Resend dashboard:
+In Brevo dashboard:
 
-1. Sidebar → **API Keys** → **Create API Key**
-2. Name: `kiwi-cloud-homes-prod` (or whatever)
-3. Permission: **Full access** (or "Sending access" if you want least-privilege)
-4. **Copy the key** — Resend shows it once. Looks like `re_…`
+1. Top-right → **SMTP & API** (or **Settings → SMTP & API**)
+2. **API Keys** tab → **Generate a new API key**
+3. Name: `kiwi-cloud-homes-prod`
+4. **Copy the key** — Brevo shows it once. Looks like `xkeysib-…`
 
 ## 5. Add env vars in Vercel
 
@@ -65,38 +72,41 @@ In Resend dashboard:
 
 | Key | Value |
 |---|---|
-| `RESEND_API_KEY` | the `re_…` you just copied |
+| `BREVO_API_KEY` | the `xkeysib-…` you just copied |
 | `EMAIL_FROM_ADDRESS` | `nina@kiwicloudhomes.co.nz` (or whatever From: you want — must be on the verified domain) |
-| `EMAIL_REPLY_TO` | (optional) override; defaults to EMAIL_FROM_ADDRESS |
+| `EMAIL_REPLY_TO` | (optional) override; defaults to `EMAIL_FROM_ADDRESS` |
 
-All three go into all three environments (Production / Preview / Development).
+All three go into Production / Preview / Development environments.
 
-**Redeploy** so the new env vars are picked up: Vercel → Deployments → ⋯ on
-latest → **Redeploy**.
+**Redeploy** so the new env vars are picked up: Vercel → Deployments →
+⋯ on the latest deployment → **Redeploy**.
 
 ## 6. Test
 
-Run an end-to-end test booking on the live site (or preview URL):
+Run an end-to-end test booking on the live site (or a preview URL):
 
-1. Block a fake date in Hostaway
+1. Block a fake date range in Hostaway
 2. Book those dates on the website with the test Stripe card
-3. Watch:
+   (`4242 4242 4242 4242`)
+3. Watch, in order:
    - Stripe webhook responds 200
    - Hostaway reservation is created
-   - The guest email address you used receives a "Booking confirmed" email
-     within a few seconds
+   - The guest email address you used receives a "Booking confirmed"
+     email within a few seconds
 4. Cancel the test reservation in Hostaway
 
 If the email doesn't arrive:
 
-- Check spam/junk folder
-- Vercel → Logs → look for `[booking/webhook] confirmation email …` lines:
-  - `skipped: RESEND_API_KEY not configured` → env var missing or typo
-  - `failed: …` → Resend rejected the send (often domain not yet verified
-    or wrong From address)
-  - `sent: re_…` → Resend accepted; the issue is downstream (spam filter,
+- Check spam/junk folder (especially Gmail's "Promotions" tab)
+- Vercel → Logs → look for `[booking/webhook] confirmation email …`:
+  - `skipped: BREVO_API_KEY not configured` → env var missing or typo
+  - `failed: Brevo 401 …` → API key is wrong / revoked
+  - `failed: Brevo 400 … sender not authorized` → the `EMAIL_FROM_ADDRESS`
+    isn't on a verified Brevo domain yet
+  - `sent: <id>` → Brevo accepted it; downstream issue (spam filter,
     wrong recipient address)
-- Resend → **Emails** tab shows every send attempt with delivery status
+- Brevo dashboard → **Transactional → Statistics / Logs** shows every
+  send attempt with delivery status
 
 ## Notes
 
@@ -106,6 +116,6 @@ If the email doesn't arrive:
 - The email shows the **full property address** including the precise
   street address (which is hidden on the public listing card for privacy).
   Reasonable — they've paid and need to find the place.
-- If you change the email template (`src/lib/email/booking-confirmation.ts`)
-  there's nothing further to do in Resend — they only host the API; templates
-  live in our repo.
+- If you change the email template
+  (`src/lib/email/booking-confirmation.ts`) there's nothing further to
+  do in Brevo — they only host the API; templates live in our repo.

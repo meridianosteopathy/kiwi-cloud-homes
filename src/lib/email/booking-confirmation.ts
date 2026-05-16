@@ -5,9 +5,11 @@
  *
  * Email HTML follows email-safe conventions: <table> layout, inline styles,
  * common fonts. Renders cleanly in Gmail, Apple Mail, Outlook, QQ Mail.
+ *
+ * Provider: Brevo (formerly Sendinblue). Their transactional API is a single
+ * POST; we hit it via fetch so there's no SDK dependency to track.
  */
 
-import { Resend } from "resend";
 import type { HostawayListing } from "@/lib/hostaway";
 
 export type ConfirmationInput = {
@@ -26,14 +28,7 @@ export type ConfirmationInput = {
   paymentIntentId: string;
 };
 
-let cached: Resend | null = null;
-function getResend(): Resend | null {
-  if (cached) return cached;
-  const key = process.env.RESEND_API_KEY;
-  if (!key) return null;
-  cached = new Resend(key);
-  return cached;
-}
+const BREVO_ENDPOINT = "https://api.brevo.com/v3/smtp/email";
 
 const COPY: Record<
   "zh-CN" | "en",
@@ -232,9 +227,9 @@ function escapeAttr(s: string): string {
 export async function sendBookingConfirmation(
   input: ConfirmationInput,
 ): Promise<{ id?: string; skipped?: string; error?: string }> {
-  const resend = getResend();
-  if (!resend) {
-    return { skipped: "RESEND_API_KEY not configured" };
+  const apiKey = process.env.BREVO_API_KEY;
+  if (!apiKey) {
+    return { skipped: "BREVO_API_KEY not configured" };
   }
 
   const from = process.env.EMAIL_FROM_ADDRESS;
@@ -246,19 +241,34 @@ export async function sendBookingConfirmation(
 
   const c = COPY[input.locale];
   const html = renderHtml(input);
+  const senderName =
+    input.locale === "zh-CN" ? "Kiwi Cloud Homes 云端之家" : "Kiwi Cloud Homes";
 
   try {
-    const { data, error } = await resend.emails.send({
-      from,
-      to: input.guestEmail,
-      replyTo,
-      subject: c.subject(input.listing.name),
-      html,
+    const res = await fetch(BREVO_ENDPOINT, {
+      method: "POST",
+      headers: {
+        "api-key": apiKey,
+        "content-type": "application/json",
+        accept: "application/json",
+      },
+      body: JSON.stringify({
+        sender: { email: from, name: senderName },
+        to: [{ email: input.guestEmail, name: input.guestName || undefined }],
+        replyTo: { email: replyTo },
+        subject: c.subject(input.listing.name),
+        htmlContent: html,
+        tags: ["booking-confirmation", `locale:${input.locale}`],
+      }),
     });
-    if (error) {
-      return { error: error.message ?? String(error) };
+    if (!res.ok) {
+      const body = await res.text().catch(() => "");
+      return {
+        error: `Brevo ${res.status} ${res.statusText}${body ? ` — ${body.slice(0, 300)}` : ""}`,
+      };
     }
-    return { id: data?.id };
+    const data = (await res.json().catch(() => ({}))) as { messageId?: string };
+    return { id: data.messageId };
   } catch (err) {
     return {
       error: err instanceof Error ? err.message : String(err),
