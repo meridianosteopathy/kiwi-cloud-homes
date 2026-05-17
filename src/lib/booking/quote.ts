@@ -92,12 +92,17 @@ export async function computeQuote(input: QuoteInput): Promise<Quote> {
   const currency = listing.basePrice.currency;
   const nightlyTotal = bookedNights.reduce((sum, day) => sum + day.price.amount, 0);
   const cleaning = listing.cleaningFee;
+  // Use the average actual rate so the "X × N nights" breakdown line
+  // multiplies out correctly. Hostaway often returns per-day prices that
+  // diverge from listing.basePrice (seasonal pricing, weekday discounts),
+  // so the listing-level base price is the wrong number to show here.
+  const avgNightly = round2(nightlyTotal / nights);
 
   const breakdown: QuoteBreakdownLine[] = [
     {
       label: "nightly",
       amount: nightlyTotal,
-      meta: { nights, nightly: listing.basePrice.amount },
+      meta: { nights, nightly: avgNightly },
     },
   ];
   if (cleaning > 0) {

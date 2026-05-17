@@ -19,6 +19,17 @@ type Props = {
   defaultCheckOut: string | null;
 };
 
+type QuoteResponse = {
+  nights: number;
+  currency: string;
+  total: number;
+  breakdown: Array<{
+    label: "nightly" | "cleaning";
+    amount: number;
+    meta?: { nights?: number; nightly?: number };
+  }>;
+};
+
 function nightsBetween(checkIn: string, checkOut: string): number {
   if (!checkIn || !checkOut) return 0;
   const a = new Date(checkIn + "T00:00:00Z").getTime();
@@ -74,11 +85,45 @@ export function BookingForm({
   const meetsMax = !(maxNights > 0 && nights > maxNights);
   const canBook = nights > 0 && meetsMin && meetsMax;
 
-  const subtotal = nights * basePrice.amount;
+  // Live quote so the breakdown matches what the checkout modal will show.
+  // Falls back to listing.basePrice when the dates aren't yet valid or
+  // the request fails — same shape, different (less accurate) source.
+  const [quote, setQuote] = useState<QuoteResponse | null>(null);
+  const [quoteLoading, setQuoteLoading] = useState(false);
+
+  useEffect(() => {
+    if (!canBook) {
+      setQuote(null);
+      return;
+    }
+    const controller = new AbortController();
+    setQuoteLoading(true);
+    fetch("/api/booking/quote", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ checkIn, checkOut, guests }),
+      signal: controller.signal,
+    })
+      .then(async (res) => {
+        if (!res.ok) throw new Error(`${res.status}`);
+        return (await res.json()) as QuoteResponse;
+      })
+      .then((q) => {
+        setQuote(q);
+        setQuoteLoading(false);
+      })
+      .catch((err) => {
+        if (err.name === "AbortError") return;
+        setQuote(null);
+        setQuoteLoading(false);
+      });
+    return () => controller.abort();
+  }, [canBook, checkIn, checkOut, guests]);
+
   const priceLabel = (amount: number) =>
     format.number(amount, {
       style: "currency",
-      currency: basePrice.currency,
+      currency: quote?.currency || basePrice.currency,
       maximumFractionDigits: 0,
     });
 
@@ -176,20 +221,39 @@ export function BookingForm({
 
       {nights > 0 && (
         <dl className="mt-4 space-y-1 rounded-lg bg-kiwi-50/60 p-3 text-sm">
-          <div className="flex items-baseline justify-between">
-            <dt className="text-kiwi-700">
-              {t("breakdown", {
-                price: priceLabel(basePrice.amount),
-                nights,
-              })}
-            </dt>
-            <dd className="tabular-nums text-kiwi-900">{priceLabel(subtotal)}</dd>
-          </div>
-          <div className="flex items-baseline justify-between border-t border-kiwi-100 pt-1 font-semibold">
-            <dt className="text-kiwi-900">{t("estimatedTotal")}</dt>
-            <dd className="tabular-nums text-kiwi-900">{priceLabel(subtotal)}</dd>
-          </div>
-          <p className="pt-1 text-[11px] text-kiwi-600">{t("estimateNote")}</p>
+          {quote ? (
+            <>
+              {quote.breakdown.map((line, i) => (
+                <div key={i} className="flex items-baseline justify-between">
+                  <dt className="text-kiwi-700">
+                    {line.label === "nightly" && line.meta?.nightly !== undefined
+                      ? t("breakdown", {
+                          price: priceLabel(line.meta.nightly),
+                          nights: line.meta.nights ?? quote.nights,
+                        })
+                      : t(`lineLabel.${line.label}`)}
+                  </dt>
+                  <dd className="tabular-nums text-kiwi-900">{priceLabel(line.amount)}</dd>
+                </div>
+              ))}
+              <div className="flex items-baseline justify-between border-t border-kiwi-100 pt-1 font-semibold">
+                <dt className="text-kiwi-900">{t("total")}</dt>
+                <dd className="tabular-nums text-kiwi-900">{priceLabel(quote.total)}</dd>
+              </div>
+            </>
+          ) : (
+            <>
+              <div className="flex items-baseline justify-between">
+                <dt className="text-kiwi-700">
+                  {t("breakdown", { price: priceLabel(basePrice.amount), nights })}
+                </dt>
+                <dd className="tabular-nums text-kiwi-900">
+                  {quoteLoading ? t("calculating") : priceLabel(nights * basePrice.amount)}
+                </dd>
+              </div>
+              <p className="pt-1 text-[11px] text-kiwi-600">{t("estimateNote")}</p>
+            </>
+          )}
         </dl>
       )}
 
