@@ -162,8 +162,14 @@
     "guests": "入住人数",
     "guestCount": "{count} 位客人",
     "breakdown": "{price} × {nights} 晚",
+    "lineLabel": {
+      "nightly": "住宿小计",
+      "cleaning": "清洁费"
+    },
+    "total": "合计",
+    "calculating": "正在计算…",
     "estimatedTotal": "预计总价",
-    "estimateNote": "上述为基础价格预估,清洁费等会在结账时显示。",
+    "estimateNote": "最终价格(含清洁费)在结账时显示。",
     "bookNow": "立即预订",
     "inquire": "发送询问",
     "minNightsHint": "至少入住 {count} 晚",

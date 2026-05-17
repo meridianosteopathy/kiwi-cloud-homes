@@ -162,8 +162,14 @@
     "guests": "Guests",
     "guestCount": "{count, plural, one {# guest} other {# guests}}",
     "breakdown": "{price} × {nights, plural, one {# night} other {# nights}}",
+    "lineLabel": {
+      "nightly": "Nightly subtotal",
+      "cleaning": "Cleaning fee"
+    },
+    "total": "Total",
+    "calculating": "Calculating…",
     "estimatedTotal": "Estimated total",
-    "estimateNote": "Estimate based on the base nightly rate. Cleaning fee is added at checkout.",
+    "estimateNote": "Final price (including cleaning fee) calculated at checkout.",
     "bookNow": "Book now",
     "inquire": "Send inquiry",
     "minNightsHint": "Minimum stay: {count, plural, one {# night} other {# nights}}",
