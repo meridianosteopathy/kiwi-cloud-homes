@@ -48,9 +48,6 @@ function TouristJourney({
           {t("features.dates")}
         </li>
         <li className="rounded-xl border border-kiwi-100 bg-white p-4">
-          {t("features.tour")}
-        </li>
-        <li className="rounded-xl border border-kiwi-100 bg-white p-4">
           {t("features.inquiry")}
         </li>
       </ul>
