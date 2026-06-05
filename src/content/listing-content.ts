@@ -38,7 +38,9 @@ export const LISTING_OVERRIDES: {
       "位于基督城西南区 Halswell 的明亮四居室家庭住宅,Cashmere High 与 Halswell School 学区内。开车前往 Riccarton、市中心 (CBD) 与 Lincoln 都很便利。\n\n房屋专为中长期入住设计:完整厨房与餐厅、独立办公区、舒适沙发、安静的卧室,以及高速 Wi-Fi、洗衣机、烘干机、暖气、热泵齐全。后院与花园适合带孩子放松,免费停车位充足。\n\n房东本地居住,沟通方便:看校、就医、生活采购、附近活动推荐,都可随时联系。",
     // en: undefined → keep the Hostaway-returned English description.
   },
-  tourUrl: "https://my.matterport.com/show/?m=SxQL3iGyoDo",
+  // Hidden until we have a real Matterport / Kuula scan for this property.
+  // Set to a non-empty URL to re-enable the "360° Tour" button.
+  tourUrl: "",
 };
 
 export function resolveDescription(
