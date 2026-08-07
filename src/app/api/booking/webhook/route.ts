@@ -109,7 +109,8 @@ export async function POST(req: Request) {
     // and double-create.
     try {
       const meta = pi.metadata ?? {};
-      const listing = await getHostawayClient().getListing();
+      // Confirm the home that was actually booked, not the first one.
+      const listing = await getHostawayClient().getListing(meta.listing_id);
       const total =
         pi.currency && pi.amount_received
           ? isZeroDecimal(pi.currency)

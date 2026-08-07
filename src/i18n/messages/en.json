@@ -53,6 +53,8 @@
   "SchoolSearch": {
     "title": "Schools & kindergartens near the home",
     "subtitle": "Within {radius} km of the home, sorted nearest first.",
+    "subtitleMultiHome": "Within {radius} km of our homes, sorted by the nearest one.",
+    "nearestHome": "Nearest home: {home}",
     "filterLabel": "Filter by name",
     "filterPlaceholder": "Filter (English or Chinese)",
     "noMatches": "No matches — try a different keyword.",
@@ -74,6 +76,8 @@
   },
   "SchoolMatch": {
     "noSelection": "Pick a school or kindergarten on the left to see distance, walking and driving times from the home.",
+    "perHomeIntro": "How each of our homes sits relative to this school — closest first.",
+    "noDistanceForHome": "School distances for this home aren't available yet.",
     "distance": "Distance from the home",
     "walking": "Walking",
     "driving": "Driving",
@@ -142,6 +146,12 @@
       "autumn": "Best window for actual school visits — schools are in session, easy to observe and meet staff.",
       "winter": "Lowest prices. Ski-trip dates push some weekends higher; confirm school holidays before planning visits."
     }
+  },
+  "Homes": {
+    "title": "Our homes ({count})",
+    "subtitle": "Each home has its own calendar, price and booking — pick the one that suits your trip.",
+    "jumpLabel": "Jump to a home",
+    "none": "No homes are listed right now. Please check back soon."
   },
   "Property": {
     "perNight": "per night",

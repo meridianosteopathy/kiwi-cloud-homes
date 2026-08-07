@@ -2,9 +2,17 @@
 // Source: MoE Directory of Educational Institutions + ECE Services Directory.
 // Re-run `node scripts/import-schools.mjs` to refresh.
 
-import type { City, District, Region, School } from "./types";
+import type { City, District, Origin, Region, School } from "./types";
 
 export const RADIUS_KM = 25;
+
+/**
+ * The point this snapshot was centred on: schools further than RADIUS_KM from
+ * here were left out, and each school's `distanceKm` / `zone` is measured
+ * from here. A home standing at this origin can use those baked values even
+ * when the snapshot carries no per-school coordinates.
+ */
+export const SNAPSHOT_ORIGIN: Origin = { lat: -43.5788, lng: 172.562 };
 
 export const REGIONS: Region[] = [
   { id: "canterbury", name: { zhCN: "坎特伯雷大区", en: "Canterbury" } },

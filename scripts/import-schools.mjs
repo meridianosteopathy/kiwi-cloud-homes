@@ -17,8 +17,16 @@
  *
  *      If the downloads are .xlsx, open in Excel and "Save As CSV (UTF-8)".
  *
- *   2. Confirm HOME_LAT / HOME_LNG below are correct for your property.
- *      Default is approximate Halswell coords.
+ *   2. Confirm HOME_LAT / HOME_LNG below are correct. With several homes on
+ *      the site this is the point the SNAPSHOT is centred on, not "the"
+ *      home — schools further than RADIUS_KM from it are left out entirely.
+ *      Pick whichever home is most central, and widen RADIUS_KM if the homes
+ *      are far apart, so every home's neighbourhood is covered.
+ *
+ *      Each home's own distances are computed at runtime from the per-school
+ *      lat/lng this script emits, using the coordinates in
+ *      src/content/homes.ts — so adding a home needs no re-import, only its
+ *      coordinates in that file.
  *
  *   3. Run:
  *        node scripts/import-schools.mjs
@@ -220,6 +228,11 @@ function processCsv(rows, columnsMap, isECE) {
       level,
       distanceKm: distance,
       zone: classifyZone(distance),
+      // Emitted so the site can measure this school from ANY of the homes,
+      // not just the snapshot origin below. distanceKm/zone stay as the
+      // origin's own numbers.
+      lat: Number(lat.toFixed(5)),
+      lng: Number(lng.toFixed(5)),
     });
   }
   return out;
@@ -252,9 +265,17 @@ function emitDataTs(schools) {
 // Source: MoE Directory of Educational Institutions + ECE Services Directory.
 // Re-run \`node scripts/import-schools.mjs\` to refresh.
 
-import type { City, District, Region, School } from "./types";
+import type { City, District, Origin, Region, School } from "./types";
 
 export const RADIUS_KM = ${RADIUS_KM};
+
+/**
+ * The point this snapshot was centred on: schools further than RADIUS_KM from
+ * here were left out, and each school's \`distanceKm\` / \`zone\` is measured
+ * from here. A home standing at this origin can use those baked values even
+ * when the snapshot carries no per-school coordinates.
+ */
+export const SNAPSHOT_ORIGIN: Origin = { lat: ${HOME_LAT}, lng: ${HOME_LNG} };
 
 export const REGIONS: Region[] = [
   { id: "canterbury", name: { zhCN: "坎特伯雷大区", en: "Canterbury" } },

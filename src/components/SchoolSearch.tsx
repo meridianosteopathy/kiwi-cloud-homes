@@ -4,20 +4,59 @@ import { useMemo, useState, useTransition } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { useSearchParams } from "next/navigation";
 import { usePathname, useRouter } from "@/i18n/routing";
+import type { HomeSummary } from "@/content/homes";
 import {
+  distanceFrom,
   findDistrict,
   localizedName,
   nearbySchools,
   RADIUS_KM,
+  SCHOOLS,
   type AppLocale,
   type School,
   type SchoolLevel,
+  type SchoolWithDistance,
   type ZoneStatus,
 } from "@/lib/schools";
 
 type Props = {
   selectedSchoolId: string | null;
+  /** Homes on the site; the list shows each school's distance to the nearest. */
+  homes: HomeSummary[];
 };
+
+/** A school plus how far it is from whichever home is closest to it. */
+type SchoolRowData = SchoolWithDistance & { nearestHomeName: string | null };
+
+/**
+ * Ranks schools by distance to the closest home. With one home this is just
+ * that home's distances; with several, a school 1 km from either house reads
+ * as 1 km rather than being buried behind the other house's number.
+ *
+ * Homes without coordinates in src/content/homes.ts can't be measured, so
+ * they don't contribute. When no home can be measured at all, fall back to
+ * the snapshot's own distances so the list still ranks sensibly.
+ */
+function rankSchools(homes: HomeSummary[]): SchoolRowData[] {
+  const located = homes.filter((h) => h.coordinates);
+  if (located.length === 0) {
+    return nearbySchools().map((s) => ({ ...s, nearestHomeName: null }));
+  }
+
+  const rows: SchoolRowData[] = [];
+  for (const school of SCHOOLS) {
+    let best: SchoolRowData | null = null;
+    for (const home of located) {
+      const d = distanceFrom(school, home.coordinates!);
+      if (!d) continue;
+      if (!best || d.distanceKm < best.distanceKm) {
+        best = { ...school, ...d, nearestHomeName: home.name };
+      }
+    }
+    if (best && best.distanceKm <= RADIUS_KM) rows.push(best);
+  }
+  return rows.sort((a, b) => a.distanceKm - b.distanceKm);
+}
 
 const LEVEL_ORDER: SchoolLevel[] = [
   "kindergarten",
@@ -48,7 +87,7 @@ const LEVEL_CHIP_ACTIVE: Record<SchoolLevel, string> = {
   secondary: "bg-indigo-600 text-white border-indigo-600 hover:bg-indigo-700",
 };
 
-export function SchoolSearch({ selectedSchoolId }: Props) {
+export function SchoolSearch({ selectedSchoolId, homes }: Props) {
   const t = useTranslations("SchoolSearch");
   const locale = useLocale() as AppLocale;
   const router = useRouter();
@@ -59,7 +98,8 @@ export function SchoolSearch({ selectedSchoolId }: Props) {
   const [filter, setFilter] = useState("");
   const [levels, setLevels] = useState<Set<SchoolLevel>>(new Set());
 
-  const all = useMemo(() => nearbySchools(), []);
+  const multiHome = homes.filter((h) => h.coordinates).length > 1;
+  const all = useMemo(() => rankSchools(homes), [homes]);
   const visible = useMemo(() => {
     let list = all;
     if (levels.size > 0) {
@@ -101,7 +141,9 @@ export function SchoolSearch({ selectedSchoolId }: Props) {
         <div>
           <h2 className="text-lg font-semibold text-kiwi-900">{t("title")}</h2>
           <p className="mt-1 text-sm text-kiwi-700">
-            {t("subtitle", { radius: RADIUS_KM })}
+            {multiHome
+              ? t("subtitleMultiHome", { radius: RADIUS_KM })
+              : t("subtitle", { radius: RADIUS_KM })}
           </p>
         </div>
         {selectedSchoolId && (
@@ -166,6 +208,11 @@ export function SchoolSearch({ selectedSchoolId }: Props) {
             locale={locale}
             zoneLabel={t(`zone.${s.zone}`)}
             levelLabel={t(`level.${s.level}`)}
+            nearestHomeLabel={
+              multiHome && s.nearestHomeName
+                ? t("nearestHome", { home: s.nearestHomeName })
+                : null
+            }
             onSelect={() => setSelected(s.id)}
           />
         ))}
@@ -180,6 +227,7 @@ function SchoolRow({
   locale,
   zoneLabel,
   levelLabel,
+  nearestHomeLabel,
   onSelect,
 }: {
   school: School;
@@ -187,6 +235,8 @@ function SchoolRow({
   locale: AppLocale;
   zoneLabel: string;
   levelLabel: string;
+  /** Which home the distance is measured from; null when there's only one. */
+  nearestHomeLabel: string | null;
   onSelect: () => void;
 }) {
   const district = findDistrict(school.districtId);
@@ -216,6 +266,11 @@ function SchoolRow({
           {district && (
             <div className="truncate text-xs text-kiwi-600">
               {localizedName(district, locale)}
+            </div>
+          )}
+          {nearestHomeLabel && (
+            <div className="truncate text-[11px] text-kiwi-500">
+              {nearestHomeLabel}
             </div>
           )}
         </div>

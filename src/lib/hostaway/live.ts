@@ -94,42 +94,56 @@ export function createLiveClient(): HostawayClient {
   readCredentials();
 
   return {
-    async getListing() {
-      const id = await resolveListingId();
-      const payload = await apiGet<HostawayApiListing>(
-        `/listings/${id}${LISTING_INCLUDE}`,
-      );
-      const listing = mapListing(payload);
-      // Hostaway lets hosts set the min-nights rule in two places: the
-      // listing-level `minNights` field, or as per-day `minimumStay`
-      // overrides on the calendar. The dashboard's "Stay restrictions"
-      // workflow writes to the calendar, leaving listing.minNights at 1.
-      // Reconcile here so the booking UI sees the rule that's actually
-      // being enforced.
-      const calendarMin = await calendarTypicalMinStay(id).catch((err) => {
-        console.warn(
-          "[hostaway] calendar min-stay lookup failed; falling back to listing.minNights:",
-          err instanceof Error ? err.message : err,
-        );
-        return 0;
+    async listListings() {
+      const ids = await resolveListingIds();
+      const settled = await Promise.allSettled(ids.map(fetchListing));
+
+      const listings: HostawayListing[] = [];
+      const failures: string[] = [];
+      settled.forEach((result, i) => {
+        if (result.status === "fulfilled") {
+          listings.push(result.value);
+        } else {
+          failures.push(ids[i]);
+          console.error(
+            `[hostaway] listing ${ids[i]} could not be loaded and is hidden from the site:`,
+            result.reason instanceof Error ? result.reason.message : result.reason,
+          );
+        }
       });
-      const effectiveMin = Math.max(listing.minNights, calendarMin);
-      if (effectiveMin !== listing.minNights) {
-        console.log(
-          `[hostaway] effective minNights ${effectiveMin} (listing=${listing.minNights}, calendar=${calendarMin})`,
+
+      // One bad listing shouldn't blank the whole site — but if none loaded,
+      // the page has nothing to show, so surface the error instead of
+      // rendering an empty "no homes" state that looks like a config choice.
+      if (listings.length === 0) {
+        throw new HostawayApiError(
+          `None of the configured listings could be loaded (${failures.join(", ") || "none configured"}).`,
         );
-        return { ...listing, minNights: effectiveMin };
       }
-      return listing;
+      return listings;
     },
 
-    async getAvailability(start, end) {
-      const id = await resolveListingId();
+    async getListing(listingId?: string) {
+      const id = listingId ?? (await resolveListingIds())[0];
+      if (!id) {
+        throw new HostawayApiError(
+          "No Hostaway listings are configured for this site.",
+        );
+      }
+      return fetchListing(id);
+    },
+
+    async getAvailability(listingId, start, end) {
       const payload = await apiGet<HostawayApiCalendarDay[]>(
-        `/listings/${id}/calendar?startDate=${encodeURIComponent(start)}&endDate=${encodeURIComponent(end)}`,
+        `/listings/${listingId}/calendar?startDate=${encodeURIComponent(start)}&endDate=${encodeURIComponent(end)}`,
       );
-      const currency = await currencyForListing(id);
+      const currency = await currencyForListing(listingId);
       return payload.map<AvailabilityDay>((d) => mapCalendarDay(d, currency));
+    },
+
+    async isConfiguredListing(listingId) {
+      const ids = await resolveListingIds();
+      return ids.includes(String(listingId));
     },
 
     async createInquiry(_input: InquiryInput): Promise<InquiryResult> {
@@ -188,11 +202,50 @@ function nightsBetween(arrivalISO: string, departureISO: string): number {
   return n > 0 ? n : 0;
 }
 
-let cachedListingId: string | null = null;
-let cachedCurrency: { listingId: string; currency: string } | null = null;
-let cachedCalendarMin: { listingId: string; value: number; expiresAt: number } | null = null;
+/**
+ * Fetches one listing and reconciles its min-nights rule.
+ *
+ * Hostaway lets hosts set that rule in two places: the listing-level
+ * `minNights` field, or as per-day `minimumStay` overrides on the calendar.
+ * The dashboard's "Stay restrictions" workflow writes to the calendar,
+ * leaving listing.minNights at 1. Reconcile here so the booking UI sees the
+ * rule that's actually being enforced.
+ */
+async function fetchListing(id: string): Promise<HostawayListing> {
+  const payload = await apiGet<HostawayApiListing>(
+    `/listings/${id}${LISTING_INCLUDE}`,
+  );
+  const listing = mapListing(payload);
+  const calendarMin = await calendarTypicalMinStay(id).catch((err) => {
+    console.warn(
+      `[hostaway] calendar min-stay lookup failed for listing ${id}; falling back to listing.minNights:`,
+      err instanceof Error ? err.message : err,
+    );
+    return 0;
+  });
+  const effectiveMin = Math.max(listing.minNights, calendarMin);
+  if (effectiveMin !== listing.minNights) {
+    console.log(
+      `[hostaway] listing ${id}: effective minNights ${effectiveMin} (listing=${listing.minNights}, calendar=${calendarMin})`,
+    );
+    return { ...listing, minNights: effectiveMin };
+  }
+  return listing;
+}
+
+let cachedListingIds: { ids: string[]; expiresAt: number } | null = null;
+const cachedCurrency = new Map<string, string>();
+const cachedCalendarMin = new Map<string, { value: number; expiresAt: number }>();
 const CALENDAR_MIN_TTL_MS = 5 * 60 * 1000;
 const CALENDAR_MIN_WINDOW_DAYS = 60;
+/**
+ * How long a discovered listing set is trusted. Bounded so a house imported
+ * into Hostaway shows up on the site within minutes, without a redeploy.
+ * Ids pinned via env don't expire — they can't change without one.
+ */
+const LISTING_IDS_TTL_MS = 5 * 60 * 1000;
+/** Upper bound on auto-discovery, well clear of any plausible host portfolio. */
+const MAX_DISCOVERED_LISTINGS = 50;
 
 /**
  * Returns the typical (mode) per-day minimumStay across the next
@@ -202,12 +255,9 @@ const CALENDAR_MIN_WINDOW_DAYS = 60;
  */
 async function calendarTypicalMinStay(listingId: string): Promise<number> {
   const now = Date.now();
-  if (
-    cachedCalendarMin &&
-    cachedCalendarMin.listingId === listingId &&
-    cachedCalendarMin.expiresAt > now
-  ) {
-    return cachedCalendarMin.value;
+  const hit = cachedCalendarMin.get(listingId);
+  if (hit && hit.expiresAt > now) {
+    return hit.value;
   }
   const today = new Date();
   today.setUTCHours(0, 0, 0, 0);
@@ -233,38 +283,69 @@ async function calendarTypicalMinStay(listingId: string): Promise<number> {
       modeCount = c;
     }
   }
-  cachedCalendarMin = {
-    listingId,
+  cachedCalendarMin.set(listingId, {
     value: mode,
     expiresAt: now + CALENDAR_MIN_TTL_MS,
-  };
+  });
   return mode;
 }
 
-async function resolveListingId(): Promise<string> {
-  if (cachedListingId) return cachedListingId;
-  const explicit = process.env.HOSTAWAY_LISTING_ID;
-  if (explicit) {
-    cachedListingId = explicit;
-    return explicit;
+/**
+ * The listings this site shows, in display order.
+ *
+ * Resolution order:
+ *   1. HOSTAWAY_LISTING_IDS — comma-separated, e.g. "123456,789012". Pins
+ *      both the set and the order.
+ *   2. HOSTAWAY_LISTING_ID — the older single-listing var. Also accepts a
+ *      comma-separated list, so an existing deploy can add a second house by
+ *      appending to the value it already has.
+ *   3. Neither set: every listing in the Hostaway account, in the order the
+ *      API returns them. This is the default — import a house into Hostaway
+ *      and it appears on the site.
+ */
+async function resolveListingIds(): Promise<string[]> {
+  const now = Date.now();
+  if (cachedListingIds && cachedListingIds.expiresAt > now) {
+    return cachedListingIds.ids;
   }
-  const listings = await apiGet<HostawayApiListing[]>("/listings?limit=1");
+
+  const pinned = parseIdList(
+    process.env.HOSTAWAY_LISTING_IDS || process.env.HOSTAWAY_LISTING_ID,
+  );
+  if (pinned.length > 0) {
+    cachedListingIds = { ids: pinned, expiresAt: Number.POSITIVE_INFINITY };
+    return pinned;
+  }
+
+  const listings = await apiGet<HostawayApiListing[]>(
+    `/listings?limit=${MAX_DISCOVERED_LISTINGS}`,
+  );
   if (!Array.isArray(listings) || listings.length === 0) {
     throw new HostawayApiError(
-      "GET /listings returned no listings. Set HOSTAWAY_LISTING_ID or add a listing to your Hostaway account.",
+      "GET /listings returned no listings. Add a listing to your Hostaway account, or set HOSTAWAY_LISTING_IDS.",
     );
   }
-  cachedListingId = String(listings[0].id);
-  return cachedListingId;
+  const ids = listings.map((l) => String(l.id));
+  cachedListingIds = { ids, expiresAt: now + LISTING_IDS_TTL_MS };
+  return ids;
+}
+
+function parseIdList(raw: string | undefined): string[] {
+  if (!raw) return [];
+  const seen = new Set<string>();
+  for (const part of raw.split(",")) {
+    const id = part.trim();
+    if (id) seen.add(id);
+  }
+  return [...seen];
 }
 
 async function currencyForListing(listingId: string): Promise<string> {
-  if (cachedCurrency && cachedCurrency.listingId === listingId) {
-    return cachedCurrency.currency;
-  }
+  const hit = cachedCurrency.get(listingId);
+  if (hit) return hit;
   const listing = await apiGet<HostawayApiListing>(`/listings/${listingId}`);
   const currency = listing.currencyCode || "NZD";
-  cachedCurrency = { listingId, currency };
+  cachedCurrency.set(listingId, currency);
   return currency;
 }
 

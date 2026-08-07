@@ -1,6 +1,8 @@
 import { getHostawayClient, type HostawayListing } from "@/lib/hostaway";
 
 export interface QuoteInput {
+  /** Hostaway listing id — which of the homes is being priced. */
+  listingId: string;
   checkIn: string; // YYYY-MM-DD
   checkOut: string; // YYYY-MM-DD
   guests: number;
@@ -15,6 +17,8 @@ export interface QuoteBreakdownLine {
 
 export interface Quote {
   listingId: string;
+  /** Display name of the home being priced — shown in the checkout dialog. */
+  listingName: string;
   checkIn: string;
   checkOut: string;
   nights: number;
@@ -38,7 +42,8 @@ export class QuoteError extends Error {
       | "guests_over_capacity"
       | "below_min_nights"
       | "above_max_nights"
-      | "unavailable",
+      | "unavailable"
+      | "unknown_listing",
     message: string,
   ) {
     super(message);
@@ -50,7 +55,16 @@ export async function computeQuote(input: QuoteInput): Promise<Quote> {
   validate(input);
 
   const client = getHostawayClient();
-  const listing = await client.getListing();
+  // The listing id comes from the browser, so check it against the configured
+  // set before pricing it — otherwise any listing on the Hostaway account
+  // could be quoted and booked through this site.
+  if (!(await client.isConfiguredListing(input.listingId))) {
+    throw new QuoteError(
+      "unknown_listing",
+      "That home isn't available for booking on this site.",
+    );
+  }
+  const listing = await client.getListing(input.listingId);
 
   if (input.guests > listing.maxGuests) {
     throw new QuoteError(
@@ -59,7 +73,11 @@ export async function computeQuote(input: QuoteInput): Promise<Quote> {
     );
   }
 
-  const calendar = await client.getAvailability(input.checkIn, input.checkOut);
+  const calendar = await client.getAvailability(
+    listing.id,
+    input.checkIn,
+    input.checkOut,
+  );
   // The Hostaway calendar endpoint typically returns dates inclusive of
   // checkIn and checkOut; we only need the booked nights (checkIn..checkOut-1).
   const bookedNights = calendar.filter((day) => day.date < input.checkOut);
@@ -112,6 +130,7 @@ export async function computeQuote(input: QuoteInput): Promise<Quote> {
   const total = round2(nightlyTotal + cleaning);
   return {
     listingId: listing.id,
+    listingName: listing.name,
     checkIn: input.checkIn,
     checkOut: input.checkOut,
     nights,
@@ -124,6 +143,9 @@ export async function computeQuote(input: QuoteInput): Promise<Quote> {
 }
 
 function validate(input: QuoteInput): void {
+  if (!input.listingId || !input.listingId.trim()) {
+    throw new QuoteError("unknown_listing", "No home was selected.");
+  }
   if (!DATE.test(input.checkIn) || !DATE.test(input.checkOut)) {
     throw new QuoteError("invalid_dates", "Dates must be ISO YYYY-MM-DD.");
   }

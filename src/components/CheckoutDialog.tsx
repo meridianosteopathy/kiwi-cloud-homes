@@ -13,6 +13,7 @@ import { isStripeTestMode } from "@/lib/stripe/mode";
 
 type Quote = {
   listingId: string;
+  listingName: string;
   checkIn: string;
   checkOut: string;
   nights: number;
@@ -85,6 +86,7 @@ export function CheckoutDialog({
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
+        listingId,
         checkIn: initialCheckIn,
         checkOut: initialCheckOut,
         guests: initialGuests,
@@ -104,7 +106,7 @@ export function CheckoutDialog({
     return () => {
       cancelled = true;
     };
-  }, [initialCheckIn, initialCheckOut, initialGuests]);
+  }, [listingId, initialCheckIn, initialCheckOut, initialGuests]);
 
   async function startPayment(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -115,6 +117,7 @@ export function CheckoutDialog({
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+          listingId: quote.listingId,
           checkIn: quote.checkIn,
           checkOut: quote.checkOut,
           guests: quote.guests,

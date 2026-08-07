@@ -101,7 +101,7 @@ export function BookingForm({
     fetch("/api/booking/quote", {
       method: "POST",
       headers: { "content-type": "application/json" },
-      body: JSON.stringify({ checkIn, checkOut, guests }),
+      body: JSON.stringify({ listingId, checkIn, checkOut, guests }),
       signal: controller.signal,
     })
       .then(async (res) => {
@@ -118,7 +118,7 @@ export function BookingForm({
         setQuoteLoading(false);
       });
     return () => controller.abort();
-  }, [canBook, checkIn, checkOut, guests]);
+  }, [canBook, listingId, checkIn, checkOut, guests]);
 
   const priceLabel = (amount: number) =>
     format.number(amount, {
@@ -283,6 +283,7 @@ export function BookingForm({
 
       {showDates && (
         <DateRangeModal
+          listingId={listingId}
           initialCheckIn={checkIn || null}
           initialCheckOut={checkOut || null}
           minNights={minNights}
