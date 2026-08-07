@@ -57,7 +57,16 @@ export interface School {
 
 /** A school paired with its distance from one particular home. */
 export interface SchoolDistance {
+  /**
+   * Estimated distance by road, km — what guests are shown, because it's what
+   * their maps app will tell them. Derived from `straightLineKm`, not routed.
+   */
   distanceKm: number;
+  /**
+   * Straight-line ("as the crow flies") km. Zone bands are measured on this,
+   * since school catchments are geographic rather than drive-based.
+   */
+  straightLineKm: number;
   zone: ZoneStatus;
 }
 

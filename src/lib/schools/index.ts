@@ -77,6 +77,24 @@ function sameOrigin(a: Origin, b: Origin): boolean {
 }
 
 /**
+ * Straight-line distance understates the drive: streets bend, the Avon and the
+ * rail corridor force detours, and one-ways add blocks. Guests check our
+ * numbers against Google Maps, which quotes road distance, so showing the raw
+ * crow-flies figure reads as simply wrong — Halswell to Burnside High is 8.0 km
+ * straight but 10.6 km by road.
+ *
+ * 1.3 is the usual circuity ratio for a city laid out like Christchurch, and
+ * reproduces that example within a few hundred metres. It's an estimate, not a
+ * route: the UI says so, and anyone booking around a tight commute should
+ * check their own maps app.
+ */
+const ROAD_DETOUR_FACTOR = 1.3;
+
+function roadKmFrom(straightLineKm: number): number {
+  return Math.round(straightLineKm * ROAD_DETOUR_FACTOR * 10) / 10;
+}
+
+/**
  * Distance from one home to one school, or null when it can't be worked out.
  *
  * Null happens when the school snapshot predates per-school coordinates and
@@ -89,13 +107,36 @@ export function distanceFrom(
   origin: Origin,
 ): SchoolDistance | null {
   if (typeof school.lat === "number" && typeof school.lng === "number") {
-    const km = Math.round(haversineKm(origin, { lat: school.lat, lng: school.lng }) * 10) / 10;
-    return { distanceKm: km, zone: zoneForDistance(km) };
+    const straightLineKm =
+      Math.round(haversineKm(origin, { lat: school.lat, lng: school.lng }) * 10) / 10;
+    return {
+      distanceKm: roadKmFrom(straightLineKm),
+      straightLineKm,
+      zone: zoneForDistance(straightLineKm),
+    };
   }
   if (sameOrigin(origin, SNAPSHOT_ORIGIN)) {
-    return { distanceKm: school.distanceKm, zone: school.zone };
+    // The snapshot's baked figure is straight-line, same as the computed one.
+    return {
+      distanceKm: roadKmFrom(school.distanceKm),
+      straightLineKm: school.distanceKm,
+      zone: school.zone,
+    };
   }
   return null;
+}
+
+/**
+ * The snapshot's own baked distance for a school, expressed the same way
+ * {@link distanceFrom} expresses one. Used when no home has coordinates yet,
+ * so the school list still ranks and reads consistently.
+ */
+export function snapshotDistance(school: School): SchoolDistance {
+  return {
+    distanceKm: roadKmFrom(school.distanceKm),
+    straightLineKm: school.distanceKm,
+    zone: school.zone,
+  };
 }
 
 /**
@@ -109,7 +150,9 @@ export function schoolsNear(
   const out: SchoolWithDistance[] = [];
   for (const school of SCHOOLS) {
     const d = distanceFrom(school, origin);
-    if (d && d.distanceKm <= maxKm) out.push({ ...school, ...d });
+    // Filter on straight-line distance so the radius keeps meaning the same
+    // thing it does in the snapshot and in RADIUS_KM.
+    if (d && d.straightLineKm <= maxKm) out.push({ ...school, ...d });
   }
   return out.sort((a, b) => a.distanceKm - b.distanceKm);
 }

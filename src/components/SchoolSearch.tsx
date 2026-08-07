@@ -12,6 +12,7 @@ import {
   nearbySchools,
   RADIUS_KM,
   SCHOOLS,
+  snapshotDistance,
   type AppLocale,
   type School,
   type SchoolLevel,
@@ -40,7 +41,11 @@ type SchoolRowData = SchoolWithDistance & { nearestHomeName: string | null };
 function rankSchools(homes: HomeSummary[]): SchoolRowData[] {
   const located = homes.filter((h) => h.coordinates);
   if (located.length === 0) {
-    return nearbySchools().map((s) => ({ ...s, nearestHomeName: null }));
+    return nearbySchools().map((s) => ({
+      ...s,
+      ...snapshotDistance(s),
+      nearestHomeName: null,
+    }));
   }
 
   const rows: SchoolRowData[] = [];
@@ -53,7 +58,7 @@ function rankSchools(homes: HomeSummary[]): SchoolRowData[] {
         best = { ...school, ...d, nearestHomeName: home.name };
       }
     }
-    if (best && best.distanceKm <= RADIUS_KM) rows.push(best);
+    if (best && best.straightLineKm <= RADIUS_KM) rows.push(best);
   }
   return rows.sort((a, b) => a.distanceKm - b.distanceKm);
 }
