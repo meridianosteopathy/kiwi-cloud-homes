@@ -68,10 +68,10 @@ export interface HomeProfile {
 export const HOMES: HomeProfile[] = [
   {
     key: "halswell",
-    // TODO(host): add the real Hostaway listing id here (dashboard URL →
-    // .../listings/123456). Until it's here, this Chinese description only
-    // applies if the listing's name in Hostaway still matches below.
-    match: ["mock-halswell", "Halswell Garden Retreat"],
+    // Hostaway 384499 — "Modern Home: 2 Ensuites, 17 Min to City & CHC Air".
+    // The trailing entry is the mock client's id, so `HOSTAWAY_USE_MOCK=true`
+    // local runs get this copy too.
+    match: ["384499", "mock-halswell"],
     coordinates: { lat: -43.5788, lng: 172.562 },
     description: {
       "zh-CN":
@@ -82,13 +82,18 @@ export const HOMES: HomeProfile[] = [
     tourUrl: "",
   },
   {
-    key: "second-home",
-    // TODO(host): replace with the second house's Hostaway listing id (or its
-    // exact listing name), then fill in the coordinates and Chinese copy.
-    // The house is already live and bookable on the site without any of this.
-    match: ["mock-riccarton"],
-    coordinates: undefined,
+    key: "bealey-ave",
+    // Hostaway 576705 — "Super king bed & free parking, central CHC".
+    // Unit 12 / 106 Bealey Avenue, Christchurch Central, Christchurch 8013.
+    match: ["576705", "mock-riccarton"],
+    // APPROXIMATE — estimated from the street address, not measured, so it
+    // may be a few hundred metres out along Bealey Avenue. To correct it:
+    // Google Maps → right-click the building → click the numbers at the top
+    // of the menu to copy → paste them here as lat, lng.
+    coordinates: { lat: -43.5218, lng: 172.6342 },
     description: {
+      // TODO(host): Mandarin copy for this home. While this is empty, Chinese
+      // visitors see Hostaway's English description for it.
       "zh-CN": "",
     },
     tourUrl: "",
