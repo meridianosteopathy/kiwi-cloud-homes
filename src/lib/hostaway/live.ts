@@ -120,6 +120,11 @@ export function createLiveClient(): HostawayClient {
           `None of the configured listings could be loaded (${failures.join(", ") || "none configured"}).`,
         );
       }
+      console.log(
+        `[hostaway] showing ${listings.length} of ${ids.length} listing(s) on the site: ${listings
+          .map((l) => `${l.id} (${l.name})`)
+          .join("; ")}`,
+      );
       return listings;
     },
 
@@ -313,6 +318,12 @@ async function resolveListingIds(): Promise<string[]> {
     process.env.HOSTAWAY_LISTING_IDS || process.env.HOSTAWAY_LISTING_ID,
   );
   if (pinned.length > 0) {
+    // Logged because "only one house shows" is nearly always either a
+    // leftover pinned id or a short discovery result, and these two lines
+    // tell them apart at a glance in the deploy logs.
+    console.log(
+      `[hostaway] using ${pinned.length} pinned listing id(s) from ${process.env.HOSTAWAY_LISTING_IDS ? "HOSTAWAY_LISTING_IDS" : "HOSTAWAY_LISTING_ID"}: ${pinned.join(", ")}`,
+    );
     cachedListingIds = { ids: pinned, expiresAt: Number.POSITIVE_INFINITY };
     return pinned;
   }
@@ -326,6 +337,11 @@ async function resolveListingIds(): Promise<string[]> {
     );
   }
   const ids = listings.map((l) => String(l.id));
+  console.log(
+    `[hostaway] GET /listings returned ${ids.length} listing(s): ${listings
+      .map((l) => `${l.id} (${l.publicName || l.name || l.internalListingName || "unnamed"})`)
+      .join("; ")}`,
+  );
   cachedListingIds = { ids, expiresAt: now + LISTING_IDS_TTL_MS };
   return ids;
 }
