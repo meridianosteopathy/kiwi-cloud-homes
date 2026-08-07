@@ -1,5 +1,5 @@
 import { useLocale, useTranslations } from "next-intl";
-import { resolveDescription, resolveTourUrl } from "@/content/listing-content";
+import { resolveDescription, resolveTourUrl } from "@/content/homes";
 import type { HostawayListing } from "@/lib/hostaway";
 import { BookingForm } from "./BookingForm";
 import { PropertyAmenities } from "./PropertyAmenities";
@@ -20,8 +20,8 @@ export function PropertyCard({
 }: Props) {
   const t = useTranslations("Property");
   const locale = useLocale();
-  const description = resolveDescription(locale, listing.description);
-  const tourUrl = resolveTourUrl(listing.tourUrl);
+  const description = resolveDescription(listing, locale, listing.description);
+  const tourUrl = resolveTourUrl(listing, listing.tourUrl);
 
   return (
     <article className="overflow-hidden rounded-2xl border border-kiwi-200 bg-white shadow-sm">

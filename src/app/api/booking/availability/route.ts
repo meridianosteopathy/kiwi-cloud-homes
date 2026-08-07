@@ -7,19 +7,27 @@ const DATE = /^\d{4}-\d{2}-\d{2}$/;
 const MAX_DAYS = 400; // ~13 months — bounds Hostaway calls
 
 /**
- * GET /api/booking/availability?start=YYYY-MM-DD&end=YYYY-MM-DD
+ * GET /api/booking/availability?listingId=123&start=YYYY-MM-DD&end=YYYY-MM-DD
  *
  * Returns `{ unavailable: string[] }` — ISO dates the host has marked as
- * unavailable in Hostaway. The date picker uses this to grey those days out
- * before the guest even tries to quote.
+ * unavailable in Hostaway for that home. The date picker uses this to grey
+ * those days out before the guest even tries to quote.
  *
  * Cached for 5 minutes server-side so a clicked-around picker doesn't hit
  * Hostaway on every modal open. Calendars don't move minute-to-minute.
  */
 export async function GET(req: Request) {
   const url = new URL(req.url);
+  const listingId = url.searchParams.get("listingId")?.trim();
   const start = url.searchParams.get("start");
   const end = url.searchParams.get("end");
+
+  if (!listingId) {
+    return NextResponse.json(
+      { error: "listingId query param is required" },
+      { status: 400 },
+    );
+  }
 
   if (!start || !end || !DATE.test(start) || !DATE.test(end)) {
     return NextResponse.json(
@@ -47,8 +55,16 @@ export async function GET(req: Request) {
     );
   }
 
+  const client = getHostawayClient();
+
   try {
-    const cal = await getHostawayClient().getAvailability(start, end);
+    // The id is client-supplied; only serve calendars for homes this site
+    // actually lists.
+    if (!(await client.isConfiguredListing(listingId))) {
+      return NextResponse.json({ error: "Unknown listing" }, { status: 404 });
+    }
+
+    const cal = await client.getAvailability(listingId, start, end);
     const unavailable = cal
       .filter((d) => !d.available)
       .map((d) => d.date);

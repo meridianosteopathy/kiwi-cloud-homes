@@ -53,6 +53,8 @@
   "SchoolSearch": {
     "title": "房源附近的学校与幼儿园",
     "subtitle": "以下学校均在房源 {radius} 公里范围内,按距离由近到远排列。",
+    "subtitleMultiHome": "以下学校均在我们房源 {radius} 公里范围内,按距离最近的一处房源排序。",
+    "nearestHome": "最近房源:{home}",
     "filterLabel": "按名称筛选",
     "filterPlaceholder": "输入学校或幼儿园名(中英文均可)",
     "noMatches": "没有匹配的结果,试着调整关键词。",
@@ -74,11 +76,13 @@
   },
   "SchoolMatch": {
     "noSelection": "在左侧选择一所学校或幼儿园,这里会显示与房源之间的距离、步行/驾车时间。",
-    "distance": "距离房源",
+    "perHomeIntro": "这所学校与我们各处房源的距离,由近到远排列。",
+    "noDistanceForHome": "该房源的学校距离数据尚未录入。",
+    "distance": "距离房源(道路里程约)",
     "walking": "步行约",
     "driving": "驾车约",
     "advice": "房东建议",
-    "estimateNote": "步行/驾车时间为按平均速度估算(步行 5 km/h、驾车 40 km/h),实际以路况为准。",
+    "estimateNote": "距离为按直线距离估算的道路里程,并非实际导航路线,与 Google 地图可能相差数百米。步行/驾车时间按平均速度估算(步行 5 km/h、驾车 40 km/h),实际以路况为准。如需精确安排接送时间,请以您的地图软件为准。",
     "durationMin": "{min} 分钟",
     "durationHour": "{h} 小时",
     "durationHourMin": "{h} 小时 {min} 分钟",
@@ -142,6 +146,12 @@
       "autumn": "学校已开学,看校窗口最佳:可见学生上课、与校方面谈更顺畅。",
       "winter": "淡季,价格最优。北岛南滑雪行程会拉高部分日期,需要看校请提前确认假期。"
     }
+  },
+  "Homes": {
+    "title": "我们的房源({count} 处)",
+    "subtitle": "每处房源都有各自的日历、价格与预订流程,请选择最适合此次行程的一处。",
+    "jumpLabel": "跳转到房源",
+    "none": "目前暂无可预订的房源,请稍后再来查看。"
   },
   "Property": {
     "perNight": "每晚",

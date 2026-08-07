@@ -107,8 +107,28 @@ export interface ReservationResult {
 }
 
 export interface HostawayClient {
-  getListing(): Promise<HostawayListing>;
-  getAvailability(start: string, end: string): Promise<AvailabilityDay[]>;
+  /**
+   * Every listing the site is configured to show, in display order.
+   *
+   * By default that's every listing in the Hostaway account — import a house
+   * into Hostaway and it appears here. Set HOSTAWAY_LISTING_IDS to pin the
+   * set (and the order) instead.
+   */
+  listListings(): Promise<HostawayListing[]>;
+  /** A single listing. Defaults to the first configured one. */
+  getListing(listingId?: string): Promise<HostawayListing>;
+  getAvailability(
+    listingId: string,
+    start: string,
+    end: string,
+  ): Promise<AvailabilityDay[]>;
+  /**
+   * Whether this id is one of the configured listings. Guards the booking
+   * endpoints: the listing id arrives from the browser, and without this a
+   * guest could quote or book any listing in the Hostaway account, including
+   * ones deliberately kept off the site.
+   */
+  isConfiguredListing(listingId: string): Promise<boolean>;
   createInquiry(input: InquiryInput): Promise<InquiryResult>;
   createReservation(input: ReservationInput): Promise<ReservationResult>;
 }
