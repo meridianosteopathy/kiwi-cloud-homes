@@ -92,10 +92,17 @@ export const HOMES: HomeProfile[] = [
     // of the menu to copy → paste them here as lat, lng.
     coordinates: { lat: -43.5218, lng: 172.6342 },
     description: {
-      // Translated from the host's English listing copy. The English original
-      // routes guest questions to the Airbnb app; that's deliberately not
-      // carried over here — this is the direct-booking site, so it points at
-      // the on-site inquiry form instead.
+      // Both locales are overridden here because the Hostaway copy routes
+      // guest questions to the Airbnb app. That's correct on the Airbnb
+      // syndication and wrong here: a direct guest has no Airbnb thread, and
+      // the referral pushes them back to a commission channel. Everything
+      // else matches the host's Hostaway copy.
+      //
+      // NOTE: this now overrides the English too, so editing the description
+      // in Hostaway no longer changes what this site shows for this home.
+      // Edit it here as well, or delete the `en` entry to go back to
+      // following Hostaway.
+      en: "A two-storey townhouse on Bealey Avenue, on the quiet northern edge of the CBD. Six minutes' drive to Te Kaha stadium, 15 minutes' walk to Hagley Park, and your own off-street carpark — leave the car and walk or taxi into town.\n\nUpstairs: open-plan kitchen and living opening to a west-facing balcony. Downstairs: two double bedrooms, bathroom and a private courtyard.\n\nThe layout is upside-down in the best way — living upstairs, bedrooms down.\n\nUpstairs is open-plan: full kitchen, dining and lounge, with glass doors onto a west-facing balcony that catches the afternoon and evening sun. It's the natural spot for a drink before or after an event.\n\nDownstairs are two double bedrooms, both with built-in wardrobes, the main bathroom and the laundry. There's a separate guest WC, which matters when four people are getting ready at once. A private ground-floor courtyard sits off the back.\n\nThe whole place is about 70m² — easy to keep tidy, warm and neutral throughout, and genuinely quiet for a central address.\n\nYou have the entire townhouse to yourself, plus one allocated off-street carpark. Self check-in via keypad, so arrive whenever your travel or event schedule lands. The complex is small and residential — please keep noise down after 10pm in the shared driveway and courtyard areas.\n\nThe best way to reach me during your stay is through this site — send a message from your booking and I'll get back to you quickly. I'm local to Christchurch, so I can usually sort things out the same day.\n\nBealey Avenue is one of the four tree-lined avenues that frame the central city, so you're on the edge of everything without being in the middle of the noise.\n\nTe Kaha / One NZ Stadium — 6 min drive, 25–30 min walk\nHagley Park & Botanic Gardens — 15 min walk\nVictoria Street restaurants and bars — 5 min walk\nRiverside Market & The Crossing — 15 min walk\nChristchurch Hospital — 5 min drive\nMerivale shops and cafés — 5 min drive\n\nStreets here are flat and bike-friendly, and frequent bus routes run along Bealey and into the central exchange. On event days most guests drive in, park, and walk or grab a ride from there — the carpark is the reason this works.",
       "zh-CN":
         "位于 Bealey Avenue 的两层联排住宅,坐落在市中心 (CBD) 北缘,闹中取静。开车 6 分钟到 Te Kaha / One NZ 体育场,步行 15 分钟到 Hagley Park,并配有一个专属院内停车位——把车停好,步行或打车进城都很方便。\n\n户型是「颠倒」设计,而且恰到好处:起居在楼上,卧室在楼下。\n\n楼上为开放式厨房、餐厅与客厅,玻璃门通向朝西阳台,午后与傍晚阳光充足;看完比赛或演出回来,在这里小酌最为惬意。\n\n楼下是两间双人卧室,均配内嵌衣柜,另有主卫浴与洗衣区。特别设有独立客用洗手间——四人同时梳洗时,这一点格外实用。一层后侧还有一个私人小庭院。\n\n全屋约 70 平方米,紧凑易打理,色调温暖素雅;虽是市中心地址,却格外安静。\n\n整套住宅由您独享,并含一个专属院内停车位。密码锁自助入住,无论航班或活动时间多晚,都可自行抵达。本小区为小型住宅社区,晚上 10 点后请在共用车道与庭院区域保持安静。\n\nBealey Avenue 是环绕基督城市中心的四条林荫大道之一。住在这里,城市的一切近在咫尺,又避开了最喧闹的核心地带。\n\n周边距离:\n· Te Kaha / One NZ 体育场 —— 车程 6 分钟,步行 25–30 分钟\n· Hagley Park 与植物园 —— 步行 15 分钟\n· Victoria Street 餐厅与酒吧 —— 步行 5 分钟\n· Riverside Market 与 The Crossing 商场 —— 步行 15 分钟\n· 基督城医院 Christchurch Hospital —— 车程 5 分钟\n· Merivale 商店与咖啡馆 —— 车程 5 分钟\n\n周边街道平坦,适合步行与骑行;Bealey Avenue 沿线公交班次密集,可直达市中心换乘站。遇有大型活动,多数房客会开车前来、停好车,再步行或打车前往——这个专属车位正是此处的便利所在。\n\n入住期间如有任何需要,可直接通过本网站联系房东。房东就在基督城本地,通常当天即可协助处理。",
     },
