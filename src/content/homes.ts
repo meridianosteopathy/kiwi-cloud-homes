@@ -92,9 +92,12 @@ export const HOMES: HomeProfile[] = [
     // of the menu to copy → paste them here as lat, lng.
     coordinates: { lat: -43.5218, lng: 172.6342 },
     description: {
-      // TODO(host): Mandarin copy for this home. While this is empty, Chinese
-      // visitors see Hostaway's English description for it.
-      "zh-CN": "",
+      // Translated from the host's English listing copy. The English original
+      // routes guest questions to the Airbnb app; that's deliberately not
+      // carried over here — this is the direct-booking site, so it points at
+      // the on-site inquiry form instead.
+      "zh-CN":
+        "位于 Bealey Avenue 的两层联排住宅,坐落在市中心 (CBD) 北缘,闹中取静。开车 6 分钟到 Te Kaha / One NZ 体育场,步行 15 分钟到 Hagley Park,并配有一个专属院内停车位——把车停好,步行或打车进城都很方便。\n\n户型是「颠倒」设计,而且恰到好处:起居在楼上,卧室在楼下。\n\n楼上为开放式厨房、餐厅与客厅,玻璃门通向朝西阳台,午后与傍晚阳光充足;看完比赛或演出回来,在这里小酌最为惬意。\n\n楼下是两间双人卧室,均配内嵌衣柜,另有主卫浴与洗衣区。特别设有独立客用洗手间——四人同时梳洗时,这一点格外实用。一层后侧还有一个私人小庭院。\n\n全屋约 70 平方米,紧凑易打理,色调温暖素雅;虽是市中心地址,却格外安静。\n\n整套住宅由您独享,并含一个专属院内停车位。密码锁自助入住,无论航班或活动时间多晚,都可自行抵达。本小区为小型住宅社区,晚上 10 点后请在共用车道与庭院区域保持安静。\n\nBealey Avenue 是环绕基督城市中心的四条林荫大道之一。住在这里,城市的一切近在咫尺,又避开了最喧闹的核心地带。\n\n周边距离:\n· Te Kaha / One NZ 体育场 —— 车程 6 分钟,步行 25–30 分钟\n· Hagley Park 与植物园 —— 步行 15 分钟\n· Victoria Street 餐厅与酒吧 —— 步行 5 分钟\n· Riverside Market 与 The Crossing 商场 —— 步行 15 分钟\n· 基督城医院 Christchurch Hospital —— 车程 5 分钟\n· Merivale 商店与咖啡馆 —— 车程 5 分钟\n\n周边街道平坦,适合步行与骑行;Bealey Avenue 沿线公交班次密集,可直达市中心换乘站。遇有大型活动,多数房客会开车前来、停好车,再步行或打车前往——这个专属车位正是此处的便利所在。\n\n入住期间如有任何需要,可直接通过本网站联系房东。房东就在基督城本地,通常当天即可协助处理。",
     },
     tourUrl: "",
   },
