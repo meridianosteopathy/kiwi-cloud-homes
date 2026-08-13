@@ -13,7 +13,7 @@ export function DirectBookingBanner() {
   const t = useTranslations("DirectBooking");
 
   return (
-    <section className="rounded-2xl border border-kiwi-600/30 bg-gradient-to-r from-kiwi-50 to-emerald-50 p-5 shadow-sm">
+    <section className="rounded-2xl border border-kiwi-600/30 bg-gradient-to-r from-kiwi-50 to-kiwi-100 p-5 shadow-sm">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div className="flex items-start gap-3">
           <span
