@@ -119,7 +119,7 @@ function SchoolJourney({
   return (
     <div className="mx-auto max-w-6xl px-4 pb-20 pt-12">
       <header className="mx-auto max-w-3xl text-center">
-        <h1 className="text-3xl font-semibold text-kiwi-900 sm:text-4xl">
+        <h1 className="font-display text-3xl font-bold text-kiwi-900 sm:text-4xl">
           {t("title")}
         </h1>
         <p className="mt-4 text-base text-kiwi-700">{t("intro")}</p>

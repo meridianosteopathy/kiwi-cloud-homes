@@ -17,7 +17,7 @@ export function LanguageHero() {
         <p className="text-xs font-semibold uppercase tracking-[0.2em] text-kiwi-600">
           Step 1 · 第一步
         </p>
-        <h2 className="mt-2 text-xl font-semibold text-kiwi-900 sm:text-2xl">
+        <h2 className="mt-2 font-display text-xl font-bold text-kiwi-900 sm:text-2xl">
           请选择您的语言 / Choose your language
         </h2>
 
