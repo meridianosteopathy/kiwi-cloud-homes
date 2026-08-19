@@ -18,7 +18,7 @@ function Landing() {
   return (
     <div className="mx-auto max-w-6xl px-4 pb-20 pt-8 sm:pt-12">
       <section className="mx-auto max-w-3xl text-center">
-        <h1 className="text-2xl font-semibold leading-tight text-kiwi-900 sm:text-4xl">
+        <h1 className="font-display text-2xl font-bold leading-tight text-kiwi-900 sm:text-4xl">
           {t("Landing.title")}
         </h1>
         <p className="mt-3 text-sm text-kiwi-700 sm:text-base">
@@ -30,7 +30,7 @@ function Landing() {
           language is switched from the header toggle, not a separate step. */}
       <section className="mt-8 sm:mt-12">
         <div className="mb-5 text-center">
-          <h2 className="text-lg font-semibold text-kiwi-900 sm:text-xl">
+          <h2 className="font-display text-lg font-bold text-kiwi-900 sm:text-xl">
             {t("Landing.personaPrompt")}
           </h2>
           <p className="mt-1 text-sm text-kiwi-700">

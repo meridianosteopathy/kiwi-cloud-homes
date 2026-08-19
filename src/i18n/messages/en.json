@@ -1,7 +1,7 @@
 {
   "Site": {
     "name": "Kiwi Cloud Homes",
-    "tagline": "Short-stay homes in New Zealand for Chinese guests"
+    "tagline": "Short-stay homes in New Zealand"
   },
   "Nav": {
     "home": "Home",
@@ -53,6 +53,8 @@
   "SchoolSearch": {
     "title": "Schools & kindergartens near the home",
     "subtitle": "Within {radius} km of the home, sorted nearest first.",
+    "subtitleMultiHome": "Within {radius} km of our homes, sorted by the nearest one.",
+    "nearestHome": "Nearest home: {home}",
     "filterLabel": "Filter by name",
     "filterPlaceholder": "Filter (English or Chinese)",
     "noMatches": "No matches — try a different keyword.",
@@ -74,11 +76,13 @@
   },
   "SchoolMatch": {
     "noSelection": "Pick a school or kindergarten on the left to see distance, walking and driving times from the home.",
-    "distance": "Distance from the home",
+    "perHomeIntro": "How each of our homes sits relative to this school — closest first.",
+    "noDistanceForHome": "School distances for this home aren't available yet.",
+    "distance": "Distance from the home (approx. by road)",
     "walking": "Walking",
     "driving": "Driving",
     "advice": "Host advice",
-    "estimateNote": "Walking and driving times are estimates from average pace (5 km/h walking, 40 km/h urban driving). Real times vary with traffic.",
+    "estimateNote": "Distances are estimated by road from the straight-line distance, not from a routed journey, so they can differ from Google Maps by a few hundred metres. Walking and driving times assume average pace (5 km/h walking, 40 km/h urban driving) and vary with traffic. Check your maps app before relying on a tight school run.",
     "durationMin": "{min, plural, one {# min} other {# min}}",
     "durationHour": "{h, plural, one {# h} other {# h}}",
     "durationHourMin": "{h, plural, one {# h} other {# h}} {min} min",
@@ -142,6 +146,12 @@
       "autumn": "Best window for actual school visits — schools are in session, easy to observe and meet staff.",
       "winter": "Lowest prices. Ski-trip dates push some weekends higher; confirm school holidays before planning visits."
     }
+  },
+  "Homes": {
+    "title": "Our homes ({count})",
+    "subtitle": "Each home has its own calendar, price and booking — pick the one that suits your trip.",
+    "jumpLabel": "Jump to a home",
+    "none": "No homes are listed right now. Please check back soon."
   },
   "Property": {
     "perNight": "per night",

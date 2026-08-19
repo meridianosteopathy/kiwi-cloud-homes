@@ -4,8 +4,8 @@
 
 html,
 body {
-  background-color: #f8faf8;
-  color: #1f3e1f;
+  background-color: #f6fafd;
+  color: #163a5b;
 }
 
 /* Improve CJK rendering */
@@ -14,10 +14,10 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* react-day-picker theme — kiwi green accents, Airbnb-style range visuals. */
+/* react-day-picker theme — brand blue accents, Airbnb-style range visuals. */
 .rdp-kiwi {
-  --rdp-accent-color: #306330; /* kiwi-600 */
-  --rdp-accent-background-color: #f1f7f1; /* kiwi-50 */
+  --rdp-accent-color: #2c6e9e; /* kiwi-600 — brand blue */
+  --rdp-accent-background-color: #f3f8fc; /* kiwi-50 */
   --rdp-day-font: inherit;
   --rdp-day-height: 2.5rem;
   --rdp-day-width: 2.5rem;
@@ -43,7 +43,7 @@ body {
 /* Past / unavailable dates get a strikethrough — matches Airbnb. */
 .rdp-kiwi .rdp-disabled .rdp-day_button {
   text-decoration: line-through;
-  color: #8ebd8e; /* kiwi-300 */
+  color: #7cb8e0; /* kiwi-300 */
 }
 
 /* Range edges (check-in / check-out): solid kiwi pill. */
@@ -56,7 +56,7 @@ body {
 /* In-range dates: tinted background, square (not pill) so they merge. */
 .rdp-kiwi .rdp-range_middle .rdp-day_button {
   background-color: var(--rdp-accent-background-color);
-  color: #1f3e1f;
+  color: #163a5b;
   border-radius: 0;
 }
 
@@ -68,11 +68,11 @@ body {
 
 .rdp-kiwi .rdp-month_caption {
   font-weight: 600;
-  color: #1a331a; /* kiwi-900 */
+  color: #163a5b; /* kiwi-900 */
 }
 
 .rdp-kiwi .rdp-weekday {
-  color: #306330; /* kiwi-600 */
+  color: #2c6e9e; /* kiwi-600 — brand blue */
   font-weight: 500;
   font-size: 0.75rem;
 }
@@ -86,7 +86,7 @@ body {
 .rdp-kiwi .rdp-too-short .rdp-day_button {
   outline: 1px solid var(--rdp-accent-color);
   outline-offset: -2px;
-  color: #1f3e1f; /* kiwi-900 — keep readable, not greyed */
+  color: #163a5b; /* kiwi-900 — keep readable, not greyed */
 }
 .rdp-too-short-tooltip {
   position: absolute;
@@ -95,7 +95,7 @@ body {
   transform: translateX(-50%);
   white-space: nowrap;
   background: white;
-  color: #1f3e1f;
+  color: #163a5b;
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 4px;
   padding: 4px 8px;

@@ -1,19 +1,55 @@
 import { setRequestLocale } from "next-intl/server";
 import { useTranslations } from "next-intl";
-import { PropertyCard } from "@/components/PropertyCard";
+import { PropertyList } from "@/components/PropertyList";
 import { SchoolMatch } from "@/components/SchoolMatch";
 import { SchoolSearch } from "@/components/SchoolSearch";
 import { SeasonalGuide } from "@/components/SeasonalGuide";
+import { homeSummary, type HomeSummary } from "@/content/homes";
 import { defaultDatesForMonth } from "@/lib/dates";
 import { getHostawayClient, type HostawayListing } from "@/lib/hostaway";
-import { findSchool } from "@/lib/schools";
+import { distanceFrom, findSchool, type School } from "@/lib/schools";
 import { findSeason, type SeasonId } from "@/lib/seasons";
+
+// Listing/price/availability are live data — render per request so the page
+// reflects the current Hostaway state and the build never blocks on the API.
+export const dynamic = "force-dynamic";
 
 type SearchParams = Record<string, string | string[] | undefined>;
 
 function pickString(sp: SearchParams, key: string): string | null {
   const v = sp[key];
   return typeof v === "string" && v.length > 0 ? v : null;
+}
+
+/**
+ * Puts the home closest to the chosen school first, so a guest comparing
+ * houses for a specific school sees the most relevant one at the top.
+ * Homes we can't measure keep their configured order, after the rest.
+ */
+function orderByDistanceToSchool(
+  listings: HostawayListing[],
+  schoolId: string | null,
+): HostawayListing[] {
+  const school = schoolId ? findSchool(schoolId) : undefined;
+  if (!school) return listings;
+
+  return [...listings].sort((a, b) => {
+    const da = distanceToSchool(a, school);
+    const db = distanceToSchool(b, school);
+    if (da === null && db === null) return 0;
+    if (da === null) return 1;
+    if (db === null) return -1;
+    return da - db;
+  });
+}
+
+function distanceToSchool(
+  listing: HostawayListing,
+  school: School,
+): number | null {
+  const coordinates = homeSummary(listing).coordinates;
+  if (!coordinates) return null;
+  return distanceFrom(school, coordinates)?.distanceKm ?? null;
 }
 
 export default async function SchoolPage({
@@ -42,12 +78,13 @@ export default async function SchoolPage({
       : null;
 
   const { checkIn, checkOut } = defaultDatesForMonth(month);
-  const listing = await getHostawayClient().getListing();
+  const listings = await getHostawayClient().listListings();
   const inquiryEmail = process.env.INQUIRY_EMAIL || null;
 
   return (
     <SchoolJourney
-      listing={listing}
+      listings={orderByDistanceToSchool(listings, schoolId)}
+      homes={listings.map(homeSummary)}
       schoolId={schoolId}
       seasonId={seasonId}
       month={month}
@@ -59,7 +96,8 @@ export default async function SchoolPage({
 }
 
 function SchoolJourney({
-  listing,
+  listings,
+  homes,
   schoolId,
   seasonId,
   month,
@@ -67,7 +105,8 @@ function SchoolJourney({
   defaultCheckOut,
   inquiryEmail,
 }: {
-  listing: HostawayListing;
+  listings: HostawayListing[];
+  homes: HomeSummary[];
   schoolId: string | null;
   seasonId: SeasonId | null;
   month: number | null;
@@ -80,30 +119,29 @@ function SchoolJourney({
   return (
     <div className="mx-auto max-w-6xl px-4 pb-20 pt-12">
       <header className="mx-auto max-w-3xl text-center">
-        <h1 className="text-3xl font-semibold text-kiwi-900 sm:text-4xl">
+        <h1 className="font-display text-3xl font-bold text-kiwi-900 sm:text-4xl">
           {t("title")}
         </h1>
         <p className="mt-4 text-base text-kiwi-700">{t("intro")}</p>
       </header>
 
       <div className="mt-10 grid gap-5 lg:grid-cols-2">
-        <SchoolSearch selectedSchoolId={schoolId} />
+        <SchoolSearch selectedSchoolId={schoolId} homes={homes} />
         <SeasonalGuide selectedSeasonId={seasonId} selectedMonth={month} />
       </div>
 
       <div className="mt-5">
-        <SchoolMatch schoolId={schoolId} />
+        <SchoolMatch schoolId={schoolId} homes={homes} />
       </div>
 
-      <section className="mt-10">
-        <PropertyCard
-          listing={listing}
+      <div className="mt-10">
+        <PropertyList
+          listings={listings}
           inquiryEmail={inquiryEmail}
           defaultCheckIn={defaultCheckIn}
           defaultCheckOut={defaultCheckOut}
         />
-      </section>
+      </div>
     </div>
   );
 }
-

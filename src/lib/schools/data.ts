@@ -2,9 +2,17 @@
 // Source: MoE Directory of Educational Institutions + ECE Services Directory.
 // Re-run `node scripts/import-schools.mjs` to refresh.
 
-import type { City, District, Region, School } from "./types";
+import type { City, District, Origin, Region, School } from "./types";
 
 export const RADIUS_KM = 25;
+
+/**
+ * The point this snapshot was centred on: schools further than RADIUS_KM from
+ * here were left out, and each school's `distanceKm` / `zone` is measured
+ * from here. A home standing at this origin can use those baked values even
+ * when the snapshot carries no per-school coordinates.
+ */
+export const SNAPSHOT_ORIGIN: Origin = { lat: -43.5788, lng: 172.562 };
 
 export const REGIONS: Region[] = [
   { id: "canterbury", name: { zhCN: "坎特伯雷大区", en: "Canterbury" } },
@@ -218,7 +226,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 0.4,
-    "zone": "in-zone"
+    "zone": "in-zone",
+    "lat": -43.5757,
+    "lng": 172.5633
   },
   {
     "id": "kidsfirst-kindergartens-wales-street-5462",
@@ -231,7 +241,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 0.5,
-    "zone": "in-zone"
+    "zone": "in-zone",
+    "lat": -43.57628,
+    "lng": 172.55727
   },
   {
     "id": "kidsfirst-kindergartens-halswell-5545",
@@ -244,7 +256,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 0.6,
-    "zone": "in-zone"
+    "zone": "in-zone",
+    "lat": -43.5794,
+    "lng": 172.56985
   },
   {
     "id": "te-whare-rama-light-house-early-learning-centre-balcairn-street-70364",
@@ -257,7 +271,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 0.6,
-    "zone": "in-zone"
+    "zone": "in-zone",
+    "lat": -43.57448,
+    "lng": 172.56642
   },
   {
     "id": "beststart-halswell-road-45051",
@@ -270,7 +286,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 0.7,
-    "zone": "in-zone"
+    "zone": "in-zone",
+    "lat": -43.57536,
+    "lng": 172.56856
   },
   {
     "id": "halswell-learning-tree-46387",
@@ -283,7 +301,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 0.8,
-    "zone": "in-zone"
+    "zone": "in-zone",
+    "lat": -43.58298,
+    "lng": 172.56964
   },
   {
     "id": "oaklands-te-kura-o-waka-3450",
@@ -296,7 +316,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 0.8,
-    "zone": "in-zone"
+    "zone": "in-zone",
+    "lat": -43.57158,
+    "lng": 172.56465
   },
   {
     "id": "halswell-playcentre-70060",
@@ -309,7 +331,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 0.9,
-    "zone": "in-zone"
+    "zone": "in-zone",
+    "lat": -43.58439,
+    "lng": 172.5697
   },
   {
     "id": "te-m-taitihi-proposed-opening-date-2027-01-25-554",
@@ -322,7 +346,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 0.9,
-    "zone": "in-zone"
+    "zone": "in-zone",
+    "lat": -43.57476,
+    "lng": 172.57235
   },
   {
     "id": "seedlings-early-learning-centre-46309",
@@ -335,7 +361,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 1.1,
-    "zone": "in-zone"
+    "zone": "in-zone",
+    "lat": -43.578,
+    "lng": 172.54785
   },
   {
     "id": "halswell-nest-early-learning-46767",
@@ -348,7 +376,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 1.2,
-    "zone": "in-zone"
+    "zone": "in-zone",
+    "lat": -43.58852,
+    "lng": 172.56959
   },
   {
     "id": "te-k-hanga-reo-o-te-wh-nau-tahi-70613",
@@ -361,7 +391,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 1.2,
-    "zone": "in-zone"
+    "zone": "in-zone",
+    "lat": -43.5825,
+    "lng": 172.54769
   },
   {
     "id": "halswell-quarry-preschool-47894",
@@ -374,7 +406,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 1.3,
-    "zone": "in-zone"
+    "zone": "in-zone",
+    "lat": -43.58759,
+    "lng": 172.57174
   },
   {
     "id": "stables-montessori-sparks-road-48289",
@@ -387,7 +421,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 1.5,
-    "zone": "in-zone"
+    "zone": "in-zone",
+    "lat": -43.58302,
+    "lng": 172.57924
   },
   {
     "id": "beststart-aidanfield-65135",
@@ -400,7 +436,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 1.5,
-    "zone": "in-zone"
+    "zone": "in-zone",
+    "lat": -43.56584,
+    "lng": 172.56798
   },
   {
     "id": "te-kura-o-te-tauawa-halswell-school-3366",
@@ -413,7 +451,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 1.5,
-    "zone": "in-zone"
+    "zone": "in-zone",
+    "lat": -43.59043,
+    "lng": 172.57071
   },
   {
     "id": "aidanfield-christian-preschool-45753",
@@ -426,7 +466,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 1.8,
-    "zone": "in-zone"
+    "zone": "in-zone",
+    "lat": -43.56383,
+    "lng": 172.57099
   },
   {
     "id": "aidanfield-christian-school-82",
@@ -439,7 +481,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "secondary",
     "distanceKm": 1.8,
-    "zone": "in-zone"
+    "zone": "in-zone",
+    "lat": -43.56377,
+    "lng": 172.571
   },
   {
     "id": "knights-stream-school-mingimingi-hautoa-579",
@@ -452,7 +496,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 2.1,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.57086,
+    "lng": 172.53793
   },
   {
     "id": "seedlings-early-learning-centre-knights-stream-park-47132",
@@ -465,7 +511,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 2.2,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.57055,
+    "lng": 172.53707
   },
   {
     "id": "educare-wigram-45380",
@@ -478,7 +526,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 2.3,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.5609,
+    "lng": 172.5484
   },
   {
     "id": "the-stables-montessori-47737",
@@ -491,7 +541,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 2.3,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.56328,
+    "lng": 172.58093
   },
   {
     "id": "beststart-halswell-junction-47928",
@@ -504,7 +556,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 2.3,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.56743,
+    "lng": 172.53851
   },
   {
     "id": "kindercare-learning-centres-aidanfield-47421",
@@ -517,7 +571,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 2.4,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.56202,
+    "lng": 172.57974
   },
   {
     "id": "little-house-montessori-zinnia-way-48096",
@@ -530,7 +586,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 2.6,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.56045,
+    "lng": 172.54146
   },
   {
     "id": "kidsfirst-kindergartens-hoon-hay-5452",
@@ -543,7 +601,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 2.7,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.56283,
+    "lng": 172.58744
   },
   {
     "id": "kindercare-learning-centres-wigram-skies-219-46757",
@@ -556,7 +616,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 2.8,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.55368,
+    "lng": 172.55744
   },
   {
     "id": "hoon-hay-community-pre-school-70367",
@@ -569,7 +631,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 2.8,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.56372,
+    "lng": 172.59038
   },
   {
     "id": "te-k-manawa-rowley-school-3492",
@@ -582,7 +646,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 2.8,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.56225,
+    "lng": 172.58777
   },
   {
     "id": "kidsfirst-kindergartens-mathers-road-5437",
@@ -595,7 +661,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 2.9,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.56352,
+    "lng": 172.59079
   },
   {
     "id": "wigram-primary-school-te-piki-k-hu-3505",
@@ -608,7 +676,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 2.9,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.55395,
+    "lng": 172.55152
   },
   {
     "id": "little-house-montessori-47194",
@@ -621,7 +691,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 3.1,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.55772,
+    "lng": 172.53771
   },
   {
     "id": "hillmorton-nest-46045",
@@ -634,7 +706,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 3.3,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.55893,
+    "lng": 172.59299
   },
   {
     "id": "pandas-home-care-46806",
@@ -647,7 +721,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 3.4,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.55187,
+    "lng": 172.54137
   },
   {
     "id": "pandas-home-based-childcare-47632",
@@ -660,7 +736,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 3.4,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.55187,
+    "lng": 172.54134
   },
   {
     "id": "airdmhor-montessori-65048",
@@ -673,7 +751,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 3.4,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.55623,
+    "lng": 172.59008
   },
   {
     "id": "hillmorton-high-school-339",
@@ -686,7 +766,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "secondary",
     "distanceKm": 3.4,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.55768,
+    "lng": 172.59278
   },
   {
     "id": "beststart-wigram-65158",
@@ -699,7 +781,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 3.5,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.54928,
+    "lng": 172.5462
   },
   {
     "id": "prebbleton-playcentre-70104",
@@ -712,7 +796,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 3.6,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.5869,
+    "lng": 172.51814
   },
   {
     "id": "trillium-montessori-school-ltd-47227",
@@ -725,7 +811,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 3.7,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.55177,
+    "lng": 172.53424
   },
   {
     "id": "te-kura-o-m-kihi-spreydon-school-3512",
@@ -738,7 +826,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 3.7,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.55757,
+    "lng": 172.59793
   },
   {
     "id": "kidsfirst-kindergartens-wigram-5463",
@@ -751,7 +841,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 3.8,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.54774,
+    "lng": 172.54096
   },
   {
     "id": "prebbleton-early-learners-45616",
@@ -764,7 +856,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 3.8,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.57803,
+    "lng": 172.51451
   },
   {
     "id": "cashmere-early-learning-centre-45406",
@@ -777,7 +871,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 3.9,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.57423,
+    "lng": 172.61044
   },
   {
     "id": "pennylane-early-childhood-centre-45635",
@@ -790,7 +886,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 3.9,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.55829,
+    "lng": 172.60162
   },
   {
     "id": "stem-montessori-48230",
@@ -803,7 +901,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 3.9,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.55346,
+    "lng": 172.59521
   },
   {
     "id": "an-nur-childcare-centre-65070",
@@ -816,7 +916,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 3.9,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.54721,
+    "lng": 172.54148
   },
   {
     "id": "kiwi-kids-preschool-70479",
@@ -829,7 +931,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 3.9,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.55034,
+    "lng": 172.59072
   },
   {
     "id": "hoon-hay-te-kura-k-aka-3379",
@@ -842,7 +946,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 3.9,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.56487,
+    "lng": 172.6066
   },
   {
     "id": "prebbleton-school-3478",
@@ -855,7 +961,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 3.9,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.57707,
+    "lng": 172.51306
   },
   {
     "id": "cherry-s-on-maryhill-45151",
@@ -868,7 +976,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 4,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.56287,
+    "lng": 172.60649
   },
   {
     "id": "our-lady-of-the-assumption-school-chch-3461",
@@ -881,7 +991,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 4,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.56479,
+    "lng": 172.60708
   },
   {
     "id": "hatch-early-learning-centre-47797",
@@ -894,7 +1006,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 4.1,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.57897,
+    "lng": 172.51108
   },
   {
     "id": "prebbleton-childcare-and-education-centre-65063",
@@ -907,7 +1021,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 4.1,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.5811,
+    "lng": 172.51179
   },
   {
     "id": "prebbleton-nursery-and-education-centre-65177",
@@ -920,7 +1036,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 4.1,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.58113,
+    "lng": 172.51179
   },
   {
     "id": "brynley-street-nursery-and-preschool-70119",
@@ -933,7 +1051,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 4.1,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.54817,
+    "lng": 172.53272
   },
   {
     "id": "te-whare-rama-light-house-early-learning-centre-edinburgh-street-45785",
@@ -946,7 +1066,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 4.3,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.55294,
+    "lng": 172.60153
   },
   {
     "id": "te-whare-rama-light-house-early-learning-centre-cobham-street-65167",
@@ -959,7 +1081,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 4.4,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.55657,
+    "lng": 172.60719
   },
   {
     "id": "te-whare-rama-light-house-early-learning-centre-lyttelton-street-70451",
@@ -972,7 +1096,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 4.4,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.55613,
+    "lng": 172.60735
   },
   {
     "id": "te-manu-tukutuku-south-hornby-school-3507",
@@ -985,7 +1111,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 4.4,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.54712,
+    "lng": 172.52905
   },
   {
     "id": "lyttelton-street-playcentre-70084",
@@ -998,7 +1126,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 4.5,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.56549,
+    "lng": 172.61453
   },
   {
     "id": "beststart-pioneer-70429",
@@ -1011,7 +1141,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 4.5,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.56557,
+    "lng": 172.61416
   },
   {
     "id": "tkkm-o-te-whanau-tahi-1618",
@@ -1024,7 +1156,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "secondary",
     "distanceKm": 4.5,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.56459,
+    "lng": 172.61459
   },
   {
     "id": "te-ara-koropiko-west-spreydon-school-3588",
@@ -1037,7 +1171,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 4.5,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.55963,
+    "lng": 172.6113
   },
   {
     "id": "sancta-maria-montessori-preschool-46127",
@@ -1050,7 +1186,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 4.6,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.53724,
+    "lng": 172.56781
   },
   {
     "id": "kidsfirst-kindergartens-hornby-5425",
@@ -1063,7 +1201,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 4.7,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.54452,
+    "lng": 172.52888
   },
   {
     "id": "kidditech-early-learning-centre-70095",
@@ -1076,7 +1216,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 4.7,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.5596,
+    "lng": 172.61385
   },
   {
     "id": "springs-community-early-learning-centre-70371",
@@ -1089,7 +1231,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 4.7,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.53647,
+    "lng": 172.55626
   },
   {
     "id": "our-lady-of-victories-3463",
@@ -1102,7 +1246,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 4.7,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.53621,
+    "lng": 172.55912
   },
   {
     "id": "riccarton-high-school-334",
@@ -1115,7 +1261,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "secondary",
     "distanceKm": 4.8,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.53589,
+    "lng": 172.56636
   },
   {
     "id": "middleton-grange-school-335",
@@ -1128,7 +1276,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "secondary",
     "distanceKm": 4.9,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.53625,
+    "lng": 172.57652
   },
   {
     "id": "ladbrooks-school-3402",
@@ -1141,7 +1291,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 4.9,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.61767,
+    "lng": 172.53233
   },
   {
     "id": "church-corner-nest-46443",
@@ -1154,7 +1306,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 5,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.53381,
+    "lng": 172.56484
   },
   {
     "id": "cornerstone-christian-early-learning-centre-middleton-70385",
@@ -1167,7 +1321,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 5,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.53479,
+    "lng": 172.5753
   },
   {
     "id": "st-thomas-of-canterbury-college-331",
@@ -1180,7 +1336,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "secondary",
     "distanceKm": 5,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.53361,
+    "lng": 172.55621
   },
   {
     "id": "beststart-barrington-47725",
@@ -1193,7 +1351,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 5.1,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.55214,
+    "lng": 172.61276
   },
   {
     "id": "te-k-pehu-riccarton-school-3485",
@@ -1206,7 +1366,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 5.1,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.53336,
+    "lng": 172.56414
   },
   {
     "id": "new-zealand-it-college-proposed-4539",
@@ -1219,7 +1381,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "secondary",
     "distanceKm": 5.1,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.54514,
+    "lng": 172.605
   },
   {
     "id": "riccarton-park-montessori-preschool-65011",
@@ -1232,7 +1396,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 5.2,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.53369,
+    "lng": 172.54647
   },
   {
     "id": "cashmere-high-school-340",
@@ -1245,7 +1411,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "secondary",
     "distanceKm": 5.2,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.56457,
+    "lng": 172.62386
   },
   {
     "id": "kidsfirst-kindergartens-cashmere-5415",
@@ -1258,7 +1426,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 5.3,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.57859,
+    "lng": 172.62769
   },
   {
     "id": "st-peter-s-anglican-preschool-47728",
@@ -1271,7 +1441,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 5.3,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.53117,
+    "lng": 172.56894
   },
   {
     "id": "kindercare-learning-centres-addington-70071",
@@ -1284,7 +1456,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 5.3,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.54022,
+    "lng": 172.59967
   },
   {
     "id": "rosy-cheeks-early-learning-centre-70151",
@@ -1297,7 +1471,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 5.3,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.56367,
+    "lng": 172.62481
   },
   {
     "id": "hornby-high-school-338",
@@ -1310,7 +1486,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "secondary",
     "distanceKm": 5.3,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.53818,
+    "lng": 172.52764
   },
   {
     "id": "barnardos-hornby-pasifika-early-learning-centre-47214",
@@ -1323,7 +1501,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 5.4,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.5385,
+    "lng": 172.52495
   },
   {
     "id": "beststart-hei-hei-70008",
@@ -1336,7 +1516,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 5.5,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.53785,
+    "lng": 172.5228
   },
   {
     "id": "sacred-heart-school-christchurch-3270",
@@ -1349,7 +1531,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 5.5,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.54607,
+    "lng": 172.61276
   },
   {
     "id": "hornby-primary-school-3380",
@@ -1362,7 +1546,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 5.5,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.53871,
+    "lng": 172.52263
   },
   {
     "id": "wharenui-school-3591",
@@ -1375,7 +1561,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 5.5,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.53631,
+    "lng": 172.59674
   },
   {
     "id": "deb-s-place-early-learning-centre-48027",
@@ -1388,7 +1576,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 5.6,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.54629,
+    "lng": 172.61533
   },
   {
     "id": "portobelo-avonhead-70033",
@@ -1401,7 +1591,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 5.6,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.5283,
+    "lng": 172.56115
   },
   {
     "id": "somerfield-community-playcentre-70120",
@@ -1414,7 +1606,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 5.6,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.55977,
+    "lng": 172.62695
   },
   {
     "id": "villa-maria-college-326",
@@ -1427,7 +1621,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "secondary",
     "distanceKm": 5.6,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.52831,
+    "lng": 172.56757
   },
   {
     "id": "annabel-s-educare-somerfield-46316",
@@ -1440,7 +1636,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 5.7,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.5619,
+    "lng": 172.62817
   },
   {
     "id": "kindercare-learning-centres-avonhead-211-70163",
@@ -1453,7 +1651,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 5.7,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.52721,
+    "lng": 172.55777
   },
   {
     "id": "conductive-education-canterbury-inc-70350",
@@ -1466,7 +1666,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 5.7,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.54764,
+    "lng": 172.61822
   },
   {
     "id": "addington-te-kura-taumatua-3271",
@@ -1479,7 +1681,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 5.7,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.54786,
+    "lng": 172.61824
   },
   {
     "id": "cashmere-primary-te-pae-kerer-3310",
@@ -1492,7 +1696,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 5.7,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.57642,
+    "lng": 172.63255
   },
   {
     "id": "kahikatea-kirkwood-intermediate-3396",
@@ -1505,7 +1711,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "intermediate",
     "distanceKm": 5.7,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.53061,
+    "lng": 172.5855
   },
   {
     "id": "somerfield-te-kura-wairepo-3506",
@@ -1518,7 +1726,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 5.7,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.56164,
+    "lng": 172.62854
   },
   {
     "id": "kidsfirst-kindergartens-hei-hei-5422",
@@ -1531,7 +1741,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 5.8,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.53597,
+    "lng": 172.52191
   },
   {
     "id": "kidsfirst-kindergartens-mckenzie-5435",
@@ -1544,7 +1756,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 5.8,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.53119,
+    "lng": 172.59153
   },
   {
     "id": "children-s-house-montessori-preschool-48394",
@@ -1557,7 +1771,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 5.8,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.5324,
+    "lng": 172.59617
   },
   {
     "id": "lalaga-preschool-65088",
@@ -1570,7 +1786,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 5.8,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.54703,
+    "lng": 172.61891
   },
   {
     "id": "beststart-riccarton-65098",
@@ -1583,7 +1801,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 5.8,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.53158,
+    "lng": 172.59289
   },
   {
     "id": "kindercare-learning-centres-riccarton-70575",
@@ -1596,7 +1816,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 5.8,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.53001,
+    "lng": 172.58665
   },
   {
     "id": "te-k-hanga-reo-o-te-horomako-o-te-huruhuru-70609",
@@ -1609,7 +1831,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 5.8,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.5394,
+    "lng": 172.51556
   },
   {
     "id": "st-bernadette-s-school-hornby-3521",
@@ -1622,7 +1846,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 5.8,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.53348,
+    "lng": 172.52534
   },
   {
     "id": "busy-bees-avonhead-70381",
@@ -1635,7 +1861,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 5.9,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.52626,
+    "lng": 172.5545
   },
   {
     "id": "christchurch-south-karamata-intermediate-school-3318",
@@ -1648,7 +1876,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "intermediate",
     "distanceKm": 5.9,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.55217,
+    "lng": 172.62533
   },
   {
     "id": "kidsfirst-kindergartens-broomfield-5549",
@@ -1661,7 +1891,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 6,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.52939,
+    "lng": 172.53238
   },
   {
     "id": "waka-huia-childcare-70423",
@@ -1674,7 +1906,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 6,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.55907,
+    "lng": 172.63166
   },
   {
     "id": "ilam-school-3384",
@@ -1687,7 +1921,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 6,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.52641,
+    "lng": 172.5797
   },
   {
     "id": "st-teresa-s-school-riccarton-3543",
@@ -1700,7 +1936,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 6,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.52976,
+    "lng": 172.59214
   },
   {
     "id": "kidsfirst-kindergartens-selwyn-street-5454",
@@ -1713,7 +1951,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 6.1,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.54559,
+    "lng": 172.62208
   },
   {
     "id": "annabel-s-educare-avonhead-ltd-45248",
@@ -1726,7 +1966,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 6.1,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.52399,
+    "lng": 172.56068
   },
   {
     "id": "montessori-courtyard-preschool-70475",
@@ -1739,7 +1981,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 6.1,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.55929,
+    "lng": 172.63255
   },
   {
     "id": "avonhead-school-rakipaoa-3287",
@@ -1752,7 +1996,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 6.1,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.5241,
+    "lng": 172.5595
   },
   {
     "id": "pebbles-montessori-cashmere-46833",
@@ -1765,7 +2011,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 6.2,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.56562,
+    "lng": 172.63723
   },
   {
     "id": "ilam-early-learning-centre-70493",
@@ -1778,7 +2026,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 6.2,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.52303,
+    "lng": 172.5669
   },
   {
     "id": "te-kura-o-huriawa-thorrington-3557",
@@ -1791,7 +2041,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 6.2,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.5663,
+    "lng": 172.63657
   },
   {
     "id": "kindercare-learning-centres-spreydon-65114",
@@ -1804,7 +2056,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 6.3,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.55155,
+    "lng": 172.63057
   },
   {
     "id": "landsdowne-terrace-playcentre-70032",
@@ -1817,7 +2071,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 6.3,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.57115,
+    "lng": 172.6397
   },
   {
     "id": "beststart-cashmere-70332",
@@ -1830,7 +2086,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 6.3,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.56064,
+    "lng": 172.63615
   },
   {
     "id": "beststart-beckenham-65077",
@@ -1843,7 +2101,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 6.4,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.55896,
+    "lng": 172.63707
   },
   {
     "id": "beststart-parkside-70551",
@@ -1856,7 +2116,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 6.4,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.53935,
+    "lng": 172.6197
   },
   {
     "id": "beststart-riccarton-park-48274",
@@ -1869,7 +2131,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 6.5,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.52233,
+    "lng": 172.54014
   },
   {
     "id": "st-peter-s-school-te-kura-haoika-3542",
@@ -1882,7 +2146,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 6.5,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.55977,
+    "lng": 172.6377
   },
   {
     "id": "kidsfirst-kindergartens-avonhead-5409",
@@ -1895,7 +2161,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 6.6,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.51996,
+    "lng": 172.55624
   },
   {
     "id": "montana-early-learning-centre-70021",
@@ -1908,7 +2176,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 6.6,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.52077,
+    "lng": 172.58004
   },
   {
     "id": "cherry-s-early-learning-centre-70342",
@@ -1921,7 +2191,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 6.6,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.56707,
+    "lng": 172.64175
   },
   {
     "id": "early-childhood-learning-centre-70491",
@@ -1934,7 +2206,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 6.6,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.52126,
+    "lng": 172.57983
   },
   {
     "id": "gilberthorpe-school-3346",
@@ -1947,7 +2221,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 6.6,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.52858,
+    "lng": 172.51853
   },
   {
     "id": "kidsfirst-kindergartens-riccarton-5450",
@@ -1960,7 +2236,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 6.7,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.52769,
+    "lng": 172.60526
   },
   {
     "id": "te-pito-o-te-puna-wai-o-waipapa-hagley-community-preschool-48026",
@@ -1973,7 +2251,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 6.7,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.53722,
+    "lng": 172.62281
   },
   {
     "id": "kindercare-learning-centres-fendalton-70543",
@@ -1986,7 +2266,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 6.7,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.52258,
+    "lng": 172.59256
   },
   {
     "id": "christchurch-boys-high-school-327",
@@ -1999,7 +2281,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "secondary",
     "distanceKm": 6.7,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.52481,
+    "lng": 172.59842
   },
   {
     "id": "te-puna-wai-o-waipapa-hagley-college-336",
@@ -2012,7 +2296,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "secondary",
     "distanceKm": 6.7,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.53724,
+    "lng": 172.62301
   },
   {
     "id": "medbury-preparatory-school-4118",
@@ -2025,7 +2311,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 6.7,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.52189,
+    "lng": 172.58911
   },
   {
     "id": "beststart-buchanans-road-45132",
@@ -2038,7 +2326,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 6.8,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.52607,
+    "lng": 172.51869
   },
   {
     "id": "grow-active-balfour-terrace-47550",
@@ -2051,7 +2341,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 6.8,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.53823,
+    "lng": 172.62552
   },
   {
     "id": "avonhead-playcentre-70022",
@@ -2064,7 +2356,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 6.8,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.51818,
+    "lng": 172.5724
   },
   {
     "id": "ilam-montessori-preschool-47787",
@@ -2077,7 +2371,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 6.9,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.51783,
+    "lng": 172.57809
   },
   {
     "id": "te-parito-k-whai-russley-school-3496",
@@ -2090,7 +2386,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 6.9,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.5179,
+    "lng": 172.5447
   },
   {
     "id": "kidsfirst-kindergartens-beckenham-5411",
@@ -2103,7 +2401,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 7,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.55926,
+    "lng": 172.6451
   },
   {
     "id": "woodlands-preschool-limited-huntsbury-46342",
@@ -2116,7 +2416,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 7,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.56583,
+    "lng": 172.64748
   },
   {
     "id": "the-activity-room-70544",
@@ -2129,7 +2431,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 7,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.53391,
+    "lng": 172.62355
   },
   {
     "id": "beckenham-te-kura-o-p-roto-3291",
@@ -2142,7 +2446,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 7,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.56288,
+    "lng": 172.64549
   },
   {
     "id": "jigsaw-preschool-yaldhurst-48073",
@@ -2155,7 +2461,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 7.1,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.5221,
+    "lng": 172.52197
   },
   {
     "id": "buchan-street-playcentre-48366",
@@ -2168,7 +2476,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 7.1,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.54644,
+    "lng": 172.63793
   },
   {
     "id": "russley-playcentre-70114",
@@ -2181,7 +2491,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 7.1,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.51602,
+    "lng": 172.54666
   },
   {
     "id": "christchurch-girls-high-school-te-kura-o-hine-waiora-328",
@@ -2194,7 +2506,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "secondary",
     "distanceKm": 7.2,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.5243,
+    "lng": 172.61137
   },
   {
     "id": "avonhead-early-edventurers-47972",
@@ -2207,7 +2521,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 7.3,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.51316,
+    "lng": 172.56161
   },
   {
     "id": "t-ora-fendalton-school-3338",
@@ -2220,7 +2536,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 7.3,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.51708,
+    "lng": 172.59115
   },
   {
     "id": "kidsfirst-kindergartens-ilam-5419",
@@ -2233,7 +2551,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 7.4,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.5135,
+    "lng": 172.57855
   },
   {
     "id": "globalkids-early-learning-centre-45566",
@@ -2246,7 +2566,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 7.4,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.55346,
+    "lng": 172.64756
   },
   {
     "id": "beststart-fendalton-46567",
@@ -2259,7 +2581,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 7.4,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.51984,
+    "lng": 172.60544
   },
   {
     "id": "the-wilderness-48123",
@@ -2272,7 +2596,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 7.4,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.51852,
+    "lng": 172.52268
   },
   {
     "id": "p-manawa-papa-hou-48253",
@@ -2285,7 +2611,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 7.4,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.53249,
+    "lng": 172.62764
   },
   {
     "id": "fendalton-playcentre-70052",
@@ -2298,7 +2626,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 7.4,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.51567,
+    "lng": 172.59102
   },
   {
     "id": "poppies-preschool-st-martins-70149",
@@ -2311,7 +2641,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 7.4,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.55641,
+    "lng": 172.64912
   },
   {
     "id": "huntsbury-preschool-incorporated-70373",
@@ -2324,7 +2656,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 7.4,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.56642,
+    "lng": 172.65203
   },
   {
     "id": "westburn-te-kura-o-hereora-3589",
@@ -2337,7 +2671,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 7.4,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.51215,
+    "lng": 172.57089
   },
   {
     "id": "kidsfirst-kindergartens-hargest-crescent-5421",
@@ -2350,7 +2686,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 7.5,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.54928,
+    "lng": 172.64589
   },
   {
     "id": "tuia-burnside-primary-school-3305",
@@ -2363,7 +2701,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 7.5,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.51274,
+    "lng": 172.58178
   },
   {
     "id": "st-michael-s-church-school-4136",
@@ -2376,7 +2716,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 7.5,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.53477,
+    "lng": 172.63306
   },
   {
     "id": "co-kids-christchurch-limited-47294",
@@ -2389,7 +2731,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 7.6,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.5407,
+    "lng": 172.64016
   },
   {
     "id": "grow-active-welles-st-47664",
@@ -2402,7 +2746,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 7.6,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.53725,
+    "lng": 172.63744
   },
   {
     "id": "sydenham-community-preschool-70463",
@@ -2415,7 +2761,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 7.6,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.54884,
+    "lng": 172.6472
   },
   {
     "id": "christ-s-college-330",
@@ -2428,7 +2776,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "secondary",
     "distanceKm": 7.6,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.52972,
+    "lng": 172.62712
   },
   {
     "id": "ao-tawhiti-unlimited-discovery-683",
@@ -2441,7 +2791,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "secondary",
     "distanceKm": 7.6,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.53594,
+    "lng": 172.63594
   },
   {
     "id": "merrin-school-ng-whet-kohara-3434",
@@ -2454,7 +2806,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 7.6,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.5105,
+    "lng": 172.55858
   },
   {
     "id": "fairleigh-kindergarten-70357",
@@ -2467,7 +2821,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 7.7,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.51912,
+    "lng": 172.61074
   },
   {
     "id": "waltham-school-3581",
@@ -2480,7 +2836,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 7.7,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.54899,
+    "lng": 172.64861
   },
   {
     "id": "kidsfirst-kindergartens-templeton-5459",
@@ -2493,7 +2851,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 7.8,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.55077,
+    "lng": 172.47385
   },
   {
     "id": "kidsfirst-kindergartens-hawthornden-road-5628",
@@ -2506,7 +2866,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 7.8,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.50941,
+    "lng": 172.5464
   },
   {
     "id": "fingerprints-christian-preschool-45055",
@@ -2519,7 +2881,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 7.8,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.55672,
+    "lng": 172.65339
   },
   {
     "id": "the-cathedral-grammar-school-pre-school-70472",
@@ -2532,7 +2896,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 7.8,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.52788,
+    "lng": 172.62879
   },
   {
     "id": "hillview-christian-school-341",
@@ -2545,7 +2911,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "secondary",
     "distanceKm": 7.8,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.55574,
+    "lng": 172.6528
   },
   {
     "id": "the-cathedral-grammar-school-368",
@@ -2558,7 +2926,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 7.8,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.52806,
+    "lng": 172.62856
   },
   {
     "id": "christ-the-king-school-burnside-3316",
@@ -2571,7 +2941,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 7.8,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.50915,
+    "lng": 172.57664
   },
   {
     "id": "wairarapa-cobham-intermediate-3323",
@@ -2584,7 +2956,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "intermediate",
     "distanceKm": 7.8,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.51047,
+    "lng": 172.58379
   },
   {
     "id": "st-martins-school-3534",
@@ -2597,7 +2971,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 7.8,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.56543,
+    "lng": 172.65723
   },
   {
     "id": "beststart-huntsbury-47961",
@@ -2610,7 +2986,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 7.9,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.56265,
+    "lng": 172.65721
   },
   {
     "id": "templeton-nursery-and-preschool-65072",
@@ -2623,7 +3001,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 7.9,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.55083,
+    "lng": 172.47127
   },
   {
     "id": "p-wakawaka-early-learning-centre-70338",
@@ -2636,7 +3016,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 7.9,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.54602,
+    "lng": 172.64931
   },
   {
     "id": "ara-early-learning-centre-70341",
@@ -2649,7 +3031,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 7.9,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.53801,
+    "lng": 172.64297
   },
   {
     "id": "te-kura-o-r-t-templeton-school-3555",
@@ -2662,7 +3046,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 7.9,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.55016,
+    "lng": 172.47236
   },
   {
     "id": "kidsfirst-kindergartens-trengrove-5460",
@@ -2675,7 +3061,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 8,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.50988,
+    "lng": 172.58866
   },
   {
     "id": "burnside-high-school-319",
@@ -2688,7 +3076,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "secondary",
     "distanceKm": 8,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.50732,
+    "lng": 172.57771
   },
   {
     "id": "rangi-ruru-girls-school-325",
@@ -2701,7 +3091,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "secondary",
     "distanceKm": 8,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.5189,
+    "lng": 172.61779
   },
   {
     "id": "broadfield-school-3301",
@@ -2714,7 +3106,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 8,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.6028,
+    "lng": 172.46794
   },
   {
     "id": "millie-s-house-armagh-st-47700",
@@ -2727,7 +3121,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 8.1,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.52859,
+    "lng": 172.63421
   },
   {
     "id": "te-waka-huruhurumanu-ki-otautahi-early-learning-centre-65143",
@@ -2740,7 +3136,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 8.1,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.53803,
+    "lng": 172.64499
   },
   {
     "id": "christchurch-rudolf-steiner-kindergarten-70445",
@@ -2753,7 +3151,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 8.1,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.5604,
+    "lng": 172.65931
   },
   {
     "id": "tafesilafa-i-early-learning-centre-telc-70550",
@@ -2766,7 +3166,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 8.1,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.53886,
+    "lng": 172.646
   },
   {
     "id": "rudolf-steiner-school-chch-419",
@@ -2779,7 +3181,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "secondary",
     "distanceKm": 8.1,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.56009,
+    "lng": 172.65913
   },
   {
     "id": "st-margaret-s-pre-school-46761",
@@ -2792,7 +3196,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 8.2,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.5192,
+    "lng": 172.62191
   },
   {
     "id": "giggles-and-scribbles-early-learning-centre-limited-46769",
@@ -2805,7 +3211,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 8.2,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.63188,
+    "lng": 172.49199
   },
   {
     "id": "learning-curves-montessori-lincoln-48144",
@@ -2818,7 +3226,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 8.2,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.63526,
+    "lng": 172.49613
   },
   {
     "id": "jeffrey-giraffe-early-learning-centre-65092",
@@ -2831,7 +3241,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 8.2,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.51087,
+    "lng": 172.60273
   },
   {
     "id": "the-rabbit-patch-preschool-70426",
@@ -2844,7 +3256,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 8.2,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.50589,
+    "lng": 172.57992
   },
   {
     "id": "te-k-hanga-reo-o-terepo-70606",
@@ -2857,7 +3271,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 8.2,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.55119,
+    "lng": 172.65574
   },
   {
     "id": "st-margaret-s-college-333",
@@ -2870,7 +3286,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "secondary",
     "distanceKm": 8.2,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.5191,
+    "lng": 172.62216
   },
   {
     "id": "catholic-cathedral-college-531",
@@ -2883,7 +3301,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "secondary",
     "distanceKm": 8.2,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.53766,
+    "lng": 172.6466
   },
   {
     "id": "st-patrick-s-school-bryndwr-3537",
@@ -2896,7 +3316,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 8.2,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.51124,
+    "lng": 172.60405
   },
   {
     "id": "tkkm-o-waitaha-4212",
@@ -2909,7 +3331,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "secondary",
     "distanceKm": 8.2,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.55118,
+    "lng": 172.65633
   },
   {
     "id": "kidsfirst-kindergartens-opawa-st-martins-5443",
@@ -2922,7 +3346,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 8.3,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.55964,
+    "lng": 172.66138
   },
   {
     "id": "minnies-pre-school-70411",
@@ -2935,7 +3361,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 8.3,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.51228,
+    "lng": 172.60825
   },
   {
     "id": "elmwood-normal-school-3334",
@@ -2948,7 +3376,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 8.4,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.51381,
+    "lng": 172.61476
   },
   {
     "id": "st-mark-s-school-christchurch-4135",
@@ -2961,7 +3391,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 8.4,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.55289,
+    "lng": 172.65931
   },
   {
     "id": "discovery-junction-47599",
@@ -2974,7 +3406,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 8.5,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.55292,
+    "lng": 172.66146
   },
   {
     "id": "selwyn-house-preschool-65087",
@@ -2987,7 +3421,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 8.5,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.51658,
+    "lng": 172.62282
   },
   {
     "id": "selwyn-house-school-4138",
@@ -3000,7 +3436,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 8.5,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.51664,
+    "lng": 172.62301
   },
   {
     "id": "beststart-salisbury-street-70447",
@@ -3013,7 +3451,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 8.6,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.52461,
+    "lng": 172.63831
   },
   {
     "id": "te-kura-o-p-waho-opawa-school-3455",
@@ -3026,7 +3466,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 8.6,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.55566,
+    "lng": 172.66449
   },
   {
     "id": "kidsfirst-kindergartens-lincoln-5548",
@@ -3039,7 +3481,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 8.7,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.63569,
+    "lng": 172.48775
   },
   {
     "id": "kindercare-learning-centres-christchurch-cbd-47366",
@@ -3052,7 +3496,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 8.7,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.52857,
+    "lng": 172.64437
   },
   {
     "id": "rhyme-and-reason-early-learning-centre-48107",
@@ -3065,7 +3511,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 8.7,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.55224,
+    "lng": 172.66305
   },
   {
     "id": "te-kura-o-hinetahi-governors-bay-3354",
@@ -3078,7 +3526,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 8.7,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.62399,
+    "lng": 172.64999
   },
   {
     "id": "he-t-wai-m-tauranga-heaton-normal-intermediate-3372",
@@ -3091,7 +3541,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "intermediate",
     "distanceKm": 8.7,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.51041,
+    "lng": 172.61541
   },
   {
     "id": "little-cubs-early-learning-centre-48079",
@@ -3104,7 +3556,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 8.8,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.54672,
+    "lng": 172.6621
   },
   {
     "id": "lollipops-blighs-road-70145",
@@ -3117,7 +3571,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 8.8,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.50521,
+    "lng": 172.6011
   },
   {
     "id": "te-k-hanga-reo-o-te-hohepa-70608",
@@ -3130,7 +3586,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 8.8,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.53769,
+    "lng": 172.65488
   },
   {
     "id": "lincoln-high-school-347",
@@ -3143,7 +3601,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "secondary",
     "distanceKm": 8.8,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.63577,
+    "lng": 172.48567
   },
   {
     "id": "christchurch-east-school-3317",
@@ -3156,7 +3616,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 8.8,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.52965,
+    "lng": 172.64836
   },
   {
     "id": "st-mary-s-school-christchurch-3535",
@@ -3169,7 +3631,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 8.8,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.52323,
+    "lng": 172.63926
   },
   {
     "id": "whippersnappers-early-learning-centre-45864",
@@ -3182,7 +3646,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 8.9,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.64248,
+    "lng": 172.49466
   },
   {
     "id": "the-willows-47281",
@@ -3195,7 +3661,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 8.9,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.50083,
+    "lng": 172.58912
   },
   {
     "id": "grow-active-essex-street-47841",
@@ -3208,7 +3676,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 8.9,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.53366,
+    "lng": 172.6526
   },
   {
     "id": "st-andrews-college-preschool-65068",
@@ -3221,7 +3691,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 8.9,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.50761,
+    "lng": 172.61314
   },
   {
     "id": "lincoln-primary-school-3412",
@@ -3234,7 +3706,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 8.9,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.6371,
+    "lng": 172.4871
   },
   {
     "id": "kidsfirst-kindergartens-kendal-avenue-5429",
@@ -3247,7 +3721,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 9,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.49802,
+    "lng": 172.57386
   },
   {
     "id": "tai-tapu-playcentre-70132",
@@ -3260,7 +3736,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 9,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.65959,
+    "lng": 172.55321
   },
   {
     "id": "learning-curves-montessori-abberley-park-ltd-70301",
@@ -3273,7 +3751,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 9,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.51492,
+    "lng": 172.63144
   },
   {
     "id": "beststart-papanui-70427",
@@ -3286,7 +3766,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 9,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.50377,
+    "lng": 172.60268
   },
   {
     "id": "the-enchanted-garden-70461",
@@ -3299,7 +3781,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 9,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.50003,
+    "lng": 172.58547
   },
   {
     "id": "waimairi-school-3571",
@@ -3312,7 +3796,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 9,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.50421,
+    "lng": 172.60528
   },
   {
     "id": "wairakei-school-christchurch-3577",
@@ -3325,7 +3811,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 9,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.50017,
+    "lng": 172.58828
   },
   {
     "id": "yaldhurst-school-t-tara-t-kaha-3602",
@@ -3338,7 +3826,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 9,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.51019,
+    "lng": 172.50219
   },
   {
     "id": "kidsfirst-kindergartens-phillipstown-5445",
@@ -3351,7 +3841,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 9.1,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.53665,
+    "lng": 172.65934
   },
   {
     "id": "harmony-haven-preschool-45158",
@@ -3364,7 +3856,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 9.1,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.51933,
+    "lng": 172.63999
   },
   {
     "id": "fundamentals-merivale-46055",
@@ -3377,7 +3871,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 9.1,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.50883,
+    "lng": 172.61943
   },
   {
     "id": "house-of-wonder-christchurch-by-busy-bees-47950",
@@ -3390,7 +3886,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 9.1,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.52634,
+    "lng": 172.64907
   },
   {
     "id": "lincoln-playcentre-70077",
@@ -3403,7 +3901,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 9.1,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.63735,
+    "lng": 172.48326
   },
   {
     "id": "the-rabbit-patch-saffron-street-45445",
@@ -3416,7 +3916,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 9.2,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.49793,
+    "lng": 172.58868
   },
   {
     "id": "st-andrew-s-college-christchurch-318",
@@ -3429,7 +3931,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "secondary",
     "distanceKm": 9.2,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.50637,
+    "lng": 172.61587
   },
   {
     "id": "educare-lincoln-village-45810",
@@ -3442,7 +3946,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 9.3,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.64109,
+    "lng": 172.48408
   },
   {
     "id": "aspire-preschool-70123",
@@ -3455,7 +3961,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 9.3,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.66215,
+    "lng": 172.55085
   },
   {
     "id": "haven-elc-70391",
@@ -3468,7 +3976,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 9.3,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.53069,
+    "lng": 172.6558
   },
   {
     "id": "beststart-merivale-70405",
@@ -3481,7 +3991,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 9.3,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.50481,
+    "lng": 172.61528
   },
   {
     "id": "st-albans-nest-45683",
@@ -3494,7 +4006,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 9.4,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.50882,
+    "lng": 172.62851
   },
   {
     "id": "sancta-maria-montessori-preschool-sherborne-47620",
@@ -3507,7 +4021,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 9.4,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.51463,
+    "lng": 172.63782
   },
   {
     "id": "little-house-montessori-preschool-central-47997",
@@ -3520,7 +4036,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 9.4,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.52166,
+    "lng": 172.6474
   },
   {
     "id": "abacus-montessori-preschool-65125",
@@ -3533,7 +4051,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 9.4,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.54799,
+    "lng": 172.67005
   },
   {
     "id": "beststart-burnside-70547",
@@ -3546,7 +4066,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 9.4,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.49395,
+    "lng": 172.56006
   },
   {
     "id": "te-ara-maurea-roydvale-school-3493",
@@ -3559,7 +4081,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 9.4,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.49448,
+    "lng": 172.56315
   },
   {
     "id": "kidsfirst-kindergartens-sunbeam-5458",
@@ -3572,7 +4096,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 9.5,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.51275,
+    "lng": 172.63702
   },
   {
     "id": "melodies-preschool-45697",
@@ -3585,7 +4111,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 9.5,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.64153,
+    "lng": 172.48186
   },
   {
     "id": "beststart-roydvale-70564",
@@ -3598,7 +4126,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 9.5,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.49302,
+    "lng": 172.56443
   },
   {
     "id": "ararira-springs-primary-te-puna-o-ararira-585",
@@ -3611,7 +4141,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 9.5,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.64809,
+    "lng": 172.49298
   },
   {
     "id": "tai-tapu-school-3549",
@@ -3624,7 +4156,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 9.5,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.66363,
+    "lng": 172.55007
   },
   {
     "id": "mastery-schools-new-zealand-arapaki-3680",
@@ -3637,7 +4171,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 9.5,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.55955,
+    "lng": 172.67635
   },
   {
     "id": "kimihia-early-learning-centre-70003",
@@ -3650,7 +4186,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 9.6,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.53826,
+    "lng": 172.6672
   },
   {
     "id": "te-aratai-college-337",
@@ -3663,7 +4201,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "secondary",
     "distanceKm": 9.6,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.53825,
+    "lng": 172.66723
   },
   {
     "id": "te-waka-unua-school-684",
@@ -3676,7 +4216,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 9.6,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.54567,
+    "lng": 172.67264
   },
   {
     "id": "st-albans-catholic-school-christchurch-3517",
@@ -3689,7 +4231,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 9.6,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.50713,
+    "lng": 172.6291
   },
   {
     "id": "kidsfirst-kindergartens-edmonds-smith-st-5418",
@@ -3702,7 +4246,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 9.7,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.54338,
+    "lng": 172.67198
   },
   {
     "id": "kidsfirst-kindergartens-papanui-5444",
@@ -3715,7 +4261,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 9.7,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.49837,
+    "lng": 172.60792
   },
   {
     "id": "beststart-montessori-st-albans-45307",
@@ -3728,7 +4276,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 9.7,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.50929,
+    "lng": 172.63458
   },
   {
     "id": "wonderhub-early-learning-centre-47556",
@@ -3741,7 +4291,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 9.7,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.4928,
+    "lng": 172.58396
   },
   {
     "id": "beststart-ferry-road-48003",
@@ -3754,7 +4306,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 9.7,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.54541,
+    "lng": 172.67348
   },
   {
     "id": "footsteps-christian-community-preschool-65137",
@@ -3767,7 +4321,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 9.7,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.49936,
+    "lng": 172.61076
   },
   {
     "id": "beststart-wairakei-road-70093",
@@ -3780,7 +4336,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 9.7,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.49215,
+    "lng": 172.57294
   },
   {
     "id": "christchurch-adventist-school-317",
@@ -3793,7 +4351,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "secondary",
     "distanceKm": 9.7,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.49902,
+    "lng": 172.61144
   },
   {
     "id": "te-kura-o-te-m-t-puna-isleworth-school-3385",
@@ -3806,7 +4366,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 9.7,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.49311,
+    "lng": 172.58212
   },
   {
     "id": "st-albans-school-3518",
@@ -3819,7 +4381,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 9.7,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.50877,
+    "lng": 172.63439
   },
   {
     "id": "christchurch-north-college-3684",
@@ -3832,7 +4396,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "secondary",
     "distanceKm": 9.7,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.4914,
+    "lng": 172.56074
   },
   {
     "id": "beststart-te-wh-riki-48013",
@@ -3845,7 +4411,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 9.8,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.64689,
+    "lng": 172.48551
   },
   {
     "id": "beststart-st-albans-70521",
@@ -3858,7 +4426,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 9.8,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.51798,
+    "lng": 172.64942
   },
   {
     "id": "harewood-rd-montessori-by-busy-bees-46462",
@@ -3871,7 +4441,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 9.9,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.49522,
+    "lng": 172.60379
   },
   {
     "id": "aratupu-preschool-and-wh-nau-hub-70407",
@@ -3884,7 +4456,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 9.9,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.49406,
+    "lng": 172.60161
   },
   {
     "id": "tiny-tots-preschool-70481",
@@ -3897,7 +4471,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 9.9,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.52836,
+    "lng": 172.66344
   },
   {
     "id": "paparoa-street-school-3467",
@@ -3910,7 +4486,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 9.9,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.49965,
+    "lng": 172.61959
   },
   {
     "id": "kidsfirst-kindergartens-rutland-street-5453",
@@ -3923,7 +4501,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 10,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.50048,
+    "lng": 172.62414
   },
   {
     "id": "beststart-cranford-street-47166",
@@ -3936,7 +4516,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 10,
-    "zone": "nearby"
+    "zone": "nearby",
+    "lat": -43.50736,
+    "lng": 172.63671
   },
   {
     "id": "little-beans-preschool-limited-47014",
@@ -3949,7 +4531,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 10.1,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.51702,
+    "lng": 172.6535
   },
   {
     "id": "p-manawa-bishopdale-70029",
@@ -3962,7 +4546,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 10.1,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.48937,
+    "lng": 172.58555
   },
   {
     "id": "kindercare-learning-centres-woolston-70107",
@@ -3975,7 +4561,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 10.1,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.54689,
+    "lng": 172.67888
   },
   {
     "id": "avonside-early-childhood-centre-70321",
@@ -3988,7 +4576,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 10.1,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.52496,
+    "lng": 172.66333
   },
   {
     "id": "new-beginnings-pre-school-70395",
@@ -4001,7 +4591,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 10.1,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.53545,
+    "lng": 172.67144
   },
   {
     "id": "kidsfirst-kindergartens-linwood-5432",
@@ -4014,7 +4606,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 10.2,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.52879,
+    "lng": 172.6678
   },
   {
     "id": "learning-bee-montessori-47569",
@@ -4027,7 +4621,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 10.2,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.49225,
+    "lng": 172.60473
   },
   {
     "id": "stables-montessori-avonside-48375",
@@ -4040,7 +4636,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 10.2,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.52458,
+    "lng": 172.66449
   },
   {
     "id": "forfar-nursery-and-preschool-70361",
@@ -4053,7 +4651,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 10.2,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.50682,
+    "lng": 172.64108
   },
   {
     "id": "lincoln-university-early-childhood-centre-70557",
@@ -4066,7 +4666,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 10.2,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.64355,
+    "lng": 172.47141
   },
   {
     "id": "breens-intermediate-3299",
@@ -4079,7 +4681,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "intermediate",
     "distanceKm": 10.2,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.4875,
+    "lng": 172.57725
   },
   {
     "id": "minerva-house-45565",
@@ -4092,7 +4696,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 10.3,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.50016,
+    "lng": 172.62961
   },
   {
     "id": "montessori-stars-65039",
@@ -4105,7 +4711,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 10.3,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.49978,
+    "lng": 172.62834
   },
   {
     "id": "papanui-preschool-70069",
@@ -4118,7 +4726,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 10.3,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.4895,
+    "lng": 172.59766
   },
   {
     "id": "bishopdale-community-preschool-70329",
@@ -4131,7 +4741,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 10.3,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.48727,
+    "lng": 172.57732
   },
   {
     "id": "st-albans-community-preschool-70455",
@@ -4144,7 +4756,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 10.3,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.50452,
+    "lng": 172.63922
   },
   {
     "id": "woolston-preschool-inc-70505",
@@ -4157,7 +4771,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 10.3,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.54839,
+    "lng": 172.68334
   },
   {
     "id": "barnardos-early-learning-homebased-canterbury-one-70511",
@@ -4170,7 +4786,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 10.3,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.49175,
+    "lng": 172.60396
   },
   {
     "id": "te-huarahi-linwood-avenue-school-3413",
@@ -4183,7 +4801,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 10.3,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.53528,
+    "lng": 172.67488
   },
   {
     "id": "woolston-playcentre-70152",
@@ -4196,7 +4816,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 10.4,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.54666,
+    "lng": 172.68345
   },
   {
     "id": "papanui-high-school-316",
@@ -4209,7 +4831,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "secondary",
     "distanceKm": 10.4,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.49104,
+    "lng": 172.60672
   },
   {
     "id": "st-anne-s-school-woolston-3520",
@@ -4222,7 +4846,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 10.4,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.55038,
+    "lng": 172.68558
   },
   {
     "id": "n-ku-te-ao-ki-te-p-46782",
@@ -4235,7 +4861,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 10.5,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.52962,
+    "lng": 172.67276
   },
   {
     "id": "small-world-preschool-and-nursery-65064",
@@ -4248,7 +4876,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 10.5,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.49844,
+    "lng": 172.62946
   },
   {
     "id": "linwood-playcentre-70080",
@@ -4261,7 +4891,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 10.5,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.52844,
+    "lng": 172.67249
   },
   {
     "id": "learning-curves-montessori-nursery-ltd-70143",
@@ -4274,7 +4906,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 10.5,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.50832,
+    "lng": 172.64817
   },
   {
     "id": "te-p-o-r-kaihaut-706",
@@ -4287,7 +4921,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "secondary",
     "distanceKm": 10.5,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.52931,
+    "lng": 172.67246
   },
   {
     "id": "ngutuawa-school-3288",
@@ -4300,7 +4936,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 10.5,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.55416,
+    "lng": 172.68745
   },
   {
     "id": "alpha-early-childhood-educational-centre-70430",
@@ -4313,7 +4951,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 10.6,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.51497,
+    "lng": 172.6595
   },
   {
     "id": "cotswold-preschool-and-nursery-70457",
@@ -4326,7 +4966,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 10.6,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.48501,
+    "lng": 172.58722
   },
   {
     "id": "bishopdale-school-te-kura-o-papak-hatu-3293",
@@ -4339,7 +4981,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 10.6,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.48665,
+    "lng": 172.59625
   },
   {
     "id": "beststart-warrington-47302",
@@ -4352,7 +4996,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 10.7,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.5079,
+    "lng": 172.65086
   },
   {
     "id": "shirley-playcentre-70118",
@@ -4365,7 +5011,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 10.7,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.50901,
+    "lng": 172.65409
   },
   {
     "id": "casa-dei-bambini-foundation-school-70333",
@@ -4378,7 +5026,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 10.7,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.51661,
+    "lng": 172.6628
   },
   {
     "id": "kidsfirst-kindergartens-mairehau-5436",
@@ -4391,7 +5041,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 10.8,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.50099,
+    "lng": 172.64311
   },
   {
     "id": "st-francis-of-assisi-catholic-school-738",
@@ -4404,7 +5056,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 10.8,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.49979,
+    "lng": 172.63939
   },
   {
     "id": "pareawa-banks-avenue-school-3289",
@@ -4417,7 +5071,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 10.8,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.51291,
+    "lng": 172.66
   },
   {
     "id": "te-hiwa-shirley-primary-school-3504",
@@ -4430,7 +5086,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 10.8,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.50789,
+    "lng": 172.65315
   },
   {
     "id": "kidsfirst-kindergartens-cotswold-avenue-5417",
@@ -4443,7 +5101,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 10.9,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.48208,
+    "lng": 172.58703
   },
   {
     "id": "kidsfirst-kindergartens-niu-65083",
@@ -4456,7 +5116,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 10.9,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.52504,
+    "lng": 172.67573
   },
   {
     "id": "cotswold-m-t-hae-school-3324",
@@ -4469,7 +5131,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 10.9,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.48246,
+    "lng": 172.58718
   },
   {
     "id": "st-joseph-s-school-papanui-3531",
@@ -4482,7 +5146,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 10.9,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.48867,
+    "lng": 172.61444
   },
   {
     "id": "tamariki-school-4143",
@@ -4495,7 +5161,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 10.9,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.54648,
+    "lng": 172.68924
   },
   {
     "id": "ako-tahi-48088",
@@ -4508,7 +5176,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 11,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.50336,
+    "lng": 172.65046
   },
   {
     "id": "harewood-playcentre-70064",
@@ -4521,7 +5191,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 11,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.47961,
+    "lng": 172.55966
   },
   {
     "id": "harewood-school-3370",
@@ -4534,7 +5206,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 11,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.47977,
+    "lng": 172.55945
   },
   {
     "id": "wh-tau-school-3415",
@@ -4547,7 +5221,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 11,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.52485,
+    "lng": 172.67579
   },
   {
     "id": "mairehau-primary-school-3425",
@@ -4560,7 +5236,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 11,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.49871,
+    "lng": 172.64141
   },
   {
     "id": "kidsfirst-kindergartens-bromley-5428",
@@ -4573,7 +5251,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 11.1,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.53662,
+    "lng": 172.68706
   },
   {
     "id": "kidsfirst-kindergartens-northcote-5440",
@@ -4586,7 +5266,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 11.1,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.48446,
+    "lng": 172.60532
   },
   {
     "id": "marian-college-343",
@@ -4599,7 +5281,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "secondary",
     "distanceKm": 11.1,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.48558,
+    "lng": 172.61259
   },
   {
     "id": "te-ahuwai-bromley-school-3302",
@@ -4612,7 +5296,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 11.1,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.53656,
+    "lng": 172.68705
   },
   {
     "id": "papanui-primary-school-3466",
@@ -4625,7 +5311,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 11.1,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.48803,
+    "lng": 172.61973
   },
   {
     "id": "millie-s-house-shirley-rd-48290",
@@ -4638,7 +5326,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 11.2,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.50806,
+    "lng": 172.6609
   },
   {
     "id": "mapusaga-aoga-amata-65016",
@@ -4651,7 +5341,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 11.2,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.54708,
+    "lng": 172.69353
   },
   {
     "id": "te-oraka-3503",
@@ -4664,7 +5356,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "intermediate",
     "distanceKm": 11.2,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.50831,
+    "lng": 172.66164
   },
   {
     "id": "kidsfirst-kindergartens-shirley-5455",
@@ -4677,7 +5371,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 11.3,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.5096,
+    "lng": 172.66454
   },
   {
     "id": "kindercare-learning-centres-bishopdale-45054",
@@ -4690,7 +5386,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 11.3,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.47853,
+    "lng": 172.58509
   },
   {
     "id": "heathcote-valley-montessori-preschool-45402",
@@ -4703,7 +5401,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 11.3,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.57485,
+    "lng": 172.70247
   },
   {
     "id": "st-albans-playcentre-70128",
@@ -4716,7 +5416,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 11.3,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.49263,
+    "lng": 172.6361
   },
   {
     "id": "emmanuel-christian-school-1168",
@@ -4729,7 +5431,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "secondary",
     "distanceKm": 11.3,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.47867,
+    "lng": 172.58828
   },
   {
     "id": "casebrook-intermediate-3309",
@@ -4742,7 +5446,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "intermediate",
     "distanceKm": 11.3,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.48181,
+    "lng": 172.6038
   },
   {
     "id": "kidsfirst-kindergartens-macfarlane-park-5434",
@@ -4755,7 +5461,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 11.4,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.50081,
+    "lng": 172.65445
   },
   {
     "id": "woodlands-preschool-limited-dallington-47672",
@@ -4768,7 +5476,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 11.4,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.51043,
+    "lng": 172.66812
   },
   {
     "id": "educational-child-care-centre-70353",
@@ -4781,7 +5491,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 11.4,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.51614,
+    "lng": 172.67473
   },
   {
     "id": "st-bede-s-college-315",
@@ -4794,7 +5506,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "secondary",
     "distanceKm": 11.4,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.48405,
+    "lng": 172.61687
   },
   {
     "id": "dudley-creek-preschool-ltd-45546",
@@ -4807,7 +5521,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 11.5,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.49635,
+    "lng": 172.64878
   },
   {
     "id": "little-owls-preschool-70035",
@@ -4820,7 +5536,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 11.5,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.52494,
+    "lng": 172.68401
   },
   {
     "id": "beststart-marshland-road-45826",
@@ -4833,7 +5551,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 11.7,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.50303,
+    "lng": 172.66272
   },
   {
     "id": "ferrymead-preschool-and-nursery-46822",
@@ -4846,7 +5566,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 11.7,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.55919,
+    "lng": 172.7041
   },
   {
     "id": "mairehau-high-school-320",
@@ -4859,7 +5581,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "secondary",
     "distanceKm": 11.7,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.49402,
+    "lng": 172.64848
   },
   {
     "id": "barnardos-early-learning-centre-te-puna-oraka-70099",
@@ -4872,7 +5596,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 11.8,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.49582,
+    "lng": 172.65407
   },
   {
     "id": "heathcote-valley-school-3371",
@@ -4885,7 +5611,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 11.8,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.57988,
+    "lng": 172.70888
   },
   {
     "id": "te-kura-o-matarangi-northcote-school-3449",
@@ -4898,7 +5626,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 11.8,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.47937,
+    "lng": 172.61401
   },
   {
     "id": "noku-te-ao-65132",
@@ -4911,7 +5641,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 11.9,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.49518,
+    "lng": 172.65371
   },
   {
     "id": "stables-montessori-casebrook-48396",
@@ -4924,7 +5656,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 12,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.4735,
+    "lng": 172.59497
   },
   {
     "id": "redwood-early-childhood-centre-70441",
@@ -4937,7 +5671,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 12.1,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.47741,
+    "lng": 172.61648
   },
   {
     "id": "kidsfirst-kindergartens-redwood-5449",
@@ -4950,7 +5686,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 12.2,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.47696,
+    "lng": 172.61668
   },
   {
     "id": "beststart-redwood-45134",
@@ -4963,7 +5701,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 12.2,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.47658,
+    "lng": 172.61742
   },
   {
     "id": "ottawa-gardens-preschool-and-nursery-65043",
@@ -4976,7 +5716,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 12.3,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.51962,
+    "lng": 172.69059
   },
   {
     "id": "redwood-playcentre-70110",
@@ -4989,7 +5731,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 12.3,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.47692,
+    "lng": 172.62266
   },
   {
     "id": "just-kids-house-70358",
@@ -5002,7 +5746,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 12.3,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.5218,
+    "lng": 172.69275
   },
   {
     "id": "just-kids-community-preschool-65155",
@@ -5015,7 +5761,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 12.5,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.51931,
+    "lng": 172.69329
   },
   {
     "id": "mt-pleasant-school-3443",
@@ -5028,7 +5776,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 12.5,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.56245,
+    "lng": 172.71593
   },
   {
     "id": "redwood-school-christchurch-3484",
@@ -5041,7 +5791,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 12.7,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.4736,
+    "lng": 172.62195
   },
   {
     "id": "discovery-junction-styx-mill-ltd-47690",
@@ -5054,7 +5806,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 12.8,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.46782,
+    "lng": 172.60585
   },
   {
     "id": "tino-e-tasi-preschool-65086",
@@ -5067,7 +5821,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 12.8,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.5186,
+    "lng": 172.69676
   },
   {
     "id": "chisnallwood-intermediate-3314",
@@ -5080,7 +5836,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "intermediate",
     "distanceKm": 12.8,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.50981,
+    "lng": 172.68899
   },
   {
     "id": "weedons-school-3585",
@@ -5093,7 +5851,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 12.8,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.57061,
+    "lng": 172.40318
   },
   {
     "id": "kidsfirst-kindergartens-lyttelton-5433",
@@ -5106,7 +5866,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 13,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.60126,
+    "lng": 172.71979
   },
   {
     "id": "kidsfirst-kindergartens-the-bays-5438",
@@ -5119,7 +5881,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 13,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.55603,
+    "lng": 172.72063
   },
   {
     "id": "e-tipu-e-rea-early-learning-centre-70308",
@@ -5132,7 +5896,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 13,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.51469,
+    "lng": 172.6971
   },
   {
     "id": "haeata-community-campus-704",
@@ -5145,7 +5911,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "secondary",
     "distanceKm": 13,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.51476,
+    "lng": 172.69669
   },
   {
     "id": "busy-bees-lake-terrace-65139",
@@ -5158,7 +5926,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 13.1,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.49874,
+    "lng": 172.68179
   },
   {
     "id": "burwood-playcentre-70030",
@@ -5171,7 +5941,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 13.1,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.50084,
+    "lng": 172.68384
   },
   {
     "id": "the-walnut-tree-preschool-70147",
@@ -5184,7 +5956,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 13.2,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.5181,
+    "lng": 172.70314
   },
   {
     "id": "busy-c-s-preschool-lyttelton-70561",
@@ -5197,7 +5971,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 13.2,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.6013,
+    "lng": 172.72242
   },
   {
     "id": "lyttelton-primary-school-686",
@@ -5210,7 +5986,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 13.2,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.60234,
+    "lng": 172.72317
   },
   {
     "id": "springston-school-3516",
@@ -5223,7 +6001,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 13.2,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.64459,
+    "lng": 172.42573
   },
   {
     "id": "just-kids-merrington-47372",
@@ -5236,7 +6016,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 13.3,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.51753,
+    "lng": 172.70395
   },
   {
     "id": "freckles-early-learning-centre-47929",
@@ -5249,7 +6031,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 13.3,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.60652,
+    "lng": 172.40134
   },
   {
     "id": "poppies-preschool-gardiners-road-46634",
@@ -5262,7 +6046,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 13.4,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.45979,
+    "lng": 172.59045
   },
   {
     "id": "wildheart-makuru-m-t-48182",
@@ -5275,7 +6061,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 13.4,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.61502,
+    "lng": 172.40297
   },
   {
     "id": "kidsfirst-kindergartens-portsmouth-street-5447",
@@ -5288,7 +6076,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 13.5,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.51031,
+    "lng": 172.70095
   },
   {
     "id": "te-r-hutu-whio-712",
@@ -5301,7 +6091,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 13.5,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.61552,
+    "lng": 172.40207
   },
   {
     "id": "beststart-wainoni-road-45477",
@@ -5314,7 +6106,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 13.6,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.50822,
+    "lng": 172.69942
   },
   {
     "id": "canterbury-educare-oakbridge-preschool-48405",
@@ -5327,7 +6121,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 13.6,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.47189,
+    "lng": 172.64417
   },
   {
     "id": "the-cats-pyjamas-preschool-70158",
@@ -5340,7 +6136,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 13.6,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.59576,
+    "lng": 172.39441
   },
   {
     "id": "beststart-west-village-48390",
@@ -5353,7 +6151,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 13.7,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.61969,
+    "lng": 172.4017
   },
   {
     "id": "little-explorers-preschool-70047",
@@ -5366,7 +6166,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 13.7,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.49797,
+    "lng": 172.69013
   },
   {
     "id": "st-james-school-aranui-3523",
@@ -5379,7 +6181,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 13.7,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.51173,
+    "lng": 172.70486
   },
   {
     "id": "puanga-k-kaho-45128",
@@ -5392,7 +6196,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 13.8,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.5867,
+    "lng": 172.39143
   },
   {
     "id": "busy-bees-burwood-65059",
@@ -5405,7 +6211,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 13.8,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.49105,
+    "lng": 172.6837
   },
   {
     "id": "beststart-northwood-65124",
@@ -5418,7 +6226,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 13.9,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.46093,
+    "lng": 172.62097
   },
   {
     "id": "fundamentals-marshland-46377",
@@ -5431,7 +6241,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 14,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.47458,
+    "lng": 172.65917
   },
   {
     "id": "wait-kiri-primary-school-685",
@@ -5444,7 +6256,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 14,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.48884,
+    "lng": 172.68384
   },
   {
     "id": "rolleston-christian-school-710",
@@ -5457,7 +6271,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 14,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.60832,
+    "lng": 172.39291
   },
   {
     "id": "te-raekura-redcliffs-school-3483",
@@ -5470,7 +6286,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 14,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.55644,
+    "lng": 172.73361
   },
   {
     "id": "kidsfirst-kindergartens-east-rolleston-48181",
@@ -5483,7 +6301,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 14.1,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.61563,
+    "lng": 172.39381
   },
   {
     "id": "three-trees-learning-centre-47609",
@@ -5496,7 +6316,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 14.2,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.60982,
+    "lng": 172.39128
   },
   {
     "id": "the-james-street-pre-school-70542",
@@ -5509,7 +6331,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 14.2,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.56121,
+    "lng": 172.73624
   },
   {
     "id": "rolleston-college-654",
@@ -5522,7 +6346,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "secondary",
     "distanceKm": 14.2,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.60352,
+    "lng": 172.38851
   },
   {
     "id": "selwyn-kids-45427",
@@ -5535,7 +6361,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 14.3,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.59413,
+    "lng": 172.38573
   },
   {
     "id": "little-blue-penguin-preschool-and-nursery-prestons-45639",
@@ -5548,7 +6376,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 14.3,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.47418,
+    "lng": 172.66565
   },
   {
     "id": "beststart-faringdon-46844",
@@ -5561,7 +6391,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 14.3,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.61643,
+    "lng": 172.39239
   },
   {
     "id": "selwyn-kids-hb-2-48183",
@@ -5574,7 +6406,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 14.3,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.59396,
+    "lng": 172.38565
   },
   {
     "id": "selwyn-kids-limited-70103",
@@ -5587,7 +6421,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 14.3,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.59427,
+    "lng": 172.3857
   },
   {
     "id": "kidsfirst-kindergartens-diamond-harbour-46636",
@@ -5600,7 +6436,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 14.4,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.63012,
+    "lng": 172.72672
   },
   {
     "id": "the-owls-nest-preschool-limited-47188",
@@ -5613,7 +6451,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 14.4,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.4555,
+    "lng": 172.6184
   },
   {
     "id": "diamond-harbour-school-3327",
@@ -5626,7 +6466,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 14.4,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.62996,
+    "lng": 172.72671
   },
   {
     "id": "beststart-rolleston-65014",
@@ -5639,7 +6481,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 14.5,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.59783,
+    "lng": 172.38366
   },
   {
     "id": "kindercare-learning-centres-burwood-208-65183",
@@ -5652,7 +6496,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 14.5,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.48062,
+    "lng": 172.68078
   },
   {
     "id": "beststart-styx-mill-70011",
@@ -5665,7 +6511,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 14.5,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.45312,
+    "lng": 172.61073
   },
   {
     "id": "moa-kids-community-early-learning-centre-inc-70459",
@@ -5678,7 +6526,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 14.5,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.5636,
+    "lng": 172.74015
   },
   {
     "id": "te-rito-harakeke-marshland-school-3429",
@@ -5691,7 +6541,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 14.5,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.47203,
+    "lng": 172.66475
   },
   {
     "id": "canterbury-educare-prestons-preschool-47201",
@@ -5704,7 +6556,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 14.6,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.47282,
+    "lng": 172.66927
   },
   {
     "id": "curious-little-explorers-limited-48268",
@@ -5717,7 +6571,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 14.6,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.60472,
+    "lng": 172.38396
   },
   {
     "id": "active-explorers-rolleston-65145",
@@ -5730,7 +6586,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 14.6,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.59375,
+    "lng": 172.3819
   },
   {
     "id": "the-champion-centre-tamariki-toiora-70339",
@@ -5743,7 +6601,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 14.6,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.47966,
+    "lng": 172.68151
   },
   {
     "id": "rolleston-school-3488",
@@ -5756,7 +6616,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 14.6,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.59249,
+    "lng": 172.38134
   },
   {
     "id": "kidsfirst-kindergartens-belfast-5535",
@@ -5769,7 +6631,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 14.8,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.45481,
+    "lng": 172.6278
   },
   {
     "id": "k-nuka-t-wharau-rolleston-playcentre-70112",
@@ -5782,7 +6646,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 14.8,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.59687,
+    "lng": 172.37939
   },
   {
     "id": "beststart-prestons-46848",
@@ -5795,7 +6661,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 14.9,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.46777,
+    "lng": 172.66557
   },
   {
     "id": "beststart-faringdon-east-47618",
@@ -5808,7 +6676,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 14.9,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.62484,
+    "lng": 172.3877
   },
   {
     "id": "little-ferns-early-learning-centre-48231",
@@ -5821,7 +6691,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 14.9,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.60503,
+    "lng": 172.38065
   },
   {
     "id": "p-tahi-belfast-school-3292",
@@ -5834,7 +6706,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 14.9,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.45362,
+    "lng": 172.6273
   },
   {
     "id": "clearview-primary-6980",
@@ -5847,7 +6721,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 14.9,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.60611,
+    "lng": 172.38121
   },
   {
     "id": "belfast-playcentre-70026",
@@ -5860,7 +6736,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 15,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.45278,
+    "lng": 172.62835
   },
   {
     "id": "annabel-s-educare-new-brighton-70089",
@@ -5873,7 +6751,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 15,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.50596,
+    "lng": 172.71924
   },
   {
     "id": "south-brighton-playcentre-70124",
@@ -5886,7 +6766,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 15,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.52764,
+    "lng": 172.73356
   },
   {
     "id": "estuary-road-preschool-70582",
@@ -5899,7 +6781,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 15,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.5259,
+    "lng": 172.73349
   },
   {
     "id": "avonside-girls-high-school-324",
@@ -5912,7 +6796,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "secondary",
     "distanceKm": 15,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.49398,
+    "lng": 172.70746
   },
   {
     "id": "south-new-brighton-school-3508",
@@ -5925,7 +6811,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 15,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.52622,
+    "lng": 172.73353
   },
   {
     "id": "lemonwood-grove-school-6967",
@@ -5938,7 +6826,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 15,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.62267,
+    "lng": 172.38602
   },
   {
     "id": "kidsfirst-kindergartens-nuffield-5442",
@@ -5951,7 +6841,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 15.1,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.50912,
+    "lng": 172.72279
   },
   {
     "id": "kidsfirst-kindergartens-south-brighton-5456",
@@ -5964,7 +6856,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 15.1,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.52323,
+    "lng": 172.73348
   },
   {
     "id": "stems-from-home-2-45819",
@@ -5977,7 +6871,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 15.1,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.58668,
+    "lng": 172.37445
   },
   {
     "id": "stems-from-home-3-47151",
@@ -5990,7 +6886,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 15.1,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.58651,
+    "lng": 172.3746
   },
   {
     "id": "new-brighton-community-preschool-and-nursery-70417",
@@ -6003,7 +6901,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 15.1,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.50959,
+    "lng": 172.7238
   },
   {
     "id": "shirley-boys-high-school-ng-tama-o-ruapaeroa-321",
@@ -6016,7 +6916,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "secondary",
     "distanceKm": 15.1,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.49401,
+    "lng": 172.70818
   },
   {
     "id": "nova-montessori-children-s-house-70057",
@@ -6029,7 +6931,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 15.2,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.51064,
+    "lng": 172.72503
   },
   {
     "id": "busy-bees-bottle-lake-70063",
@@ -6042,7 +6946,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 15.2,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.47603,
+    "lng": 172.68553
   },
   {
     "id": "nova-montessori-school-1582",
@@ -6055,7 +6961,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 15.2,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.51066,
+    "lng": 172.72499
   },
   {
     "id": "kidsfirst-kindergartens-north-new-brighton-5441",
@@ -6068,7 +6976,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 15.3,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.49812,
+    "lng": 172.71502
   },
   {
     "id": "neemo-childcare-centre-48076",
@@ -6081,7 +6991,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 15.3,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.61991,
+    "lng": 172.38097
   },
   {
     "id": "wildheart-belfast-48346",
@@ -6094,7 +7006,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 15.3,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.44931,
+    "lng": 172.62617
   },
   {
     "id": "ako-rolleston-65073",
@@ -6107,7 +7021,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 15.3,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.59482,
+    "lng": 172.37381
   },
   {
     "id": "new-brighton-catholic-school-chch-3445",
@@ -6120,7 +7036,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 15.3,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.50594,
+    "lng": 172.72372
   },
   {
     "id": "diamond-harbour-playcentre-70044",
@@ -6133,7 +7051,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 15.4,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.62604,
+    "lng": 172.74191
   },
   {
     "id": "north-beach-community-preschool-inc-70419",
@@ -6146,7 +7066,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 15.6,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.49626,
+    "lng": 172.71777
   },
   {
     "id": "r-whiti-school-696",
@@ -6159,7 +7081,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 15.6,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.49611,
+    "lng": 172.71771
   },
   {
     "id": "little-wonders-rolleston-45493",
@@ -6172,7 +7096,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 15.7,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.59541,
+    "lng": 172.36864
   },
   {
     "id": "pebbles-montessori-sumner-2-6-46378",
@@ -6185,7 +7111,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 15.7,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.57676,
+    "lng": 172.75747
   },
   {
     "id": "north-beach-playcentre-70090",
@@ -6198,7 +7126,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 15.7,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.49546,
+    "lng": 172.71876
   },
   {
     "id": "parklands-playcentre-70097",
@@ -6211,7 +7141,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 15.7,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.47986,
+    "lng": 172.70161
   },
   {
     "id": "creative-cubs-65009",
@@ -6224,7 +7156,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 15.8,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.44635,
+    "lng": 172.63184
   },
   {
     "id": "parkview-p-rua-3470",
@@ -6237,7 +7171,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 15.9,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.4806,
+    "lng": 172.70563
   },
   {
     "id": "sumner-school-3546",
@@ -6250,7 +7186,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 15.9,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.5731,
+    "lng": 172.75963
   },
   {
     "id": "kidsfirst-kindergartens-parklands-5414",
@@ -6263,7 +7201,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 16,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.47988,
+    "lng": 172.7057
   },
   {
     "id": "kidsfirst-kindergartens-queenspark-5448",
@@ -6276,7 +7216,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 16,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.47314,
+    "lng": 172.69608
   },
   {
     "id": "pebbles-montessori-sumner-0-3-45400",
@@ -6289,7 +7231,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 16,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.57023,
+    "lng": 172.75995
   },
   {
     "id": "bright-beginnings-montessori-45483",
@@ -6302,7 +7246,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 16,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.60522,
+    "lng": 172.36697
   },
   {
     "id": "beststart-parklands-65096",
@@ -6315,7 +7261,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 16,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.47941,
+    "lng": 172.70509
   },
   {
     "id": "queenspark-te-hua-m-nuka-3479",
@@ -6328,7 +7276,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 16,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.47316,
+    "lng": 172.69599
   },
   {
     "id": "kidsfirst-kindergartens-sumner-5457",
@@ -6341,7 +7291,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 16.1,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.57287,
+    "lng": 172.76124
   },
   {
     "id": "te-rau-horopito-962",
@@ -6354,7 +7306,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 16.1,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.62387,
+    "lng": 172.37257
   },
   {
     "id": "annabel-s-educare-west-melton-47434",
@@ -6367,7 +7321,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 16.2,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.52643,
+    "lng": 172.37417
   },
   {
     "id": "our-lady-star-of-the-sea-school-christchurch-3544",
@@ -6380,7 +7336,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 16.2,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.57487,
+    "lng": 172.76254
   },
   {
     "id": "kiddz-homebased-early-childhood-education-service-65071",
@@ -6393,7 +7351,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 16.5,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.48321,
+    "lng": 172.71903
   },
   {
     "id": "kiddz-homebased-childcare-2-45808",
@@ -6406,7 +7366,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 16.6,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.48028,
+    "lng": 172.7174
   },
   {
     "id": "kiddz-homebased-childcare-47087",
@@ -6419,7 +7381,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 16.6,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.48043,
+    "lng": 172.71741
   },
   {
     "id": "kiddz-homebased-childcare-1-47922",
@@ -6432,7 +7396,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 16.6,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.48028,
+    "lng": 172.7174
   },
   {
     "id": "west-melton-nursery-and-preschool-limited-65099",
@@ -6445,7 +7411,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 16.7,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.52277,
+    "lng": 172.36946
   },
   {
     "id": "blossoms-educare-rolleston-limited-47205",
@@ -6458,7 +7426,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 16.8,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.60804,
+    "lng": 172.35706
   },
   {
     "id": "kidsfirst-kindergartens-west-rolleston-47354",
@@ -6471,7 +7441,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 16.8,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.60486,
+    "lng": 172.35593
   },
   {
     "id": "west-melton-school-3587",
@@ -6484,7 +7456,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 16.8,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.52144,
+    "lng": 172.36939
   },
   {
     "id": "west-melton-playcentre-70148",
@@ -6497,7 +7471,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 16.9,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.52426,
+    "lng": 172.36641
   },
   {
     "id": "west-rolleston-primary-school-584",
@@ -6510,7 +7486,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 16.9,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.60689,
+    "lng": 172.35592
   },
   {
     "id": "uruhia-model-school-3464",
@@ -6523,7 +7501,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 16.9,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.4446,
+    "lng": 172.66039
   },
   {
     "id": "beststart-west-melton-45907",
@@ -6536,7 +7516,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 17.1,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.52042,
+    "lng": 172.36577
   },
   {
     "id": "spencerville-playcentre-70028",
@@ -6549,7 +7531,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 19.5,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.43296,
+    "lng": 172.69583
   },
   {
     "id": "organic-kids-limited-46641",
@@ -6562,7 +7546,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 19.8,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.41443,
+    "lng": 172.65741
   },
   {
     "id": "clarkville-playcentre-70036",
@@ -6575,7 +7561,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 19.8,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.40614,
+    "lng": 172.62399
   },
   {
     "id": "clarkville-te-kura-ki-waim-tao-3321",
@@ -6588,7 +7576,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 19.8,
-    "zone": "further"
+    "zone": "further",
+    "lat": -43.406,
+    "lng": 172.62336
   },
   {
     "id": "burnham-school-te-kura-o-tiori-3304",
@@ -6601,7 +7591,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 20.8,
-    "zone": "out-of-region"
+    "zone": "out-of-region",
+    "lat": -43.6163,
+    "lng": 172.3084
   },
   {
     "id": "kidsfirst-kindergartens-burnham-5465",
@@ -6614,7 +7606,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 21.7,
-    "zone": "out-of-region"
+    "zone": "out-of-region",
+    "lat": -43.61943,
+    "lng": 172.29821
   },
   {
     "id": "little-diggers-ece-47484",
@@ -6627,7 +7621,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 22.2,
-    "zone": "out-of-region"
+    "zone": "out-of-region",
+    "lat": -43.38001,
+    "lng": 172.53611
   },
   {
     "id": "karanga-mai-early-learning-centre-65058",
@@ -6640,7 +7636,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 22.2,
-    "zone": "out-of-region"
+    "zone": "out-of-region",
+    "lat": -43.38796,
+    "lng": 172.64445
   },
   {
     "id": "beststart-kaiapoi-70065",
@@ -6653,7 +7651,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 22.2,
-    "zone": "out-of-region"
+    "zone": "out-of-region",
+    "lat": -43.39076,
+    "lng": 172.65373
   },
   {
     "id": "kidsfirst-kindergartens-vickery-street-5461",
@@ -6666,7 +7666,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 22.3,
-    "zone": "out-of-region"
+    "zone": "out-of-region",
+    "lat": -43.38882,
+    "lng": 172.6508
   },
   {
     "id": "the-rainbow-early-learning-centre-65085",
@@ -6679,7 +7681,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 22.4,
-    "zone": "out-of-region"
+    "zone": "out-of-region",
+    "lat": -43.38542,
+    "lng": 172.63962
   },
   {
     "id": "kaiapoi-high-school-314",
@@ -6692,7 +7696,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "secondary",
     "distanceKm": 22.4,
-    "zone": "out-of-region"
+    "zone": "out-of-region",
+    "lat": -43.38717,
+    "lng": 172.64613
   },
   {
     "id": "beststart-silverstream-47361",
@@ -6705,7 +7711,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 22.5,
-    "zone": "out-of-region"
+    "zone": "out-of-region",
+    "lat": -43.38458,
+    "lng": 172.63882
   },
   {
     "id": "burnham-country-montessori-70167",
@@ -6718,7 +7726,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 22.5,
-    "zone": "out-of-region"
+    "zone": "out-of-region",
+    "lat": -43.63291,
+    "lng": 172.29289
   },
   {
     "id": "bella-montessori-preschool-limited-47007",
@@ -6731,7 +7741,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 22.7,
-    "zone": "out-of-region"
+    "zone": "out-of-region",
+    "lat": -43.38598,
+    "lng": 172.65468
   },
   {
     "id": "st-patrick-s-school-kaiapoi-3540",
@@ -6744,7 +7756,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 22.9,
-    "zone": "out-of-region"
+    "zone": "out-of-region",
+    "lat": -43.38436,
+    "lng": 172.65411
   },
   {
     "id": "portobelo-kaiapoi-45304",
@@ -6757,7 +7771,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 23,
-    "zone": "out-of-region"
+    "zone": "out-of-region",
+    "lat": -43.38164,
+    "lng": 172.64744
   },
   {
     "id": "hoka-school-3451",
@@ -6770,7 +7786,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 23.3,
-    "zone": "out-of-region"
+    "zone": "out-of-region",
+    "lat": -43.37016,
+    "lng": 172.59055
   },
   {
     "id": "honeybeez-preschool-and-nursery-45079",
@@ -6783,7 +7801,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 23.4,
-    "zone": "out-of-region"
+    "zone": "out-of-region",
+    "lat": -43.38064,
+    "lng": 172.66127
   },
   {
     "id": "kaiapoi-borough-school-3388",
@@ -6796,7 +7816,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 23.4,
-    "zone": "out-of-region"
+    "zone": "out-of-region",
+    "lat": -43.37906,
+    "lng": 172.65147
   },
   {
     "id": "educare-kaiapoi-47614",
@@ -6809,7 +7831,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 23.6,
-    "zone": "out-of-region"
+    "zone": "out-of-region",
+    "lat": -43.37663,
+    "lng": 172.65081
   },
   {
     "id": "active-explorers-kaiapoi-47262",
@@ -6822,7 +7846,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 23.8,
-    "zone": "out-of-region"
+    "zone": "out-of-region",
+    "lat": -43.37888,
+    "lng": 172.6667
   },
   {
     "id": "swannanoa-preschool-70466",
@@ -6835,7 +7861,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 23.8,
-    "zone": "out-of-region"
+    "zone": "out-of-region",
+    "lat": -43.36998,
+    "lng": 172.49771
   },
   {
     "id": "te-koromiko-swannanoa-school-3547",
@@ -6848,7 +7876,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 23.9,
-    "zone": "out-of-region"
+    "zone": "out-of-region",
+    "lat": -43.36934,
+    "lng": 172.49557
   },
   {
     "id": "kaiapoi-north-school-3389",
@@ -6861,7 +7891,9 @@ export const SCHOOLS: School[] = [
     },
     "level": "primary",
     "distanceKm": 24,
-    "zone": "out-of-region"
+    "zone": "out-of-region",
+    "lat": -43.37596,
+    "lng": 172.66361
   },
   {
     "id": "sovereign-star-nursery-and-preschool-46610",
@@ -6874,6 +7906,8 @@ export const SCHOOLS: School[] = [
     },
     "level": "kindergarten",
     "distanceKm": 24.9,
-    "zone": "out-of-region"
+    "zone": "out-of-region",
+    "lat": -43.36776,
+    "lng": 172.66439
   }
 ];

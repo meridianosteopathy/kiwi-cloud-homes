@@ -28,7 +28,7 @@ EXCEPT for the Hostaway flag which must be `false` for the live site:
 | `HOSTAWAY_ACCOUNT_ID` | Your `.env.local` | Hostaway API |
 | `HOSTAWAY_CLIENT_ID` | Your `.env.local` | Hostaway API |
 | `HOSTAWAY_CLIENT_SECRET` | Your `.env.local` | Hostaway API |
-| `HOSTAWAY_LISTING_ID` *(optional)* | Your `.env.local` | Hostaway API |
+| `HOSTAWAY_LISTING_IDS` *(optional)* | **Leave empty** to show every house in your Hostaway account (see below) | Hostaway API |
 | `INQUIRY_EMAIL` | `nina@kiwicloudhomes.co.nz` | mailto inquiry form |
 | `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY` | Your `.env.local` (start with the **test** key) | Stripe checkout |
 | `STRIPE_SECRET_KEY` | Your `.env.local` (test) | Stripe checkout |
@@ -37,6 +37,27 @@ EXCEPT for the Hostaway flag which must be `false` for the live site:
 For each row: paste the **Key** and **Value**, click **Add**. Leave the
 "Environment" dropdowns set to all three (Production / Preview / Development).
 
+### Which houses show on the site
+
+By default, **every listing in your Hostaway account**. Import a house into
+Hostaway and it appears on `/tourist` and `/school` within about five minutes
+— bookable, with its own calendar and price. No redeploy, no code change.
+
+Two things to watch:
+
+- **If `HOSTAWAY_LISTING_ID` is already set in Vercel** (from the
+  single-house days) the site shows only that one house. Delete the variable
+  to show them all, or set `HOSTAWAY_LISTING_IDS` to the full comma-separated
+  list. Changing an env var needs a redeploy to take effect: Vercel →
+  **Deployments** → ⋯ on the latest → **Redeploy**.
+- **To hide a house** — one you've listed in Hostaway but don't want on the
+  website — set `HOSTAWAY_LISTING_IDS` to just the ids you *do* want. The
+  order you write them is the order they appear on the page. A house that
+  isn't on the list can't be quoted or booked through the site.
+
+To find a listing id: open the house in the Hostaway dashboard and read it off
+the address bar — `.../listings/123456`.
+
 ## 3. Deploy
 
 Click **Deploy**. ~2 minutes later you'll get a URL like
@@ -44,7 +65,8 @@ Click **Deploy**. ~2 minutes later you'll get a URL like
 include a random-ish suffix).
 
 Open it. You should see the language picker and the persona selector.
-Click into `/tourist` and verify the real Hostaway listing renders.
+Click into `/tourist` and verify every house you expect renders, each with its
+own price and "Book your stay" panel.
 
 ## 4. Create the Stripe webhook (now that we have a URL)
 

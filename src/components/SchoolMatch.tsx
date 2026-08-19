@@ -1,16 +1,22 @@
 import { useLocale, useTranslations } from "next-intl";
+import type { HomeSummary } from "@/content/homes";
 import {
+  distanceFrom,
   findCity,
   findDistrict,
   findRegion,
   findSchool,
   localizedName,
   type AppLocale,
+  type School,
+  type SchoolDistance,
   type ZoneStatus,
 } from "@/lib/schools";
 
 type Props = {
   schoolId: string | null;
+  /** Every home on the site — each gets its own distance to the school. */
+  homes: HomeSummary[];
 };
 
 const ZONE_STYLES: Record<ZoneStatus, string> = {
@@ -29,7 +35,26 @@ function estimateMinutes(distanceKm: number, minPerKm: number): number {
   return Math.max(1, Math.round(distanceKm * minPerKm));
 }
 
-export function SchoolMatch({ schoolId }: Props) {
+/** Homes that can be measured, nearest first; the rest keep their order after. */
+function rankHomes(
+  homes: HomeSummary[],
+  school: School,
+): Array<{ home: HomeSummary; distance: SchoolDistance | null }> {
+  const measured = homes.map((home) => ({
+    home,
+    distance: home.coordinates
+      ? distanceFrom(school, home.coordinates)
+      : null,
+  }));
+  return measured.sort((a, b) => {
+    if (a.distance && b.distance) return a.distance.distanceKm - b.distance.distanceKm;
+    if (a.distance) return -1;
+    if (b.distance) return 1;
+    return 0;
+  });
+}
+
+export function SchoolMatch({ schoolId, homes }: Props) {
   const t = useTranslations("SchoolMatch");
   const locale = useLocale() as AppLocale;
   const school = schoolId ? findSchool(schoolId) : undefined;
@@ -45,9 +70,8 @@ export function SchoolMatch({ schoolId }: Props) {
   const region = findRegion(school.regionId);
   const city = findCity(school.cityId);
   const district = findDistrict(school.districtId);
-
-  const walkMin = estimateMinutes(school.distanceKm, WALKING_MIN_PER_KM);
-  const driveMin = estimateMinutes(school.distanceKm, DRIVING_MIN_PER_KM);
+  const ranked = rankHomes(homes, school);
+  const multiHome = homes.length > 1;
 
   return (
     <section className="rounded-2xl border border-kiwi-200 bg-white p-5 shadow-sm">
@@ -63,18 +87,83 @@ export function SchoolMatch({ schoolId }: Props) {
               .join(" · ")}
           </p>
         </div>
-        <span
-          className={`shrink-0 rounded-full border px-2.5 py-1 text-[11px] font-medium ${ZONE_STYLES[school.zone]}`}
-        >
-          {t(`zone.${school.zone}`)}
-        </span>
+        {/* Single home: the zone belongs to the school header, as before.
+            Several homes: each home carries its own zone pill below. */}
+        {!multiHome && ranked[0]?.distance && (
+          <span
+            className={`shrink-0 rounded-full border px-2.5 py-1 text-[11px] font-medium ${ZONE_STYLES[ranked[0].distance.zone]}`}
+          >
+            {t(`zone.${ranked[0].distance.zone}`)}
+          </span>
+        )}
       </div>
 
-      <dl className="mt-4 grid grid-cols-2 gap-3 text-sm sm:grid-cols-3">
+      {multiHome && (
+        <p className="mt-3 text-xs text-kiwi-700">{t("perHomeIntro")}</p>
+      )}
+
+      <div className="mt-4 space-y-4">
+        {ranked.map(({ home, distance }) => (
+          <HomeDistance
+            key={home.listingId}
+            home={home}
+            distance={distance}
+            showHomeName={multiHome}
+            locale={locale}
+          />
+        ))}
+      </div>
+
+      <p className="mt-3 text-[10px] text-kiwi-500">{t("estimateNote")}</p>
+    </section>
+  );
+}
+
+function HomeDistance({
+  home,
+  distance,
+  showHomeName,
+  locale,
+}: {
+  home: HomeSummary;
+  distance: SchoolDistance | null;
+  showHomeName: boolean;
+  locale: AppLocale;
+}) {
+  const t = useTranslations("SchoolMatch");
+
+  if (!distance) {
+    return (
+      <div className="rounded-lg border border-dashed border-kiwi-200 p-3">
+        {showHomeName && (
+          <h3 className="text-sm font-semibold text-kiwi-900">{home.name}</h3>
+        )}
+        <p className="mt-1 text-xs text-kiwi-600">{t("noDistanceForHome")}</p>
+      </div>
+    );
+  }
+
+  const walkMin = estimateMinutes(distance.distanceKm, WALKING_MIN_PER_KM);
+  const driveMin = estimateMinutes(distance.distanceKm, DRIVING_MIN_PER_KM);
+
+  return (
+    <div>
+      {showHomeName && (
+        <div className="mb-2 flex items-center justify-between gap-3">
+          <h3 className="text-sm font-semibold text-kiwi-900">{home.name}</h3>
+          <span
+            className={`shrink-0 rounded-full border px-2.5 py-1 text-[11px] font-medium ${ZONE_STYLES[distance.zone]}`}
+          >
+            {t(`zone.${distance.zone}`)}
+          </span>
+        </div>
+      )}
+
+      <dl className="grid grid-cols-2 gap-3 text-sm sm:grid-cols-3">
         <div className="rounded-lg bg-kiwi-50/60 p-3">
           <dt className="text-xs text-kiwi-600">{t("distance")}</dt>
           <dd className="mt-1 font-semibold text-kiwi-900">
-            {school.distanceKm} km
+            {distance.distanceKm} km
           </dd>
         </div>
         <div className="rounded-lg bg-kiwi-50/60 p-3">
@@ -97,11 +186,12 @@ export function SchoolMatch({ schoolId }: Props) {
         </div>
         <div className="rounded-lg bg-kiwi-50/60 p-3 sm:col-span-3">
           <dt className="text-xs text-kiwi-600">{t("advice")}</dt>
-          <dd className="mt-1 text-kiwi-800">{t(`adviceText.${school.zone}`)}</dd>
+          <dd className="mt-1 text-kiwi-800">
+            {t(`adviceText.${distance.zone}`)}
+          </dd>
         </div>
       </dl>
-      <p className="mt-2 text-[10px] text-kiwi-500">{t("estimateNote")}</p>
-    </section>
+    </div>
   );
 }
 
