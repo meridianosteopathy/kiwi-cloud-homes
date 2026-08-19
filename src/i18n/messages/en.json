@@ -15,21 +15,19 @@
     "en": "English"
   },
   "Landing": {
-    "title": "Settle in, then explore New Zealand",
-    "subtitle": "A trusted, comfortable whole-home stay — designed with Chinese travellers in mind.",
-    "personaPrompt": "Tell us why you're coming to New Zealand.",
-    "personaHint": "We'll tailor the journey — from search filters to seasonal advice."
+    "title": "What brings you to New Zealand?",
+    "chooseOne": "Choose one to continue"
   },
   "Persona": {
     "tourist": {
       "title": "Tourist stay",
-      "blurb": "Visiting New Zealand for sightseeing, business, or family — settle in like a local.",
+      "blurb": "Sightseeing, business, or visiting family.",
       "cta": "I'm a tourist"
     },
     "school": {
       "title": "School visit",
-      "blurb": "Visiting schools or accompanying your child for enrolment? Filter by region and school.",
-      "cta": "I'm here to visit schools"
+      "blurb": "Looking at schools, or settling a child into one.",
+      "cta": "I'm here for schools"
     },
     "relocation": {
       "title": "Relocation",
