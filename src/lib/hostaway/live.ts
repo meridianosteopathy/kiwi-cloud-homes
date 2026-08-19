@@ -15,7 +15,7 @@ import {
   HostawayAuthError,
   readCredentials,
 } from "./auth";
-import { categorizeImage } from "@/lib/photos";
+import { categorizeImage, presentableCaption } from "@/lib/photos";
 import type {
   AvailabilityDay,
   HostawayClient,
@@ -445,7 +445,10 @@ function mapListing(api: HostawayApiListing): HostawayListing {
         i.caption ?? i.bookingEngineCaption ?? i.airbnbCaption ?? i.vrboCaption ?? "";
       return {
         url: i.url ?? "",
-        caption,
+        // The raw value still drives the category — a filename like
+        // "01-exterior-front.jpg" says which room this is — but only a
+        // presentable caption is kept for display.
+        caption: presentableCaption(caption),
         category: categorizeImage(caption),
       };
     })
