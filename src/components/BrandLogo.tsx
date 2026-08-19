@@ -95,12 +95,15 @@ export function BrandMark({
 export function BrandLockup({
   name,
   tagline,
+  nameClassName = "",
   taglineClassName = "",
   variant = "primary",
   stacked = false,
 }: {
   name: string;
   tagline?: string;
+  /** Lets a caller hide the wordmark where there is no room for it. */
+  nameClassName?: string;
   taglineClassName?: string;
   variant?: MarkVariant;
   stacked?: boolean;
@@ -127,7 +130,8 @@ export function BrandLockup({
         <span
           className={
             "font-display text-base font-bold tracking-tight " +
-            (reversed ? "text-white" : "text-kiwi-800")
+            (reversed ? "text-white " : "text-kiwi-800 ") +
+            nameClassName
           }
         >
           {name}

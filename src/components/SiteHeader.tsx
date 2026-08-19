@@ -10,11 +10,15 @@ export function SiteHeader() {
     <header className="border-b border-kiwi-100 bg-white/80 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3">
         <Link href="/" aria-label={t("Site.name")}>
-          {/* Tagline is hidden on narrow screens — it wraps to two lines on a
-              phone and pushes the nav row out of alignment. */}
+          {/* Both wordmark and tagline drop out as the header narrows: the
+              tagline wraps to two lines on a phone, and below 360px the name
+              itself can't share the row with the language toggle without
+              wrapping. The mark alone carries the brand there, and the link
+              keeps its aria-label. */}
           <BrandLockup
             name={t("Site.name")}
             tagline={t("Site.tagline")}
+            nameClassName="hidden min-[360px]:block"
             taglineClassName="hidden sm:block"
           />
         </Link>

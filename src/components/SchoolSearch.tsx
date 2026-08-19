@@ -141,7 +141,10 @@ export function SchoolSearch({ selectedSchoolId, homes }: Props) {
   }
 
   return (
-    <section className="rounded-2xl border border-kiwi-200 bg-white p-5 shadow-sm">
+    // min-w-0: the school rows truncate, and a nowrap row would otherwise set
+    // this section's min-content width — as a grid item (min-width: auto by
+    // default) that dragged the whole page wider than a phone screen.
+    <section className="min-w-0 rounded-2xl border border-kiwi-200 bg-white p-5 shadow-sm">
       <header className="mb-4 flex items-start justify-between gap-3">
         <div>
           <h2 className="text-lg font-semibold text-kiwi-900">{t("title")}</h2>
@@ -253,40 +256,44 @@ function SchoolRow({
         onClick={onSelect}
         aria-pressed={selected}
         className={
-          "flex w-full items-center justify-between gap-3 px-3 py-2.5 text-left transition " +
+          "flex w-full flex-col gap-1 px-3 py-2.5 text-left transition " +
           (selected ? "bg-kiwi-50" : "hover:bg-kiwi-50/60")
         }
       >
-        <div className="min-w-0 flex-1">
-          <div className="flex items-center gap-2">
-            <span className="truncate text-sm font-medium text-kiwi-900">
-              {localizedName(school, locale)}
-            </span>
-            <span
-              className={`shrink-0 rounded-full border px-1.5 py-0.5 text-[9px] font-medium uppercase tracking-wide ${LEVEL_PILL[school.level]}`}
-            >
-              {levelLabel}
-            </span>
-          </div>
-          {district && (
-            <div className="truncate text-xs text-kiwi-600">
-              {localizedName(district, locale)}
-            </div>
-          )}
-          {nearestHomeLabel && (
-            <div className="truncate text-[11px] text-kiwi-500">
-              {nearestHomeLabel}
-            </div>
-          )}
+        {/* The name gets the full row width and wraps rather than truncating —
+            on a phone there isn't room for a name and two pills side by side,
+            and a half-shown school name is the one thing this list can't
+            afford to hide. The pills sit on their own row underneath. */}
+        <div className="flex w-full items-start justify-between gap-2">
+          <span className="text-sm font-medium text-kiwi-900">
+            {localizedName(school, locale)}
+          </span>
+          <span className="shrink-0 pt-0.5 text-xs tabular-nums text-kiwi-700">
+            {school.distanceKm} km
+          </span>
         </div>
-        <div className="flex shrink-0 items-center gap-2">
+
+        {district && (
+          <div className="truncate text-xs text-kiwi-600">
+            {localizedName(district, locale)}
+          </div>
+        )}
+        {nearestHomeLabel && (
+          <div className="truncate text-[11px] text-kiwi-500">
+            {nearestHomeLabel}
+          </div>
+        )}
+
+        <div className="mt-0.5 flex flex-wrap items-center gap-1.5">
+          <span
+            className={`rounded-full border px-1.5 py-0.5 text-[9px] font-medium uppercase tracking-wide ${LEVEL_PILL[school.level]}`}
+          >
+            {levelLabel}
+          </span>
           <span
             className={`rounded-full border px-2 py-0.5 text-[10px] font-medium ${ZONE_PILL[school.zone]}`}
           >
             {zoneLabel}
-          </span>
-          <span className="text-xs tabular-nums text-kiwi-700">
-            {school.distanceKm} km
           </span>
         </div>
       </button>
