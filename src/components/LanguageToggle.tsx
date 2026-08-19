@@ -32,8 +32,9 @@ export function LanguageToggle() {
             aria-pressed={active}
             className={
               // py-2 keeps the pill a comfortable tap target on a phone; the
-              // header toggle is the site's only language switch.
-              "rounded-full px-3 py-2 transition-colors " +
+              // header toggle is the site's only language switch. nowrap stops
+              // "中文" breaking into two stacked glyphs on a narrow screen.
+              "whitespace-nowrap rounded-full px-3 py-2 transition-colors " +
               (active
                 ? "bg-kiwi-600 text-white"
                 : "text-kiwi-800 hover:bg-kiwi-50")
