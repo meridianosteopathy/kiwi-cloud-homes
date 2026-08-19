@@ -73,7 +73,7 @@
     "levelFilterAria": "School type"
   },
   "SchoolMatch": {
-    "noSelection": "Pick a school or kindergarten on the left to see distance, walking and driving times from the home.",
+    "noSelection": "Pick a school or kindergarten above to see distance, walking and driving times from the home.",
     "perHomeIntro": "How each of our homes sits relative to this school — closest first.",
     "noDistanceForHome": "School distances for this home aren't available yet.",
     "distance": "Distance from the home (approx. by road)",

@@ -141,7 +141,10 @@ export function SchoolSearch({ selectedSchoolId, homes }: Props) {
   }
 
   return (
-    <section className="rounded-2xl border border-kiwi-200 bg-white p-5 shadow-sm">
+    // min-w-0: the school rows truncate, and a nowrap row would otherwise set
+    // this section's min-content width — as a grid item (min-width: auto by
+    // default) that dragged the whole page wider than a phone screen.
+    <section className="min-w-0 rounded-2xl border border-kiwi-200 bg-white p-5 shadow-sm">
       <header className="mb-4 flex items-start justify-between gap-3">
         <div>
           <h2 className="text-lg font-semibold text-kiwi-900">{t("title")}</h2>

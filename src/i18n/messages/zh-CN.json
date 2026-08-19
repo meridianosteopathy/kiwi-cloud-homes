@@ -73,7 +73,7 @@
     "levelFilterAria": "学校类型"
   },
   "SchoolMatch": {
-    "noSelection": "在左侧选择一所学校或幼儿园,这里会显示与房源之间的距离、步行/驾车时间。",
+    "noSelection": "请在上方选择一所学校或幼儿园，这里会显示与房源之间的距离、步行/驾车时间。",
     "perHomeIntro": "这所学校与我们各处房源的距离,由近到远排列。",
     "noDistanceForHome": "该房源的学校距离数据尚未录入。",
     "distance": "距离房源(道路里程约)",
