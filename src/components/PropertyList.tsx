@@ -50,7 +50,9 @@ export function PropertyList({
               <a
                 key={listing.id}
                 href={`#${anchorFor(listing.id)}`}
-                className="rounded-full border border-kiwi-200 px-3 py-1 text-xs font-medium text-kiwi-700 transition hover:bg-kiwi-50"
+                // py-2.5 keeps these jump links a comfortable tap target on a
+                // phone; at py-1 they were 26px tall.
+                className="rounded-full border border-kiwi-200 px-3.5 py-2.5 text-xs font-medium text-kiwi-700 transition hover:bg-kiwi-50"
               >
                 {listing.name}
               </a>
