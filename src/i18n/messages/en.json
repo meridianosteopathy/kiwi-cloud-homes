@@ -252,6 +252,8 @@
     "testModeNotice": "Test mode — this is the Stripe test environment. Use card 4242 4242 4242 4242 with any future expiry and any CVC. No real money moves. Note: test payments still create real reservations on the host's Hostaway calendar (Hostaway has no sandbox).",
     "missingStripeKey": "Stripe publishable key (NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY) isn't configured. Please contact the site admin.",
     "continueToPayment": "Continue to payment",
+    "cancellationSummary": "Free cancellation up to 5 days before check-in. Cancellations closer to check-in receive a 50% refund of the accommodation.",
+    "cancellationLink": "Read full policy →",
     "starting": "Preparing...",
     "back": "Back",
     "payNow": "Pay {amount}",
@@ -291,7 +293,37 @@
     "close": "Close"
   },
   "Footer": {
-    "rights": "© {year} Kiwi Cloud Homes · Powered by Hostaway"
+    "rights": "© {year} Kiwi Cloud Homes · Powered by Hostaway",
+    "cancellationPolicy": "Cancellation policy"
+  },
+  "CancellationPolicy": {
+    "title": "Cancellation policy",
+    "intro": "Two policies apply depending on how long your stay is. Read the section that matches your booking.",
+    "asOf": "Effective from {date}. Times are New Zealand local time.",
+    "shortStay": {
+      "heading": "Short stays (direct bookings on this site)",
+      "summary": "Free cancellation up to 5 days before check-in. Cancellations closer to check-in receive a 50% refund of the accommodation total.",
+      "points": {
+        "fullRefund": "Cancel 5 or more full days before your check-in date → we refund everything you paid.",
+        "halfRefund": "Cancel within 5 days of check-in → we refund 50% of the accommodation total.",
+        "cleaningRefund": "The cleaning fee is always refunded in full if you have not checked in.",
+        "afterCheckin": "Once your check-in date has passed, remaining nights are non-refundable.",
+        "howTo": "Cancellations must be sent in writing (email reply to your booking confirmation). The date we receive your message is the cancellation date."
+      },
+      "refundTiming": "Approved refunds are returned to the card used for payment, typically within 5–10 working days."
+    },
+    "longStay": {
+      "heading": "Long stays (30+ nights, arranged by quotation)",
+      "summary": "A non-refundable administration fee applies from the moment the booking is confirmed. Beyond that, a full-refund window closes one month before check-in.",
+      "points": {
+        "adminFee": "A non-refundable administration fee of NZD 150.00 + GST (NZD 172.50) applies from the moment the booking is confirmed.",
+        "beforeCutoff": "Cancel on or before the date one month before check-in → we refund everything you paid, including the security bond, less the administration fee.",
+        "afterCutoff": "Cancel after that date → the payment for the stay is non-refundable. The security bond is still returned in full.",
+        "midStay": "Cancelling part-way through the stay is treated the same as cancelling after the cutoff: no portion of the payment is refunded, and the bond is returned as normal.",
+        "howTo": "Cancellations take effect on the date we receive them in writing (WhatsApp or email). Approved refunds are returned to the original payment method within 10 working days."
+      }
+    },
+    "questions": "Questions about a booking? Reply to your booking confirmation or message us on WhatsApp — we'll get back to you within one business day."
   },
   "Common": {
     "comingSoon": "Coming soon",
