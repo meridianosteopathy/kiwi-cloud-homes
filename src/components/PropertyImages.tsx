@@ -15,6 +15,39 @@ type Props = {
   listingName?: string;
 };
 
+/**
+ * Tile spans and corner rounding per photo count, so a home with fewer than
+ * five photos still fills the collage instead of leaving holes down the
+ * right-hand side. Classes are written out in full — Tailwind only keeps the
+ * ones it can see in the source.
+ */
+const COLLAGE: Record<
+  number,
+  { grid: string; hero: string; thumbs: string[] }
+> = {
+  1: { grid: "sm:grid-cols-1 sm:grid-rows-1", hero: "rounded-xl", thumbs: [] },
+  2: {
+    grid: "sm:grid-cols-2 sm:grid-rows-1",
+    hero: "rounded-l-xl",
+    thumbs: ["rounded-r-xl"],
+  },
+  3: {
+    grid: "sm:grid-cols-3 sm:grid-rows-2",
+    hero: "sm:col-span-2 sm:row-span-2 rounded-l-xl",
+    thumbs: ["rounded-tr-xl", "rounded-br-xl"],
+  },
+  4: {
+    grid: "sm:grid-cols-4 sm:grid-rows-2",
+    hero: "sm:col-span-2 sm:row-span-2 rounded-l-xl",
+    thumbs: ["sm:col-span-2 rounded-tr-xl", "", "rounded-br-xl"],
+  },
+  5: {
+    grid: "sm:grid-cols-4 sm:grid-rows-2",
+    hero: "sm:col-span-2 sm:row-span-2 rounded-l-xl",
+    thumbs: ["", "rounded-tr-xl", "", "rounded-br-xl"],
+  },
+};
+
 export function PropertyImages({
   images,
   alt,
@@ -48,6 +81,7 @@ export function PropertyImages({
   const thumbs = grid.slice(1);
   const hasMoreOverlay = images.length > 1;
   const hasTour = Boolean(tourUrl && tourUrl.trim());
+  const layout = COLLAGE[grid.length] ?? COLLAGE[5];
 
   return (
     <>
@@ -68,13 +102,15 @@ export function PropertyImages({
           />
         </button>
 
-        {/* Tablet+: 5-photo collage. */}
-        <div className="hidden aspect-[2/1] w-full overflow-hidden rounded-xl sm:grid sm:grid-cols-4 sm:grid-rows-2 sm:gap-2">
+        {/* Tablet+: collage, sized to however many photos the home has. */}
+        <div
+          className={`hidden aspect-[2/1] w-full overflow-hidden rounded-xl sm:grid sm:gap-2 ${layout.grid}`}
+        >
           <button
             type="button"
             onClick={() => openAt(0)}
             aria-label={t("openGallery")}
-            className="relative col-span-2 row-span-2 overflow-hidden rounded-l-xl bg-kiwi-50 transition hover:opacity-95"
+            className={`relative overflow-hidden bg-kiwi-50 transition hover:opacity-95 ${layout.hero}`}
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
@@ -87,15 +123,13 @@ export function PropertyImages({
 
           {thumbs.map((img, i) => {
             const index = i + 1;
-            const rounding =
-              i === 1 ? "rounded-tr-xl" : i === 3 ? "rounded-br-xl" : "";
             return (
               <button
                 key={img.url + index}
                 type="button"
                 onClick={() => openAt(index)}
                 aria-label={t("openPhoto", { n: index + 1 })}
-                className={`relative overflow-hidden bg-kiwi-50 transition hover:opacity-95 ${rounding}`}
+                className={`relative overflow-hidden bg-kiwi-50 transition hover:opacity-95 ${layout.thumbs[i] ?? ""}`}
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
