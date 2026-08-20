@@ -1,4 +1,5 @@
 import { CITIES, DISTRICTS, RADIUS_KM, REGIONS, SCHOOLS, SNAPSHOT_ORIGIN } from "./data";
+import { haversineKm, roadKmFrom } from "@/lib/geo";
 import type {
   City,
   District,
@@ -42,24 +43,6 @@ export function nearbySchools(maxKm: number = RADIUS_KM): School[] {
   );
 }
 
-const EARTH_RADIUS_KM = 6371;
-
-function toRadians(deg: number): number {
-  return (deg * Math.PI) / 180;
-}
-
-/** Great-circle distance in km. Same formula the importer uses. */
-function haversineKm(a: Origin, b: Origin): number {
-  const dLat = toRadians(b.lat - a.lat);
-  const dLng = toRadians(b.lng - a.lng);
-  const lat1 = toRadians(a.lat);
-  const lat2 = toRadians(b.lat);
-  const h =
-    Math.sin(dLat / 2) ** 2 +
-    Math.cos(lat1) * Math.cos(lat2) * Math.sin(dLng / 2) ** 2;
-  return 2 * EARTH_RADIUS_KM * Math.asin(Math.sqrt(h));
-}
-
 /**
  * Zone bands, matching the importer's. MoE doesn't publish catchment
  * polygons, so "in zone" is approximated from distance.
@@ -74,24 +57,6 @@ function zoneForDistance(km: number): ZoneStatus {
 /** Two origins within ~100 m are treated as the same place. */
 function sameOrigin(a: Origin, b: Origin): boolean {
   return haversineKm(a, b) < 0.1;
-}
-
-/**
- * Straight-line distance understates the drive: streets bend, the Avon and the
- * rail corridor force detours, and one-ways add blocks. Guests check our
- * numbers against Google Maps, which quotes road distance, so showing the raw
- * crow-flies figure reads as simply wrong — Halswell to Burnside High is 8.0 km
- * straight but 10.6 km by road.
- *
- * 1.3 is the usual circuity ratio for a city laid out like Christchurch, and
- * reproduces that example within a few hundred metres. It's an estimate, not a
- * route: the UI says so, and anyone booking around a tight commute should
- * check their own maps app.
- */
-const ROAD_DETOUR_FACTOR = 1.3;
-
-function roadKmFrom(straightLineKm: number): number {
-  return Math.round(straightLineKm * ROAD_DETOUR_FACTOR * 10) / 10;
 }
 
 /**
