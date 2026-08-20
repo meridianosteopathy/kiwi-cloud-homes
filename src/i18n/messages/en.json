@@ -159,7 +159,7 @@
     "viewDetails": "View property",
     "inquire": "Message the host",
     "bookNow": "Book now",
-    "nearestSupermarket": "Nearest Chinese supermarket: {name}, approx. {distance} km"
+    "nearestSupermarket": "Nearest Chinese supermarket: {name}, approx. {minutes} min drive"
   },
   "Booking": {
     "title": "Book your stay",

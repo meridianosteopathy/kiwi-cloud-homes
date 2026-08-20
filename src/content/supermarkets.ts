@@ -21,6 +21,8 @@ export interface Supermarket {
   /** Internal label — only ever seen by you, in this file. */
   id: string;
   name: string;
+  /** Chinese name. Falls back to `name` when not given. */
+  nameZh?: string;
   address: string;
   lat: number;
   lng: number;
@@ -30,6 +32,7 @@ export const SUPERMARKETS: Supermarket[] = [
   {
     id: "sunson-wigram",
     name: "Sunson Asian Food Market",
+    nameZh: "三商亚洲超市",
     address: "17 Lodestar Avenue, Wigram, Christchurch 8042",
     lat: -43.546991737458846,
     lng: 172.55885649325293,
@@ -37,6 +40,7 @@ export const SUPERMARKETS: Supermarket[] = [
   {
     id: "xinxing-riccarton",
     name: "Xinxing Asian Market",
+    nameZh: "新兴亚洲超市",
     address: "103 Riccarton Road, Riccarton, Christchurch 8041",
     lat: -43.52969298803746,
     lng: 172.60115313315663,
