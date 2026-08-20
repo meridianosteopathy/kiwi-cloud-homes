@@ -1,11 +1,12 @@
 import { SUPERMARKETS, type Supermarket } from "@/content/supermarkets";
-import { haversineKm, roadKmFrom, type Origin } from "@/lib/geo";
+import { drivingMinutesFrom, haversineKm, roadKmFrom, type Origin } from "@/lib/geo";
 
 export type { Supermarket } from "@/content/supermarkets";
 
 export interface SupermarketDistance {
   distanceKm: number;
   straightLineKm: number;
+  drivingMinutes: number;
 }
 
 export type SupermarketWithDistance = Supermarket & SupermarketDistance;
@@ -22,10 +23,12 @@ export function nearestSupermarket(
     const straightLineKm =
       Math.round(haversineKm(origin, supermarket) * 10) / 10;
     if (best === null || straightLineKm < best.straightLineKm) {
+      const distanceKm = roadKmFrom(straightLineKm);
       best = {
         ...supermarket,
         straightLineKm,
-        distanceKm: roadKmFrom(straightLineKm),
+        distanceKm,
+        drivingMinutes: drivingMinutesFrom(distanceKm),
       };
     }
   }

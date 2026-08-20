@@ -65,8 +65,11 @@ export function PropertyCard({
           {supermarket && (
             <p className="text-sm text-kiwi-700">
               {t("nearestSupermarket", {
-                name: supermarket.name,
-                distance: supermarket.distanceKm,
+                name:
+                  locale === "zh-CN"
+                    ? (supermarket.nameZh ?? supermarket.name)
+                    : supermarket.name,
+                minutes: supermarket.drivingMinutes,
               })}
             </p>
           )}

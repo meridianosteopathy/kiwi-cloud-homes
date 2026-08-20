@@ -159,7 +159,7 @@
     "viewDetails": "查看房源",
     "inquire": "联系房东",
     "bookNow": "立即预订",
-    "nearestSupermarket": "最近的中国超市:{name},约 {distance} 公里"
+    "nearestSupermarket": "最近的中国超市:{name},车程约 {minutes} 分钟"
   },
   "Booking": {
     "title": "预订入住",
