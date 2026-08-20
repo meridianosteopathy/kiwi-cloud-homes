@@ -435,14 +435,31 @@ async function readSnippet(res: Response): Promise<string> {
   }
 }
 
+/** First value that has non-whitespace content, trimmed. "" when there is none. */
+function firstNonBlank(...values: Array<string | undefined | null>): string {
+  for (const v of values) {
+    const trimmed = v?.trim();
+    if (trimmed) return trimmed;
+  }
+  return "";
+}
+
 function mapListing(api: HostawayApiListing): HostawayListing {
   const currency = api.currencyCode || "NZD";
 
   const orderedImages: ListingImage[] = [...(api.listingImages ?? [])]
     .sort((a, b) => (a.sortOrder ?? 0) - (b.sortOrder ?? 0))
     .map((i) => {
-      const caption =
-        i.caption ?? i.bookingEngineCaption ?? i.airbnbCaption ?? i.vrboCaption ?? "";
+      // First caption that actually has text. `??` was wrong here: a listing
+      // synced from Airbnb comes back with `caption: ""` (empty, not null) and
+      // its real text in `airbnbCaption`, so the nullish chain stopped at the
+      // empty string and every photo ended up uncategorised.
+      const caption = firstNonBlank(
+        i.caption,
+        i.bookingEngineCaption,
+        i.airbnbCaption,
+        i.vrboCaption,
+      );
       return {
         url: i.url ?? "",
         caption,
