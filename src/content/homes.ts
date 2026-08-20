@@ -54,6 +54,13 @@ export interface HomeProfile {
   /** Locale overrides for the description. Empty/missing → Hostaway's copy. */
   description?: Partial<Record<"zh-CN" | "en", string>>;
   /**
+   * Locale overrides for the bedroom-count line on the property card. Use
+   * this when Hostaway's single bedroom number doesn't tell guests enough —
+   * e.g. a room count that mixes double, single and study rooms. Empty/
+   * missing → the generic "{count} bedrooms" line.
+   */
+  bedroomsLabel?: Partial<Record<"zh-CN" | "en", string>>;
+  /**
    * 360° virtual tour URL — paste the EMBED URL the tour provider gives you.
    *
    *   - Matterport: https://my.matterport.com/show/?m=YOUR-TOUR-ID
@@ -75,11 +82,17 @@ export const HOMES: HomeProfile[] = [
     coordinates: { lat: -43.5788, lng: 172.562 },
     description: {
       "zh-CN":
-        "位于基督城西南区 Halswell 的明亮四居室家庭住宅,Cashmere High 与 Halswell School 学区内。开车前往 Riccarton、市中心 (CBD) 与 Lincoln 都很便利。\n\n房屋专为中长期入住设计:完整厨房与餐厅、独立办公区、舒适沙发、安静的卧室,以及高速 Wi-Fi、洗衣机、烘干机、暖气、热泵齐全。后院与花园适合带孩子放松,免费停车位充足。\n\n房东本地居住,沟通方便:看校、就医、生活采购、附近活动推荐,都可随时联系。",
+        "位于基督城西南区 Halswell 的明亮两居室家庭住宅(两间卧室均带独立卫浴),Cashmere High 与 Halswell School 学区内。开车前往 Riccarton、市中心 (CBD) 与 Lincoln 都很便利。\n\n房屋专为中长期入住设计:完整厨房与餐厅、独立办公区、舒适沙发、安静的卧室,以及高速 Wi-Fi、洗衣机、烘干机、暖气、热泵齐全。后院与花园适合带孩子放松,免费停车位充足。\n\n房东本地居住,沟通方便:看校、就医、生活采购、附近活动推荐,都可随时联系。",
       // en: undefined → keep the Hostaway-returned English description.
     },
     // Hidden until we have a real Matterport / Kuula scan for this property.
     tourUrl: "",
+    bedroomsLabel: {
+      // Hostaway's bedroom count (2) undersells the layout — there's also a
+      // single bedroom and a study beyond the two ensuites. Spell that out
+      // in Chinese so guests don't read "2 bedrooms" as capacity for two.
+      "zh-CN": "2个双人房，1个单人房，一个书房",
+    },
   },
   {
     key: "bealey-ave",
@@ -147,6 +160,16 @@ export function resolveDescription(
   const override =
     profile?.description?.[locale === "zh-CN" ? "zh-CN" : "en"];
   return override && override.trim().length > 0 ? override : fallback;
+}
+
+export function resolveBedroomsLabel(
+  listing: HomeIdentity,
+  locale: string,
+): string | null {
+  const profile = homeProfileFor(listing);
+  const override =
+    profile?.bedroomsLabel?.[locale === "zh-CN" ? "zh-CN" : "en"];
+  return override && override.trim().length > 0 ? override : null;
 }
 
 export function resolveTourUrl(

@@ -1,5 +1,9 @@
 import { useLocale, useTranslations } from "next-intl";
-import { resolveDescription, resolveTourUrl } from "@/content/homes";
+import {
+  resolveBedroomsLabel,
+  resolveDescription,
+  resolveTourUrl,
+} from "@/content/homes";
 import type { HostawayListing } from "@/lib/hostaway";
 import { BookingForm } from "./BookingForm";
 import { PropertyAmenities } from "./PropertyAmenities";
@@ -22,6 +26,7 @@ export function PropertyCard({
   const locale = useLocale();
   const description = resolveDescription(listing, locale, listing.description);
   const tourUrl = resolveTourUrl(listing, listing.tourUrl);
+  const bedroomsLabel = resolveBedroomsLabel(listing, locale);
 
   return (
     <article className="overflow-hidden rounded-2xl border border-kiwi-200 bg-white shadow-sm">
@@ -48,7 +53,7 @@ export function PropertyCard({
           </header>
 
           <ul className="flex flex-wrap gap-x-4 gap-y-1 text-sm text-kiwi-700">
-            <li>{t("bedrooms", { count: listing.bedrooms })}</li>
+            <li>{bedroomsLabel ?? t("bedrooms", { count: listing.bedrooms })}</li>
             <li>{t("bathrooms", { count: listing.bathrooms })}</li>
             <li>{t("maxGuests", { count: listing.maxGuests })}</li>
           </ul>
