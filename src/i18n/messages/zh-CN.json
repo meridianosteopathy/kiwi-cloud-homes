@@ -252,6 +252,8 @@
     "testModeNotice": "测试模式 · 这是 Stripe 测试环境,使用测试卡号 4242 4242 4242 4242(任意有效期与 CVC),不会发生真实扣款。注意:测试支付完成后,房东的 Hostaway 日历仍会创建真实的预订条目(因为 Hostaway 没有沙盒环境)。",
     "missingStripeKey": "未配置 Stripe 密钥(NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY)。请联系网站管理员。",
     "continueToPayment": "前往支付",
+    "cancellationSummary": "入住日 5 天前可免费取消,更接近入住日则退还住宿费用的 50%。",
+    "cancellationLink": "查看完整政策 →",
     "starting": "正在准备...",
     "back": "返回",
     "payNow": "支付 {amount}",
@@ -291,7 +293,37 @@
     "close": "关闭"
   },
   "Footer": {
-    "rights": "© {year} Kiwi Cloud Homes · 服务由 Hostaway 提供"
+    "rights": "© {year} Kiwi Cloud Homes · 服务由 Hostaway 提供",
+    "cancellationPolicy": "退订政策"
+  },
+  "CancellationPolicy": {
+    "title": "退订政策",
+    "intro": "根据入住时长,以下两种政策择一适用。请阅读与您预订相符的条款。",
+    "asOf": "自 {date} 起生效,所有时间以新西兰当地时间为准。",
+    "shortStay": {
+      "heading": "短住 (通过本网站直接预订)",
+      "summary": "入住日 5 天前可免费取消,超过此期限退款为住宿费用的 50%。",
+      "points": {
+        "fullRefund": "入住日前 5 整天或更早取消 → 全额退款。",
+        "halfRefund": "入住日前 5 天以内取消 → 退还住宿费用的 50%。",
+        "cleaningRefund": "若未办理入住,清洁费一律全额退还。",
+        "afterCheckin": "入住日之后,剩余晚数不予退款。",
+        "howTo": "取消申请须以书面形式提交 (回复预订确认邮件),我们收到邮件的日期即为取消生效日。"
+      },
+      "refundTiming": "获批的退款将退回至原支付卡,通常在 5–10 个工作日内到账。"
+    },
+    "longStay": {
+      "heading": "长住 (30 晚以上,报价方式预订)",
+      "summary": "预订确认后即产生一笔不可退还的管理费,超过入住日前一个月后,住宿费不再退还。",
+      "points": {
+        "adminFee": "预订确认之时起,产生一笔 NZD 150.00 + GST (合 NZD 172.50) 的不可退还管理费。",
+        "beforeCutoff": "入住日前一个月或更早取消 → 全额退款 (含押金),仅扣除上述管理费。",
+        "afterCutoff": "该日期之后取消 → 住宿费不予退还,押金仍全额退还。",
+        "midStay": "入住期间取消视同截止日之后取消:住宿费不退,押金按常规退还。",
+        "howTo": "取消申请以书面 (WhatsApp 或邮件) 送达日期为准,获批退款将在 10 个工作日内退回原支付方式。"
+      }
+    },
+    "questions": "对预订有疑问?请回复预订确认邮件或通过 WhatsApp 联系我们,一个工作日内回复。"
   },
   "Common": {
     "comingSoon": "即将上线",
