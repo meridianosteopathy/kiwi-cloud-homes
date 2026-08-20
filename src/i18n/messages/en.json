@@ -158,7 +158,8 @@
     "maxGuests": "Sleeps up to {count}",
     "viewDetails": "View property",
     "inquire": "Message the host",
-    "bookNow": "Book now"
+    "bookNow": "Book now",
+    "nearestSupermarket": "Nearest Chinese supermarket: {name}, approx. {distance} km"
   },
   "Booking": {
     "title": "Book your stay",

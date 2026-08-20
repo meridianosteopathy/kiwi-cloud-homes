@@ -158,7 +158,8 @@
     "maxGuests": "最多入住 {count} 人",
     "viewDetails": "查看房源",
     "inquire": "联系房东",
-    "bookNow": "立即预订"
+    "bookNow": "立即预订",
+    "nearestSupermarket": "最近的中国超市:{name},约 {distance} 公里"
   },
   "Booking": {
     "title": "预订入住",
