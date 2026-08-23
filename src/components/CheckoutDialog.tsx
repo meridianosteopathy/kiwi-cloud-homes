@@ -10,6 +10,7 @@ import {
   useStripe,
 } from "@stripe/react-stripe-js";
 import { isStripeTestMode } from "@/lib/stripe/mode";
+import { Link } from "@/i18n/routing";
 
 type Quote = {
   listingId: string;
@@ -321,6 +322,17 @@ function ReviewStep(props: {
           {t("testModeNotice")}
         </div>
       )}
+
+      <p className="text-[11px] leading-snug text-kiwi-700">
+        {t("cancellationSummary")}{" "}
+        <Link
+          href="/cancellation-policy"
+          target="_blank"
+          className="text-kiwi-800 underline underline-offset-2 hover:text-kiwi-900"
+        >
+          {t("cancellationLink")}
+        </Link>
+      </p>
 
       <div className="flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
         <button

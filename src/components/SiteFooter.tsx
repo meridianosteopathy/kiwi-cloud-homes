@@ -1,4 +1,5 @@
 import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/routing";
 import { BrandLockup, BrandStrapline } from "./BrandLogo";
 
 export function SiteFooter() {
@@ -18,7 +19,16 @@ export function SiteFooter() {
           stacked
         />
         <BrandStrapline reversed />
-        <p className="mt-2 text-xs text-brand-cloud">{t("rights", { year })}</p>
+        <p className="mt-2 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-xs text-brand-cloud">
+          <span>{t("rights", { year })}</span>
+          <span aria-hidden>·</span>
+          <Link
+            href="/cancellation-policy"
+            className="underline-offset-2 hover:text-white hover:underline"
+          >
+            {t("cancellationPolicy")}
+          </Link>
+        </p>
       </div>
     </footer>
   );
