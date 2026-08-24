@@ -38,3 +38,13 @@ export const ROAD_DETOUR_FACTOR = 1.3;
 export function roadKmFrom(straightLineKm: number): number {
   return Math.round(straightLineKm * ROAD_DETOUR_FACTOR * 10) / 10;
 }
+
+// Rough urban estimate — good enough for "give me a feel" without a routing
+// API. ~40 km/h in Christchurch traffic, same figure SchoolMatch uses for
+// driving times.
+const DRIVING_MIN_PER_KM = 1.5;
+
+/** Estimated driving minutes for a road-distance km figure (from {@link roadKmFrom}). */
+export function drivingMinutesFrom(roadKm: number): number {
+  return Math.max(1, Math.round(roadKm * DRIVING_MIN_PER_KM));
+}
