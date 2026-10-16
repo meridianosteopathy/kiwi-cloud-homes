@@ -60,7 +60,10 @@ For each variable:
 
 | Key | Value | Used in |
 |---|---|---|
-| `HOSTAWAY_USE_MOCK` | `false` (type it literally) | Switches to live Hostaway |
+| `BOOKING_BACKEND` | `hostaway` while Hostaway is still the engine; `beds24` after the switch (see below) | Chooses the booking engine |
+| `BEDS24_REFRESH_TOKEN` | from `npm run beds24:setup` (only when `BOOKING_BACKEND=beds24`) | Beds24 API |
+| `BEDS24_PROPERTY_IDS` *(optional)* | **Leave empty** to show every property in the Beds24 account | Beds24 API |
+| `HOSTAWAY_USE_MOCK` | `false` (type it literally); only matters while the engine is Hostaway | Switches to live Hostaway |
 | `HOSTAWAY_ACCOUNT_ID` | from `.env.local` | Hostaway API |
 | `HOSTAWAY_CLIENT_ID` | from `.env.local` | Hostaway API |
 | `HOSTAWAY_CLIENT_SECRET` | from `.env.local` | Hostaway API |
@@ -97,6 +100,41 @@ Two things to watch:
 To find a listing id: open the house in the Hostaway dashboard and read it off
 the address bar: `.../listings/123456`.
 
+### Switching the booking engine to Beds24
+
+The site can run on either engine. The switch is a settings change plus a
+small edit to the per-home file, with no code change:
+
+1. **Get a Beds24 refresh token.** In Beds24 go to **Settings → Apps &
+   Integrations → API** and generate an invite code with read properties,
+   read inventory (calendar and prices) and read/write bookings scopes. The
+   code works once. Exchange it from your computer:
+
+   ```
+   npm run beds24:setup -- <invite code>
+   ```
+
+   It prints the refresh token and checks its scopes. (Alternative without a
+   terminal: open https://beds24.com/api/v2, find **GET /authentication/setup**,
+   click *Try it out*, paste the code into the `code` header, execute, and copy
+   `refreshToken` from the response.)
+2. **Find each house's Beds24 property id** (Settings → Properties; the number
+   in the address bar). Add it to that house's `match` list in
+   `src/content/homes.ts`, and fill in `bedrooms` and `bathrooms` there,
+   because Beds24 has no fields for them. If Beds24 returns no photos for a
+   house, add `images` there too. Commit and merge.
+3. **Netlify variables:** set `BOOKING_BACKEND` to `beds24` and add
+   `BEDS24_REFRESH_TOKEN`. Leave `BEDS24_PROPERTY_IDS` empty unless you want
+   to hide a property or fix the order. The Hostaway variables can stay until
+   the Hostaway account is closed; they are ignored while the engine is Beds24.
+4. **Deploys → Trigger deploy → Deploy project.**
+5. Check `/tourist`: both houses, real prices and calendar from Beds24. Then
+   run the end-to-end test booking (section 6) and confirm the booking appears
+   in Beds24 with the Stripe payment reference in its notes, and that the
+   dates block on Airbnb and Booking.com through Beds24.
+
+To go back, set `BOOKING_BACKEND` to `hostaway` and redeploy.
+
 ## 4. Deploy and check
 
 Click **Deploy**. About two minutes later you get a URL like
@@ -110,8 +148,9 @@ Open the URL and check:
   running on Netlify.
 - `/tourist` shows every house you expect, each with its own price and
   "Book your stay" panel, not the mock "Halswell Garden Retreat". If you see
-  mock data, `HOSTAWAY_USE_MOCK` is not `false`, or a Hostaway variable is
-  missing. Fix it, then **Deploys → Trigger deploy → Deploy
+  mock data, `BOOKING_BACKEND` is not set to the engine you meant, or one of
+  that engine's variables is missing. The deploy log prints
+  `[booking] backend: ...` so you can tell which engine ran. Fix it, then **Deploys → Trigger deploy → Deploy
   project**. Env var changes only take effect on the next deploy.
 
 ## 5. Create the Stripe test webhook
@@ -141,8 +180,8 @@ Open the URL and check:
      event shows a **200** response. This is the key check. A **400** with
      "Invalid signature" means the webhook secret is wrong or the raw body
      is not reaching the function; stop and report it.
-   - **Hostaway → Reservations**: a new reservation whose
-     `channelReservationId` matches the Stripe payment intent id.
+   - **Hostaway → Reservations** (or **Beds24 → Bookings** after the switch):
+     a new reservation carrying the Stripe payment intent id.
    - The guest email address receives the confirmation email.
 5. Cancel the test reservation in Hostaway.
 

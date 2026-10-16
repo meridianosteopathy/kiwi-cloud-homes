@@ -55,6 +55,13 @@ Use the `BrandLogo` component rather than inlining logo SVG; it carries the
   the build, because the helper runs while static pages are prerendered.
   Unset, it falls back to Vercel's production hostname, then Netlify's `URL`,
   then localhost.
+- The booking engine is chosen by `BOOKING_BACKEND` (`beds24`, `hostaway` or
+  `mock`); unset, `HOSTAWAY_USE_MOCK` decides. Every page and route talks to
+  the `HostawayClient` interface in `src/lib/hostaway/types.ts`; the name is
+  historical and `src/lib/beds24` implements the same interface. On Beds24 a
+  listing id is the Beds24 property id, and bedroom/bathroom counts plus
+  fallback photos come from `src/content/homes.ts` because Beds24 has no
+  fields for them.
 - Hosting is Netlify Free (see `DEPLOY.md`). Vercel's Hobby plan does not
   permit a site that takes payments. Every production deploy costs 15 of
   Netlify's 300 monthly credits, so batch changes and test on PR previews.
