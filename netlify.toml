@@ -1,0 +1,11 @@
+# Netlify build settings. Next.js is handled by the Netlify Next.js Runtime
+# (@netlify/plugin-nextjs), pinned in package.json devDependencies.
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
