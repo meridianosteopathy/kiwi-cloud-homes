@@ -69,7 +69,7 @@ For each variable:
 | `HOSTAWAY_CLIENT_ID` | from `.env.local` | Hostaway API |
 | `HOSTAWAY_CLIENT_SECRET` | from `.env.local` | Hostaway API |
 | `HOSTAWAY_LISTING_IDS` *(optional)* | **Leave empty** to show every house in your Hostaway account (see below) | Hostaway API |
-| `INQUIRY_EMAIL` | `nina@kiwicloudhomes.co.nz` | inquiry mailto link |
+| `INQUIRY_EMAIL` | `nina@kiwicloudhomes.co.nz` | inquiry mailto link; owner alert when a payment cannot be booked |
 | `NEXT_PUBLIC_SITE_URL` | the site's public address, e.g. `https://kiwicloudhomes.co.nz` (use the `.netlify.app` URL until the domain is live) | social-share preview links |
 | `BREVO_API_KEY` | from `.env.local` | confirmation email |
 | `EMAIL_FROM_ADDRESS` | `nina@kiwicloudhomes.co.nz` | confirmation email |
@@ -110,9 +110,10 @@ small edit to the per-home file, with no code change:
    API** (the page at `beds24.com/control3.php?pagetype=apiv2`) and generate
    an invite code with these scopes: **read:properties**, **read:inventory**
    (calendar and prices), **all:bookings**, **all:bookings-personal** (guest
-   names and emails) and **all:bookings-financial** (the payment line). Tick
-   both houses under property access. The code works once and expires after
-   24 hours. Exchange it from your computer:
+   names and emails) and **all:bookings-financial** (the payment line). Leave
+   property access on **all properties**: a token tied to one property would
+   show only that house, and the setup script warns if that happened. The
+   code works once and expires after 24 hours. Exchange it from your computer:
 
    ```
    npm run beds24:setup -- <invite code>
@@ -137,14 +138,22 @@ small edit to the per-home file, with no code change:
 5. Check `/tourist`: both houses, real prices and calendar from Beds24. The
    site sells the room's **daily prices** (Settings → Properties → Rooms →
    Daily prices, or the Calendar price grid); a date with no price is shown
-   but not bookable, and the cleaning fee is the property's enabled one-off
+   but not bookable. It sells **one price slot** as a flat nightly rate (the
+   first one enabled for the Beds24 booking page, or `BEDS24_PRICE_SLOT`);
+   conditions on that price (minimum stay, lead time, per-person pricing)
+   and extra-person charges are not applied, so keep the sold slot a plain
+   nightly price. The cleaning fee is the property's enabled one-off
    *obligatory cleaning* upsell item (Booking page → Upsell items), falling
-   back to the room's cleaning-fee field. If a house shows no photos, add them
-   to `src/content/homes.ts`. Then run the end-to-end test booking (section 6)
-   and confirm the booking appears in Beds24 with source *Kiwi Cloud Homes
-   website*, the Stripe payment reference (`pi_…`) in its notes and `custom1`
-   field, an accommodation charge, a cleaning-fee charge and a payment line,
-   and that the dates block on Airbnb and Booking.com through Beds24.
+   back to the room's cleaning-fee field; other compulsory upsell items are
+   not charged (the function log says so), so fold them into the nightly
+   price or the cleaning fee. Per-date minimum stays, no-check-in and
+   no-check-out days from the Beds24 calendar are honoured. If a house shows
+   no photos, add them to `src/content/homes.ts`. Then run the end-to-end
+   test booking (section 6) and confirm the booking appears in Beds24 with
+   source *Kiwi Cloud Homes website*, the Stripe payment reference (`pi_…`)
+   in its notes and `custom1` field, an accommodation charge, a cleaning-fee
+   charge and a payment line, and that the dates block on Airbnb and
+   Booking.com through Beds24.
 
 To go back, set `BOOKING_BACKEND` to `hostaway` and redeploy.
 
@@ -161,10 +170,13 @@ Open the URL and check:
   running on Netlify.
 - `/tourist` shows every house you expect, each with its own price and
   "Book your stay" panel, not the mock "Halswell Garden Retreat". If you see
-  mock data, `BOOKING_BACKEND` is not set to the engine you meant, or one of
-  that engine's variables is missing. The deploy log prints
-  `[booking] backend: ...` so you can tell which engine ran. Fix it, then **Deploys → Trigger deploy → Deploy
-  project**. Env var changes only take effect on the next deploy.
+  mock data, `BOOKING_BACKEND` is not set to the engine you meant. If you see
+  an error page instead, one of that engine's variables is missing or wrong:
+  **Logs → Functions** shows the message (for Beds24, a line naming
+  `BEDS24_REFRESH_TOKEN`) and a `[booking] backend: ...` line saying which
+  engine ran; both appear on the first page view, not in the deploy log. Fix
+  it, then **Deploys → Trigger deploy → Deploy project**. Env var changes
+  only take effect on the next deploy.
 
 ## 5. Create the Stripe test webhook
 
@@ -180,9 +192,10 @@ Open the URL and check:
 
 ## 6. End-to-end test
 
-1. In Hostaway, **block off a fake date range** (a month two years out). The
+1. In the booking engine the site is running on (Hostaway, or Beds24 after
+   the switch), **block off a fake date range** (a month two years out). The
    first successful test booking creates a real reservation on your real
-   calendar.
+   calendar, and the engine pushes it to Airbnb and Booking.com.
 2. Open `https://YOUR-NETLIFY-URL/tourist`, pick those dates, **Book now**,
    fill in name and email, **Continue to payment**.
 3. Pay with the Stripe test card `4242 4242 4242 4242`, any future expiry,
@@ -196,7 +209,15 @@ Open the URL and check:
    - **Hostaway → Reservations** (or **Beds24 → Bookings** after the switch):
      a new reservation carrying the Stripe payment intent id.
    - The guest email address receives the confirmation email.
-5. Cancel the test reservation in Hostaway.
+5. Cancel the test reservation in that same engine.
+
+If a payment succeeds but the booking cannot be written (the nights were
+taken on another channel in the meantime, or the listing is unknown to the
+engine), the site emails `INQUIRY_EMAIL` an **ACTION NEEDED** alert with the
+payment id, guest and dates, and the Stripe event shows **200**. Refund the
+guest in Stripe or create the booking by hand. If that alert cannot be sent
+(Brevo not configured), the event stays red in Stripe and keeps retrying so
+the failure is not lost.
 
 If anything fails, **Netlify → Logs → Functions** shows the server-side
 log lines (`[booking/webhook] …`). Look soon after the failure; free-plan

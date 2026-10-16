@@ -18,6 +18,9 @@ export type {
   ReservationResult,
 } from "./types";
 
+export { ReservationRejectedError } from "./errors";
+export type { ReservationRejectionReason } from "./errors";
+
 export type BookingBackend = "mock" | "hostaway" | "beds24";
 
 /**

@@ -66,7 +66,11 @@ Use the `BrandLogo` component rather than inlining logo SVG; it carries the
   else 1); a day with no price in that slot is not for sale. Bookings carry
   the Stripe PaymentIntent id in `custom1` (Beds24's `apiReference` and
   `referer` are read-only on the API) and that field is the idempotency key
-  when Stripe retries the webhook.
+  when Stripe retries the webhook. A paid booking the engine cannot write
+  (nights gone, unknown listing, currency mismatch) is a
+  `ReservationRejectedError`: the webhook emails the owner (`INQUIRY_EMAIL`)
+  and only then acks to Stripe; a transient error still returns 500 so Stripe
+  retries.
 - Hosting is Netlify Free (see `DEPLOY.md`). Vercel's Hobby plan does not
   permit a site that takes payments. Every production deploy costs 15 of
   Netlify's 300 monthly credits, so batch changes and test on PR previews.

@@ -4,8 +4,9 @@ import {
   reserveFromPaymentIntent,
   ReservationMetadataError,
 } from "@/lib/booking/reservation";
+import { sendBookingAlert } from "@/lib/email/booking-alert";
 import { sendBookingConfirmation } from "@/lib/email/booking-confirmation";
-import { getHostawayClient } from "@/lib/hostaway";
+import { getHostawayClient, ReservationRejectedError } from "@/lib/hostaway";
 import { getStripe, StripeConfigError } from "@/lib/stripe/server";
 
 export const dynamic = "force-dynamic";
@@ -109,8 +110,10 @@ export async function POST(req: Request) {
     // and double-create.
     try {
       const meta = pi.metadata ?? {};
-      // Confirm the home that was actually booked, not the first one.
-      const listing = await getHostawayClient().getListing(meta.listing_id);
+      // Confirm the home that was actually booked, not the first one. The
+      // reservation carries the id the engine knows, which can differ from
+      // the PaymentIntent's when the site switched engines mid-checkout.
+      const listing = await getHostawayClient().getListing(reservation.listingId ?? meta.listing_id);
       const total =
         pi.currency && pi.amount_received
           ? isZeroDecimal(pi.currency)
@@ -149,12 +152,45 @@ export async function POST(req: Request) {
     const idx = SEEN_FIFO.indexOf(event.id);
     if (idx >= 0) SEEN_FIFO.splice(idx, 1);
 
+    if (err instanceof ReservationRejectedError) {
+      // The money is captured but no booking can be written: the nights
+      // went to another channel between quote and payment, the listing is
+      // not one the engine knows, or the currency does not match. Retrying
+      // cannot fix any of those; a person has to refund or re-home the
+      // guest. Tell the owner, and only once that message is out tell
+      // Stripe to stop retrying. If the alert cannot be sent, keep the 500
+      // so the failure stays visible in Stripe's webhook view.
+      console.error(`[booking/webhook] reservation rejected (${err.reason}):`, err.message);
+      const alert = await sendBookingAlert({ reason: err.reason, detail: err.message, paymentIntent: pi });
+      if (alert.id) {
+        console.log(`[booking/webhook] owner alerted (${alert.id}); acking so Stripe stops retrying.`);
+        return NextResponse.json(
+          { ok: false, error: err.message, retriable: false, alerted: true },
+          { status: 200 },
+        );
+      }
+      console.error(
+        `[booking/webhook] owner alert not sent (${alert.skipped ?? alert.error}); answering 500 so Stripe keeps retrying.`,
+      );
+      return NextResponse.json(
+        { ok: false, error: err.message, retriable: true },
+        { status: 500 },
+      );
+    }
+
     if (err instanceof ReservationMetadataError) {
       console.error(
         "[booking/webhook] metadata error (not retrying):",
         err.message,
       );
-      // Bad metadata won't fix itself on retry; ack so Stripe stops.
+      // Bad metadata won't fix itself on retry; ack so Stripe stops. If
+      // money was captured, the owner still needs to know.
+      if (pi.amount_received > 0) {
+        const alert = await sendBookingAlert({ reason: "missing_metadata", detail: err.message, paymentIntent: pi });
+        if (!alert.id) {
+          console.error(`[booking/webhook] owner alert not sent (${alert.skipped ?? alert.error}).`);
+        }
+      }
       return NextResponse.json(
         { ok: false, error: err.message, retriable: false },
         { status: 200 },

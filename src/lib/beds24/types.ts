@@ -58,8 +58,14 @@ export interface Beds24PriceRule {
   /** Slot number, 1..16: the calendar field is `price<id>`. */
   id?: number;
   name?: string;
+  /** Conditions Beds24 applies to this price; the site warns when it ignores them. */
   minimumStay?: number;
   maximumStay?: number;
+  minDaysUntilCheckin?: number;
+  maxDaysUntilCheckin?: number;
+  priceFor?: { type?: "perPerson" | "maxCapacity" | "upToPerson" | string; upToPersonValue?: number | null };
+  extraPerson?: number;
+  extraChild?: number;
   /** Which booking pages may sell this price. */
   bookingPage?: { direct?: boolean; agent?: boolean };
   [key: string]: unknown;

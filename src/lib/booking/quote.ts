@@ -1,4 +1,4 @@
-import { getHostawayClient, type HostawayListing } from "@/lib/hostaway";
+import { getHostawayClient, type AvailabilityDay, type HostawayListing } from "@/lib/hostaway";
 
 export interface QuoteInput {
   /** Hostaway listing id — which of the homes is being priced. */
@@ -94,10 +94,22 @@ export async function computeQuote(input: QuoteInput): Promise<Quote> {
   if (nights <= 0) {
     throw new QuoteError("checkout_before_checkin", "Pick a check-out after check-in.");
   }
-  if (nights < listing.minNights) {
+
+  // The host can close a day for arrivals or departures without closing it
+  // for stays that pass through (Beds24 noCheckIn / noCheckOut overrides).
+  const restriction = arrivalDepartureRestriction(calendar, input.checkIn, input.checkOut);
+  if (restriction) {
+    throw new QuoteError("unavailable", restriction);
+  }
+
+  // Minimum stay can be set per date in the engine's calendar as well as per
+  // listing; the engine does not enforce it on a booking written through the
+  // API, so this quote is the only gate.
+  const minNights = effectiveMinNights(listing.minNights, bookedNights);
+  if (nights < minNights) {
     throw new QuoteError(
       "below_min_nights",
-      `Minimum stay for this home is ${listing.minNights} night${listing.minNights === 1 ? "" : "s"}.`,
+      `Minimum stay for these dates is ${minNights} night${minNights === 1 ? "" : "s"}.`,
     );
   }
   if (listing.maxNights > 0 && nights > listing.maxNights) {
@@ -181,4 +193,46 @@ function toMinor(major: number, currency: string): number {
 
 export function listingExposes(listing: HostawayListing): boolean {
   return Boolean(listing.id);
+}
+
+/**
+ * The minimum stay that applies to a set of booked nights. Beds24 returns the
+ * effective per-day rule for every night (the room default where the
+ * calendar has none), so when every night carries a value the calendar is
+ * authoritative: a calendar that relaxes the room's minimum is honoured, and
+ * a longer calendar minimum on any night of the stay applies (stay-through).
+ * When some nights carry no value the listing default still applies.
+ */
+export function effectiveMinNights(
+  listingMinNights: number,
+  bookedNights: Array<Pick<AvailabilityDay, "minimumStay">>,
+): number {
+  const perDay = bookedNights
+    .map((d) => (typeof d.minimumStay === "number" ? d.minimumStay : 0))
+    .filter((n) => n > 0);
+  if (perDay.length === 0) return Math.max(1, listingMinNights);
+  const calendarMax = Math.max(...perDay);
+  return perDay.length === bookedNights.length
+    ? Math.max(1, calendarMax)
+    : Math.max(1, listingMinNights, calendarMax);
+}
+
+/**
+ * Why a stay may not start or end on the requested days, or null when it may.
+ * `calendar` is the engine's inclusive check-in..check-out range.
+ */
+export function arrivalDepartureRestriction(
+  calendar: Array<Pick<AvailabilityDay, "date" | "noCheckIn" | "noCheckOut">>,
+  checkIn: string,
+  checkOut: string,
+): string | null {
+  const arrival = calendar.find((d) => d.date === checkIn);
+  if (arrival?.noCheckIn) {
+    return `Check-in isn't possible on ${checkIn} for this home; pick another arrival day.`;
+  }
+  const departure = calendar.find((d) => d.date === checkOut);
+  if (departure?.noCheckOut) {
+    return `Check-out isn't possible on ${checkOut} for this home; pick another departure day.`;
+  }
+  return null;
 }

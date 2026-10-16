@@ -61,13 +61,18 @@ if (token) {
     );
     const has = (pattern) => scopes.some((s) => pattern.test(String(s)));
     const problems = [];
+    if (d.token?.onlyPropertyId) {
+      problems.push(
+        `property access is limited to property ${d.token.onlyPropertyId}; the site needs all properties (generate the code with property access left on "all")`,
+      );
+    }
     if (!has(/properties/i)) problems.push("read:properties (needed to list the houses)");
     if (!has(/inventory/i)) problems.push("read:inventory (needed for prices and availability)");
     if (!has(/^(all|write):bookings$/i)) problems.push("all:bookings (needed to create bookings)");
     if (!has(/bookings-personal/i)) problems.push("all:bookings-personal (needed to store guest names and emails)");
     if (!has(/bookings-financial/i)) problems.push("all:bookings-financial (needed to store the price and payment)");
     if (problems.length > 0) {
-      console.log("\nWarning: this token is missing scopes the website needs:");
+      console.log("\nWarning: this token does not give the website everything it needs:");
       for (const p of problems) console.log(`  - ${p}`);
       console.log("Generate a new invite code with those scopes ticked and run this again.");
     } else {

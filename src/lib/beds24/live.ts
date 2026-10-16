@@ -13,7 +13,8 @@
  *        &includeLanguages=zh&includePictures=true&includeUpsellItems=true
  *        &includePriceRules=true            (paginated; all pages are read)
  *   GET  /inventory/rooms/calendar?roomId&startDate&endDate&includeNumAvail
- *        &includeMinStay&includePrices&includeOverride
+ *        &includeMinStay&includePrices&includeOverride   (all pages; also
+ *        read 90 days ahead for the card's "from" price)
  *   GET  /bookings?roomId&arrival&status=...  (idempotency check, matched on
  *        custom1 = Stripe PaymentIntent id; apiReference is read-only)
  *   POST /bookings  [ { roomId, status, arrival, departure, ... , actions } ]
@@ -38,6 +39,7 @@ import type {
   ReservationInput,
   ReservationResult,
 } from "@/lib/hostaway/types";
+import { ReservationRejectedError } from "@/lib/hostaway/errors";
 import {
   Beds24AuthError,
   clearAccessTokenCache,
@@ -51,6 +53,7 @@ import type {
   Beds24Envelope,
   Beds24Picture,
   Beds24PostResult,
+  Beds24PriceRule,
   Beds24Property,
   Beds24Room,
   Beds24RoomCalendar,
@@ -58,6 +61,7 @@ import type {
 } from "./types";
 
 const PROPERTIES_TTL_MS = 5 * 60 * 1000;
+const HEADLINE_LOOKAHEAD_DAYS = 90;
 const MAX_DISCOVERED_PROPERTIES = 50;
 const MAX_PAGES = 10;
 const LOW_CREDIT_WARNING = 50;
@@ -71,7 +75,7 @@ export function createBeds24Client(): HostawayClient {
   return {
     async listListings() {
       const properties = await resolveProperties();
-      const listings = properties.map(mapProperty);
+      const listings = await Promise.all(properties.map(toListing));
       console.log(
         `[beds24] showing ${listings.length} listing(s): ${listings
           .map((l) => `${l.id} (${l.name})`)
@@ -92,7 +96,7 @@ export function createBeds24Client(): HostawayClient {
             : "No Beds24 properties are configured for this site.",
         );
       }
-      return mapProperty(property);
+      return toListing(property);
     },
 
     async isConfiguredListing(listingId) {
@@ -104,18 +108,7 @@ export function createBeds24Client(): HostawayClient {
       const property = await requireProperty(listingId);
       const room = pickRoom(property);
       const currency = property.currency || "NZD";
-      const data = await apiGet<Beds24RoomCalendar[]>("/inventory/rooms/calendar", {
-        roomId: room.id,
-        startDate: start,
-        endDate: end,
-        includeNumAvail: true,
-        includeMinStay: true,
-        includePrices: true,
-        includeOverride: true,
-      });
-      const ranges = (data ?? []).find((r) => Number(r.roomId) === Number(room.id))?.calendar
-        ?? data?.[0]?.calendar
-        ?? [];
+      const ranges = await fetchCalendarRanges(room.id, start, end);
       const days = expandCalendar(ranges, start, end, currency, room.rackRate || room.minPrice || 0, {
         priceSlot: priceSlotFor(room),
         today: todayInNewZealand(),
@@ -143,7 +136,8 @@ export function createBeds24Client(): HostawayClient {
       if (input.currency && input.currency.toUpperCase() !== currency.toUpperCase()) {
         // The guest paid in one currency and Beds24 keeps the property in
         // another; writing the number across would misstate the price.
-        throw new Beds24ApiError(
+        throw new ReservationRejectedError(
+          "currency_mismatch",
           `Payment ${input.externalRef} is in ${input.currency} but Beds24 property ${property.id} is priced in ${currency}; not creating the booking.`,
         );
       }
@@ -199,18 +193,23 @@ export function createBeds24Client(): HostawayClient {
           departure: input.departureDate,
           numAdult,
           numChild: 0,
-          firstName: input.guestFirstName,
-          lastName: input.guestLastName || input.guestFirstName,
+          // Beds24 caps these at 100 characters (notes at 2000). A single-name
+          // guest keeps an empty last name rather than a duplicated first name.
+          firstName: clip(input.guestFirstName, 100),
+          lastName: clip(input.guestLastName ?? "", 100),
           email: input.guestEmail,
-          phone: input.guestPhone ?? "",
+          phone: clip(input.guestPhone ?? "", 100),
           lang: "en",
           price: total,
           // `referer` and `apiReference` are read-only on the API; the
           // writable source label is refererEditable, and custom1 carries
           // the Stripe PaymentIntent id so a retry can find this booking.
           refererEditable: WEBSITE_REFERER,
-          custom1: input.externalRef,
-          notes: `Direct booking from the website. ${nights} night(s), paid ${total} ${currency} via Stripe (${input.externalRef}).`,
+          custom1: clip(input.externalRef, 1000),
+          notes: clip(
+            `Direct booking from the website. ${nights} night(s), paid ${total} ${currency} via Stripe (${input.externalRef}).`,
+            2000,
+          ),
           invoiceItems,
           actions: {
             // Beds24 refuses the booking if the room has no availability,
@@ -220,8 +219,11 @@ export function createBeds24Client(): HostawayClient {
             // Beds24's new-booking email.
             notifyGuest: false,
             notifyHost: true,
-            // Let the booking fan out to the channels and to our future
-            // webhook receiver like any other new booking would.
+            // Let this booking fire the account's Beds24 webhooks (our
+            // future receiver) on status, date or room changes, like any
+            // other new booking. Channel-manager sync to Airbnb and
+            // Booking.com is independent of this flag; DEPLOY.md has the
+            // owner check it by hand on the first live booking.
             allowWebhooks: true,
           },
         },
@@ -280,6 +282,9 @@ let cachedProperties: { list: Beds24Property[]; expiresAt: number } | null = nul
  * The properties this site shows, in display order.
  *   1. BEDS24_PROPERTY_IDS — comma-separated ids, pins the set and the order.
  *   2. Otherwise every property in the Beds24 account, as the API returns them.
+ * Either way the property data (cleaning fee, capacity, texts, price rules)
+ * is re-read every five minutes, so a change made in Beds24 shows up without
+ * a redeploy.
  */
 async function resolveProperties(): Promise<Beds24Property[]> {
   const now = Date.now();
@@ -323,11 +328,54 @@ async function resolveProperties(): Promise<Beds24Property[]> {
       .map((p) => `${p.id} (${p.name ?? "unnamed"})`)
       .join("; ")}${pinned.length > 0 ? " (pinned via BEDS24_PROPERTY_IDS)" : ""}`,
   );
-  cachedProperties = {
-    list,
-    expiresAt: now + (pinned.length > 0 ? Number.POSITIVE_INFINITY : PROPERTIES_TTL_MS),
-  };
+  cachedProperties = { list, expiresAt: now + PROPERTIES_TTL_MS };
   return list;
+}
+
+/** A property as the site shows it, with the headline price taken from the calendar. */
+async function toListing(property: Beds24Property): Promise<HostawayListing> {
+  const listing = mapProperty(property);
+  const room = pickRoom(property);
+  const headline = await headlinePriceFor(property, room);
+  if (headline !== null) {
+    listing.basePrice = { ...listing.basePrice, amount: headline };
+  } else if (listing.basePrice.amount <= 0) {
+    console.warn(
+      `[beds24] property ${property.id} has no upcoming price in slot ${priceSlotFor(room)} and no rack rate; the card will show 0.`,
+    );
+  }
+  return listing;
+}
+
+const headlineCache = new Map<number, { amount: number | null; expiresAt: number }>();
+
+/**
+ * The "from" price on the property card: the lowest price in the sold slot
+ * over the next 90 nights. rackRate and minPrice are unrelated room fields
+ * that are often unset, which would print "0 per night"; this is display
+ * only, every quote prices the actual nights.
+ */
+async function headlinePriceFor(property: Beds24Property, room: Beds24Room): Promise<number | null> {
+  const now = Date.now();
+  const hit = headlineCache.get(property.id);
+  if (hit && hit.expiresAt > now) return hit.amount;
+  let amount: number | null = null;
+  try {
+    const today = todayInNewZealand();
+    const ranges = await fetchCalendarRanges(room.id, today, addDays(today, HEADLINE_LOOKAHEAD_DAYS));
+    const key = `price${priceSlotFor(room)}`;
+    const prices = ranges
+      .map((r) => r[key])
+      .filter((p): p is number => typeof p === "number" && Number.isFinite(p) && p > 0);
+    amount = prices.length > 0 ? Math.min(...prices) : null;
+  } catch (err) {
+    console.warn(
+      `[beds24] could not read upcoming prices for property ${property.id}:`,
+      err instanceof Error ? err.message : err,
+    );
+  }
+  headlineCache.set(property.id, { amount, expiresAt: now + PROPERTIES_TTL_MS });
+  return amount;
 }
 
 async function requireProperty(listingId: string): Promise<Beds24Property> {
@@ -347,14 +395,22 @@ export function pickRoom(property: Beds24Property): Beds24Room {
     );
   }
   const sellable = rooms.filter((r) => (r.qty ?? 1) > 0 && r.sellPriority !== null);
+  if (sellable.length === 0) {
+    console.warn(
+      `[beds24] property ${property.id} has no sellable room type (all hidden from the booking page or with 0 units); selling room ${rooms[0].id} anyway. Unhide it in Beds24 if this is unintended.`,
+    );
+  }
   const candidates = sellable.length > 0 ? sellable : rooms;
-  if (candidates.length > 1) {
+  if (candidates.length > 1 && !warnedRooms.has(property.id)) {
     console.warn(
       `[beds24] property ${property.id} has ${candidates.length} room types; using the first (${candidates[0].id} ${candidates[0].name ?? ""}). A whole-house listing should have one.`,
     );
+    warnedRooms.add(property.id);
   }
   return candidates[0];
 }
+
+const warnedRooms = new Set<number>();
 
 export function mapProperty(property: Beds24Property): HostawayListing {
   const room = pickRoom(property);
@@ -404,6 +460,7 @@ export function mapProperty(property: Beds24Property): HostawayListing {
  * channel manager pushes to Airbnb and the like) is the fallback.
  */
 export function cleaningFeeFor(property: Beds24Property, room: Beds24Room): number {
+  warnAboutUnmodelledFees(property);
   const upsell = (property.upsellItems ?? [])
     .filter(
       (u) =>
@@ -419,6 +476,38 @@ export function cleaningFeeFor(property: Beds24Property, room: Beds24Room): numb
   return room.cleaningFee && room.cleaningFee > 0 ? room.cleaningFee : 0;
 }
 
+const warnedFees = new Set<number>();
+
+/**
+ * The site charges nightly prices plus a flat cleaning fee. Any other
+ * compulsory upsell item (a per-person charge, a daily fee, a percentage
+ * tax) is not collected, so say so once per property for the trial log.
+ */
+function warnAboutUnmodelledFees(property: Beds24Property): void {
+  if (warnedFees.has(property.id)) return;
+  const ignored = (property.upsellItems ?? []).filter(
+    (u) =>
+      u.enable === true &&
+      typeof u.type === "string" &&
+      /^obligatory/.test(u.type) &&
+      !(
+        u.type === "obligatoryCleaning" &&
+        (u.per === undefined || u.per === "booking" || u.per === "room") &&
+        (u.period === undefined || u.period === "oneTime")
+      ),
+  );
+  if (ignored.length > 0) {
+    console.warn(
+      `[beds24] property ${property.id} has compulsory upsell item(s) the site does not charge: ${ignored
+        .map((u) => `${u.type} ${u.amount ?? "?"} per ${u.per ?? "booking"} ${u.period ?? "oneTime"}`)
+        .join("; ")}. Fold them into the nightly price or the cleaning fee.`,
+    );
+  }
+  warnedFees.add(property.id);
+}
+
+const warnedSlots = new Set<number>();
+
 /**
  * Which of the room's 16 price slots the site sells.
  *   BEDS24_PRICE_SLOT=n  pins it (1..16).
@@ -431,7 +520,34 @@ export function priceSlotFor(room: Beds24Room): number {
   const direct = (room.priceRules ?? []).find(
     (r) => r?.bookingPage?.direct === true && Number.isInteger(r.id) && (r.id as number) >= 1 && (r.id as number) <= 16,
   );
-  return direct?.id ?? 1;
+  const slot = direct?.id ?? 1;
+  const rule = (room.priceRules ?? []).find((r) => r?.id === slot);
+  if (rule && !warnedSlots.has(room.id)) {
+    const conditions = describeRuleConditions(rule);
+    if (conditions.length > 0) {
+      console.warn(
+        `[beds24] room ${room.id} price slot ${slot} ("${rule.name ?? ""}") has conditions the site does not apply (${conditions.join(
+          ", ",
+        )}); every stay is sold at that slot's nightly price.`,
+      );
+    }
+    warnedSlots.add(room.id);
+  }
+  return slot;
+}
+
+/** The conditions on a Beds24 price rule that the site's flat nightly pricing ignores. */
+export function describeRuleConditions(rule: Beds24PriceRule): string[] {
+  const out: string[] = [];
+  if (typeof rule.minimumStay === "number" && rule.minimumStay > 1) out.push(`minimum stay ${rule.minimumStay}`);
+  if (typeof rule.maximumStay === "number" && rule.maximumStay > 0 && rule.maximumStay < 365) out.push(`maximum stay ${rule.maximumStay}`);
+  if (typeof rule.minDaysUntilCheckin === "number" && rule.minDaysUntilCheckin > 0) out.push(`at least ${rule.minDaysUntilCheckin} days before check-in`);
+  if (typeof rule.maxDaysUntilCheckin === "number" && rule.maxDaysUntilCheckin > 0) out.push(`at most ${rule.maxDaysUntilCheckin} days before check-in`);
+  const priceFor = rule.priceFor?.type;
+  if (priceFor === "perPerson") out.push("priced per person");
+  if (priceFor === "upToPerson") out.push(`priced up to ${rule.priceFor?.upToPersonValue ?? "?"} guest(s)`);
+  if (typeof rule.extraPerson === "number" && rule.extraPerson > 0) out.push(`extra person ${rule.extraPerson}`);
+  return out;
 }
 
 /**
@@ -575,6 +691,8 @@ export interface ExpandCalendarOptions {
  * price. A day with no range at all, or with no price, is marked and made
  * unavailable: better to refuse a booking than to sell a night we know
  * nothing about. The fallback price is only ever shown, never charged.
+ * The noCheckIn / noCheckOut overrides are carried through as flags for the
+ * quote to apply to the arrival and departure day.
  */
 export function expandCalendar(
   ranges: Beds24CalendarRange[],
@@ -608,7 +726,10 @@ export function expandCalendar(
       };
     }
     const numAvail = typeof range.numAvail === "number" ? range.numAvail : 0;
-    const blackout = range.override === "blackout";
+    const override = String(range.override ?? "none");
+    const blackout = override === "blackout";
+    const noCheckIn = override === "noCheckIn" || override === "noCheckInOrCheckOut";
+    const noCheckOut = override === "noCheckOut" || override === "noCheckInOrCheckOut";
     const rawPrice = range[priceKey];
     const priced = typeof rawPrice === "number" && Number.isFinite(rawPrice) && rawPrice > 0;
     return {
@@ -617,6 +738,8 @@ export function expandCalendar(
       price: { amount: priced ? (rawPrice as number) : fallbackPrice, currency },
       minimumStay:
         typeof range.minStay === "number" && range.minStay > 0 ? range.minStay : undefined,
+      ...(noCheckIn ? { noCheckIn: true } : {}),
+      ...(noCheckOut ? { noCheckOut: true } : {}),
       missing: false,
       unpriced: !priced,
     };
@@ -632,6 +755,31 @@ export function todayInNewZealand(now: Date = new Date()): string {
     month: "2-digit",
     day: "2-digit",
   }).format(now);
+}
+
+/** Every calendar range Beds24 holds for a room between two dates, across pages. */
+async function fetchCalendarRanges(roomId: number, start: string, end: string): Promise<Beds24CalendarRange[]> {
+  const data = await apiGetAllPages<Beds24RoomCalendar>("/inventory/rooms/calendar", {
+    roomId,
+    startDate: start,
+    endDate: end,
+    includeNumAvail: true,
+    includeMinStay: true,
+    includePrices: true,
+    includeOverride: true,
+  });
+  const mine = data.filter((r) => Number(r.roomId) === Number(roomId));
+  return (mine.length > 0 ? mine : data).flatMap((r) => r.calendar ?? []);
+}
+
+export function addDays(iso: string, days: number): string {
+  const d = new Date(iso + "T00:00:00Z");
+  d.setUTCDate(d.getUTCDate() + days);
+  return d.toISOString().slice(0, 10);
+}
+
+function clip(value: string, max: number): string {
+  return value.length > max ? value.slice(0, max) : value;
 }
 
 function dateRange(startISO: string, endISO: string): string[] {
@@ -785,6 +933,12 @@ async function apiRequest<T>(
   };
 
   let { res, text } = await send(await getAccessToken());
+  if (looksLikeAuthFailure(res.status, text) && !creds.refreshToken) {
+    // A static BEDS24_TOKEN cannot be renewed; resending it would fail the same way.
+    throw new Beds24AuthError(
+      `Beds24 rejected BEDS24_TOKEN (${res.status}): ${text.slice(0, 200)}. Long-life tokens are read-only and cannot be refreshed; use BEDS24_REFRESH_TOKEN for production.`,
+    );
+  }
   if (looksLikeAuthFailure(res.status, text)) {
     clearAccessTokenCache();
     let token: string;
@@ -843,10 +997,14 @@ export class Beds24ApiError extends Error {
   }
 }
 
-/** Beds24 refused the booking because the room is no longer free for those nights. */
-export class Beds24UnavailableError extends Beds24ApiError {
+/**
+ * Beds24 refused the booking because the room is no longer free for those
+ * nights. A ReservationRejectedError, so the webhook alerts the owner and
+ * stops Stripe retrying instead of failing the same way for three days.
+ */
+export class Beds24UnavailableError extends ReservationRejectedError {
   constructor(message: string) {
-    super(message);
+    super("unavailable", message);
     this.name = "Beds24UnavailableError";
   }
 }
