@@ -1,13 +1,14 @@
 # Replacing Hostaway: decision brief
 
-Prepared 15 October 2026 for Kiwi Cloud Homes. One property, listed on Airbnb and
-Booking.com, plus the direct-booking website in this repository.
+Prepared 15 October 2026 for Kiwi Cloud Homes, updated 16 October. Two Christchurch
+houses managed through Hostaway, on Airbnb and Booking.com, plus the direct-booking
+website in this repository.
 
 ## 1. The short answer
 
-Going back to Hostaway is the easiest choice, not the cheaper one. For one listing it
-costs roughly three to five times more than the alternatives. It is sold by sales call
-only, and it may not accept a single-listing account at all.
+Going back to Hostaway is the easiest choice, not the cheaper one. For two listings it
+costs roughly three to eight times more than the alternatives. It is sold by sales call
+only, usually with a 12-month contract and an onboarding fee.
 
 Building your own channel manager from scratch is not possible right now. Airbnb and
 Booking.com are not giving API access to new software. Any platform you own has to run
@@ -21,7 +22,7 @@ So the recommended path is a hybrid:
    on top of the engine in small iterations. You own the user interface and the data.
    The engine can be swapped later.
 
-Engine cost: about NZD 33 to 50 a month, versus NZD 170 to 300 for Hostaway.
+Engine cost for two houses: about NZD 42 to 67 a month, versus NZD 170 to 300 for Hostaway.
 
 First choice for the engine: **Beds24**. Runner-up: **Hospitable**. Both connect to
 Airbnb and Booking.com through official connections. Both let you read and reply to guest
@@ -61,7 +62,7 @@ suspension. Booking.com's two-factor login also makes it impractical.
 **"Connectivity as a service" is priced for software companies.** Channex, the most
 transparent of them, charges a USD 130 (NZD 224) monthly platform fee plus USD 0.50 per
 unit. Rentals United starts at USD 330 (NZD 568). NextPax targets portfolios of 50 or
-more. None is sensible for one property.
+more. None is sensible for two houses.
 
 **So "my own platform" means one of two things.** Either your own screens and database on
 top of a small-host channel manager that exposes its data through an API. Or your own
@@ -74,7 +75,7 @@ only, and Vercel lists "requesting or processing payment from visitors" as comme
 A site that takes card payments is not allowed on it. The fix is to move the website to
 Netlify's free plan, which permits commercial projects, needs no card and does not put the
 site to sleep. The catch is a monthly allowance of 300 credits: each production deploy
-costs 15 and traffic uses the rest, which is enough for one property if deploys are kept to
+costs 15 and traffic uses the rest, which is enough for two houses if deploys are kept to
 a handful a month. Hosting is therefore NZD 0 in the tables below. If the allowance ever
 runs short, Netlify's Personal plan is USD 9 (NZD 15) a month. DEPLOY.md has the steps.
 
@@ -89,9 +90,9 @@ L = several weeks of developer work plus ongoing upkeep.
   175 a month (NZD 172 to 301). Hostaway's own comparison page mentions a USD 500
   (NZD 860) onboarding fee. Twelve-month contracts are the norm according to independent
   reviews. No free trial.
-- **Small-host fit:** Hostaway's quote form starts at two listings, with a separate link
-  for single-listing hosts. One 2026 review says single-listing hosts are waitlisted.
-  Hostaway's billing rules charge for every listing in the account and allow no pause.
+- **Small-host fit:** Hostaway's quote form starts at two listings, so two houses clear
+  its entry bracket. Hostaway's billing rules charge for every listing in the account and
+  allow no pause.
 - **Takeover:** there is no documented transfer feature. The employer's admin email asks
   Hostaway support to change the login to yours, then you change the card and billing
   details. Whether Hostaway re-prices or charges onboarding on a takeover is unknown.
@@ -105,39 +106,42 @@ L = several weeks of developer work plus ongoing upkeep.
 
 Two to trial, side by side, in the same fortnight.
 
-**Beds24 (first choice).** About EUR 16.60 a month (NZD 33): a EUR 15.50 base plus
-EUR 0.55 per channel link. Pay as you go, no contract, no setup fee, accepts payment in
+**Beds24 (first choice).** About EUR 21 a month (NZD 42) for two houses: a EUR 15.50 base, about EUR 3 for the
+second property, plus EUR 0.55 per channel link (four links). Third parties report the
+second-property rate, so confirm it in Beds24's calculator. Pay as you go, no contract, no setup fee, accepts payment in
 NZD. The API is included on every account and covers bookings (including creating one),
 availability and prices, and reading and sending Airbnb and Booking.com messages. Strong
 reporting. Native smart-lock integrations (RemoteLock, Nuki). Weakness: reviewers call the
 interface dated and complex. 14-day trial.
 
 **Hospitable (runner-up).** Essentials is free and already gives you the unified inbox
-and calendar for Airbnb and Booking.com, but no API. The Host plan at USD 29 (NZD 50)
-unlocks the API for one property. Friendlier interface by reputation. Weaknesses: smart
+and calendar for Airbnb and Booking.com, but no API. The Host plan at USD 39 (NZD 67)
+unlocks the API: USD 29 for the first property plus USD 10 for the second. Host stops at
+two properties, so a third house would mean Professional at USD 74 (NZD 127). Friendlier interface by reputation. Weaknesses: smart
 locks need the USD 59 (NZD 101) Professional plan, and it is unclear whether a personal
 API token can create a reservation or send a message. Test both in the trial. 14-day
 trial, no card needed.
 
 **Set aside, with reasons.**
 
-- Smoobu (EUR 35, NZD 70): good product, twice Beds24's price, API keys not available on
-  the trial.
-- OwnerRez (USD 40, NZD 69): well documented, free API token, but US-centric and twice
-  the price.
-- Lodgify (USD 14 to 18 for one property): the API is gated to the USD 42 to 53
-  Professional plan.
-- Hostex (USD 4.90, NZD 8): tempting, but prices are single-source and the API needs the
-  Pro plan. A sandbox, not a decision.
-- Hostfully (about USD 114 with its platform fee), Uplisting (GBP 72, API invite-only
-  and without messaging), iGMS (USD 48, no public API), Guesty Lite (API probably
-  Pro-only), Tokeet (Booking.com messages arrive by email relay).
+- Smoobu (EUR 47, NZD 94 for two houses): good product, twice Beds24's price, API keys
+  not available on the trial.
+- OwnerRez (USD 55, NZD 95 for two houses): well documented, free API token, but US-centric
+  and twice the price.
+- Lodgify (Starter USD 26 to 33 for two properties): the API is gated to the Professional
+  plan at USD 42 to 53 and up.
+- Hostex (USD 4.90 per property, NZD 17 for two): tempting, but prices are single-source
+  and the API needs the Pro plan. A sandbox, not a decision.
+- Hostfully (about USD 129 for two with its platform fee), Uplisting (GBP 72, API
+  invite-only and without messaging), iGMS (about USD 60 for two, no public API), Guesty
+  Lite (API probably Pro-only), Tokeet (Booking.com messages arrive by email relay).
 
 Shared points for option B:
 
-- **Website:** rewrite the one Hostaway adapter file against the new vendor's API. Three
-  data calls plus a login call. The mock client and environment flag already exist, so
-  the swap is contained.
+- **Website:** rewrite the one Hostaway adapter file against the new vendor's API. Four
+  data calls plus a login call: list the houses, one house's details, availability and
+  prices, and create a reservation. The mock client and environment flag already exist,
+  so the swap is contained.
 - **You get:** calendar, inbox, reservation details and channel mapping in the vendor's
   app from day one.
 - **Effort:** S for you, M for the website swap. **Lock-in:** monthly, data exportable
@@ -150,7 +154,7 @@ Booking.com pipes and the channel mapping. Your app holds a copy of the data, sh
 calendar, one inbox and one reservation list, and the website becomes part of the same
 app.
 
-- **Monthly:** the same NZD 33 to 50 engine, plus hosting at NZD 0 on Netlify's free plan
+- **Monthly:** the same NZD 42 to 67 engine, plus hosting at NZD 0 on Netlify's free plan
   (section 3), plus a free Neon Postgres database. Neon rather
   than Supabase, because Supabase's free tier pauses a project after a quiet week.
 - **Effort:** L in total, split into M-sized phases. Phase 1 is identical to option B's
@@ -189,9 +193,9 @@ month (NZD 180 a year) to every row.
 | Option | Software per month, NZD (original) | Hosting per month, NZD | One-off | 12-month total, NZD |
 |---|---|---|---|---|
 | A. Hostaway | 172 to 301 (USD 100 to 175), quote only | 0 | 0 to 860 onboarding (USD 0 to 500) | 2,060 to 4,470 |
-| B. Beds24 | 33 (EUR 16.60) | 0 | none | about 400 |
-| B. Hospitable Host | 50 (USD 29) | 0 | none | about 600 |
-| C. Own screens on Beds24 | 33 | 0 | your build time | about 400 |
+| B. Beds24 | 42 (EUR 21) | 0 | none | about 500 |
+| B. Hospitable Host | 67 (USD 39) | 0 | none | about 800 |
+| C. Own screens on Beds24 | 42 | 0 | your build time | about 500 |
 | D. iCal plus email | 0 | 0 | your build time | 0, your build time only |
 
 Add 15 percent to every line if you are not GST-registered. Hospitable and most others
@@ -218,32 +222,32 @@ Beds24 accepts NZD.
 Go with option B now, on Beds24, and let it grow into option C only as far as you find
 useful.
 
-Why Beds24 first: it meets all four day-one wants for about NZD 33 a month with no
-contract. The website change is the smallest possible, and the API covers what the site
+Why Beds24 first: it meets all four day-one wants for about NZD 42 a month for two houses
+with no contract. The website change is the smallest possible, and the API covers what the site
 needs. It accepts NZD, so no card foreign-currency fee. Its messaging API covers both
 platforms, so the inbox you asked for can be built on it later. Reporting and smart locks
 come without a plan upgrade.
 
-Why Hospitable is close: a friendlier app, a genuinely free tier, and only about NZD 200 a
-year more for the API plan. If Beds24 feels unusable in the trial, pick Hospitable. The
+Why Hospitable is close: a friendlier app, a genuinely free tier, and about NZD 300 a year
+more for the API plan. If Beds24 feels unusable in the trial, pick Hospitable. The
 website work is the same size either way.
 
 What would change my mind:
 
 - Hostaway quotes you NZD 100 a month or less in writing, including API access, no
-  onboarding fee, month to month, and accepts a single-listing takeover. Then Hostaway is
+  onboarding fee, month to month, and accepts the takeover. Then Hostaway is
   a reasonable one-year bridge.
 - Beds24's calculator shows a much higher price, or excludes the API at your tier. Then
   Hospitable Host.
 - You can live with several-hour sync delays and replying to Airbnb guests in the Airbnb
-  app. Then option D saves about NZD 400 to 600 a year. I would not take that trade for a
+  app. Then option D saves about NZD 500 to 800 a year. I would not take that trade for a
   business that takes payments.
 
 ## 8. Suggested iterations
 
 | Phase | Size | You do | Gets built | Done when |
 |---|---|---|---|---|
-| 1. Take Hostaway out from under the website | M | Export data; open Beds24 and Hospitable trials; enter listing, prices, min stay; protect the cutover; reconnect channels | Beds24 adapter for the website; one test booking | Website takes bookings whether or not Hostaway exists |
+| 1. Take Hostaway out from under the website | M | Export data; open Beds24 and Hospitable trials; enter both houses, prices, min stay; protect the cutover; reconnect channels | Beds24 adapter for the website; one test booking | Website takes bookings whether or not Hostaway exists |
 | 2. Live on the channel manager | S | Use the vendor app daily for 2 to 4 weeks; fix the Vercel plan; cancel Hostaway | Nothing, or a webhook that sends your Brevo confirmation email for channel bookings | Off Hostaway, no double bookings |
 | 3. Your own dashboard, version 1 (optional) | M | Decide whether the vendor app is enough; list the three things you want on one screen | One page: merged calendar and upcoming reservations, kept current by webhooks; Neon database | You open your page instead of the vendor's |
 | 4. Inbox in your own app (optional) | M | Write down your message rules | Read and reply through the Beds24 messages API | Replies work on both platforms |
@@ -253,12 +257,12 @@ Phase 1 cutover, step by step:
 
 1. Export all reservation data from Hostaway.
 2. Open a Beds24 trial and a Hospitable trial.
-3. Enter listing content, nightly prices and minimum stay in Beds24. Create an API token
+3. Enter both houses' listing content, nightly prices and minimum stay in Beds24. Create an API token
    (Settings > Marketplace > API).
 4. Before disconnecting anything, block the next few weeks on Airbnb and Booking.com, or
    switch Airbnb to request-to-book. Disconnecting stops sync while the listing stays
    bookable.
-5. In Hostaway, unmap the listing from Airbnb and Booking.com. On Airbnb, remove Hostaway
+5. In Hostaway, unmap each listing from Airbnb and Booking.com. On Airbnb, remove Hostaway
    from connected services under Account > Privacy and sharing, then connect Airbnb inside
    Beds24.
 6. In the Booking.com Extranet, disconnect Hostaway as connectivity provider, then connect
@@ -266,7 +270,7 @@ Phase 1 cutover, step by step:
 7. Reopen the blocked dates once Beds24 shows both channels syncing and a test booking has
    blocked correctly on both.
 
-Built alongside: a Beds24 adapter file implementing login plus the three data calls behind
+Built alongside: a Beds24 adapter file implementing login plus the four data calls behind
 the existing environment flag, and a Stripe test-mode booking proving the dates block on
 both platforms.
 
@@ -289,7 +293,7 @@ Your accounts:
 
 Beds24 and Hospitable:
 
-- Run Beds24's pricing calculator for one property with two channel links. Confirm NZD
+- Run Beds24's pricing calculator for two properties with four channel links. Confirm NZD
   billing, API included, and that the API exposes minimum stay.
 - In the Hospitable trial, test whether a personal access token can create a reservation
   and send a guest message.

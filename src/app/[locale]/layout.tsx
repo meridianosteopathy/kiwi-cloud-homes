@@ -69,6 +69,11 @@ function siteUrl() {
   const vercel = process.env.VERCEL_PROJECT_PRODUCTION_URL;
   if (vercel) return new URL(`https://${vercel}`);
 
+  // Netlify exposes the site's primary URL (custom domain once one is set,
+  // otherwise the .netlify.app address) as URL at build and run time.
+  const netlify = process.env.URL;
+  if (netlify && /^https?:\/\//.test(netlify)) return new URL(netlify);
+
   return new URL("http://localhost:3000");
 }
 
