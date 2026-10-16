@@ -6,9 +6,11 @@ website in this repository.
 
 ## 1. The short answer
 
-Going back to Hostaway is the easiest choice, not the cheaper one. For two listings it
-costs roughly three to eight times more than the alternatives. It is sold by sales call
-only, usually with a 12-month contract and an onboarding fee.
+Going back to Hostaway is not the cheaper choice. Hostaway's own quote for the two houses
+(16 October) is USD 100 a month (NZD 172), month to month, with the onboarding fee waived,
+but only as a new account. That is about four times Beds24 and two and a half times
+Hospitable. A new account also means both houses must be reconnected there, the same
+cutover work as moving to Beds24, so Hostaway no longer saves any effort either.
 
 Building your own channel manager from scratch is not possible right now. Airbnb and
 Booking.com are not giving API access to new software. Any platform you own has to run
@@ -22,7 +24,7 @@ So the recommended path is a hybrid:
    on top of the engine in small iterations. You own the user interface and the data.
    The engine can be swapped later.
 
-Engine cost for two houses: about NZD 42 to 67 a month, versus NZD 170 to 300 for Hostaway.
+Engine cost for two houses: about NZD 42 to 67 a month, versus NZD 172 for Hostaway's quote.
 
 First choice for the engine: **Beds24**. Runner-up: **Hospitable**. Both connect to
 Airbnb and Booking.com through official connections. Both let you read and reply to guest
@@ -86,21 +88,21 @@ L = several weeks of developer work plus ongoing upkeep.
 
 ### A. Re-subscribe to Hostaway, or take over the employer's account
 
-- **Price:** not published. Third-party estimates for one to four listings are USD 100 to
-  175 a month (NZD 172 to 301). Hostaway's own comparison page mentions a USD 500
-  (NZD 860) onboarding fee. Twelve-month contracts are the norm according to independent
-  reviews. No free trial.
+- **Price:** quoted to Nina on 16 October 2026: USD 100 a month (NZD 172) for two
+  listings, month to month, onboarding fee waived. That is the bottom of the USD 100 to
+  175 range the research found. No free trial. Still to confirm in writing: that API
+  access is included at that price.
 - **Small-host fit:** Hostaway's quote form starts at two listings, so two houses clear
   its entry bracket. Hostaway's billing rules charge for every listing in the account and
   allow no pause.
-- **Takeover:** there is no documented transfer feature. The employer's admin email asks
-  Hostaway support to change the login to yours, then you change the card and billing
-  details. Whether Hostaway re-prices or charges onboarding on a takeover is unknown.
+- **Takeover:** the quote is for a new account, not a takeover of the employer's. Both
+  houses would be set up again and reconnected to Airbnb and Booking.com, which is the
+  same cutover work as moving to Beds24, so Hostaway has no zero-effort advantage left.
 - **Website:** unchanged, as long as API access stays included in your plan. No official
   page confirms the API is on every plan.
 - **You get:** all four features, mature, today.
-- **Effort:** S. **Lock-in:** 12-month term likely. Reservation data is deleted on
-  deactivation, so export first.
+- **Effort:** M, the same reconnection work as Beds24. **Lock-in:** month to month per
+  the quote. Reservation data is deleted on deactivation, so export first.
 
 ### B. Switch to a small-host channel manager
 
@@ -192,7 +194,7 @@ month (NZD 180 a year) to every row.
 
 | Option | Software per month, NZD (original) | Hosting per month, NZD | One-off | 12-month total, NZD |
 |---|---|---|---|---|
-| A. Hostaway | 172 to 301 (USD 100 to 175), quote only | 0 | 0 to 860 onboarding (USD 0 to 500) | 2,060 to 4,470 |
+| A. Hostaway | 172 (USD 100), quoted 16 Oct, month to month | 0 | none, onboarding fee waived | about 2,060 |
 | B. Beds24 | 42 (EUR 21) | 0 | none | about 500 |
 | B. Hospitable Host | 67 (USD 39) | 0 | none | about 800 |
 | C. Own screens on Beds24 | 42 | 0 | your build time | about 500 |
@@ -234,9 +236,8 @@ website work is the same size either way.
 
 What would change my mind:
 
-- Hostaway quotes you NZD 100 a month or less in writing, including API access, no
-  onboarding fee, month to month, and accepts the takeover. Then Hostaway is
-  a reasonable one-year bridge.
+- Hostaway's quote came in at NZD 172 a month for a new account, above the NZD 100 level
+  that would have made it a sensible bridge. This test is settled in Beds24's favour.
 - Beds24's calculator shows a much higher price, or excludes the API at your tier. Then
   Hospitable Host.
 - You can live with several-hour sync delays and replying to Airbnb guests in the Airbnb
@@ -278,8 +279,9 @@ both platforms.
 
 Hostaway and the employer:
 
-- Ask Hostaway sales for a written quote for a one-listing NZ account: monthly price,
-  minimum, onboarding fee, term, currency, whether the API is included.
+- Done on 16 October: Hostaway quoted USD 100 a month for two listings, month to month,
+  onboarding fee waived, as a new account. Still to confirm in writing: that API access is
+  included at that price.
 - Ask the employer for the Hostaway order form (term, auto-renewal, notice period). If
   you want the takeover, their admin must email Hostaway support now.
 - Export reservation data this week.
