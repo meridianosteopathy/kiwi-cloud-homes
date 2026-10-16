@@ -1,11 +1,16 @@
-# Netlify build settings. Next.js is handled by the Netlify Next.js Runtime
-# (@netlify/plugin-nextjs), pinned in package.json devDependencies.
+# Netlify build settings.
+#
+# Next.js is detected automatically and run through Netlify's OpenNext adapter,
+# which Netlify installs and keeps up to date itself (Netlify recommends not
+# pinning it). This file only fixes the build command, output folder and Node
+# version so they do not depend on dashboard defaults.
+#
+# Do NOT put secrets or runtime environment variables here: variables declared
+# in netlify.toml are not available to serverless functions. Set them in the
+# Netlify UI with the Functions scope included. See DEPLOY.md.
 [build]
   command = "npm run build"
   publish = ".next"
 
 [build.environment]
   NODE_VERSION = "22"
-
-[[plugins]]
-  package = "@netlify/plugin-nextjs"

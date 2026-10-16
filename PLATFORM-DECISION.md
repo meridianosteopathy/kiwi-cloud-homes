@@ -70,9 +70,13 @@ notification emails both platforms send. The first is how custom dashboards get 
 Hostaway today. The second works but has real gaps, described in option D.
 
 **Your hosting plan matters too.** Vercel's free Hobby plan is for non-commercial use
-only. A site that takes card payments needs the Pro plan at USD 20 (NZD 34) a month. Check
-which plan the website is on today. The cheaper alternative is Cloudflare Workers at
-USD 5 (NZD 9), but that needs the app to be ported, and the port is untested.
+only, and Vercel lists "requesting or processing payment from visitors" as commercial use.
+A site that takes card payments is not allowed on it. The fix is to move the website to
+Netlify's free plan, which permits commercial projects, needs no card and does not put the
+site to sleep. The catch is a monthly allowance of 300 credits: each production deploy
+costs 15 and traffic uses the rest, which is enough for one property if deploys are kept to
+a handful a month. Hosting is therefore NZD 0 in the tables below. If the allowance ever
+runs short, Netlify's Personal plan is USD 9 (NZD 15) a month. DEPLOY.md has the steps.
 
 ## 4. The four options
 
@@ -146,8 +150,8 @@ Booking.com pipes and the channel mapping. Your app holds a copy of the data, sh
 calendar, one inbox and one reservation list, and the website becomes part of the same
 app.
 
-- **Monthly:** the same NZD 33 to 50 engine, plus hosting you pay anyway (NZD 34 Vercel
-  Pro, or NZD 9 Cloudflare if ported), plus a free Neon Postgres database. Neon rather
+- **Monthly:** the same NZD 33 to 50 engine, plus hosting at NZD 0 on Netlify's free plan
+  (section 3), plus a free Neon Postgres database. Neon rather
   than Supabase, because Supabase's free tier pauses a project after a quiet week.
 - **Effort:** L in total, split into M-sized phases. Phase 1 is identical to option B's
   website swap.
@@ -157,7 +161,7 @@ app.
 
 ### D. Your own platform on zero-cost plumbing (iCal plus email)
 
-- **Monthly:** software NZD 0; hosting NZD 9 to 34.
+- **Monthly:** software NZD 0; hosting NZD 0 on Netlify's free plan.
 - **Calendar:** merge Airbnb's and Booking.com's iCal feeds with direct bookings and
   publish one feed each platform imports. Airbnb refreshes imported feeds every 3 hours.
   Booking.com publishes no figure; reports say 1 to 6 hours. Typical lag is 1 to 3 hours
@@ -178,17 +182,17 @@ app.
 
 ## 5. Twelve-month cost comparison
 
-Hosting is counted the same way in every row: Vercel Pro at NZD 34 a month (NZD 408 a
-year). Where Cloudflare appears it is NZD 9 a month (NZD 102 a year) and assumes a
-successful port.
+Hosting is counted the same way in every row: NZD 0 on Netlify's free plan, within its
+monthly allowance (section 3). If the site ever needs Netlify's Personal plan, add NZD 15 a
+month (NZD 180 a year) to every row.
 
 | Option | Software per month, NZD (original) | Hosting per month, NZD | One-off | 12-month total, NZD |
 |---|---|---|---|---|
-| A. Hostaway | 172 to 301 (USD 100 to 175), quote only | 34 | 0 to 860 onboarding (USD 0 to 500) | 2,470 to 4,880 |
-| B. Beds24 | 33 (EUR 16.60) | 34 | none | about 810 |
-| B. Hospitable Host | 50 (USD 29) | 34 | none | about 1,010 |
-| C. Own screens on Beds24 | 33 | 9 to 34 | your build time | 500 to 810 |
-| D. iCal plus email | 0 | 9 to 34 | your build time | 100 to 410 |
+| A. Hostaway | 172 to 301 (USD 100 to 175), quote only | 0 | 0 to 860 onboarding (USD 0 to 500) | 2,060 to 4,470 |
+| B. Beds24 | 33 (EUR 16.60) | 0 | none | about 400 |
+| B. Hospitable Host | 50 (USD 29) | 0 | none | about 600 |
+| C. Own screens on Beds24 | 33 | 0 | your build time | about 400 |
+| D. iCal plus email | 0 | 0 | your build time | 0, your build time only |
 
 Add 15 percent to every line if you are not GST-registered. Hospitable and most others
 bill in USD or EUR, so expect a card foreign-currency fee of 2 to 3 percent on top.
@@ -278,7 +282,8 @@ Hostaway and the employer:
 
 Your accounts:
 
-- Check the website's Vercel plan. Hobby does not permit payments.
+- Move the website to Netlify's free plan, following DEPLOY.md. Vercel's Hobby plan does
+  not permit a site that takes payments.
 - Confirm whether you are GST-registered and, if so, enter the GST number in each
   vendor's billing settings.
 
@@ -323,6 +328,9 @@ Hosting and database:
 
 - Vercel fair use (Hobby is non-commercial): https://vercel.com/docs/limits/fair-use-guidelines
 - Vercel Pro plan: https://vercel.com/docs/plans/pro-plan
+- Netlify free plan permits commercial projects: https://www.netlify.com/blog/introducing-netlify-free-plan/
+- Netlify credits: https://docs.netlify.com/manage/accounts-and-billing/billing/billing-for-credit-based-plans/how-credits-work/
+- Netlify Next.js 16 support: https://www.netlify.com/changelog/next-js-16-deploy-on-netlify/
 - Cloudflare Workers pricing: https://developers.cloudflare.com/workers/platform/pricing/
 - Neon plans: https://neon.com/docs/introduction/plans
 - Supabase free-tier pausing: https://supabase.com/docs/guides/platform/free-project-pausing
