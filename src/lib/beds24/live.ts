@@ -10,11 +10,17 @@
  *
  * Endpoints (official OpenAPI "API V2" 3.0.0):
  *   GET  /properties?includeAllRooms=true&includeTexts=all&includeLanguages=en
- *        &includePictures=true&includeUpsellItems=true
+ *        &includeLanguages=zh&includePictures=true&includeUpsellItems=true
+ *        &includePriceRules=true            (paginated; all pages are read)
  *   GET  /inventory/rooms/calendar?roomId&startDate&endDate&includeNumAvail
  *        &includeMinStay&includePrices&includeOverride
- *   GET  /bookings?apiReference=...            (idempotency check)
+ *   GET  /bookings?roomId&arrival&status=...  (idempotency check, matched on
+ *        custom1 = Stripe PaymentIntent id; apiReference is read-only)
  *   POST /bookings  [ { roomId, status, arrival, departure, ... , actions } ]
+ *
+ * Beds24 reports most errors as HTTP 400 with {"success": false, "error"}:
+ * an expired token can arrive that way rather than as 401, so auth retries
+ * key off the body as well as the status (see auth.ts).
  *
  * Things Beds24 has no field for (bedroom and bathroom counts) come from the
  * per-home profile in src/content/homes.ts.
@@ -36,6 +42,7 @@ import {
   Beds24AuthError,
   clearAccessTokenCache,
   getAccessToken,
+  looksLikeAuthFailure,
   readCredentials,
 } from "./auth";
 import type {
@@ -52,7 +59,10 @@ import type {
 
 const PROPERTIES_TTL_MS = 5 * 60 * 1000;
 const MAX_DISCOVERED_PROPERTIES = 50;
+const MAX_PAGES = 10;
 const LOW_CREDIT_WARNING = 50;
+const WEBSITE_REFERER = "Kiwi Cloud Homes website";
+const ALL_BOOKING_STATUSES = ["confirmed", "new", "request", "black", "inquiry", "cancelled"];
 
 export function createBeds24Client(): HostawayClient {
   // Fail at startup, not on the first guest request, when config is missing.
@@ -106,15 +116,18 @@ export function createBeds24Client(): HostawayClient {
       const ranges = (data ?? []).find((r) => Number(r.roomId) === Number(room.id))?.calendar
         ?? data?.[0]?.calendar
         ?? [];
-      const fallbackPrice = room.rackRate || room.minPrice || 0;
-      const days = expandCalendar(ranges, start, end, currency, fallbackPrice);
+      const days = expandCalendar(ranges, start, end, currency, room.rackRate || room.minPrice || 0, {
+        priceSlot: priceSlotFor(room),
+        today: todayInNewZealand(),
+      });
       const missing = days.filter((d) => d.missing).length;
-      if (missing > 0) {
+      const unpriced = days.filter((d) => !d.missing && d.unpriced).length;
+      if (missing > 0 || unpriced > 0) {
         console.warn(
-          `[beds24] calendar for room ${room.id} had no entry for ${missing} of ${days.length} day(s) in ${start}..${end}; treating them as unavailable.`,
+          `[beds24] calendar for room ${room.id} in ${start}..${end}: ${missing} day(s) had no entry and ${unpriced} had no price in slot ${priceSlotFor(room)}; those days are not for sale.`,
         );
       }
-      return days.map(({ missing: _m, ...day }) => day);
+      return days.map(({ missing: _m, unpriced: _u, ...day }) => day);
     },
 
     async createInquiry(_input: InquiryInput): Promise<InquiryResult> {
@@ -126,27 +139,65 @@ export function createBeds24Client(): HostawayClient {
     async createReservation(input: ReservationInput): Promise<ReservationResult> {
       const property = await requireProperty(input.listingId);
       const room = pickRoom(property);
+      const currency = property.currency || "NZD";
+      if (input.currency && input.currency.toUpperCase() !== currency.toUpperCase()) {
+        // The guest paid in one currency and Beds24 keeps the property in
+        // another; writing the number across would misstate the price.
+        throw new Beds24ApiError(
+          `Payment ${input.externalRef} is in ${input.currency} but Beds24 property ${property.id} is priced in ${currency}; not creating the booking.`,
+        );
+      }
 
       // Idempotency: Stripe retries a webhook until we answer 2xx. If a
-      // booking with this payment reference already exists, return it
-      // instead of creating a second one.
-      const existing = await findBookingByReference(property.id, input.externalRef);
+      // booking carrying this payment reference already exists (even a
+      // cancelled one), return it instead of creating a second booking.
+      // A failed lookup throws so Stripe retries later: a duplicate booking
+      // is worse than a delayed one.
+      const existing = await findBookingByReference(room.id, input.arrivalDate, input.externalRef);
       if (existing) {
         console.log(
-          `[beds24] reservation for ${input.externalRef} already exists as booking ${existing.id}; not creating another.`,
+          `[beds24] reservation for ${input.externalRef} already exists as booking ${existing.id} (${existing.status ?? "?"}); not creating another.`,
         );
         return { id: String(existing.id), alreadyExisted: true };
       }
 
       const nights = nightsBetween(input.arrivalDate, input.departureDate);
       const total = round2(input.totalPrice);
+      const cleaning = cleaningFeeFor(property, room);
+      const accommodation = cleaning > 0 && cleaning < total ? round2(total - cleaning) : total;
+      const maxPeople = room.maxPeople ?? room.maxAdult ?? 0;
+      const numAdult = Math.max(1, maxPeople > 0 ? Math.min(input.numberOfGuests, maxPeople) : input.numberOfGuests);
+      if (numAdult !== input.numberOfGuests) {
+        console.warn(
+          `[beds24] guest count ${input.numberOfGuests} clamped to ${numAdult} for room ${room.id} (max ${maxPeople || "unknown"}).`,
+        );
+      }
+
+      const invoiceItems: Array<{ type: "charge" | "payment"; description: string; qty: number; amount: number }> = [
+        {
+          type: "charge",
+          description: `Accommodation, ${nights} night(s), website booking`,
+          qty: 1,
+          amount: accommodation,
+        },
+      ];
+      if (accommodation !== total) {
+        invoiceItems.push({ type: "charge", description: "Cleaning fee", qty: 1, amount: cleaning });
+      }
+      invoiceItems.push({
+        type: "payment",
+        description: `Stripe payment ${input.externalRef}`,
+        qty: 1,
+        amount: total,
+      });
+
       const body = [
         {
           roomId: room.id,
           status: "confirmed",
           arrival: input.arrivalDate,
           departure: input.departureDate,
-          numAdult: input.numberOfGuests,
+          numAdult,
           numChild: 0,
           firstName: input.guestFirstName,
           lastName: input.guestLastName || input.guestFirstName,
@@ -154,24 +205,13 @@ export function createBeds24Client(): HostawayClient {
           phone: input.guestPhone ?? "",
           lang: "en",
           price: total,
-          referer: "Direct website",
-          apiReference: input.externalRef,
+          // `referer` and `apiReference` are read-only on the API; the
+          // writable source label is refererEditable, and custom1 carries
+          // the Stripe PaymentIntent id so a retry can find this booking.
+          refererEditable: WEBSITE_REFERER,
           custom1: input.externalRef,
-          notes: `Direct booking from the website. ${nights} night(s), paid ${total} ${input.currency} via Stripe (${input.externalRef}).`,
-          invoiceItems: [
-            {
-              type: "charge",
-              description: `Accommodation, ${nights} night(s), website booking`,
-              qty: 1,
-              amount: total,
-            },
-            {
-              type: "payment",
-              description: `Stripe payment ${input.externalRef}`,
-              qty: 1,
-              amount: total,
-            },
-          ],
+          notes: `Direct booking from the website. ${nights} night(s), paid ${total} ${currency} via Stripe (${input.externalRef}).`,
+          invoiceItems,
           actions: {
             // Beds24 refuses the booking if the room has no availability,
             // which is our last line of defence against a double booking.
@@ -180,19 +220,41 @@ export function createBeds24Client(): HostawayClient {
             // Beds24's new-booking email.
             notifyGuest: false,
             notifyHost: true,
+            // Let the booking fan out to the channels and to our future
+            // webhook receiver like any other new booking would.
+            allowWebhooks: true,
           },
         },
       ];
 
-      const results = await apiPost<Beds24PostResult[]>("/bookings", body);
-      const first = Array.isArray(results) ? results[0] : (results as unknown as Beds24PostResult);
+      let first: Beds24PostResult | undefined;
+      try {
+        const results = await apiPost<Beds24PostResult[]>("/bookings", body);
+        first = Array.isArray(results) ? results[0] : (results as unknown as Beds24PostResult);
+      } catch (err) {
+        // The request may have been applied even though the response was
+        // lost (timeout, proxy error). Look once more before giving up.
+        const created = await findBookingByReference(room.id, input.arrivalDate, input.externalRef).catch(
+          () => undefined,
+        );
+        if (created) {
+          console.warn(
+            `[beds24] POST /bookings threw but booking ${created.id} exists for ${input.externalRef}; returning it.`,
+          );
+          return { id: String(created.id) };
+        }
+        throw err;
+      }
+
       if (!first || first.success === false) {
         const detail = (first?.errors ?? [])
           .map((e) => [e.field, e.message].filter(Boolean).join(": "))
           .join("; ");
-        throw new Beds24ApiError(
-          `Beds24 POST /bookings did not create the booking${detail ? `: ${detail}` : "."}`,
-        );
+        const message = `Beds24 POST /bookings did not create the booking${detail ? `: ${detail}` : "."}`;
+        if (/availab|not available|no longer available|overbook/i.test(detail)) {
+          throw new Beds24UnavailableError(message);
+        }
+        throw new Beds24ApiError(message);
       }
       for (const w of first.warnings ?? []) {
         console.warn(`[beds24] POST /bookings warning: ${w.field ?? ""} ${w.message ?? ""}`.trim());
@@ -228,14 +290,15 @@ async function resolveProperties(): Promise<Beds24Property[]> {
   const query: Query = {
     includeAllRooms: true,
     includeTexts: "all",
-    includeLanguages: "en",
+    includeLanguages: ["en", "zh"],
     includePictures: true,
     includeUpsellItems: true,
+    includePriceRules: true,
   };
   if (pinned.length > 0) query.id = pinned;
 
-  const data = (await apiGet<Beds24Property[]>("/properties", query)) ?? [];
-  if (!Array.isArray(data) || data.length === 0) {
+  const data = await apiGetAllPages<Beds24Property>("/properties", query);
+  if (data.length === 0) {
     throw new Beds24ApiError(
       pinned.length > 0
         ? `Beds24 returned none of the pinned properties (${pinned.join(", ")}). Check BEDS24_PROPERTY_IDS and the token's property access.`
@@ -312,10 +375,6 @@ export function mapProperty(property: Beds24Property): HostawayListing {
   const codes = uniqueCodes([...(property.featureCodes ?? []), ...(room.featureCodes ?? [])]);
   const amenities = codes.map((code) => ({ id: code, name: humanizeFeatureCode(code) }));
 
-  const cleaningFromUpsell = (property.upsellItems ?? []).find(
-    (u) => u.enable !== false && u.type === "obligatoryCleaning" && typeof u.amount === "number",
-  )?.amount;
-
   return {
     id,
     name,
@@ -324,7 +383,7 @@ export function mapProperty(property: Beds24Property): HostawayListing {
     bathrooms: profile?.bathrooms ?? 0,
     maxGuests: room.maxPeople ?? room.maxAdult ?? 0,
     basePrice: { amount: room.rackRate || room.minPrice || 0, currency },
-    cleaningFee: room.cleaningFee && room.cleaningFee > 0 ? room.cleaningFee : cleaningFromUpsell ?? 0,
+    cleaningFee: cleaningFeeFor(property, room),
     minNights: Math.max(1, room.minStay ?? 1),
     maxNights: room.maxStay && room.maxStay > 0 ? room.maxStay : 365,
     images: images.length > 0 ? images : fallbackImages,
@@ -338,7 +397,49 @@ export function mapProperty(property: Beds24Property): HostawayListing {
   };
 }
 
-/** English text first; the longest description-like field wins. */
+/**
+ * The cleaning fee a direct booking pays. Beds24's own booking page charges
+ * the property's enabled one-off "obligatoryCleaning" upsell item(s), so
+ * that is what the site mirrors; the room-level cleaningFee (what the
+ * channel manager pushes to Airbnb and the like) is the fallback.
+ */
+export function cleaningFeeFor(property: Beds24Property, room: Beds24Room): number {
+  const upsell = (property.upsellItems ?? [])
+    .filter(
+      (u) =>
+        u.enable === true &&
+        u.type === "obligatoryCleaning" &&
+        typeof u.amount === "number" &&
+        u.amount > 0 &&
+        (u.per === undefined || u.per === "booking" || u.per === "room") &&
+        (u.period === undefined || u.period === "oneTime"),
+    )
+    .reduce((sum, u) => sum + (u.amount ?? 0), 0);
+  if (upsell > 0) return round2(upsell);
+  return room.cleaningFee && room.cleaningFee > 0 ? room.cleaningFee : 0;
+}
+
+/**
+ * Which of the room's 16 price slots the site sells.
+ *   BEDS24_PRICE_SLOT=n  pins it (1..16).
+ *   Otherwise the first price rule that is enabled for the direct booking page.
+ *   Otherwise slot 1.
+ */
+export function priceSlotFor(room: Beds24Room): number {
+  const fromEnv = Number.parseInt(process.env.BEDS24_PRICE_SLOT ?? "", 10);
+  if (Number.isInteger(fromEnv) && fromEnv >= 1 && fromEnv <= 16) return fromEnv;
+  const direct = (room.priceRules ?? []).find(
+    (r) => r?.bookingPage?.direct === true && Number.isInteger(r.id) && (r.id as number) >= 1 && (r.id as number) <= 16,
+  );
+  return direct?.id ?? 1;
+}
+
+/**
+ * Description text. English first (then any other language), and within a
+ * language: the main property description, then its two-part variant, then
+ * the longest other description-like field (booking-page copies, room
+ * descriptions), then the headline. HTML from the Beds24 editor is stripped.
+ */
 export function pickDescription(texts: Beds24Text[] | undefined): string {
   if (!texts || texts.length === 0) return "";
   const ordered = [...texts].sort((a, b) => {
@@ -347,14 +448,43 @@ export function pickDescription(texts: Beds24Text[] | undefined): string {
     return la - lb;
   });
   for (const t of ordered) {
-    const candidates = Object.entries(t)
-      .filter(([key, value]) => /description/i.test(key) && typeof value === "string" && value.trim())
-      .map(([, value]) => (value as string).trim())
+    const main = asText(t.propertyDescription);
+    if (main) return main;
+    const parts = [asText(t.propertyDescription1), asText(t.propertyDescription2)].filter(Boolean);
+    if (parts.length > 0) return parts.join("\n\n");
+    const others = Object.entries(t)
+      .filter(([key, value]) => /description/i.test(key) && typeof value === "string")
+      .map(([, value]) => asText(value as string))
+      .filter(Boolean)
       .sort((a, b) => b.length - a.length);
-    if (candidates.length > 0) return candidates[0];
-    if (typeof t.headline === "string" && t.headline.trim()) return t.headline.trim();
+    if (others.length > 0) return others[0];
+    const headline = asText(t.headline);
+    if (headline) return headline;
   }
   return "";
+}
+
+/** Plain text from a Beds24 text field: tags removed, entities decoded, whitespace tidied. */
+export function stripHtml(raw: string | undefined | null): string {
+  if (!raw) return "";
+  return raw
+    .replace(/<\s*br\s*\/?>/gi, "\n")
+    .replace(/<\/\s*(p|div|li|h[1-6])\s*>/gi, "\n\n")
+    .replace(/<[^>]+>/g, "")
+    .replace(/&nbsp;/gi, " ")
+    .replace(/&amp;/gi, "&")
+    .replace(/&lt;/gi, "<")
+    .replace(/&gt;/gi, ">")
+    .replace(/&quot;/gi, '"')
+    .replace(/&#0?39;|&apos;/gi, "'")
+    .replace(/[ \t]+/g, " ")
+    .replace(/ *\n */g, "\n")
+    .replace(/\n{3,}/g, "\n\n")
+    .trim();
+}
+
+function asText(value: unknown): string {
+  return typeof value === "string" ? stripHtml(value) : "";
 }
 
 /** Pictures are not in the public spec, so accept the common shapes. */
@@ -426,14 +556,25 @@ function countryName(code: string | undefined): string {
 // Calendar
 // ---------------------------------------------------------------------------
 
-type ExpandedDay = AvailabilityDay & { missing: boolean };
+type ExpandedDay = AvailabilityDay & { missing: boolean; unpriced: boolean };
+
+export interface ExpandCalendarOptions {
+  /** 1..16, which `price<n>` field to sell. Default 1. */
+  priceSlot?: number;
+  /** YYYY-MM-DD; days before it are never for sale. Default: no cut-off. */
+  today?: string;
+}
 
 /**
  * Beds24 returns the calendar as date ranges (`from`..`to`, both inclusive)
  * with the same values. Expand to one entry per day across start..end
- * (inclusive, matching what the quote code expects). A day with no range is
- * marked missing and unavailable: better to refuse a booking than to sell a
- * night we know nothing about.
+ * (inclusive, matching what the quote code expects).
+ *
+ * A day is for sale only when Beds24 says a unit is free, the day is not
+ * blacked out, it is not in the past, and the chosen price slot has a
+ * price. A day with no range at all, or with no price, is marked and made
+ * unavailable: better to refuse a booking than to sell a night we know
+ * nothing about. The fallback price is only ever shown, never charged.
  */
 export function expandCalendar(
   ranges: Beds24CalendarRange[],
@@ -441,7 +582,10 @@ export function expandCalendar(
   end: string,
   currency: string,
   fallbackPrice: number,
+  options: ExpandCalendarOptions = {},
 ): ExpandedDay[] {
+  const slot = options.priceSlot && options.priceSlot >= 1 && options.priceSlot <= 16 ? options.priceSlot : 1;
+  const priceKey = `price${slot}`;
   const byDate = new Map<string, Beds24CalendarRange>();
   for (const range of ranges ?? []) {
     if (!range?.from) continue;
@@ -452,6 +596,7 @@ export function expandCalendar(
     }
   }
   return dateRange(start, end).map<ExpandedDay>((date) => {
+    const past = Boolean(options.today) && date < (options.today as string);
     const range = byDate.get(date);
     if (!range) {
       return {
@@ -459,21 +604,34 @@ export function expandCalendar(
         available: false,
         price: { amount: fallbackPrice, currency },
         missing: true,
+        unpriced: true,
       };
     }
     const numAvail = typeof range.numAvail === "number" ? range.numAvail : 0;
     const blackout = range.override === "blackout";
-    const price =
-      typeof range.price1 === "number" && range.price1 > 0 ? range.price1 : fallbackPrice;
+    const rawPrice = range[priceKey];
+    const priced = typeof rawPrice === "number" && Number.isFinite(rawPrice) && rawPrice > 0;
     return {
       date,
-      available: numAvail > 0 && !blackout,
-      price: { amount: price, currency },
+      available: numAvail > 0 && !blackout && priced && !past,
+      price: { amount: priced ? (rawPrice as number) : fallbackPrice, currency },
       minimumStay:
         typeof range.minStay === "number" && range.minStay > 0 ? range.minStay : undefined,
       missing: false,
+      unpriced: !priced,
     };
   });
+}
+
+/** Today's date in New Zealand, where the houses are. */
+export function todayInNewZealand(now: Date = new Date()): string {
+  // en-CA formats as YYYY-MM-DD.
+  return new Intl.DateTimeFormat("en-CA", {
+    timeZone: "Pacific/Auckland",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).format(now);
 }
 
 function dateRange(startISO: string, endISO: string): string[] {
@@ -503,35 +661,24 @@ function round2(n: number): number {
 // Bookings
 // ---------------------------------------------------------------------------
 
+/**
+ * Finds the booking we created for a Stripe payment, if any. `apiReference`
+ * cannot be set through the API, so the PaymentIntent id lives in custom1
+ * and the lookup narrows by room and arrival date, then matches custom1.
+ * Cancelled bookings are included: a cancelled booking still means the
+ * payment was already handled once. Throws when Beds24 cannot be asked.
+ */
 async function findBookingByReference(
-  propertyId: number,
+  roomId: number,
+  arrival: string,
   reference: string,
 ): Promise<Beds24Booking | undefined> {
-  const live = ["confirmed", "new", "request"];
-  try {
-    const byRef = await apiGet<Beds24Booking[]>("/bookings", {
-      propertyId,
-      apiReference: reference,
-      status: live,
-    });
-    const hit = (byRef ?? []).find((b) => b.apiReference === reference);
-    if (hit) return hit;
-    // Fallback in case apiReference was not stored on creation: searchString
-    // matches guest name, email, api reference and booking id.
-    const bySearch = await apiGet<Beds24Booking[]>("/bookings", {
-      propertyId,
-      searchString: reference,
-      status: live,
-    });
-    return (bySearch ?? []).find((b) => b.apiReference === reference);
-  } catch (err) {
-    // A failed lookup must not block the booking; log and continue.
-    console.warn(
-      `[beds24] idempotency lookup for ${reference} failed; continuing to create:`,
-      err instanceof Error ? err.message : err,
-    );
-    return undefined;
-  }
+  const bookings = await apiGetAllPages<Beds24Booking>("/bookings", {
+    roomId,
+    arrival,
+    status: ALL_BOOKING_STATUSES,
+  });
+  return bookings.find((b) => typeof b.custom1 === "string" && b.custom1.trim() === reference);
 }
 
 function extractNewId(result: Beds24PostResult): number | string | undefined {
@@ -560,6 +707,7 @@ function parseIdList(raw: string | undefined): string[] {
   return [...seen];
 }
 
+/** Arrays become repeated keys (`status=new&status=request`), as the spec's form style expects. */
 function buildQuery(query: Query | undefined): string {
   if (!query) return "";
   const params = new URLSearchParams();
@@ -575,21 +723,38 @@ function buildQuery(query: Query | undefined): string {
   return s ? `?${s}` : "";
 }
 
+/** One page of a list endpoint, unwrapped from the Beds24 envelope. */
 async function apiGet<T>(path: string, query?: Query): Promise<T | undefined> {
   const envelope = await apiRequest<Beds24Envelope<T>>("GET", path, query);
-  if (envelope && typeof envelope === "object" && "success" in envelope && envelope.success === false) {
-    throw new Beds24ApiError(
-      `Beds24 GET ${path} failed: ${envelope.error ?? "unknown error"} (code ${envelope.code ?? "?"})`,
-    );
+  return unwrap(envelope, path).data;
+}
+
+/** Every page of a list endpoint, following `pages.nextPageExists` up to MAX_PAGES. */
+async function apiGetAllPages<T>(path: string, query: Query = {}): Promise<T[]> {
+  const out: T[] = [];
+  for (let page = 1; page <= MAX_PAGES; page++) {
+    const envelope = await apiRequest<Beds24Envelope<T[]>>("GET", path, { ...query, page });
+    const { data, nextPageExists } = unwrap(envelope, path);
+    if (Array.isArray(data)) out.push(...data);
+    if (!nextPageExists) return out;
+    if (page === MAX_PAGES) {
+      console.warn(`[beds24] GET ${path} has more than ${MAX_PAGES} pages; the rest were not read.`);
+    }
+  }
+  return out;
+}
+
+function unwrap<T>(envelope: Beds24Envelope<T> | T, path: string): { data: T | undefined; nextPageExists: boolean } {
+  if (envelope && typeof envelope === "object" && "success" in envelope && (envelope as Beds24Envelope<T>).success === false) {
+    const e = envelope as Beds24Envelope<T>;
+    throw new Beds24ApiError(`Beds24 GET ${path} failed: ${e.error ?? "unknown error"} (code ${e.code ?? "?"})`);
   }
   if (envelope && typeof envelope === "object" && "data" in envelope) {
-    if (envelope.pages?.nextPageExists) {
-      console.warn(`[beds24] GET ${path} has more pages than the site reads; only the first page is used.`);
-    }
-    return envelope.data;
+    const e = envelope as Beds24Envelope<T>;
+    return { data: e.data, nextPageExists: e.pages?.nextPageExists === true };
   }
   // Some endpoints return bare arrays.
-  return envelope as unknown as T;
+  return { data: envelope as T, nextPageExists: false };
 }
 
 async function apiPost<T>(path: string, body: unknown): Promise<T> {
@@ -605,8 +770,8 @@ async function apiRequest<T>(
   const creds = readCredentials();
   const url = `${creds.apiBase}${path}${buildQuery(query)}`;
 
-  const send = async (token: string): Promise<Response> =>
-    fetch(url, {
+  const send = async (token: string): Promise<{ res: Response; text: string }> => {
+    const res = await fetch(url, {
       method,
       headers: {
         token,
@@ -616,27 +781,35 @@ async function apiRequest<T>(
       body: body !== undefined ? JSON.stringify(body) : undefined,
       cache: "no-store",
     });
+    return { res, text: await res.text() };
+  };
 
-  let res = await send(await getAccessToken());
-  if (res.status === 401) {
+  let { res, text } = await send(await getAccessToken());
+  if (looksLikeAuthFailure(res.status, text)) {
     clearAccessTokenCache();
     let token: string;
     try {
       token = await getAccessToken(true);
     } catch (err) {
       throw new Beds24AuthError(
-        `Beds24 401 then re-auth failed: ${err instanceof Error ? err.message : String(err)}`,
+        `Beds24 rejected the access token (${res.status}) and re-authentication failed: ${err instanceof Error ? err.message : String(err)}`,
       );
     }
-    res = await send(token);
+    ({ res, text } = await send(token));
+    if (looksLikeAuthFailure(res.status, text)) {
+      throw new Beds24AuthError(
+        `Beds24 rejected a freshly minted access token (${res.status}): ${text.slice(0, 200)}. Check the refresh token's scopes and property access.`,
+      );
+    }
   }
 
-  const remaining = Number(res.headers.get("x-five-min-limit-remaining"));
-  if (Number.isFinite(remaining) && remaining > 0 && remaining < LOW_CREDIT_WARNING) {
-    console.warn(`[beds24] only ${remaining} API credits left in this five-minute window.`);
-  }
+  warnOnLowCredits(res);
 
-  const text = await res.text();
+  if (res.status === 429 || (res.status === 400 && /credit limit|rate limit|too many requests|credits? (?:exhausted|used up)/i.test(text))) {
+    throw new Beds24RateLimitError(
+      `Beds24 ${method} ${path} was rate limited (${res.status})${text ? `: ${text.slice(0, 200)}` : ""}. Credits refill every five minutes.`,
+    );
+  }
   if (!res.ok) {
     throw new Beds24ApiError(
       `Beds24 ${method} ${path} failed: ${res.status} ${res.statusText}${text ? ` — ${text.slice(0, 300)}` : ""}`,
@@ -649,10 +822,40 @@ async function apiRequest<T>(
   }
 }
 
+/**
+ * Beds24 spells its credit headers two ways (X-FiveMinCreditLimit-Remaining in
+ * the spec, x-five-min-limit-remaining in practice); read both.
+ */
+function warnOnLowCredits(res: Response): void {
+  const raw =
+    res.headers.get("x-fivemincreditlimit-remaining") ?? res.headers.get("x-five-min-limit-remaining");
+  if (raw === null) return;
+  const remaining = Number(raw);
+  if (Number.isFinite(remaining) && remaining < LOW_CREDIT_WARNING) {
+    console.warn(`[beds24] only ${remaining} API credits left in this five-minute window.`);
+  }
+}
+
 export class Beds24ApiError extends Error {
   constructor(message: string) {
     super(message);
     this.name = "Beds24ApiError";
+  }
+}
+
+/** Beds24 refused the booking because the room is no longer free for those nights. */
+export class Beds24UnavailableError extends Beds24ApiError {
+  constructor(message: string) {
+    super(message);
+    this.name = "Beds24UnavailableError";
+  }
+}
+
+/** Beds24's five-minute credit allowance is used up; retry after the window. */
+export class Beds24RateLimitError extends Beds24ApiError {
+  constructor(message: string) {
+    super(message);
+    this.name = "Beds24RateLimitError";
   }
 }
 

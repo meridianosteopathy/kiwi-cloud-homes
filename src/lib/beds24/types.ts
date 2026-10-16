@@ -43,10 +43,26 @@ export interface Beds24Picture {
 export interface Beds24UpsellItem {
   index?: number;
   enable?: boolean;
+  /** notUsed | optional | optionalQty | optionalPercentage | obligatory | obligatoryCleaning | obligatoryTax | ... */
   type?: string;
   amount?: number;
+  /** booking | room | person | adult | child */
   per?: string;
+  /** oneTime | daily | dailyPlusOne | weekly | refundable */
   period?: string;
+  vat?: number;
+}
+
+/** One of the up-to-16 price slots of a room (Beds24 "daily prices"). */
+export interface Beds24PriceRule {
+  /** Slot number, 1..16: the calendar field is `price<id>`. */
+  id?: number;
+  name?: string;
+  minimumStay?: number;
+  maximumStay?: number;
+  /** Which booking pages may sell this price. */
+  bookingPage?: { direct?: boolean; agent?: boolean };
+  [key: string]: unknown;
 }
 
 export interface Beds24Room {
@@ -66,6 +82,7 @@ export interface Beds24Room {
   roomSize?: number;
   featureCodes?: string[][];
   texts?: Beds24Text[];
+  priceRules?: Beds24PriceRule[];
   pictures?: Beds24Picture[];
   images?: Beds24Picture[];
 }
@@ -100,6 +117,7 @@ export interface Beds24CalendarRange {
   maxStay?: number;
   override?: "none" | "blackout" | "exception" | "noCheckIn" | "noCheckOut" | "noCheckInOrCheckOut" | string;
   price1?: number;
+  /** price2 .. price16 and anything else Beds24 adds. */
   [key: string]: unknown;
 }
 
@@ -113,16 +131,25 @@ export interface Beds24Booking {
   id: number;
   propertyId?: number;
   roomId?: number;
+  /** confirmed | request | new | cancelled | black | inquiry */
   status?: string;
   arrival?: string;
   departure?: string;
+  numAdult?: number;
+  numChild?: number;
+  /** Read-only on the API; set by Beds24 for channel bookings. */
   apiReference?: string;
+  /** Read-only on the API; the writable counterpart is `refererEditable`. */
   referer?: string;
   channel?: string;
   firstName?: string;
   lastName?: string;
   email?: string;
   price?: number;
+  /** Free-text fields we own; custom1 carries the Stripe PaymentIntent id. */
+  custom1?: string;
+  custom2?: string;
+  notes?: string;
   bookingTime?: string;
   modifiedTime?: string;
 }

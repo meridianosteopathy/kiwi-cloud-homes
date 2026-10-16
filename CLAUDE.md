@@ -61,7 +61,12 @@ Use the `BrandLogo` component rather than inlining logo SVG; it carries the
   historical and `src/lib/beds24` implements the same interface. On Beds24 a
   listing id is the Beds24 property id, and bedroom/bathroom counts plus
   fallback photos come from `src/content/homes.ts` because Beds24 has no
-  fields for them.
+  fields for them. The site sells one of a room's 16 daily-price slots
+  (`BEDS24_PRICE_SLOT`, else the slot enabled for the direct booking page,
+  else 1); a day with no price in that slot is not for sale. Bookings carry
+  the Stripe PaymentIntent id in `custom1` (Beds24's `apiReference` and
+  `referer` are read-only on the API) and that field is the idempotency key
+  when Stripe retries the webhook.
 - Hosting is Netlify Free (see `DEPLOY.md`). Vercel's Hobby plan does not
   permit a site that takes payments. Every production deploy costs 15 of
   Netlify's 300 monthly credits, so batch changes and test on PR previews.

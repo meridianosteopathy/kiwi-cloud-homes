@@ -63,6 +63,7 @@ For each variable:
 | `BOOKING_BACKEND` | `hostaway` while Hostaway is still the engine; `beds24` after the switch (see below) | Chooses the booking engine |
 | `BEDS24_REFRESH_TOKEN` | from `npm run beds24:setup` (only when `BOOKING_BACKEND=beds24`) | Beds24 API |
 | `BEDS24_PROPERTY_IDS` *(optional)* | **Leave empty** to show every property in the Beds24 account | Beds24 API |
+| `BEDS24_PRICE_SLOT` *(optional)* | **Leave empty** unless a house sells a daily price other than the one enabled for Beds24's own booking page | Beds24 API |
 | `HOSTAWAY_USE_MOCK` | `false` (type it literally); only matters while the engine is Hostaway | Switches to live Hostaway |
 | `HOSTAWAY_ACCOUNT_ID` | from `.env.local` | Hostaway API |
 | `HOSTAWAY_CLIENT_ID` | from `.env.local` | Hostaway API |
@@ -105,10 +106,13 @@ the address bar: `.../listings/123456`.
 The site can run on either engine. The switch is a settings change plus a
 small edit to the per-home file, with no code change:
 
-1. **Get a Beds24 refresh token.** In Beds24 go to **Settings → Apps &
-   Integrations → API** and generate an invite code with read properties,
-   read inventory (calendar and prices) and read/write bookings scopes. The
-   code works once. Exchange it from your computer:
+1. **Get a Beds24 refresh token.** In Beds24 go to **Settings → Marketplace →
+   API** (the page at `beds24.com/control3.php?pagetype=apiv2`) and generate
+   an invite code with these scopes: **read:properties**, **read:inventory**
+   (calendar and prices), **all:bookings**, **all:bookings-personal** (guest
+   names and emails) and **all:bookings-financial** (the payment line). Tick
+   both houses under property access. The code works once and expires after
+   24 hours. Exchange it from your computer:
 
    ```
    npm run beds24:setup -- <invite code>
@@ -117,7 +121,9 @@ small edit to the per-home file, with no code change:
    It prints the refresh token and checks its scopes. (Alternative without a
    terminal: open https://beds24.com/api/v2, find **GET /authentication/setup**,
    click *Try it out*, paste the code into the `code` header, execute, and copy
-   `refreshToken` from the response.)
+   `refreshToken` from the response.) Do not use a "long life token" from the
+   same page for production: Beds24 makes those read-only, so the site could
+   show the houses but never write a booking.
 2. **Find each house's Beds24 property id** (Settings → Properties; the number
    in the address bar). Add it to that house's `match` list in
    `src/content/homes.ts`, and fill in `bedrooms` and `bathrooms` there,
@@ -128,10 +134,17 @@ small edit to the per-home file, with no code change:
    to hide a property or fix the order. The Hostaway variables can stay until
    the Hostaway account is closed; they are ignored while the engine is Beds24.
 4. **Deploys → Trigger deploy → Deploy project.**
-5. Check `/tourist`: both houses, real prices and calendar from Beds24. Then
-   run the end-to-end test booking (section 6) and confirm the booking appears
-   in Beds24 with the Stripe payment reference in its notes, and that the
-   dates block on Airbnb and Booking.com through Beds24.
+5. Check `/tourist`: both houses, real prices and calendar from Beds24. The
+   site sells the room's **daily prices** (Settings → Properties → Rooms →
+   Daily prices, or the Calendar price grid); a date with no price is shown
+   but not bookable, and the cleaning fee is the property's enabled one-off
+   *obligatory cleaning* upsell item (Booking page → Upsell items), falling
+   back to the room's cleaning-fee field. If a house shows no photos, add them
+   to `src/content/homes.ts`. Then run the end-to-end test booking (section 6)
+   and confirm the booking appears in Beds24 with source *Kiwi Cloud Homes
+   website*, the Stripe payment reference (`pi_…`) in its notes and `custom1`
+   field, an accommodation charge, a cleaning-fee charge and a payment line,
+   and that the dates block on Airbnb and Booking.com through Beds24.
 
 To go back, set `BOOKING_BACKEND` to `hostaway` and redeploy.
 
