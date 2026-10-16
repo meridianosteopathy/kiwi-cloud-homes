@@ -7,6 +7,8 @@ import { enUS, zhCN } from "date-fns/locale";
 import "react-day-picker/style.css";
 
 type Props = {
+  /** Which home's calendar to grey out — each listing has its own. */
+  listingId: string;
   initialCheckIn: string | null;
   initialCheckOut: string | null;
   /** Minimum nights enforced by Hostaway; default 1. */
@@ -46,6 +48,7 @@ function addDays(d: Date, days: number): Date {
 const AVAILABILITY_DAYS = 365; // ~12 months from today
 
 export function DateRangeModal({
+  listingId,
   initialCheckIn,
   initialCheckOut,
   minNights = 1,
@@ -99,7 +102,9 @@ export function DateRangeModal({
       return;
     }
 
-    fetch(`/api/booking/availability?start=${start}&end=${end}`)
+    fetch(
+      `/api/booking/availability?listingId=${encodeURIComponent(listingId)}&start=${start}&end=${end}`,
+    )
       .then(async (res) => {
         if (!res.ok) throw new Error(`${res.status}`);
         return (await res.json()) as { unavailable: string[] };
@@ -121,7 +126,7 @@ export function DateRangeModal({
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [listingId]);
 
   const disabled: Matcher[] = useMemo(
     () => [{ before: startOfToday() }, ...unavailable],

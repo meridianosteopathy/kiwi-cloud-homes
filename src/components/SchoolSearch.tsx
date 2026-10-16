@@ -4,20 +4,64 @@ import { useMemo, useState, useTransition } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { useSearchParams } from "next/navigation";
 import { usePathname, useRouter } from "@/i18n/routing";
+import type { HomeSummary } from "@/content/homes";
 import {
+  distanceFrom,
   findDistrict,
   localizedName,
   nearbySchools,
   RADIUS_KM,
+  SCHOOLS,
+  snapshotDistance,
   type AppLocale,
   type School,
   type SchoolLevel,
+  type SchoolWithDistance,
   type ZoneStatus,
 } from "@/lib/schools";
 
 type Props = {
   selectedSchoolId: string | null;
+  /** Homes on the site; the list shows each school's distance to the nearest. */
+  homes: HomeSummary[];
 };
+
+/** A school plus how far it is from whichever home is closest to it. */
+type SchoolRowData = SchoolWithDistance & { nearestHomeName: string | null };
+
+/**
+ * Ranks schools by distance to the closest home. With one home this is just
+ * that home's distances; with several, a school 1 km from either house reads
+ * as 1 km rather than being buried behind the other house's number.
+ *
+ * Homes without coordinates in src/content/homes.ts can't be measured, so
+ * they don't contribute. When no home can be measured at all, fall back to
+ * the snapshot's own distances so the list still ranks sensibly.
+ */
+function rankSchools(homes: HomeSummary[]): SchoolRowData[] {
+  const located = homes.filter((h) => h.coordinates);
+  if (located.length === 0) {
+    return nearbySchools().map((s) => ({
+      ...s,
+      ...snapshotDistance(s),
+      nearestHomeName: null,
+    }));
+  }
+
+  const rows: SchoolRowData[] = [];
+  for (const school of SCHOOLS) {
+    let best: SchoolRowData | null = null;
+    for (const home of located) {
+      const d = distanceFrom(school, home.coordinates!);
+      if (!d) continue;
+      if (!best || d.distanceKm < best.distanceKm) {
+        best = { ...school, ...d, nearestHomeName: home.name };
+      }
+    }
+    if (best && best.straightLineKm <= RADIUS_KM) rows.push(best);
+  }
+  return rows.sort((a, b) => a.distanceKm - b.distanceKm);
+}
 
 const LEVEL_ORDER: SchoolLevel[] = [
   "kindergarten",
@@ -48,7 +92,7 @@ const LEVEL_CHIP_ACTIVE: Record<SchoolLevel, string> = {
   secondary: "bg-indigo-600 text-white border-indigo-600 hover:bg-indigo-700",
 };
 
-export function SchoolSearch({ selectedSchoolId }: Props) {
+export function SchoolSearch({ selectedSchoolId, homes }: Props) {
   const t = useTranslations("SchoolSearch");
   const locale = useLocale() as AppLocale;
   const router = useRouter();
@@ -59,7 +103,8 @@ export function SchoolSearch({ selectedSchoolId }: Props) {
   const [filter, setFilter] = useState("");
   const [levels, setLevels] = useState<Set<SchoolLevel>>(new Set());
 
-  const all = useMemo(() => nearbySchools(), []);
+  const multiHome = homes.filter((h) => h.coordinates).length > 1;
+  const all = useMemo(() => rankSchools(homes), [homes]);
   const visible = useMemo(() => {
     let list = all;
     if (levels.size > 0) {
@@ -96,12 +141,17 @@ export function SchoolSearch({ selectedSchoolId }: Props) {
   }
 
   return (
-    <section className="rounded-2xl border border-kiwi-200 bg-white p-5 shadow-sm">
+    // min-w-0: the school rows truncate, and a nowrap row would otherwise set
+    // this section's min-content width — as a grid item (min-width: auto by
+    // default) that dragged the whole page wider than a phone screen.
+    <section className="min-w-0 rounded-2xl border border-kiwi-200 bg-white p-5 shadow-sm">
       <header className="mb-4 flex items-start justify-between gap-3">
         <div>
           <h2 className="text-lg font-semibold text-kiwi-900">{t("title")}</h2>
           <p className="mt-1 text-sm text-kiwi-700">
-            {t("subtitle", { radius: RADIUS_KM })}
+            {multiHome
+              ? t("subtitleMultiHome", { radius: RADIUS_KM })
+              : t("subtitle", { radius: RADIUS_KM })}
           </p>
         </div>
         {selectedSchoolId && (
@@ -166,6 +216,11 @@ export function SchoolSearch({ selectedSchoolId }: Props) {
             locale={locale}
             zoneLabel={t(`zone.${s.zone}`)}
             levelLabel={t(`level.${s.level}`)}
+            nearestHomeLabel={
+              multiHome && s.nearestHomeName
+                ? t("nearestHome", { home: s.nearestHomeName })
+                : null
+            }
             onSelect={() => setSelected(s.id)}
           />
         ))}
@@ -180,6 +235,7 @@ function SchoolRow({
   locale,
   zoneLabel,
   levelLabel,
+  nearestHomeLabel,
   onSelect,
 }: {
   school: School;
@@ -187,6 +243,8 @@ function SchoolRow({
   locale: AppLocale;
   zoneLabel: string;
   levelLabel: string;
+  /** Which home the distance is measured from; null when there's only one. */
+  nearestHomeLabel: string | null;
   onSelect: () => void;
 }) {
   const district = findDistrict(school.districtId);
@@ -198,35 +256,44 @@ function SchoolRow({
         onClick={onSelect}
         aria-pressed={selected}
         className={
-          "flex w-full items-center justify-between gap-3 px-3 py-2.5 text-left transition " +
+          "flex w-full flex-col gap-1 px-3 py-2.5 text-left transition " +
           (selected ? "bg-kiwi-50" : "hover:bg-kiwi-50/60")
         }
       >
-        <div className="min-w-0 flex-1">
-          <div className="flex items-center gap-2">
-            <span className="truncate text-sm font-medium text-kiwi-900">
-              {localizedName(school, locale)}
-            </span>
-            <span
-              className={`shrink-0 rounded-full border px-1.5 py-0.5 text-[9px] font-medium uppercase tracking-wide ${LEVEL_PILL[school.level]}`}
-            >
-              {levelLabel}
-            </span>
-          </div>
-          {district && (
-            <div className="truncate text-xs text-kiwi-600">
-              {localizedName(district, locale)}
-            </div>
-          )}
+        {/* The name gets the full row width and wraps rather than truncating —
+            on a phone there isn't room for a name and two pills side by side,
+            and a half-shown school name is the one thing this list can't
+            afford to hide. The pills sit on their own row underneath. */}
+        <div className="flex w-full items-start justify-between gap-2">
+          <span className="text-sm font-medium text-kiwi-900">
+            {localizedName(school, locale)}
+          </span>
+          <span className="shrink-0 pt-0.5 text-xs tabular-nums text-kiwi-700">
+            {school.distanceKm} km
+          </span>
         </div>
-        <div className="flex shrink-0 items-center gap-2">
+
+        {district && (
+          <div className="truncate text-xs text-kiwi-600">
+            {localizedName(district, locale)}
+          </div>
+        )}
+        {nearestHomeLabel && (
+          <div className="truncate text-[11px] text-kiwi-500">
+            {nearestHomeLabel}
+          </div>
+        )}
+
+        <div className="mt-0.5 flex flex-wrap items-center gap-1.5">
+          <span
+            className={`rounded-full border px-1.5 py-0.5 text-[9px] font-medium uppercase tracking-wide ${LEVEL_PILL[school.level]}`}
+          >
+            {levelLabel}
+          </span>
           <span
             className={`rounded-full border px-2 py-0.5 text-[10px] font-medium ${ZONE_PILL[school.zone]}`}
           >
             {zoneLabel}
-          </span>
-          <span className="text-xs tabular-nums text-kiwi-700">
-            {school.distanceKm} km
           </span>
         </div>
       </button>

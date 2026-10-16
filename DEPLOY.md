@@ -38,6 +38,9 @@ The one thing to understand about Netlify Free is its **monthly allowance of
    project → GitHub**. Authorise Netlify for the `kiwi-cloud-homes` repo.
 4. Netlify detects Next.js. The build command (`npm run build`) and publish
    directory (`.next`) come from the committed `netlify.toml`. Leave them.
+   Check the **Branch to deploy** is `main`. Netlify defaults to the
+   repository's default branch, which in this repo is still an old
+   `claude/...` branch, so change it to `main` if it is not already.
 5. **Do not deploy yet.** Add the environment variables first (next step).
    Every production deploy costs 15 credits, so get the first one right.
 
@@ -61,8 +64,9 @@ For each variable:
 | `HOSTAWAY_ACCOUNT_ID` | from `.env.local` | Hostaway API |
 | `HOSTAWAY_CLIENT_ID` | from `.env.local` | Hostaway API |
 | `HOSTAWAY_CLIENT_SECRET` | from `.env.local` | Hostaway API |
-| `HOSTAWAY_LISTING_ID` *(optional)* | from `.env.local` | Hostaway API |
+| `HOSTAWAY_LISTING_IDS` *(optional)* | **Leave empty** to show every house in your Hostaway account (see below) | Hostaway API |
 | `INQUIRY_EMAIL` | `nina@kiwicloudhomes.co.nz` | inquiry mailto link |
+| `NEXT_PUBLIC_SITE_URL` | the site's public address, e.g. `https://kiwicloudhomes.co.nz` (use the `.netlify.app` URL until the domain is live) | social-share preview links |
 | `BREVO_API_KEY` | from `.env.local` | confirmation email |
 | `EMAIL_FROM_ADDRESS` | `nina@kiwicloudhomes.co.nz` | confirmation email |
 | `EMAIL_REPLY_TO` *(optional)* | reply address | confirmation email |
@@ -72,6 +76,26 @@ For each variable:
 
 Never put any of these in `netlify.toml`: values there are not visible to
 functions, and the file is public in the repo.
+
+### Which houses show on the site
+
+By default, **every listing in your Hostaway account**. Import a house into
+Hostaway and it appears on `/tourist` and `/school` within about five minutes,
+bookable, with its own calendar and price. No redeploy, no code change.
+
+Two things to watch:
+
+- **If the old `HOSTAWAY_LISTING_ID` variable is set** (from the single-house
+  days) the site shows only that one house. Do not carry it over to Netlify.
+  To pin the set, use `HOSTAWAY_LISTING_IDS` with the full comma-separated
+  list instead.
+- **To hide a house** you have in Hostaway but do not want on the website,
+  set `HOSTAWAY_LISTING_IDS` to just the ids you *do* want. The order you
+  write them is the order they appear. A house not on the list cannot be
+  quoted or booked through the site.
+
+To find a listing id: open the house in the Hostaway dashboard and read it off
+the address bar: `.../listings/123456`.
 
 ## 4. Deploy and check
 
@@ -84,9 +108,10 @@ Open the URL and check:
 - The language picker appears and choosing a language redirects you to
   `/en` or `/zh-CN`. If this works, the Next.js proxy (locale routing) is
   running on Netlify.
-- `/tourist` shows the real listing, not the mock "Halswell Garden Retreat".
-  If you see mock data, `HOSTAWAY_USE_MOCK` is not `false`, or a Hostaway
-  variable is missing. Fix it, then **Deploys → Trigger deploy → Deploy
+- `/tourist` shows every house you expect, each with its own price and
+  "Book your stay" panel, not the mock "Halswell Garden Retreat". If you see
+  mock data, `HOSTAWAY_USE_MOCK` is not `false`, or a Hostaway variable is
+  missing. Fix it, then **Deploys → Trigger deploy → Deploy
   project**. Env var changes only take effect on the next deploy.
 
 ## 5. Create the Stripe test webhook

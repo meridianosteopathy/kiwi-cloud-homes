@@ -1,7 +1,7 @@
 import { setRequestLocale } from "next-intl/server";
 import { useTranslations } from "next-intl";
 import { DirectBookingBanner } from "@/components/DirectBookingBanner";
-import { PropertyCard } from "@/components/PropertyCard";
+import { PropertyList } from "@/components/PropertyList";
 import { getHostawayClient, type HostawayListing } from "@/lib/hostaway";
 
 // Listing/price/availability are live data — render per request so the page
@@ -16,16 +16,16 @@ export default async function TouristPage({
   const { locale } = await params;
   setRequestLocale(locale);
 
-  const listing = await getHostawayClient().getListing();
+  const listings = await getHostawayClient().listListings();
   const inquiryEmail = process.env.INQUIRY_EMAIL || null;
-  return <TouristJourney listing={listing} inquiryEmail={inquiryEmail} />;
+  return <TouristJourney listings={listings} inquiryEmail={inquiryEmail} />;
 }
 
 function TouristJourney({
-  listing,
+  listings,
   inquiryEmail,
 }: {
-  listing: HostawayListing;
+  listings: HostawayListing[];
   inquiryEmail: string | null;
 }) {
   const t = useTranslations("Tourist");
@@ -33,7 +33,7 @@ function TouristJourney({
   return (
     <div className="mx-auto max-w-6xl px-4 pb-20 pt-12">
       <header className="mx-auto max-w-3xl text-center">
-        <h1 className="text-3xl font-semibold text-kiwi-900 sm:text-4xl">
+        <h1 className="font-display text-3xl font-bold text-kiwi-900 sm:text-4xl">
           {t("title")}
         </h1>
         <p className="mt-4 text-base text-kiwi-700">{t("intro")}</p>
@@ -52,9 +52,9 @@ function TouristJourney({
         </li>
       </ul>
 
-      <section className="mt-12">
-        <PropertyCard listing={listing} inquiryEmail={inquiryEmail} />
-      </section>
+      <div className="mt-12">
+        <PropertyList listings={listings} inquiryEmail={inquiryEmail} />
+      </div>
     </div>
   );
 }

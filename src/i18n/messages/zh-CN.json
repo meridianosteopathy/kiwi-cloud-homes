@@ -15,21 +15,19 @@
     "en": "English"
   },
   "Landing": {
-    "title": "在新西兰,安顿您的旅程",
-    "subtitle": "云端之家专为华人旅客打造,提供舒适、可信赖的整套住宿体验。",
-    "personaPrompt": "请告诉我们,您此行的目的是？",
-    "personaHint": "我们将为您推荐最合适的入住方案与行程信息。"
+    "title": "您此行的目的是？",
+    "chooseOne": "请选择一项以继续"
   },
   "Persona": {
     "tourist": {
       "title": "旅行短住",
-      "blurb": "短期来新西兰旅游、商务或探亲,享受一个像家一样的落脚点。",
+      "blurb": "旅游、商务或探亲。",
       "cta": "我是旅客"
     },
     "school": {
       "title": "陪读 · 看校之旅",
-      "blurb": "为孩子的留学考察或入学陪读出行,按学区与学校筛选合适的住所。",
-      "cta": "我为孩子看校而来"
+      "blurb": "看校考察，或陪孩子入学。",
+      "cta": "我为看校而来"
     },
     "relocation": {
       "title": "移居新西兰",
@@ -53,6 +51,8 @@
   "SchoolSearch": {
     "title": "房源附近的学校与幼儿园",
     "subtitle": "以下学校均在房源 {radius} 公里范围内,按距离由近到远排列。",
+    "subtitleMultiHome": "以下学校均在我们房源 {radius} 公里范围内,按距离最近的一处房源排序。",
+    "nearestHome": "最近房源:{home}",
     "filterLabel": "按名称筛选",
     "filterPlaceholder": "输入学校或幼儿园名(中英文均可)",
     "noMatches": "没有匹配的结果,试着调整关键词。",
@@ -73,12 +73,14 @@
     "levelFilterAria": "学校类型"
   },
   "SchoolMatch": {
-    "noSelection": "在左侧选择一所学校或幼儿园,这里会显示与房源之间的距离、步行/驾车时间。",
-    "distance": "距离房源",
+    "noSelection": "请在上方选择一所学校或幼儿园，这里会显示与房源之间的距离、步行/驾车时间。",
+    "perHomeIntro": "这所学校与我们各处房源的距离,由近到远排列。",
+    "noDistanceForHome": "该房源的学校距离数据尚未录入。",
+    "distance": "距离房源(道路里程约)",
     "walking": "步行约",
     "driving": "驾车约",
     "advice": "房东建议",
-    "estimateNote": "步行/驾车时间为按平均速度估算(步行 5 km/h、驾车 40 km/h),实际以路况为准。",
+    "estimateNote": "距离为按直线距离估算的道路里程,并非实际导航路线,与 Google 地图可能相差数百米。步行/驾车时间按平均速度估算(步行 5 km/h、驾车 40 km/h),实际以路况为准。如需精确安排接送时间,请以您的地图软件为准。",
     "durationMin": "{min} 分钟",
     "durationHour": "{h} 小时",
     "durationHourMin": "{h} 小时 {min} 分钟",
@@ -143,6 +145,12 @@
       "winter": "淡季,价格最优。北岛南滑雪行程会拉高部分日期,需要看校请提前确认假期。"
     }
   },
+  "Homes": {
+    "title": "我们的房源({count} 处)",
+    "subtitle": "每处房源都有各自的日历、价格与预订流程,请选择最适合此次行程的一处。",
+    "jumpLabel": "跳转到房源",
+    "none": "目前暂无可预订的房源,请稍后再来查看。"
+  },
   "Property": {
     "perNight": "每晚",
     "bedrooms": "{count} 间卧室",
@@ -150,7 +158,8 @@
     "maxGuests": "最多入住 {count} 人",
     "viewDetails": "查看房源",
     "inquire": "联系房东",
-    "bookNow": "立即预订"
+    "bookNow": "立即预订",
+    "nearestSupermarket": "最近的中国超市:{name},车程约 {minutes} 分钟"
   },
   "Booking": {
     "title": "预订入住",
@@ -244,6 +253,8 @@
     "testModeNotice": "测试模式 · 这是 Stripe 测试环境,使用测试卡号 4242 4242 4242 4242(任意有效期与 CVC),不会发生真实扣款。注意:测试支付完成后,房东的 Hostaway 日历仍会创建真实的预订条目(因为 Hostaway 没有沙盒环境)。",
     "missingStripeKey": "未配置 Stripe 密钥(NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY)。请联系网站管理员。",
     "continueToPayment": "前往支付",
+    "cancellationSummary": "入住日 5 天前可免费取消,更接近入住日则退还住宿费用的 50%。",
+    "cancellationLink": "查看完整政策 →",
     "starting": "正在准备...",
     "back": "返回",
     "payNow": "支付 {amount}",
@@ -283,7 +294,37 @@
     "close": "关闭"
   },
   "Footer": {
-    "rights": "© {year} Kiwi Cloud Homes · 服务由 Hostaway 提供"
+    "rights": "© {year} Kiwi Cloud Homes · 服务由 Hostaway 提供",
+    "cancellationPolicy": "退订政策"
+  },
+  "CancellationPolicy": {
+    "title": "退订政策",
+    "intro": "根据入住时长,以下两种政策择一适用。请阅读与您预订相符的条款。",
+    "asOf": "自 {date} 起生效,所有时间以新西兰当地时间为准。",
+    "shortStay": {
+      "heading": "短住 (通过本网站直接预订)",
+      "summary": "入住日 5 天前可免费取消,超过此期限退款为住宿费用的 50%。",
+      "points": {
+        "fullRefund": "入住日前 5 整天或更早取消 → 全额退款。",
+        "halfRefund": "入住日前 5 天以内取消 → 退还住宿费用的 50%。",
+        "cleaningRefund": "若未办理入住,清洁费一律全额退还。",
+        "afterCheckin": "入住日之后,剩余晚数不予退款。",
+        "howTo": "取消申请须以书面形式提交 (回复预订确认邮件),我们收到邮件的日期即为取消生效日。"
+      },
+      "refundTiming": "获批的退款将退回至原支付卡,通常在 5–10 个工作日内到账。"
+    },
+    "longStay": {
+      "heading": "长住 (30 晚以上,报价方式预订)",
+      "summary": "预订确认后即产生一笔不可退还的管理费,超过入住日前一个月后,住宿费不再退还。",
+      "points": {
+        "adminFee": "预订确认之时起,产生一笔 NZD 150.00 + GST (合 NZD 172.50) 的不可退还管理费。",
+        "beforeCutoff": "入住日前一个月或更早取消 → 全额退款 (含押金),仅扣除上述管理费。",
+        "afterCutoff": "该日期之后取消 → 住宿费不予退还,押金仍全额退还。",
+        "midStay": "入住期间取消视同截止日之后取消:住宿费不退,押金按常规退还。",
+        "howTo": "取消申请以书面 (WhatsApp 或邮件) 送达日期为准,获批退款将在 10 个工作日内退回原支付方式。"
+      }
+    },
+    "questions": "对预订有疑问?请回复预订确认邮件或通过 WhatsApp 联系我们,一个工作日内回复。"
   },
   "Common": {
     "comingSoon": "即将上线",

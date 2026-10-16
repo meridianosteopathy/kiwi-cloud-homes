@@ -23,7 +23,7 @@ export async function POST(req: Request) {
     if (err instanceof QuoteError) {
       return NextResponse.json(
         { error: err.message, code: err.code },
-        { status: err.code === "unavailable" ? 409 : 400 },
+        { status: statusForQuoteError(err) },
       );
     }
     console.error("[booking/quote] unexpected error:", err);
@@ -34,15 +34,24 @@ export async function POST(req: Request) {
   }
 }
 
+function statusForQuoteError(err: QuoteError): number {
+  if (err.code === "unavailable") return 409;
+  if (err.code === "unknown_listing") return 404;
+  return 400;
+}
+
 function parseBody(
   body: unknown,
 ):
-  | { checkIn: string; checkOut: string; guests: number }
+  | { listingId: string; checkIn: string; checkOut: string; guests: number }
   | { error: string } {
   if (!body || typeof body !== "object") {
     return { error: "Expected an object." };
   }
   const b = body as Record<string, unknown>;
+  if (typeof b.listingId !== "string" || !b.listingId.trim()) {
+    return { error: "listingId is required." };
+  }
   if (typeof b.checkIn !== "string" || typeof b.checkOut !== "string") {
     return { error: "checkIn and checkOut are required strings." };
   }
@@ -50,5 +59,10 @@ function parseBody(
   if (!Number.isInteger(guests) || guests < 1) {
     return { error: "guests must be a positive integer." };
   }
-  return { checkIn: b.checkIn, checkOut: b.checkOut, guests };
+  return {
+    listingId: b.listingId.trim(),
+    checkIn: b.checkIn,
+    checkOut: b.checkOut,
+    guests,
+  };
 }

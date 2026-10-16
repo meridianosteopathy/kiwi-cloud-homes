@@ -77,6 +77,15 @@ export async function reserveFromPaymentIntent(
   const total = fromMinor(pi.amount_received, pi.currency);
 
   const client = getHostawayClient();
+  // The site now lists several homes, so listing_id decides which calendar
+  // this reservation lands on. Re-check it here: metadata is written by us,
+  // but a stale PaymentIntent could name a listing that has since been
+  // removed from the site, and creating a booking on it would be wrong.
+  if (!(await client.isConfiguredListing(listingId))) {
+    throw new ReservationMetadataError(
+      `PaymentIntent ${pi.id} names listing ${listingId}, which this site doesn't list.`,
+    );
+  }
   return client.createReservation({
     listingId,
     guestFirstName: first,

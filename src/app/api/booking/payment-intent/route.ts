@@ -34,7 +34,14 @@ export async function POST(req: Request) {
     if (err instanceof QuoteError) {
       return NextResponse.json(
         { error: err.message, code: err.code },
-        { status: err.code === "unavailable" ? 409 : 400 },
+        {
+          status:
+            err.code === "unavailable"
+              ? 409
+              : err.code === "unknown_listing"
+                ? 404
+                : 400,
+        },
       );
     }
     console.error("[booking/payment-intent] quote error:", err);
@@ -57,9 +64,12 @@ export async function POST(req: Request) {
       currency: quote.currency.toLowerCase(),
       automatic_payment_methods: { enabled: true },
       receipt_email: parsed.guestEmail,
-      description: `Kiwi Cloud Homes — ${quote.nights} night${quote.nights === 1 ? "" : "s"} (${quote.checkIn} → ${quote.checkOut})`,
+      description: `Kiwi Cloud Homes — ${quote.listingName} — ${quote.nights} night${quote.nights === 1 ? "" : "s"} (${quote.checkIn} → ${quote.checkOut})`,
       metadata: {
         listing_id: quote.listingId,
+        // Not used to create the reservation (listing_id is), but it makes the
+        // Stripe dashboard readable now that payments span more than one home.
+        listing_name: quote.listingName.slice(0, 200),
         check_in: quote.checkIn,
         check_out: quote.checkOut,
         nights: String(quote.nights),
@@ -89,6 +99,7 @@ function parseBody(
   body: unknown,
 ):
   | {
+      listingId: string;
       checkIn: string;
       checkOut: string;
       guests: number;
@@ -101,6 +112,9 @@ function parseBody(
     return { error: "Expected an object." };
   }
   const b = body as Record<string, unknown>;
+  if (typeof b.listingId !== "string" || !b.listingId.trim()) {
+    return { error: "listingId is required." };
+  }
   if (typeof b.checkIn !== "string" || typeof b.checkOut !== "string") {
     return { error: "checkIn and checkOut are required strings." };
   }
@@ -116,6 +130,7 @@ function parseBody(
   }
   const locale: "zh-CN" | "en" = b.locale === "en" ? "en" : "zh-CN";
   return {
+    listingId: b.listingId.trim(),
     checkIn: b.checkIn,
     checkOut: b.checkOut,
     guests,

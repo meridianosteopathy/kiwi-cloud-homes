@@ -1,6 +1,12 @@
 import { useLocale, useTranslations } from "next-intl";
-import { resolveDescription, resolveTourUrl } from "@/content/listing-content";
+import {
+  homeCoordinates,
+  resolveBedroomsLabel,
+  resolveDescription,
+  resolveTourUrl,
+} from "@/content/homes";
 import type { HostawayListing } from "@/lib/hostaway";
+import { nearestSupermarket } from "@/lib/supermarkets";
 import { BookingForm } from "./BookingForm";
 import { PropertyAmenities } from "./PropertyAmenities";
 import { PropertyImages } from "./PropertyImages";
@@ -20,8 +26,11 @@ export function PropertyCard({
 }: Props) {
   const t = useTranslations("Property");
   const locale = useLocale();
-  const description = resolveDescription(locale, listing.description);
-  const tourUrl = resolveTourUrl(listing.tourUrl);
+  const description = resolveDescription(listing, locale, listing.description);
+  const tourUrl = resolveTourUrl(listing, listing.tourUrl);
+  const bedroomsLabel = resolveBedroomsLabel(listing, locale);
+  const coordinates = homeCoordinates(listing);
+  const supermarket = coordinates ? nearestSupermarket(coordinates) : null;
 
   return (
     <article className="overflow-hidden rounded-2xl border border-kiwi-200 bg-white shadow-sm">
@@ -48,10 +57,22 @@ export function PropertyCard({
           </header>
 
           <ul className="flex flex-wrap gap-x-4 gap-y-1 text-sm text-kiwi-700">
-            <li>{t("bedrooms", { count: listing.bedrooms })}</li>
+            <li>{bedroomsLabel ?? t("bedrooms", { count: listing.bedrooms })}</li>
             <li>{t("bathrooms", { count: listing.bathrooms })}</li>
             <li>{t("maxGuests", { count: listing.maxGuests })}</li>
           </ul>
+
+          {supermarket && (
+            <p className="text-sm text-kiwi-700">
+              {t("nearestSupermarket", {
+                name:
+                  locale === "zh-CN"
+                    ? (supermarket.nameZh ?? supermarket.name)
+                    : supermarket.name,
+                minutes: supermarket.drivingMinutes,
+              })}
+            </p>
+          )}
 
           {description && (
             <p className="whitespace-pre-line text-sm leading-relaxed text-kiwi-800">

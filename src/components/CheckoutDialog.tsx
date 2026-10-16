@@ -10,9 +10,11 @@ import {
   useStripe,
 } from "@stripe/react-stripe-js";
 import { isStripeTestMode } from "@/lib/stripe/mode";
+import { Link } from "@/i18n/routing";
 
 type Quote = {
   listingId: string;
+  listingName: string;
   checkIn: string;
   checkOut: string;
   nights: number;
@@ -85,6 +87,7 @@ export function CheckoutDialog({
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
+        listingId,
         checkIn: initialCheckIn,
         checkOut: initialCheckOut,
         guests: initialGuests,
@@ -104,7 +107,7 @@ export function CheckoutDialog({
     return () => {
       cancelled = true;
     };
-  }, [initialCheckIn, initialCheckOut, initialGuests]);
+  }, [listingId, initialCheckIn, initialCheckOut, initialGuests]);
 
   async function startPayment(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -115,6 +118,7 @@ export function CheckoutDialog({
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+          listingId: quote.listingId,
           checkIn: quote.checkIn,
           checkOut: quote.checkOut,
           guests: quote.guests,
@@ -318,6 +322,17 @@ function ReviewStep(props: {
           {t("testModeNotice")}
         </div>
       )}
+
+      <p className="text-[11px] leading-snug text-kiwi-700">
+        {t("cancellationSummary")}{" "}
+        <Link
+          href="/cancellation-policy"
+          target="_blank"
+          className="text-kiwi-800 underline underline-offset-2 hover:text-kiwi-900"
+        >
+          {t("cancellationLink")}
+        </Link>
+      </p>
 
       <div className="flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
         <button

@@ -11,6 +11,12 @@ type Props = {
   icon?: ReactNode;
 };
 
+/**
+ * One of the two choices on the landing page. The whole card is the link,
+ * but the CTA is styled as a solid pill so the card reads as something you
+ * tap rather than a block of text — on a phone the button is often the only
+ * affordance a visitor registers.
+ */
 export function PersonaCard({
   href,
   title,
@@ -23,10 +29,10 @@ export function PersonaCard({
   const body = (
     <div
       className={
-        "group relative flex h-full flex-col rounded-2xl border bg-white p-6 shadow-sm transition " +
+        "group relative flex h-full flex-col items-center rounded-2xl border bg-white p-6 text-center shadow-sm transition sm:p-8 " +
         (disabled
           ? "border-kiwi-100 opacity-70"
-          : "border-kiwi-200 hover:-translate-y-0.5 hover:border-kiwi-400 hover:shadow-md")
+          : "border-kiwi-200 hover:-translate-y-0.5 hover:border-kiwi-400 hover:shadow-lg")
       }
     >
       {badge && (
@@ -35,21 +41,21 @@ export function PersonaCard({
         </span>
       )}
       {icon && (
-        <div className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-full bg-kiwi-50 text-kiwi-700">
+        <div className="mb-4 inline-flex h-14 w-14 items-center justify-center rounded-full bg-kiwi-50 text-kiwi-600">
           {icon}
         </div>
       )}
-      <h3 className="text-lg font-semibold text-kiwi-900">{title}</h3>
+      <h2 className="font-display text-xl font-bold text-kiwi-900">{title}</h2>
       <p className="mt-2 flex-1 text-sm leading-relaxed text-kiwi-700">
         {blurb}
       </p>
       {cta && (
         <span
           className={
-            "mt-5 inline-flex items-center gap-1 text-sm font-medium " +
+            "mt-6 inline-flex items-center gap-1.5 rounded-full px-5 py-2.5 text-sm font-semibold transition-colors " +
             (disabled
-              ? "text-kiwi-400"
-              : "text-kiwi-600 group-hover:text-kiwi-800")
+              ? "bg-kiwi-100 text-kiwi-400"
+              : "bg-kiwi-600 text-white group-hover:bg-kiwi-700")
           }
         >
           {cta}
@@ -68,7 +74,10 @@ export function PersonaCard({
   }
 
   return (
-    <Link href={href} className="h-full">
+    <Link
+      href={href}
+      className="h-full rounded-2xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-kiwi-600"
+    >
       {body}
     </Link>
   );

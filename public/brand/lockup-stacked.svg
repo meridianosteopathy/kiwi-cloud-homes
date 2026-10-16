@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 200">
+
+<g transform="translate(60,10)"><g fill="#A9CFEA"><circle cx="19" cy="29" r="6"></circle><circle cx="27" cy="24" r="8"></circle><circle cx="35" cy="29" r="6"></circle><rect x="13" y="27" width="28" height="8" rx="4"></rect></g>
+<path d="M30,98 V60 L60,38 L90,60 V98" fill="none" stroke="#2C6E9E" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"></path>
+<path d="M40,79 C40,68 48,61 57,61 C62,61 65,63 66.5,66 L77,70 L66.5,71.5 C67.5,76 67,81 64.5,85 C61.5,90 56,92.5 51,92.5 C44.5,92.5 40,88 40,79 Z" fill="#4A9BD4"></path>
+<path d="M50,92 v5 M56,91.5 v5.2" fill="none" stroke="#4A9BD4" stroke-width="3" stroke-linecap="round"></path>
+<circle cx="61" cy="66" r="1.8" fill="#fff"></circle></g>
+<text x="120" y="152" text-anchor="middle" font-family="Comfortaa, sans-serif" font-weight="700" font-size="21" fill="#1E4E79">Kiwi Cloud Homes</text>
+<text x="120" y="176" text-anchor="middle" font-family="Comfortaa, sans-serif" font-weight="700" font-size="10" letter-spacing="5" fill="#4A9BD4">STR · LTR</text>
+</svg>
