@@ -50,4 +50,11 @@ Use the `BrandLogo` component rather than inlining logo SVG; it carries the
   (`public/brand/og-image.png`, 1200×630). Regenerate it if the tagline
   changes, and keep its wording in sync with `Site.tagline`.
 - `NEXT_PUBLIC_SITE_URL` drives `metadataBase` for absolute share-card URLs.
-  Unset, it falls back to the Vercel production hostname.
+  Give it the full form (`https://kiwicloudhomes.co.nz`); a bare hostname is
+  tolerated and an invalid value is skipped with a warning rather than failing
+  the build, because the helper runs while static pages are prerendered.
+  Unset, it falls back to Vercel's production hostname, then Netlify's `URL`,
+  then localhost.
+- Hosting is Netlify Free (see `DEPLOY.md`). Vercel's Hobby plan does not
+  permit a site that takes payments. Every production deploy costs 15 of
+  Netlify's 300 monthly credits, so batch changes and test on PR previews.
