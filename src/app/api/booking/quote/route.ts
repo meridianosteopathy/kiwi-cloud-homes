@@ -35,7 +35,7 @@ export async function POST(req: Request) {
 }
 
 function statusForQuoteError(err: QuoteError): number {
-  if (err.code === "unavailable") return 409;
+  if (err.code === "unavailable" || err.code === "no_check_in" || err.code === "no_check_out") return 409;
   if (err.code === "unknown_listing") return 404;
   return 400;
 }

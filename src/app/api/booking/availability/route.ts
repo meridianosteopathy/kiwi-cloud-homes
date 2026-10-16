@@ -9,9 +9,10 @@ const MAX_DAYS = 400; // ~13 months — bounds Hostaway calls
 /**
  * GET /api/booking/availability?listingId=123&start=YYYY-MM-DD&end=YYYY-MM-DD
  *
- * Returns `{ unavailable: string[] }` — ISO dates the host has marked as
- * unavailable in Hostaway for that home. The date picker uses this to grey
- * those days out before the guest even tries to quote.
+ * Returns `{ unavailable, noCheckIn, noCheckOut }`: ISO dates the host has
+ * marked unavailable for that home, plus days a stay may not start or end on.
+ * The date picker uses this to grey days out and steer the selection before
+ * the guest even tries to quote; the quote remains the real gate.
  *
  * Cached for 5 minutes server-side so a clicked-around picker doesn't hit
  * Hostaway on every modal open. Calendars don't move minute-to-minute.
@@ -65,11 +66,11 @@ export async function GET(req: Request) {
     }
 
     const cal = await client.getAvailability(listingId, start, end);
-    const unavailable = cal
-      .filter((d) => !d.available)
-      .map((d) => d.date);
+    const unavailable = cal.filter((d) => !d.available).map((d) => d.date);
+    const noCheckIn = cal.filter((d) => d.available && d.noCheckIn).map((d) => d.date);
+    const noCheckOut = cal.filter((d) => d.noCheckOut).map((d) => d.date);
     return NextResponse.json(
-      { unavailable },
+      { unavailable, noCheckIn, noCheckOut },
       {
         headers: {
           // Browser + CDN cache for 5 minutes; stale-while-revalidate

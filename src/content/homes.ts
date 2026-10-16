@@ -1,34 +1,39 @@
 /**
  * Per-home settings the host edits by hand.
  *
- * Hostaway holds the bookable facts for each house — price, calendar, photos,
- * amenities, bed counts. This file holds the few things Hostaway has nowhere
- * to put:
+ * The booking engine (Beds24, or Hostaway before the switch) holds the bookable
+ * facts for each house: price, calendar, photos, amenities. This file holds the
+ * few things the engine has nowhere to put:
  *
- *   - the Mandarin description (Hostaway stores only one description per
- *     listing, usually the English copy)
+ *   - the Mandarin description (engines store one description per listing,
+ *     usually the English copy)
  *   - the 360° tour URL
  *   - the map coordinates, which the /school page uses to work out how far
  *     each school is from that particular house
+ *   - bedroom and bathroom counts, and fallback photos, which Beds24's API does
+ *     not supply (Hostaway did)
  *
  * ────────────────────────────────────────────────────────────────────────
  * HOW TO ADD A HOUSE
  * ────────────────────────────────────────────────────────────────────────
- * The house itself only needs to exist in Hostaway — the website picks it up
- * automatically and it becomes bookable straight away. You only come here to
- * give it Chinese copy, a tour link, or school distances.
+ * The house itself only needs to exist in the booking engine; the website
+ * picks it up automatically and it becomes bookable straight away. You come
+ * here to give it Chinese copy, a tour link, school distances, and (on Beds24)
+ * its bedroom and bathroom counts.
  *
- *   1. Find the listing id: open the house in the Hostaway dashboard and look
- *      at the address bar — .../listings/123456 → the id is 123456.
+ *   1. Find the listing id. Beds24: the property id shown in the dashboard
+ *      (Settings -> Properties, or the number in the address bar). Hostaway:
+ *      .../listings/123456 -> the id is 123456.
  *   2. Copy one of the blocks below, paste it at the end of the list.
  *   3. Put the id in `match`. (The listing's name works too, but the id never
- *      changes when you rename the house, so prefer the id.)
+ *      changes when you rename the house, so prefer the id.) A house can carry
+ *      both its old Hostaway id and its new Beds24 id during the switch.
  *   4. Fill in what you have. Anything you leave out just falls back to what
- *      Hostaway returns — nothing breaks.
+ *      the engine returns; nothing breaks.
  *   5. Commit + push + merge.
  *
  * To find a house's coordinates: open Google Maps, right-click the house,
- * click the numbers at the top of the menu (that copies them), and paste —
+ * click the numbers at the top of the menu (that copies them), and paste;
  * you get `-43.5788, 172.5620`, which is `lat` then `lng`.
  */
 
@@ -41,21 +46,36 @@ export interface HomeProfile {
   /** Internal label — only ever seen by you, in this file. */
   key: string;
   /**
-   * Hostaway listing ids (preferred) and/or listing names that identify this
-   * house. Names are matched case- and space-insensitively.
+   * Listing ids (preferred) and/or listing names that identify this house in
+   * the booking engine: Beds24 property ids, Hostaway listing ids, or both.
+   * Names are matched case- and space-insensitively.
    */
   match: string[];
+  /**
+   * Bedroom and bathroom counts shown on the property card. Hostaway supplied
+   * these from the listing; Beds24 has no such fields, so fill them in here
+   * once the house runs on Beds24. Leave out to show 0.
+   */
+  bedrooms?: number;
+  bathrooms?: number;
+  /**
+   * Photos to show when the booking engine returns none. Beds24's API does
+   * not reliably expose listing pictures. Use any https image URL, or a file
+   * you have added under public/ (e.g. "/homes/halswell/living.jpg"). The
+   * caption drives the lightbox grouping ("Master bedroom", "Kitchen", ...).
+   */
+  images?: Array<{ url: string; caption?: string }>;
   /**
    * Where the house is. Used to compute distance, walking and driving time to
    * each school on the /school page. Leave it out and that house simply shows
    * no school distances — everything else about it still works.
    */
   coordinates?: HomeCoordinates;
-  /** Locale overrides for the description. Empty/missing → Hostaway's copy. */
+  /** Locale overrides for the description. Empty/missing → the engine's copy. */
   description?: Partial<Record<"zh-CN" | "en", string>>;
   /**
    * Locale overrides for the bedroom-count line on the property card. Use
-   * this when Hostaway's single bedroom number doesn't tell guests enough —
+   * this when a single bedroom number doesn't tell guests enough —
    * e.g. a room count that mixes double, single and study rooms. Empty/
    * missing → the generic "{count} bedrooms" line.
    */
@@ -134,7 +154,7 @@ export interface HomeIdentity {
 }
 
 /**
- * Finds the profile for a Hostaway listing, by id first and then by name.
+ * Finds the profile for a listing, by id first and then by name.
  * Returns undefined for a house that hasn't been given a block above — which
  * is a normal state, not an error.
  */

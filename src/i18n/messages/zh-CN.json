@@ -181,7 +181,16 @@
     "bookNow": "立即预订",
     "inquire": "发送询问",
     "minNightsHint": "至少入住 {count} 晚",
-    "testModeNotice": "测试模式 · 暂不会扣款,可使用 Stripe 测试卡 4242 4242 4242 4242。"
+    "testModeNotice": "测试模式 · 暂不会扣款,可使用 Stripe 测试卡 4242 4242 4242 4242。",
+    "fromPrice": "{price} 起",
+    "quoteError": {
+      "unavailable": "该房源在所选日期不可预订,请换个日期。",
+      "no_check_in": "该房源当天不能入住,请选择其他入住日期。",
+      "no_check_out": "该房源当天不能退房,请选择其他退房日期。",
+      "below_min_nights": "所选日期未达到该房源此期间的最少入住天数。",
+      "above_max_nights": "入住天数超过了该房源在所选日期允许的上限。",
+      "guests_over_capacity": "人数超过了该房源可容纳的上限。"
+    }
   },
   "DatePicker": {
     "title": "选择日期",
@@ -196,7 +205,9 @@
     "loadingAvailability": "正在加载房态…",
     "availabilityFallback": "暂时无法加载房态,所选日期将在预订时再次确认。",
     "minNightsHint": "至少入住 {count} 晚",
-    "minNightsTooltip": "至少 {count} 晚"
+    "minNightsTooltip": "至少 {count} 晚",
+    "noCheckInHint": "当天不能入住,请选择其他入住日期。",
+    "noCheckOutHint": "当天不能退房,请选择其他退房日期。"
   },
   "PropertyImages": {
     "openGallery": "查看全部照片",

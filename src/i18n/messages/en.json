@@ -181,7 +181,16 @@
     "bookNow": "Book now",
     "inquire": "Send inquiry",
     "minNightsHint": "Minimum stay: {count, plural, one {# night} other {# nights}}",
-    "testModeNotice": "Test mode — no real charges. Use Stripe test card 4242 4242 4242 4242 to try the flow."
+    "testModeNotice": "Test mode — no real charges. Use Stripe test card 4242 4242 4242 4242 to try the flow.",
+    "fromPrice": "from {price}",
+    "quoteError": {
+      "unavailable": "These dates aren't available for this home. Try different dates.",
+      "no_check_in": "Check-in isn't possible on that day for this home. Pick another arrival day.",
+      "no_check_out": "Check-out isn't possible on that day for this home. Pick another departure day.",
+      "below_min_nights": "These dates don't meet this home's minimum stay for that time of year.",
+      "above_max_nights": "This stay is longer than this home allows for those dates.",
+      "guests_over_capacity": "That's more guests than this home sleeps."
+    }
   },
   "DatePicker": {
     "title": "Select dates",
@@ -196,7 +205,9 @@
     "loadingAvailability": "Loading availability…",
     "availabilityFallback": "Availability couldn't load — your dates will be confirmed at checkout.",
     "minNightsHint": "Minimum stay: {count, plural, one {# night} other {# nights}}",
-    "minNightsTooltip": "{count}-night minimum"
+    "minNightsTooltip": "{count}-night minimum",
+    "noCheckInHint": "Check-in isn't possible on that day. Pick another arrival day.",
+    "noCheckOutHint": "Check-out isn't possible on that day. Pick another departure day."
   },
   "PropertyImages": {
     "openGallery": "View all photos",

@@ -65,6 +65,10 @@ export function DateRangeModal({
   });
 
   const [unavailable, setUnavailable] = useState<Date[]>([]);
+  // Days the host allows stays to pass through but not to start or end on.
+  const [noCheckIn, setNoCheckIn] = useState<Set<string>>(new Set());
+  const [noCheckOut, setNoCheckOut] = useState<Set<string>>(new Set());
+  const [hint, setHint] = useState<"noCheckIn" | "noCheckOut" | null>(null);
   const [loading, setLoading] = useState(true);
   const [loadError, setLoadError] = useState(false);
 
@@ -107,7 +111,11 @@ export function DateRangeModal({
     )
       .then(async (res) => {
         if (!res.ok) throw new Error(`${res.status}`);
-        return (await res.json()) as { unavailable: string[] };
+        return (await res.json()) as {
+          unavailable: string[];
+          noCheckIn?: string[];
+          noCheckOut?: string[];
+        };
       })
       .then((data) => {
         if (cancelled) return;
@@ -115,6 +123,8 @@ export function DateRangeModal({
           .map((iso) => parseISO(iso))
           .filter((d): d is Date => Boolean(d));
         setUnavailable(dates);
+        setNoCheckIn(new Set(data.noCheckIn ?? []));
+        setNoCheckOut(new Set(data.noCheckOut ?? []));
         setLoading(false);
       })
       .catch(() => {
@@ -168,7 +178,25 @@ export function DateRangeModal({
     [tooltipText],
   );
 
+  // Refuse a check-in on a no-check-in day or a check-out on a no-check-out
+  // day at the moment it is clicked, and say why. The quote enforces the same
+  // rule server-side; this just saves the guest a round trip.
+  function select(next: DateRange | undefined, clicked: Date) {
+    const iso = toISO(clicked);
+    if (iso && next?.from && toISO(next.from) === iso && !next.to && noCheckIn.has(iso)) {
+      setHint("noCheckIn");
+      return;
+    }
+    if (iso && next?.to && toISO(next.to) === iso && noCheckOut.has(iso)) {
+      setHint("noCheckOut");
+      return;
+    }
+    setHint(null);
+    setRange(next);
+  }
+
   function clear() {
+    setHint(null);
     setRange(undefined);
   }
 
@@ -253,10 +281,16 @@ export function DateRangeModal({
             </p>
           )}
 
+          {hint && (
+            <p className="mb-2 text-center text-xs text-amber-700" role="status">
+              {t(hint === "noCheckIn" ? "noCheckInHint" : "noCheckOutHint")}
+            </p>
+          )}
+
           <DayPicker
             mode="range"
             selected={range}
-            onSelect={setRange}
+            onSelect={select}
             numberOfMonths={numberOfMonths}
             min={minNights}
             disabled={disabled}
