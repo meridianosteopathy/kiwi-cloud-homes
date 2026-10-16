@@ -43,6 +43,8 @@ export class QuoteError extends Error {
       | "below_min_nights"
       | "above_max_nights"
       | "unavailable"
+      | "no_check_in"
+      | "no_check_out"
       | "unknown_listing",
     message: string,
   ) {
@@ -99,23 +101,25 @@ export async function computeQuote(input: QuoteInput): Promise<Quote> {
   // for stays that pass through (Beds24 noCheckIn / noCheckOut overrides).
   const restriction = arrivalDepartureRestriction(calendar, input.checkIn, input.checkOut);
   if (restriction) {
-    throw new QuoteError("unavailable", restriction);
+    throw new QuoteError(restriction.code, restriction.message);
   }
 
-  // Minimum stay can be set per date in the engine's calendar as well as per
-  // listing; the engine does not enforce it on a booking written through the
-  // API, so this quote is the only gate.
-  const minNights = effectiveMinNights(listing.minNights, bookedNights);
+  // Minimum and maximum stay can be set per date in the engine's calendar as
+  // well as per listing; the engine does not enforce them on a booking
+  // written through the API, so this quote is the only gate.
+  const strategy = listing.minStayStrategy ?? "stayThrough";
+  const minNights = effectiveMinNights(listing.minNights, bookedNights, strategy);
   if (nights < minNights) {
     throw new QuoteError(
       "below_min_nights",
       `Minimum stay for these dates is ${minNights} night${minNights === 1 ? "" : "s"}.`,
     );
   }
-  if (listing.maxNights > 0 && nights > listing.maxNights) {
+  const maxNights = effectiveMaxNights(listing.maxNights, bookedNights, strategy);
+  if (maxNights > 0 && nights > maxNights) {
     throw new QuoteError(
       "above_max_nights",
-      `Maximum stay for this home is ${listing.maxNights} night${listing.maxNights === 1 ? "" : "s"}.`,
+      `Maximum stay for these dates is ${maxNights} night${maxNights === 1 ? "" : "s"}.`,
     );
   }
 
@@ -195,26 +199,60 @@ export function listingExposes(listing: HostawayListing): boolean {
   return Boolean(listing.id);
 }
 
+export type StayRuleStrategy = "firstNight" | "stayThrough";
+
 /**
  * The minimum stay that applies to a set of booked nights. Beds24 returns the
  * effective per-day rule for every night (the room default where the
  * calendar has none), so when every night carries a value the calendar is
- * authoritative: a calendar that relaxes the room's minimum is honoured, and
- * a longer calendar minimum on any night of the stay applies (stay-through).
- * When some nights carry no value the listing default still applies.
+ * authoritative: a calendar that relaxes the room's minimum is honoured.
+ * With "stayThrough" the strictest night of the stay applies; with
+ * "firstNight" only the arrival night's rule does. When some nights carry no
+ * value the listing default still applies as a floor.
  */
 export function effectiveMinNights(
   listingMinNights: number,
   bookedNights: Array<Pick<AvailabilityDay, "minimumStay">>,
+  strategy: StayRuleStrategy = "stayThrough",
 ): number {
-  const perDay = bookedNights
-    .map((d) => (typeof d.minimumStay === "number" ? d.minimumStay : 0))
-    .filter((n) => n > 0);
+  const values = bookedNights.map((d) =>
+    typeof d.minimumStay === "number" && d.minimumStay > 0 ? d.minimumStay : 0,
+  );
+  if (bookedNights.length === 0) return Math.max(1, listingMinNights);
+  if (strategy === "firstNight") {
+    return Math.max(1, values[0] > 0 ? values[0] : listingMinNights);
+  }
+  const perDay = values.filter((n) => n > 0);
   if (perDay.length === 0) return Math.max(1, listingMinNights);
   const calendarMax = Math.max(...perDay);
   return perDay.length === bookedNights.length
     ? Math.max(1, calendarMax)
     : Math.max(1, listingMinNights, calendarMax);
+}
+
+/**
+ * The maximum stay that applies, or 0 for none. Same sources and strategy as
+ * the minimum; with "stayThrough" the tightest (smallest) per-day maximum of
+ * any night applies.
+ */
+export function effectiveMaxNights(
+  listingMaxNights: number,
+  bookedNights: Array<Pick<AvailabilityDay, "maximumStay">>,
+  strategy: StayRuleStrategy = "stayThrough",
+): number {
+  const values = bookedNights.map((d) =>
+    typeof d.maximumStay === "number" && d.maximumStay > 0 ? d.maximumStay : 0,
+  );
+  const listingMax = listingMaxNights > 0 ? listingMaxNights : 0;
+  if (bookedNights.length === 0) return listingMax;
+  if (strategy === "firstNight") {
+    return values[0] > 0 ? values[0] : listingMax;
+  }
+  const perDay = values.filter((n) => n > 0);
+  if (perDay.length === 0) return listingMax;
+  const calendarMin = Math.min(...perDay);
+  if (perDay.length === bookedNights.length) return calendarMin;
+  return listingMax > 0 ? Math.min(listingMax, calendarMin) : calendarMin;
 }
 
 /**
@@ -225,14 +263,20 @@ export function arrivalDepartureRestriction(
   calendar: Array<Pick<AvailabilityDay, "date" | "noCheckIn" | "noCheckOut">>,
   checkIn: string,
   checkOut: string,
-): string | null {
+): { code: "no_check_in" | "no_check_out"; message: string } | null {
   const arrival = calendar.find((d) => d.date === checkIn);
   if (arrival?.noCheckIn) {
-    return `Check-in isn't possible on ${checkIn} for this home; pick another arrival day.`;
+    return {
+      code: "no_check_in",
+      message: `Check-in isn't possible on ${checkIn} for this home; pick another arrival day.`,
+    };
   }
   const departure = calendar.find((d) => d.date === checkOut);
   if (departure?.noCheckOut) {
-    return `Check-out isn't possible on ${checkOut} for this home; pick another departure day.`;
+    return {
+      code: "no_check_out",
+      message: `Check-out isn't possible on ${checkOut} for this home; pick another departure day.`,
+    };
   }
   return null;
 }

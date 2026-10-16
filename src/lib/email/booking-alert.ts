@@ -60,7 +60,7 @@ export function renderAlert(input: BookingAlertInput): { subject: string; html: 
     ["Payment", `${money(pi)} (${pi.id})`],
     ["Stripe", stripeUrl],
     ["Guest", [meta.guest_name, meta.guest_email].filter(Boolean).join(" · ") || "unknown"],
-    ["Listing", meta.listing_id || "unknown"],
+    ["Listing", [meta.listing_name, meta.listing_id ? `(${meta.listing_id})` : ""].filter(Boolean).join(" ") || "unknown"],
     ["Dates", meta.check_in && meta.check_out ? `${meta.check_in} → ${meta.check_out}` : "unknown"],
     ["Guests", meta.guests || "unknown"],
     ["Locale", meta.locale || "unknown"],

@@ -90,10 +90,16 @@ export function BookingForm({
   // the request fails — same shape, different (less accurate) source.
   const [quote, setQuote] = useState<QuoteResponse | null>(null);
   const [quoteLoading, setQuoteLoading] = useState(false);
+  // A 4xx from the quote means the stay itself is not allowed (dates taken,
+  // a per-date minimum stay, a no-check-in day, too many guests). Show why
+  // and hold the button; a 5xx keeps the estimate so a hiccup does not
+  // block the guest, and checkout re-quotes anyway.
+  const [quoteRefusal, setQuoteRefusal] = useState<{ code?: string; message: string } | null>(null);
 
   useEffect(() => {
     if (!canBook) {
       setQuote(null);
+      setQuoteRefusal(null);
       return;
     }
     const controller = new AbortController();
@@ -105,20 +111,38 @@ export function BookingForm({
       signal: controller.signal,
     })
       .then(async (res) => {
-        if (!res.ok) throw new Error(`${res.status}`);
+        if (!res.ok) {
+          const data = (await res.json().catch(() => ({}))) as { error?: string; code?: string };
+          throw Object.assign(new Error(data.error ?? `${res.status}`), {
+            status: res.status,
+            code: data.code,
+          });
+        }
         return (await res.json()) as QuoteResponse;
       })
       .then((q) => {
         setQuote(q);
+        setQuoteRefusal(null);
         setQuoteLoading(false);
       })
-      .catch((err) => {
+      .catch((err: Error & { status?: number; code?: string }) => {
         if (err.name === "AbortError") return;
         setQuote(null);
+        setQuoteRefusal(
+          err.status && err.status >= 400 && err.status < 500
+            ? { code: err.code, message: err.message }
+            : null,
+        );
         setQuoteLoading(false);
       });
     return () => controller.abort();
   }, [canBook, listingId, checkIn, checkOut, guests]);
+
+  const refusalText = quoteRefusal
+    ? quoteRefusal.code && t.has(`quoteError.${quoteRefusal.code}`)
+      ? t(`quoteError.${quoteRefusal.code}`)
+      : quoteRefusal.message
+    : null;
 
   const priceLabel = (amount: number) =>
     format.number(amount, {
@@ -144,7 +168,7 @@ export function BookingForm({
         <h3 className="text-lg font-semibold text-kiwi-900">{t("title")}</h3>
         <div className="text-right">
           <div className="text-base font-semibold text-kiwi-900">
-            {priceLabel(basePrice.amount)}
+            {t("fromPrice", { price: priceLabel(basePrice.amount) })}
           </div>
           <div className="text-xs text-kiwi-600">{t("perNight")}</div>
         </div>
@@ -219,7 +243,13 @@ export function BookingForm({
         </select>
       </label>
 
-      {nights > 0 && (
+      {nights > 0 && refusalText && (
+        <p className="mt-4 rounded-lg bg-amber-50 p-3 text-sm text-amber-800" role="status">
+          {refusalText}
+        </p>
+      )}
+
+      {nights > 0 && !refusalText && (
         <dl className="mt-4 space-y-1 rounded-lg bg-kiwi-50/60 p-3 text-sm">
           {quote ? (
             <>
@@ -261,7 +291,7 @@ export function BookingForm({
         <button
           type="button"
           onClick={() => setShowCheckout(true)}
-          disabled={!canBook}
+          disabled={!canBook || Boolean(quoteRefusal)}
           className="flex-1 rounded-full bg-kiwi-600 px-4 py-2 text-sm font-medium text-white hover:bg-kiwi-700 disabled:cursor-not-allowed disabled:bg-kiwi-300"
         >
           {t("bookNow")}

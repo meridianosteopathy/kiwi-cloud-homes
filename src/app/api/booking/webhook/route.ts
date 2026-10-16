@@ -34,6 +34,13 @@ function isZeroDecimal(currency: string): boolean {
   return ZERO_DECIMAL_CURRENCIES.has(currency.toLowerCase());
 }
 
+/** Forget an event so a redelivery is processed again; only for answers that ask Stripe to retry. */
+function forgetEvent(id: string): void {
+  SEEN.delete(id);
+  const idx = SEEN_FIFO.indexOf(id);
+  if (idx >= 0) SEEN_FIFO.splice(idx, 1);
+}
+
 function rememberEvent(id: string): boolean {
   if (SEEN.has(id)) return false;
   SEEN.add(id);
@@ -147,10 +154,13 @@ export async function POST(req: Request) {
 
     return NextResponse.json({ ok: true, reservationId: reservation.id });
   } catch (err) {
-    // Drop the dedup entry so a retry can re-attempt; Stripe will redeliver.
-    SEEN.delete(event.id);
-    const idx = SEEN_FIFO.indexOf(event.id);
-    if (idx >= 0) SEEN_FIFO.splice(idx, 1);
+    // Only a 500 asks Stripe to redeliver, so only then drop the dedup entry.
+    // An acked event keeps its entry; otherwise a same-instance redelivery
+    // would re-run the engine call and send the owner a second alert.
+    const retryLater = (body: Record<string, unknown>) => {
+      forgetEvent(event.id);
+      return NextResponse.json(body, { status: 500 });
+    };
 
     if (err instanceof ReservationRejectedError) {
       // The money is captured but no booking can be written: the nights
@@ -172,10 +182,7 @@ export async function POST(req: Request) {
       console.error(
         `[booking/webhook] owner alert not sent (${alert.skipped ?? alert.error}); answering 500 so Stripe keeps retrying.`,
       );
-      return NextResponse.json(
-        { ok: false, error: err.message, retriable: true },
-        { status: 500 },
-      );
+      return retryLater({ ok: false, error: err.message, retriable: true });
     }
 
     if (err instanceof ReservationMetadataError) {
@@ -183,13 +190,24 @@ export async function POST(req: Request) {
         "[booking/webhook] metadata error (not retrying):",
         err.message,
       );
-      // Bad metadata won't fix itself on retry; ack so Stripe stops. If
-      // money was captured, the owner still needs to know.
-      if (pi.amount_received > 0) {
+      // Bad metadata won't fix itself on retry; ack so Stripe stops. A
+      // payment that carries none of the website's keys is not a website
+      // booking at all (another product on the same Stripe account) and
+      // needs no alert. One that carries them malformed, with money
+      // captured, is ours: the owner must know, and if the alert cannot be
+      // sent the failure stays visible in Stripe.
+      const meta = pi.metadata ?? {};
+      const websitePayment = Boolean(meta.listing_id || meta.check_in || meta.guest_email);
+      if (pi.amount_received > 0 && websitePayment) {
         const alert = await sendBookingAlert({ reason: "missing_metadata", detail: err.message, paymentIntent: pi });
         if (!alert.id) {
-          console.error(`[booking/webhook] owner alert not sent (${alert.skipped ?? alert.error}).`);
+          console.error(
+            `[booking/webhook] owner alert not sent (${alert.skipped ?? alert.error}); answering 500 so Stripe keeps retrying.`,
+          );
+          return retryLater({ ok: false, error: err.message, retriable: true });
         }
+      } else if (pi.amount_received > 0) {
+        console.log(`[booking/webhook] ${pi.id} carries no website booking metadata; not a site booking, acking.`);
       }
       return NextResponse.json(
         { ok: false, error: err.message, retriable: false },
@@ -198,9 +216,6 @@ export async function POST(req: Request) {
     }
 
     console.error("[booking/webhook] reservation create failed:", err);
-    return NextResponse.json(
-      { ok: false, error: err instanceof Error ? err.message : String(err) },
-      { status: 500 },
-    );
+    return retryLater({ ok: false, error: err instanceof Error ? err.message : String(err) });
   }
 }

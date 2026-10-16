@@ -254,6 +254,17 @@ export function createBeds24Client(): HostawayClient {
           .join("; ");
         const message = `Beds24 POST /bookings did not create the booking${detail ? `: ${detail}` : "."}`;
         if (/availab|not available|no longer available|overbook/i.test(detail)) {
+          // The unit may be occupied by the booking this very payment created
+          // on a concurrent delivery of the same Stripe event. Look once more
+          // before telling the owner to refund anyone; a failed lookup throws
+          // and Stripe retries later.
+          const existing = await findBookingByReference(room.id, input.arrivalDate, input.externalRef);
+          if (existing) {
+            console.warn(
+              `[beds24] POST /bookings was refused for availability but booking ${existing.id} already carries ${input.externalRef}; returning it.`,
+            );
+            return { id: String(existing.id), alreadyExisted: true };
+          }
           throw new Beds24UnavailableError(message);
         }
         throw new Beds24ApiError(message);
@@ -339,13 +350,16 @@ async function toListing(property: Beds24Property): Promise<HostawayListing> {
   const headline = await headlinePriceFor(property, room);
   if (headline !== null) {
     listing.basePrice = { ...listing.basePrice, amount: headline };
-  } else if (listing.basePrice.amount <= 0) {
+  } else if (listing.basePrice.amount <= 0 && !warnedZeroPrice.has(property.id)) {
     console.warn(
       `[beds24] property ${property.id} has no upcoming price in slot ${priceSlotFor(room)} and no rack rate; the card will show 0.`,
     );
+    warnedZeroPrice.add(property.id);
   }
   return listing;
 }
+
+const warnedZeroPrice = new Set<number>();
 
 const headlineCache = new Map<number, { amount: number | null; expiresAt: number }>();
 
@@ -395,10 +409,11 @@ export function pickRoom(property: Beds24Property): Beds24Room {
     );
   }
   const sellable = rooms.filter((r) => (r.qty ?? 1) > 0 && r.sellPriority !== null);
-  if (sellable.length === 0) {
+  if (sellable.length === 0 && !warnedHidden.has(property.id)) {
     console.warn(
       `[beds24] property ${property.id} has no sellable room type (all hidden from the booking page or with 0 units); selling room ${rooms[0].id} anyway. Unhide it in Beds24 if this is unintended.`,
     );
+    warnedHidden.add(property.id);
   }
   const candidates = sellable.length > 0 ? sellable : rooms;
   if (candidates.length > 1 && !warnedRooms.has(property.id)) {
@@ -411,6 +426,7 @@ export function pickRoom(property: Beds24Property): Beds24Room {
 }
 
 const warnedRooms = new Set<number>();
+const warnedHidden = new Set<number>();
 
 export function mapProperty(property: Beds24Property): HostawayListing {
   const room = pickRoom(property);
@@ -442,6 +458,9 @@ export function mapProperty(property: Beds24Property): HostawayListing {
     cleaningFee: cleaningFeeFor(property, room),
     minNights: Math.max(1, room.minStay ?? 1),
     maxNights: room.maxStay && room.maxStay > 0 ? room.maxStay : 365,
+    ...(room.restrictionStrategy === "firstNight" || room.restrictionStrategy === "stayThrough"
+      ? { minStayStrategy: room.restrictionStrategy }
+      : {}),
     images: images.length > 0 ? images : fallbackImages,
     amenities,
     address: {
@@ -691,8 +710,8 @@ export interface ExpandCalendarOptions {
  * price. A day with no range at all, or with no price, is marked and made
  * unavailable: better to refuse a booking than to sell a night we know
  * nothing about. The fallback price is only ever shown, never charged.
- * The noCheckIn / noCheckOut overrides are carried through as flags for the
- * quote to apply to the arrival and departure day.
+ * Per-day minStay/maxStay and the noCheckIn / noCheckOut overrides are
+ * carried through for the quote to apply.
  */
 export function expandCalendar(
   ranges: Beds24CalendarRange[],
@@ -738,6 +757,7 @@ export function expandCalendar(
       price: { amount: priced ? (rawPrice as number) : fallbackPrice, currency },
       minimumStay:
         typeof range.minStay === "number" && range.minStay > 0 ? range.minStay : undefined,
+      ...(typeof range.maxStay === "number" && range.maxStay > 0 ? { maximumStay: range.maxStay } : {}),
       ...(noCheckIn ? { noCheckIn: true } : {}),
       ...(noCheckOut ? { noCheckOut: true } : {}),
       missing: false,
@@ -765,6 +785,7 @@ async function fetchCalendarRanges(roomId: number, start: string, end: string): 
     endDate: end,
     includeNumAvail: true,
     includeMinStay: true,
+    includeMaxStay: true,
     includePrices: true,
     includeOverride: true,
   });

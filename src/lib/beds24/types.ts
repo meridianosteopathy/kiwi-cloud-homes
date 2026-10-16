@@ -84,6 +84,8 @@ export interface Beds24Room {
   maxStay?: number;
   rackRate?: number;
   cleaningFee?: number;
+  /** firstNight | stayThrough: how minStay/maxStay apply across a stay. */
+  restrictionStrategy?: "firstNight" | "stayThrough" | string;
   sellPriority?: number | null;
   roomSize?: number;
   featureCodes?: string[][];

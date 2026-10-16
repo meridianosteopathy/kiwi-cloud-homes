@@ -48,6 +48,12 @@ export interface HostawayListing {
   minNights: number;
   /** Maximum nights per booking (Hostaway `maxNights`). 0 / Infinity if not set. */
   maxNights: number;
+  /**
+   * How per-day minimum/maximum stay rules combine over a stay (Beds24
+   * `restrictionStrategy`): "firstNight" applies the arrival night's rule,
+   * "stayThrough" the strictest rule of any night. Unset means stayThrough.
+   */
+  minStayStrategy?: "firstNight" | "stayThrough";
   images: ListingImage[];
   amenities: Amenity[];
   address: HostawayAddress;
@@ -62,6 +68,8 @@ export interface AvailabilityDay {
   price: HostawayPrice;
   /** Per-day minimum stay rule (Hostaway `minimumStay`); 0/undefined = use listing default. */
   minimumStay?: number;
+  /** Per-day maximum stay rule; 0/undefined = use listing default. */
+  maximumStay?: number;
   /** The host does not allow a stay to start on this day (Beds24 override noCheckIn). */
   noCheckIn?: boolean;
   /** The host does not allow a stay to end on this day (Beds24 override noCheckOut). */
