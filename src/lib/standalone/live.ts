@@ -86,9 +86,10 @@ export function createStandaloneClient(): HostawayClient {
       }
       const today = NZ_DATE.format(new Date());
       const price = { amount: home.fromPrice ?? 0, currency: home.currency ?? DEFAULT_CURRENCY };
+      const ownerBlocked = ownerBlockedNights(home, start, end);
       return dateRange(start, end).map<AvailabilityDay>((date) => ({
         date,
-        available: date >= today && !nights.has(date),
+        available: date >= today && !nights.has(date) && !ownerBlocked.has(date),
         price,
         minimumStay: home.minNights && home.minNights > 0 ? home.minNights : undefined,
       }));
@@ -135,6 +136,21 @@ export function toListing(home: HomeProfile): HostawayListing {
     },
     tourUrl: home.tourUrl && home.tourUrl.trim() ? home.tourUrl : undefined,
   };
+}
+
+/** Nights the owner listed under `blockedDates` (first and last night inclusive). */
+export function ownerBlockedNights(home: Pick<HomeProfile, "key" | "blockedDates">, start: string, end: string): Set<string> {
+  const out = new Set<string>();
+  for (const block of home.blockedDates ?? []) {
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(block.from) || !/^\d{4}-\d{2}-\d{2}$/.test(block.to) || block.to < block.from) {
+      console.warn(`[standalone] ignoring malformed blockedDates entry on "${home.key}": ${JSON.stringify(block)}`);
+      continue;
+    }
+    for (const date of dateRange(block.from < start ? start : block.from, block.to > end ? end : block.to)) {
+      out.add(date);
+    }
+  }
+  return out;
 }
 
 function slug(name: string): string {

@@ -28,6 +28,9 @@
  *      card hides what is missing and shows "price on request" for a house
  *      with no fromPrice.
  *   4. In Netlify, add ICAL_<KEY> with the iCal export link(s) of the house.
+ *      Hospitable's feed includes reservations, Owner Stays and Manual
+ *      Bookings, but not plain manual blocks: record your own stays as an
+ *      "Owner Stay" there, or list them under `blockedDates` here.
  *   5. Commit + push + merge.
  *
  * HOW TO ADD A HOUSE (with a booking engine)
@@ -77,6 +80,14 @@ export interface HomeProfile {
   amenities?: string[];
   /** Standalone mode: shown as "City · Region"; the street is optional. */
   address?: { line1?: string; city: string; region?: string; country?: string };
+  /**
+   * Standalone mode: nights to show as taken in addition to the iCal feeds.
+   * Hospitable's feed carries reservations but not plain manual blocks, so
+   * use this for maintenance or your own stays if you prefer not to record
+   * them as an "Owner Stay" in Hospitable. `from` is the first night and `to`
+   * the last night, both YYYY-MM-DD and inclusive.
+   */
+  blockedDates?: Array<{ from: string; to: string; note?: string }>;
   /**
    * Bedroom and bathroom counts shown on the property card. Hostaway supplied
    * these from the listing; Beds24 has no such fields, so fill them in here

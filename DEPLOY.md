@@ -112,16 +112,26 @@ dates and takes inquiries by email. Nothing is paid online.
    bedrooms, bathrooms, `maxGuests`, `fromPrice`, amenities, address, photos
    and both descriptions. A house with no `fromPrice` shows "price on
    request". Edit, commit and merge; the site updates on the next deploy.
-2. **Taken dates come from iCal links.** In Hospitable open the property's
-   calendar settings and copy its **iCal export** link (Airbnb and
-   Booking.com each publish one too, under the listing's availability or
-   calendar sync settings). In Netlify add a variable per house named after
-   its key, `ICAL_HALSWELL` and `ICAL_BEALEY_AVE`, with the link; several
-   links can be comma-separated. The links contain a secret, so they go only
-   into Netlify. Feeds are re-read every ten minutes; Airbnb and Booking.com
-   publish changes with a lag of up to a few hours, so a date can show as
-   free briefly after it was booked elsewhere. The inquiry step is where you
-   confirm.
+2. **Taken dates come from iCal links.** In Hospitable go to **Properties →
+   the house → Export calendar → Copy iCal link** (first check that this
+   section exists on the free plan; no help page says so in writing). In
+   Netlify add a variable per house named after its key, `ICAL_HALSWELL` and
+   `ICAL_BEALEY_AVE`, with the link; several links can be comma-separated,
+   so Airbnb's own export link can be added as a second source. The links
+   contain a secret and the feed carries guest names, so they go only into
+   Netlify; the website reads them on the server and shows nothing but
+   taken dates. If a link ever leaks, use Hospitable's *Revoke calendar
+   access* and paste the new link.
+
+   Two things to know about Hospitable's feed: it refreshes about every 40
+   minutes, and the site re-reads it every ten, so a booking made on Airbnb
+   can show as free here for up to an hour; and it contains **reservations,
+   Owner Stays and Manual Bookings only**, not plain manual blocks. So record
+   your own stays in Hospitable as an *Owner Stay* (which also blocks Airbnb
+   and Booking.com), and when a website inquiry becomes a booking, enter it
+   as a *Manual Booking*. For anything else, list the nights under
+   `blockedDates` in `src/content/homes.ts`. The inquiry step is always
+   where you confirm.
 3. **Inquiries arrive by email.** With `BREVO_API_KEY`, `EMAIL_FROM_ADDRESS`
    and `INQUIRY_EMAIL` set, the "Send message" button emails you the guest's
    dates and message with the guest as reply-to, and copies the guest. If
@@ -132,6 +142,20 @@ dates and takes inquiries by email. Nothing is paid online.
 5. Check `/tourist`: both houses, "price on request" or the from-price, taken
    dates greyed out in the date picker, and a test message that reaches your
    inbox (reply to it: the reply goes to the guest).
+
+**Moving the channels from Hostaway to Hospitable.** Booking.com allows one
+connected software per listing, so for each house: in the Booking.com
+extranet open **Connectivity provider**, disconnect Hostaway and remove any
+imported iCal calendars; then connect the listing from Hospitable using its
+Booking.com accommodation ID. Hospitable says the switch can take up to ten
+minutes and that dates can open up in the gap, so close the listing to new
+bookings while you switch and check the calendar afterwards. Past Booking.com
+bookings do not come across, only current and future ones. Connect Airbnb
+from Hospitable as well. When you choose the free Essentials plan you may be
+asked for a card; it is only charged if you switch on paid extras (Dynamic
+Pricing, guest verification, security deposits, upsells), so leave those
+off. Support on the free plan is Hospitable's AI assistant and the community
+forum, not a human.
 
 ### Switching the booking engine to Beds24 (only if paid bookings come back)
 

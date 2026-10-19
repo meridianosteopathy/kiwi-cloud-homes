@@ -20,8 +20,11 @@ After discussion the owner chose the zero-cost route:
   codebase behind `BOOKING_BACKEND`, so paid direct bookings can be turned
   back on in a later phase without rebuilding.
 - **Accepted trade-offs:** no instant booking; a date booked on Airbnb or
-  Booking.com can show as free on the site for a few hours (iCal lag); the
-  owner confirms every inquiry by hand.
+  Booking.com can show as free on the site for up to an hour (Hospitable's
+  feed refreshes about every 40 minutes); Hospitable's feed omits plain manual
+  blocks, so the owner records her own stays as an "Owner Stay" or lists them
+  in the site's per-home file; the owner confirms every inquiry by hand; no
+  human support on Hospitable's free plan.
 
 The analysis below is kept as the record of how the options compared.
 
