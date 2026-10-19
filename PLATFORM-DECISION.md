@@ -15,7 +15,11 @@ After discussion the owner chose the zero-cost route:
   per-home file, greys out taken dates read from each house's iCal feed, and
   emails inquiries to the owner. The Stripe checkout is switched off, not
   removed.
-- **Monthly software cost:** NZD 0 (Hospitable free, Netlify free, Brevo free).
+- **Hosting:** stays on Vercel's free Hobby plan. With no payments taken the
+  clearest fair-use breach is gone; Vercel's wording is still "non-commercial",
+  so if paid bookings return the site moves to Netlify Free (that version of
+  the deploy guide is in the history of pull request #30) or Vercel Pro.
+- **Monthly software cost:** NZD 0 (Hospitable free, Vercel free, Brevo free).
 - **Confirmed on the owner's account (19 October 2026):** Hospitable's free
   plan does provide the per-property iCal export link the website reads.
 - **Kept for later:** the Beds24 adapter and the paid-booking flow stay in the

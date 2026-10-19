@@ -66,9 +66,9 @@ In Brevo dashboard:
 3. Name: `kiwi-cloud-homes-prod`
 4. **Copy the key** — Brevo shows it once. Looks like `xkeysib-…`
 
-## 5. Add env vars in Netlify
+## 5. Add env vars in Vercel
 
-**Netlify → kiwi-cloud-homes → Project configuration → Environment variables → Add a variable** (leave scopes on *All scopes*):
+**Vercel → kiwi-cloud-homes → Settings → Environment Variables → Add** (Production and Preview):
 
 | Key | Value |
 |---|---|
@@ -78,8 +78,7 @@ In Brevo dashboard:
 
 Use *Same value for all deploy contexts* for all three.
 
-**Redeploy** so the new env vars are picked up: Netlify → **Deploys →
-Trigger deploy → Deploy project**.
+**Redeploy** so the new env vars are picked up: Vercel → **Deployments → ⋯ on the latest → Redeploy**.
 
 ## 6. Test
 
@@ -98,7 +97,7 @@ Run an end-to-end test booking on the live site (or a preview URL):
 If the email doesn't arrive:
 
 - Check spam/junk folder (especially Gmail's "Promotions" tab)
-- Netlify → **Logs → Functions** → look for `[booking/webhook] confirmation email …`:
+- Vercel → **Project → Logs** → look for `[booking/webhook] confirmation email …`:
   - `skipped: BREVO_API_KEY not configured` → env var missing or typo
   - `failed: Brevo 401 …` → API key is wrong / revoked
   - `failed: Brevo 400 … sender not authorized` → the `EMAIL_FROM_ADDRESS`

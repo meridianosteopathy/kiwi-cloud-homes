@@ -77,6 +77,11 @@ Use the `BrandLogo` component rather than inlining logo SVG; it carries the
   `ReservationRejectedError`: the webhook emails the owner (`INQUIRY_EMAIL`)
   and only then acks to Stripe; a transient error still returns 500 so Stripe
   retries.
-- Hosting is Netlify Free (see `DEPLOY.md`). Vercel's Hobby plan does not
-  permit a site that takes payments. Every production deploy costs 15 of
-  Netlify's 300 monthly credits, so batch changes and test on PR previews.
+- Hosting is Vercel's free Hobby plan (see `DEPLOY.md`), kept because the
+  site takes no payments. Vercel's fair-use rules call Hobby non-commercial
+  and name taking payments as the clearest breach, so if paid direct
+  bookings are ever turned back on, the site must move first (Netlify Free,
+  whose guide is in the history of PR #30, or Vercel Pro). `vercel.json`
+  pins functions to Sydney. The repository's default branch on GitHub is an
+  old `claude/...` branch; production deploys from `main`, so check the
+  Production Branch setting if deploys look stale.

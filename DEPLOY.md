@@ -1,106 +1,49 @@
-# Deploying to Netlify
+# Deploying to Vercel
 
-One-time setup, then every push to `main` auto-deploys. Pull requests get a
-free preview URL.
+The site runs on Vercel's free **Hobby** plan, in the existing project
+`kiwi-cloud-homes`. Every push to `main` deploys production; every pull
+request gets a preview URL (posted by the Vercel bot on the PR).
 
-## Why Netlify, and why not Vercel's free plan
+**About the free plan.** Vercel's Fair Use Guidelines say Hobby is for
+personal, non-commercial use, and their clearest example of commercial use is
+taking payments from visitors. This site takes no payments: it shows the
+houses and sends inquiries by email, so the plan is kept. If paid direct
+bookings are ever turned back on, move first: Netlify's free plan permits
+commercial sites (the Netlify version of this guide is in the history of pull
+request #30), or use Vercel Pro at USD 20 a month.
 
-The site used to run on Vercel's free **Hobby** plan. Vercel's Fair Use
-Guidelines say Hobby is "restricted to non-commercial personal use only", and
-their first example of commercial use is "any method of requesting or
-processing payment from visitors of the site". A booking page with Stripe
-checkout is exactly that, and Vercel may pause such a site without notice.
-Staying on Vercel legitimately means the Pro plan at USD 20 a month.
+## 1. The Vercel project
 
-Netlify's **Free** plan permits commercial projects, needs no credit card,
-does not put the site to sleep between visits, supports Next.js 16 with no
-special configuration, and includes a custom domain with free SSL. It is the
-free host this project targets.
+The project already exists under the team that imported this repository.
+Two settings to check once:
 
-The one thing to understand about Netlify Free is its **monthly allowance of
-300 credits**. See "Monthly credit budget" at the end before you deploy.
+- **Settings → Git → Production Branch** must be `main`. The repository's
+  default branch on GitHub is still an old `claude/...` branch, and Vercel
+  follows the default unless told otherwise.
+- **Region** is pinned to Sydney (`syd1`) by the committed `vercel.json`,
+  which is the closest region to New Zealand.
 
-## 1. Before you start
+## 2. Environment variables
 
-- The GitHub account that owns this repo (`meridianosteopathy`) must be the
-  one you sign in with. Netlify Free can import public repos and private repos
-  owned by a **personal** account. It cannot import a private repo owned by a
-  GitHub **organisation** (that needs Pro). If the import step cannot see the
-  repo, this is why.
-- Have your `.env.local` values to hand (Hostaway, Brevo, Stripe test keys).
-- Have the Stripe Dashboard open in **Test mode**.
+**Settings → Environment Variables → Add.** Tick **Production** and
+**Preview** so pull-request previews behave like the live site. Vercel only
+reads variables at build time, so after adding or changing one trigger a
+redeploy: **Deployments → ⋯ on the latest → Redeploy**.
 
-## 2. Sign up and import the repo
-
-1. Go to **https://app.netlify.com/signup** and sign up with GitHub.
-2. Choose the **Free** plan. No card is asked for.
-3. On the team dashboard click **Add new project → Import an existing
-   project → GitHub**. Authorise Netlify for the `kiwi-cloud-homes` repo.
-4. Netlify detects Next.js. The build command (`npm run build`) and publish
-   directory (`.next`) come from the committed `netlify.toml`. Leave them.
-   Check the **Branch to deploy** is `main`. Netlify defaults to the
-   repository's default branch, which in this repo is still an old
-   `claude/...` branch, so change it to `main` if it is not already.
-5. **Do not deploy yet.** Add the environment variables first (next step).
-   Every production deploy costs 15 credits, so get the first one right.
-
-## 3. Add environment variables
-
-On the import screen open **Add environment variables** (or afterwards:
-**Project configuration → Environment variables → Add a variable**).
-
-For each variable:
-
-- **Scopes:** leave on **All scopes**. Serverless functions only see
-  variables whose scope includes *Functions*, and `NEXT_PUBLIC_…` variables
-  are baked in at build time so they also need *Builds*. "All scopes" covers
-  both.
-- **Deploy contexts:** **Same value for all deploy contexts** unless you
-  deliberately want different test and live values.
-
-| Key | Value | Used in |
+| Key | Value | Used for |
 |---|---|---|
-| `BOOKING_BACKEND` | `standalone` (no booking engine, inquiries only; see "Running without a booking engine" below). `beds24` or `hostaway` only if paid bookings are turned back on | Chooses the booking engine |
-| `ICAL_HALSWELL`, `ICAL_BEALEY_AVE` | the iCal export link(s) of each house from Hospitable (or Airbnb and Booking.com), comma-separated | Standalone mode: greys out taken dates |
-| `BEDS24_REFRESH_TOKEN` | from `npm run beds24:setup` (only when `BOOKING_BACKEND=beds24`) | Beds24 API |
-| `BEDS24_PROPERTY_IDS` *(optional)* | **Leave empty** to show every property in the Beds24 account | Beds24 API |
-| `BEDS24_PRICE_SLOT` *(optional)* | **Leave empty** unless a house sells a daily price other than the one enabled for Beds24's own booking page | Beds24 API |
-| `HOSTAWAY_USE_MOCK` | `false` (type it literally); only matters while the engine is Hostaway | Switches to live Hostaway |
-| `HOSTAWAY_ACCOUNT_ID` | from `.env.local` | Hostaway API |
-| `HOSTAWAY_CLIENT_ID` | from `.env.local` | Hostaway API |
-| `HOSTAWAY_CLIENT_SECRET` | from `.env.local` | Hostaway API |
-| `HOSTAWAY_LISTING_IDS` *(optional)* | **Leave empty** to show every house in your Hostaway account (see below) | Hostaway API |
-| `INQUIRY_EMAIL` | `nina@kiwicloudhomes.co.nz` | inquiry mailto link; owner alert when a payment cannot be booked |
-| `NEXT_PUBLIC_SITE_URL` | the site's public address, e.g. `https://kiwicloudhomes.co.nz` (use the `.netlify.app` URL until the domain is live) | social-share preview links |
-| `BREVO_API_KEY` | from `.env.local` | confirmation email |
-| `EMAIL_FROM_ADDRESS` | `nina@kiwicloudhomes.co.nz` | confirmation email |
-| `EMAIL_REPLY_TO` *(optional)* | reply address | confirmation email |
-| `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY` | `pk_test_…` to start | Stripe checkout |
-| `STRIPE_SECRET_KEY` | `sk_test_…` to start | Stripe checkout |
-| `STRIPE_WEBHOOK_SECRET` | **skip for now**, added in step 5 | Stripe webhook |
+| `BOOKING_BACKEND` | `standalone` | No booking engine: house facts from `src/content/homes.ts`, taken dates from the iCal feeds below, inquiries by email, no checkout |
+| `ICAL_HALSWELL` | the Hospitable iCal export link of the Modern Home (see section 3) | Greys out taken dates |
+| `ICAL_BEALEY_AVE` | the Hospitable iCal export link of the Super king bed home | Greys out taken dates |
+| `INQUIRY_EMAIL` | `nina@kiwicloudhomes.co.nz` | Where inquiries arrive; also the owner alert address |
+| `EMAIL_FROM_ADDRESS` | a sender address verified in Brevo (see `EMAIL.md`) | Inquiry and confirmation emails |
+| `BREVO_API_KEY` | from Brevo → SMTP & API | Sending email |
+| `EMAIL_REPLY_TO` *(optional)* | reply address for the guest's confirmation | Defaults to `INQUIRY_EMAIL` |
+| `NEXT_PUBLIC_SITE_URL` *(optional)* | `https://kiwicloudhomes.co.nz` once the domain is live, full form with `https://` | Absolute links on share cards; unset, Vercel's production hostname is used |
 
-Never put any of these in `netlify.toml`: values there are not visible to
-functions, and the file is public in the repo.
-
-### Which houses show on the site
-
-By default, **every listing in your Hostaway account**. Import a house into
-Hostaway and it appears on `/tourist` and `/school` within about five minutes,
-bookable, with its own calendar and price. No redeploy, no code change.
-
-Two things to watch:
-
-- **If the old `HOSTAWAY_LISTING_ID` variable is set** (from the single-house
-  days) the site shows only that one house. Do not carry it over to Netlify.
-  To pin the set, use `HOSTAWAY_LISTING_IDS` with the full comma-separated
-  list instead.
-- **To hide a house** you have in Hostaway but do not want on the website,
-  set `HOSTAWAY_LISTING_IDS` to just the ids you *do* want. The order you
-  write them is the order they appear. A house not on the list cannot be
-  quoted or booked through the site.
-
-To find a listing id: open the house in the Hostaway dashboard and read it off
-the address bar: `.../listings/123456`.
+Variables from the Hostaway and Stripe days (`HOSTAWAY_*`, `STRIPE_*`,
+`NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY`) are not used in standalone mode and can
+be deleted. Keep them only if paid bookings come back (section 6).
 
 ### Running without a booking engine (standalone mode)
 
@@ -116,15 +59,15 @@ dates and takes inquiries by email. Nothing is paid online.
    the house → Export calendar → Copy iCal link** (confirmed available on the
    free Essentials plan, October 2026; the link looks like
    `https://api.hospitable.com/v1/properties/reservations.ics?key=…&token=…`).
-   In Netlify add a variable per house named after its key, `ICAL_HALSWELL`
+   In Vercel add a variable per house named after its key, `ICAL_HALSWELL`
    (Modern Home) and `ICAL_BEALEY_AVE` (Super king bed), with the link;
    several links can be comma-separated, so Airbnb's own export link can be
    added as a second source. The links contain a secret and the feed carries
-   guest names, so they go only into Netlify, never into the repo, chat or
+   guest names, so they go only into Vercel, never into the repo, chat or
    email; the website reads them on the server and shows nothing but taken
    dates. If a link is ever shared anywhere else, use Hospitable's *Revoke
    calendar access* (the three-dots menu next to the link) and paste the new
-   link into Netlify.
+   link into Vercel.
 
    Two things to know about Hospitable's feed: it refreshes about every 40
    minutes, and the site re-reads it every ten, so a booking made on Airbnb
@@ -162,6 +105,39 @@ Pricing, guest verification, security deposits, upsells), so leave those
 off. Support on the free plan is Hospitable's AI assistant and the community
 forum, not a human.
 
+## 4. Deploy and check
+
+Push to `main` (merging the pull request does that), or **Deployments → ⋯ on
+the latest → Redeploy** after changing variables. About two minutes later
+open the production URL and check:
+
+- The language picker appears and choosing a language redirects you to
+  `/en` or `/zh-CN`.
+- `/tourist` shows both houses with their photos, bedrooms and either the
+  from-price or "price on request", a date picker that greys out taken
+  nights, and a **Send message** button. No "Book now".
+- Send yourself a test message: it arrives at `INQUIRY_EMAIL` with the
+  guest's address as reply-to, and the guest address gets a short
+  confirmation.
+- If you see the mock "Halswell Garden Retreat" instead, `BOOKING_BACKEND`
+  is not set to `standalone`. If the date picker says availability could not
+  load, a feed link is wrong or unreachable: **Vercel → Project → Logs**
+  shows a `[standalone]` line saying which.
+
+## 5. Custom domain
+
+Vercel → **Settings → Domains → Add** → enter `kiwicloudhomes.co.nz` (add
+`www` too). Vercel shows the DNS records to create. Keep GoDaddy as the DNS
+host and add exactly those records under **My Products →
+kiwicloudhomes.co.nz → DNS**. SSL is automatic. Then set
+`NEXT_PUBLIC_SITE_URL` to `https://kiwicloudhomes.co.nz` and redeploy.
+
+## 6. If paid bookings come back
+
+Everything below is already in the codebase but switched off. Before turning
+it on, read the note about Vercel's free plan at the top: a site that takes
+payments has to move to Netlify Free or Vercel Pro first.
+
 ### Switching the booking engine to Beds24 (only if paid bookings come back)
 
 The site can run on either engine. The switch is a settings change plus a
@@ -191,7 +167,7 @@ small edit to the per-home file, with no code change:
    `src/content/homes.ts`, and fill in `bedrooms` and `bathrooms` there,
    because Beds24 has no fields for them. If Beds24 returns no photos for a
    house, add `images` there too. Commit and merge.
-3. **Netlify variables:** set `BOOKING_BACKEND` to `beds24` and add
+3. **Vercel variables:** set `BOOKING_BACKEND` to `beds24` and add
    `BEDS24_REFRESH_TOKEN`. Leave `BEDS24_PROPERTY_IDS` empty unless you want
    to hide a property or fix the order. The Hostaway variables can stay until
    the Hostaway account is closed; they are ignored while the engine is Beds24.
@@ -218,38 +194,17 @@ small edit to the per-home file, with no code change:
 
 To go back, set `BOOKING_BACKEND` to `hostaway` and redeploy.
 
-## 4. Deploy and check
-
-Click **Deploy**. About two minutes later you get a URL like
-`https://something-random.netlify.app`. You can rename the `something-random`
-part under **Project configuration → Project details → Change project name**.
-
-Open the URL and check:
-
-- The language picker appears and choosing a language redirects you to
-  `/en` or `/zh-CN`. If this works, the Next.js proxy (locale routing) is
-  running on Netlify.
-- `/tourist` shows every house you expect, each with its own price and
-  "Book your stay" panel, not the mock "Halswell Garden Retreat". If you see
-  mock data, `BOOKING_BACKEND` is not set to the engine you meant. If you see
-  an error page instead, one of that engine's variables is missing or wrong:
-  **Logs → Functions** shows the message (for Beds24, a line naming
-  `BEDS24_REFRESH_TOKEN`) and a `[booking] backend: ...` line saying which
-  engine ran; both appear on the first page view, not in the deploy log. Fix
-  it, then **Deploys → Trigger deploy → Deploy project**. Env var changes
-  only take effect on the next deploy.
-
 ## 5. Create the Stripe test webhook
 
 1. Stripe Dashboard → **Test mode** on → **Developers → Webhooks → Add
    endpoint**.
-2. **Endpoint URL:** `https://YOUR-NETLIFY-URL/api/booking/webhook`
+2. **Endpoint URL:** `https://YOUR-VERCEL-URL/api/booking/webhook`
 3. **Listen to:** `payment_intent.succeeded` (only that one).
 4. **Add endpoint**, then **Reveal** the signing secret and copy the
    `whsec_…` value.
-5. Netlify → **Project configuration → Environment variables → Add a
-   variable**: key `STRIPE_WEBHOOK_SECRET`, value the `whsec_…`, all scopes.
-6. **Deploys → Trigger deploy → Deploy project**.
+5. Vercel → **Settings → Environment Variables → Add**: key
+   `STRIPE_WEBHOOK_SECRET`, value the `whsec_…`, Production and Preview.
+6. **Deployments → ⋯ on the latest → Redeploy**.
 
 ## 6. End-to-end test
 
@@ -257,7 +212,7 @@ Open the URL and check:
    the switch), **block off a fake date range** (a month two years out). The
    first successful test booking creates a real reservation on your real
    calendar, and the engine pushes it to Airbnb and Booking.com.
-2. Open `https://YOUR-NETLIFY-URL/tourist`, pick those dates, **Book now**,
+2. Open `https://YOUR-VERCEL-URL/tourist`, pick those dates, **Book now**,
    fill in name and email, **Continue to payment**.
 3. Pay with the Stripe test card `4242 4242 4242 4242`, any future expiry,
    any CVC.
@@ -280,26 +235,9 @@ guest in Stripe or create the booking by hand. If that alert cannot be sent
 (Brevo not configured), the event stays red in Stripe and keeps retrying so
 the failure is not lost.
 
-If anything fails, **Netlify → Logs → Functions** shows the server-side
+If anything fails, **Vercel → Logs → Functions** shows the server-side
 log lines (`[booking/webhook] …`). Look soon after the failure; free-plan
 logs are kept only briefly.
-
-## 7. Custom domain
-
-1. Netlify → **Domain management → Add a domain** → enter
-   `kiwicloudhomes.co.nz` (Netlify adds `www` as well).
-2. Netlify shows you the DNS records to create. Two ways to do it:
-   - **Keep GoDaddy DNS (recommended, nothing else changes):** in GoDaddy →
-     **My Products → kiwicloudhomes.co.nz → DNS**, add exactly the records
-     Netlify shows (an `A` or `ALIAS` record for the apex and a `CNAME` for
-     `www`). Remove the old records that pointed at Vercel.
-   - **Or move DNS to Netlify:** change the nameservers at GoDaddy to the
-     ones Netlify lists. Only do this if you are comfortable re-entering your
-     existing mail (MX) and Brevo (TXT) records in Netlify DNS.
-3. **Do not touch the MX records** or the Brevo TXT records. Your email and
-   confirmation-email sending depend on them.
-4. Back in Netlify, **Verify DNS configuration**, then under **HTTPS** wait
-   for the free Let's Encrypt certificate. DNS can take up to a day to settle.
 
 ## 8. Going live
 
@@ -308,61 +246,23 @@ logs are kept only briefly.
 2. **Stripe (live mode):** **Webhooks → Add endpoint** with the same URL
    (now on your real domain) and the same `payment_intent.succeeded` event.
    Copy the live `whsec_…`.
-3. **Netlify:** update the three Stripe variables to the live values.
-4. **Deploys → Trigger deploy → Deploy project**.
+3. **Vercel:** update the three Stripe variables to the live values.
+4. **Deployments → ⋯ on the latest → Redeploy**.
 5. Make one real low-value booking and refund it in Stripe to prove the live
    path works.
 
-## 9. Switch off Vercel
-
-Once the domain resolves to Netlify and a live booking has worked:
-
-1. Vercel → the `kiwi-cloud-homes` project → **Settings → Domains** →
-   remove `kiwicloudhomes.co.nz`.
-2. **Settings → General → Delete Project**.
-3. Delete the old Stripe webhook endpoints that point at the Vercel URL.
-
-## Monthly credit budget
-
-Netlify Free gives **300 credits per month**. Everything draws from that pool
-and nothing is billed: when the credits run out, every site on the account
-shows a "Site not available" page until the next month, and Stripe webhooks
-cannot be received while it is paused. Netlify emails you at 50, 75, 90 and
-100 percent.
-
-| What | Credits |
-|---|---|
-| One successful **production** deploy | 15 |
-| 1 GB of bandwidth served | 20 |
-| 10,000 web requests | 2 |
-| Function compute (server-rendered pages, API routes) | 10 per GB-hour, small for this site |
-| Preview deploys, failed deploys, rollbacks | 0 |
-
-What that means for one property with light traffic:
-
-- Aim for **no more than 5 to 8 production deploys a month** (75 to 120
-  credits). Test on pull-request previews, which are free, and merge changes
-  in batches.
-- Photos are served from Hostaway's image CDN, not from Netlify, so bandwidth
-  is mostly the pages themselves. A few thousand page views a month is
-  roughly 40 to 80 credits.
-- Check **Team settings → Usage** once a month.
-- If the allowance ever runs short, Netlify's **Personal** plan is USD 9 a
-  month for 1,000 credits, or the **Pro** plan is USD 20 for 3,000.
-
 ## Notes
 
-- **Region:** on the Free plan, server code runs in Netlify's US East (Ohio)
-  region and cannot be moved. Pages render a few hundred milliseconds slower
-  for New Zealand visitors than on Vercel's Sydney region. Static files still
-  come from Netlify's global CDN.
-- **Env var changes do not redeploy automatically.** After changing any
-  variable, **Deploys → Trigger deploy → Deploy project** (15 credits).
-- **Build minutes** are not metered separately on the credit plans; only
-  successful production deploys cost credits.
-- **China access:** Netlify, like Vercel, may be slow or blocked from
-  mainland China. Long-term, consider a China-accessible host for Chinese
-  visitors inside the firewall.
-- The `netlify.toml` in the repo pins only the build command, output
-  directory and Node version. Netlify installs and updates its Next.js
-  adapter itself.
+- **Region:** `vercel.json` pins serverless functions to Sydney (`syd1`),
+  the lowest latency for New Zealand visitors.
+- **China access:** Vercel is blocked in mainland China. For visitors inside
+  the firewall this URL will not load; a China-accessible host is a separate,
+  later decision.
+- **Auto-deploys:** every push to `main` deploys production; every pull
+  request gets its own preview URL in the Vercel bot's comment.
+- **Variable changes do not redeploy automatically.** After changing any
+  variable, trigger a redeploy.
+- **Logs:** **Vercel → Project → Logs** (or a deployment's **Functions**
+  tab) shows the server-side lines (`[booking] backend: …`,
+  `[standalone] …`, `[booking/inquiry] …`). They appear on the first page
+  view after a deploy, not in the build log.
