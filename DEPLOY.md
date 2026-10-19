@@ -60,7 +60,8 @@ For each variable:
 
 | Key | Value | Used in |
 |---|---|---|
-| `BOOKING_BACKEND` | `hostaway` while Hostaway is still the engine; `beds24` after the switch (see below) | Chooses the booking engine |
+| `BOOKING_BACKEND` | `standalone` (no booking engine, inquiries only; see "Running without a booking engine" below). `beds24` or `hostaway` only if paid bookings are turned back on | Chooses the booking engine |
+| `ICAL_HALSWELL`, `ICAL_BEALEY_AVE` | the iCal export link(s) of each house from Hospitable (or Airbnb and Booking.com), comma-separated | Standalone mode: greys out taken dates |
 | `BEDS24_REFRESH_TOKEN` | from `npm run beds24:setup` (only when `BOOKING_BACKEND=beds24`) | Beds24 API |
 | `BEDS24_PROPERTY_IDS` *(optional)* | **Leave empty** to show every property in the Beds24 account | Beds24 API |
 | `BEDS24_PRICE_SLOT` *(optional)* | **Leave empty** unless a house sells a daily price other than the one enabled for Beds24's own booking page | Beds24 API |
@@ -101,7 +102,38 @@ Two things to watch:
 To find a listing id: open the house in the Hostaway dashboard and read it off
 the address bar: `.../listings/123456`.
 
-### Switching the booking engine to Beds24
+### Running without a booking engine (standalone mode)
+
+This is the current setup: Hospitable's free plan is the inbox and calendar
+for Airbnb and Booking.com, and the website shows the houses, greys out taken
+dates and takes inquiries by email. Nothing is paid online.
+
+1. **House facts live in `src/content/homes.ts`.** Each house has a `name`,
+   bedrooms, bathrooms, `maxGuests`, `fromPrice`, amenities, address, photos
+   and both descriptions. A house with no `fromPrice` shows "price on
+   request". Edit, commit and merge; the site updates on the next deploy.
+2. **Taken dates come from iCal links.** In Hospitable open the property's
+   calendar settings and copy its **iCal export** link (Airbnb and
+   Booking.com each publish one too, under the listing's availability or
+   calendar sync settings). In Netlify add a variable per house named after
+   its key, `ICAL_HALSWELL` and `ICAL_BEALEY_AVE`, with the link; several
+   links can be comma-separated. The links contain a secret, so they go only
+   into Netlify. Feeds are re-read every ten minutes; Airbnb and Booking.com
+   publish changes with a lag of up to a few hours, so a date can show as
+   free briefly after it was booked elsewhere. The inquiry step is where you
+   confirm.
+3. **Inquiries arrive by email.** With `BREVO_API_KEY`, `EMAIL_FROM_ADDRESS`
+   and `INQUIRY_EMAIL` set, the "Send message" button emails you the guest's
+   dates and message with the guest as reply-to, and copies the guest. If
+   Brevo is not configured the button falls back to opening the guest's own
+   mail app, as before.
+4. **Stripe is not used** in this mode: the checkout is hidden and the
+   payment route refuses requests. The Stripe variables can stay empty.
+5. Check `/tourist`: both houses, "price on request" or the from-price, taken
+   dates greyed out in the date picker, and a test message that reaches your
+   inbox (reply to it: the reply goes to the guest).
+
+### Switching the booking engine to Beds24 (only if paid bookings come back)
 
 The site can run on either engine. The switch is a settings change plus a
 small edit to the per-home file, with no code change:

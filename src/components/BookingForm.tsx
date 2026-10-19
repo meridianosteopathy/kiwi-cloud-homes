@@ -15,9 +15,14 @@ type Props = {
   minNights: number;
   maxNights: number;
   inquiryEmail: string | null;
+  /** False when guests send an inquiry instead of paying here. */
+  directBooking?: boolean;
   defaultCheckIn: string | null;
   defaultCheckOut: string | null;
 };
+
+/** Guest-count dropdown size when a home's capacity is not known. */
+const UNKNOWN_CAPACITY_GUESTS = 8;
 
 type QuoteResponse = {
   nights: number;
@@ -57,10 +62,13 @@ export function BookingForm({
   minNights,
   maxNights,
   inquiryEmail,
+  directBooking = true,
   defaultCheckIn,
   defaultCheckOut,
 }: Props) {
   const t = useTranslations("Booking");
+  const guestCapacity = maxGuests > 0 ? maxGuests : UNKNOWN_CAPACITY_GUESTS;
+  const hasPrice = basePrice.amount > 0;
   const format = useFormatter();
   const locale = useLocale();
   const testMode = isStripeTestMode();
@@ -97,7 +105,8 @@ export function BookingForm({
   const [quoteRefusal, setQuoteRefusal] = useState<{ code?: string; message: string } | null>(null);
 
   useEffect(() => {
-    if (!canBook) {
+    // Inquiry-only sites never quote: the host confirms the price by email.
+    if (!canBook || !directBooking) {
       setQuote(null);
       setQuoteRefusal(null);
       return;
@@ -136,7 +145,7 @@ export function BookingForm({
         setQuoteLoading(false);
       });
     return () => controller.abort();
-  }, [canBook, listingId, checkIn, checkOut, guests]);
+  }, [canBook, directBooking, listingId, checkIn, checkOut, guests]);
 
   const refusalText = quoteRefusal
     ? quoteRefusal.code && t.has(`quoteError.${quoteRefusal.code}`)
@@ -165,12 +174,20 @@ export function BookingForm({
   return (
     <section className="rounded-2xl border border-kiwi-200 bg-white p-5 shadow-sm">
       <header className="mb-4 flex items-baseline justify-between gap-3">
-        <h3 className="text-lg font-semibold text-kiwi-900">{t("title")}</h3>
+        <h3 className="text-lg font-semibold text-kiwi-900">
+          {t(directBooking ? "title" : "titleInquiry")}
+        </h3>
         <div className="text-right">
-          <div className="text-base font-semibold text-kiwi-900">
-            {t("fromPrice", { price: priceLabel(basePrice.amount) })}
-          </div>
-          <div className="text-xs text-kiwi-600">{t("perNight")}</div>
+          {hasPrice ? (
+            <>
+              <div className="text-base font-semibold text-kiwi-900">
+                {t("fromPrice", { price: priceLabel(basePrice.amount) })}
+              </div>
+              <div className="text-xs text-kiwi-600">{t("perNight")}</div>
+            </>
+          ) : (
+            <div className="text-sm font-semibold text-kiwi-900">{t("priceOnRequest")}</div>
+          )}
         </div>
       </header>
 
@@ -233,7 +250,7 @@ export function BookingForm({
           onChange={(e) => setGuests(Number(e.target.value))}
           className={inputClass}
         >
-          {Array.from({ length: Math.max(maxGuests, 1) }, (_, i) => i + 1).map(
+          {Array.from({ length: guestCapacity }, (_, i) => i + 1).map(
             (n) => (
               <option key={n} value={n}>
                 {t("guestCount", { count: n })}
@@ -249,7 +266,7 @@ export function BookingForm({
         </p>
       )}
 
-      {nights > 0 && !refusalText && (
+      {nights > 0 && !refusalText && (quote || hasPrice) && (
         <dl className="mt-4 space-y-1 rounded-lg bg-kiwi-50/60 p-3 text-sm">
           {quote ? (
             <>
@@ -281,31 +298,45 @@ export function BookingForm({
                   {quoteLoading ? t("calculating") : priceLabel(nights * basePrice.amount)}
                 </dd>
               </div>
-              <p className="pt-1 text-[11px] text-kiwi-600">{t("estimateNote")}</p>
+              <p className="pt-1 text-[11px] text-kiwi-600">
+                {t(directBooking ? "estimateNote" : "estimateInquiryNote")}
+              </p>
             </>
           )}
         </dl>
       )}
 
       <div className="mt-4 flex flex-col gap-2 sm:flex-row">
-        <button
-          type="button"
-          onClick={() => setShowCheckout(true)}
-          disabled={!canBook || Boolean(quoteRefusal)}
-          className="flex-1 rounded-full bg-kiwi-600 px-4 py-2 text-sm font-medium text-white hover:bg-kiwi-700 disabled:cursor-not-allowed disabled:bg-kiwi-300"
-        >
-          {t("bookNow")}
-        </button>
-        <button
-          type="button"
-          onClick={() => setShowInquiry(true)}
-          className="flex-1 rounded-full border border-kiwi-600 px-4 py-2 text-sm font-medium text-kiwi-700 hover:bg-kiwi-50"
-        >
-          {t("inquire")}
-        </button>
+        {directBooking ? (
+          <>
+            <button
+              type="button"
+              onClick={() => setShowCheckout(true)}
+              disabled={!canBook || Boolean(quoteRefusal)}
+              className="flex-1 rounded-full bg-kiwi-600 px-4 py-2 text-sm font-medium text-white hover:bg-kiwi-700 disabled:cursor-not-allowed disabled:bg-kiwi-300"
+            >
+              {t("bookNow")}
+            </button>
+            <button
+              type="button"
+              onClick={() => setShowInquiry(true)}
+              className="flex-1 rounded-full border border-kiwi-600 px-4 py-2 text-sm font-medium text-kiwi-700 hover:bg-kiwi-50"
+            >
+              {t("inquire")}
+            </button>
+          </>
+        ) : (
+          <button
+            type="button"
+            onClick={() => setShowInquiry(true)}
+            className="flex-1 rounded-full bg-kiwi-600 px-4 py-2 text-sm font-medium text-white hover:bg-kiwi-700"
+          >
+            {t("inquire")}
+          </button>
+        )}
       </div>
 
-      {testMode && (
+      {directBooking && testMode && (
         <p className="mt-2 text-center text-[11px] text-amber-700">
           {t("testModeNotice")}
         </p>

@@ -125,7 +125,19 @@ export interface ReservationResult {
   listingId?: string;
 }
 
+export interface BookingCapabilities {
+  /**
+   * Guests can pay and book on the site: the checkout is shown and the
+   * payment route accepts requests. False on the standalone backend, where
+   * guests send an inquiry instead.
+   */
+  directBooking: boolean;
+  /** The calendar comes from a live source (engine API or iCal feeds). */
+  liveAvailability: boolean;
+}
+
 export interface HostawayClient {
+  readonly capabilities: BookingCapabilities;
   /**
    * Every listing the site is configured to show, in display order.
    *

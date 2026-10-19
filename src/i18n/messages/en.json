@@ -40,7 +40,9 @@
     "intro": "Whether you're sightseeing, on business, or visiting family, this is a comfortable base in New Zealand.",
     "features": {
       "dates": "Pick check-in and check-out dates, with live pricing and availability",
-      "inquiry": "Book direct, or message the host to negotiate"
+      "inquiry": "Book direct, or message the host to negotiate",
+      "datesInquiry": "See which dates are free, then send the host your dates",
+      "inquiryOnly": "Message the host directly. They confirm price and availability, with no platform fees"
     },
     "cta": "View the property"
   },
@@ -190,7 +192,10 @@
       "below_min_nights": "These dates don't meet this home's minimum stay for that time of year.",
       "above_max_nights": "This stay is longer than this home allows for those dates.",
       "guests_over_capacity": "That's more guests than this home sleeps."
-    }
+    },
+    "titleInquiry": "Check dates and ask",
+    "priceOnRequest": "Price on request",
+    "estimateInquiryNote": "Indicative only. The host confirms the price when replying."
   },
   "DatePicker": {
     "title": "Select dates",
@@ -241,7 +246,8 @@
     "title": "You're booking direct with us",
     "subtitle": "Typically around 10–15% cheaper than Airbnb / Booking.com — no platform fees added on top.",
     "savingsBadge": "Save ~10–15%",
-    "disclaimer": "Airbnb adds a ~14–16% guest service fee, and Booking.com bakes platform commission into the displayed price. Booking direct here skips both."
+    "disclaimer": "Airbnb adds a ~14–16% guest service fee, and Booking.com bakes platform commission into the displayed price. Booking direct here skips both.",
+    "titleInquiry": "Deal direct with the host"
   },
   "Checkout": {
     "title": {
@@ -261,7 +267,7 @@
     "total": "Total",
     "yourName": "Your name",
     "yourEmail": "Your email",
-    "testModeNotice": "Test mode — this is the Stripe test environment. Use card 4242 4242 4242 4242 with any future expiry and any CVC. No real money moves. Note: test payments still create real reservations on the host's Hostaway calendar (Hostaway has no sandbox).",
+    "testModeNotice": "Test mode — this is the Stripe test environment. Use card 4242 4242 4242 4242 with any future expiry and any CVC. No real money moves. Note: test payments still create real reservations on the host's real calendar (the booking engine has no sandbox).",
     "missingStripeKey": "Stripe publishable key (NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY) isn't configured. Please contact the site admin.",
     "continueToPayment": "Continue to payment",
     "cancellationSummary": "Free cancellation up to 5 days before check-in. Cancellations closer to check-in receive a 50% refund of the accommodation.",
@@ -296,7 +302,13 @@
     "cancel": "Cancel",
     "close": "Close",
     "missingHostEmail": "Host inbox (INQUIRY_EMAIL) isn't configured yet, so submit is disabled. Please contact the site admin.",
-    "mailtoNote": "Clicking \"Open my email app\" opens a pre-filled message in your default email app — you can review it before hitting send."
+    "mailtoNote": "Clicking \"Open my email app\" opens a pre-filled message in your default email app — you can review it before hitting send.",
+    "send": "Send message",
+    "sending": "Sending…",
+    "sentTitle": "Message sent",
+    "sentBody": "The host has your message and will reply by email to {email}. A copy has been sent to you.",
+    "sendFailed": "We couldn't send your message just now.",
+    "sendNote": "We email your message to the host and send you a copy."
   },
   "Amenities": {
     "title": "What this place offers",

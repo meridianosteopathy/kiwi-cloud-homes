@@ -4,6 +4,27 @@ Prepared 15 October 2026 for Kiwi Cloud Homes, updated 16 October. Two Christchu
 houses managed through Hostaway, on Airbnb and Booking.com, plus the direct-booking
 website in this repository.
 
+## Decision taken (19 October 2026)
+
+After discussion the owner chose the zero-cost route:
+
+- **Inbox and calendar:** Hospitable's free Essentials plan, connected to
+  Airbnb and Booking.com. No API on that plan, so the website does not talk to
+  it.
+- **Website:** inquiry-only for now. It shows the two houses from its own
+  per-home file, greys out taken dates read from each house's iCal feed, and
+  emails inquiries to the owner. The Stripe checkout is switched off, not
+  removed.
+- **Monthly software cost:** NZD 0 (Hospitable free, Netlify free, Brevo free).
+- **Kept for later:** the Beds24 adapter and the paid-booking flow stay in the
+  codebase behind `BOOKING_BACKEND`, so paid direct bookings can be turned
+  back on in a later phase without rebuilding.
+- **Accepted trade-offs:** no instant booking; a date booked on Airbnb or
+  Booking.com can show as free on the site for a few hours (iCal lag); the
+  owner confirms every inquiry by hand.
+
+The analysis below is kept as the record of how the options compared.
+
 ## 1. The short answer
 
 Going back to Hostaway is not the cheaper choice. Hostaway's own quote for the two houses

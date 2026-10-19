@@ -73,6 +73,8 @@ export function createBeds24Client(): HostawayClient {
   readCredentials();
 
   return {
+    capabilities: { directBooking: true, liveAvailability: true },
+
     async listListings() {
       const properties = await resolveProperties();
       const listings = await Promise.all(properties.map(toListing));

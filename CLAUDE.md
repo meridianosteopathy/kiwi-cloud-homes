@@ -55,8 +55,14 @@ Use the `BrandLogo` component rather than inlining logo SVG; it carries the
   the build, because the helper runs while static pages are prerendered.
   Unset, it falls back to Vercel's production hostname, then Netlify's `URL`,
   then localhost.
-- The booking engine is chosen by `BOOKING_BACKEND` (`beds24`, `hostaway` or
-  `mock`); unset, `HOSTAWAY_USE_MOCK` decides. Every page and route talks to
+- The booking engine is chosen by `BOOKING_BACKEND` (`standalone`, `beds24`,
+  `hostaway` or `mock`); unset, `HOSTAWAY_USE_MOCK` decides. `standalone` is
+  the current production setup: no engine, house facts from
+  `src/content/homes.ts` (a house is listed once it has a `name`), taken
+  dates from iCal feeds in `ICAL_<KEY>` variables, inquiries emailed via
+  `/api/booking/inquiry`, and `capabilities.directBooking` false, which hides
+  the checkout and makes the payment route answer 403. Every client exposes
+  `capabilities`; read it from the client, never from an env var. Every page and route talks to
   the `HostawayClient` interface in `src/lib/hostaway/types.ts`; the name is
   historical and `src/lib/beds24` implements the same interface. On Beds24 a
   listing id is the Beds24 property id, and bedroom/bathroom counts plus

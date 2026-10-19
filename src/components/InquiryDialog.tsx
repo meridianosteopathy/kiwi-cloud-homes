@@ -46,6 +46,9 @@ export function InquiryDialog({
   const [checkOut, setCheckOut] = useState(initialCheckOut);
   const [guests, setGuests] = useState(initialGuests);
   const [message, setMessage] = useState("");
+  // Hidden field a person never sees; bots fill it and the server drops those.
+  const [website, setWebsite] = useState("");
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
 
   const dialogRef = useRef<HTMLDivElement>(null);
   const closeBtnRef = useRef<HTMLButtonElement>(null);
@@ -68,10 +71,8 @@ export function InquiryDialog({
     checkIn &&
     checkOut;
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
+  function openMailApp() {
     if (!inquiryEmail) return;
-
     const subject = t("emailSubject", { listing: listingName });
     const body = t("emailBody", {
       listing: listingName,
@@ -91,6 +92,48 @@ export function InquiryDialog({
       subject,
       body,
     });
+  }
+
+  /**
+   * Send through the site (the owner gets an email, the guest a copy). When
+   * email is not configured on the server the dialog falls back to opening
+   * the guest's own mail app, as it always did.
+   */
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    if (!inquiryEmail || status === "sending") return;
+    setStatus("sending");
+    try {
+      const res = await fetch("/api/booking/inquiry", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({
+          listingId,
+          listingName,
+          name,
+          email,
+          phone,
+          checkIn,
+          checkOut,
+          guests,
+          message,
+          locale,
+          website,
+        }),
+      });
+      if (res.ok) {
+        setStatus("sent");
+        return;
+      }
+      if (res.status === 503) {
+        setStatus("idle");
+        openMailApp();
+        return;
+      }
+      setStatus("error");
+    } catch {
+      setStatus("error");
+    }
   }
 
   const inputClass =
@@ -125,7 +168,32 @@ export function InquiryDialog({
           </button>
         </header>
 
+        {status === "sent" ? (
+          <div className="space-y-4 px-5 py-6">
+            <h3 className="text-base font-semibold text-kiwi-900">{t("sentTitle")}</h3>
+            <p className="text-sm text-kiwi-800">{t("sentBody", { email })}</p>
+            <div className="flex justify-end">
+              <button
+                type="button"
+                onClick={onClose}
+                className="rounded-full bg-kiwi-600 px-4 py-2 text-sm font-medium text-white hover:bg-kiwi-700"
+              >
+                {t("close")}
+              </button>
+            </div>
+          </div>
+        ) : (
         <form onSubmit={handleSubmit} className="space-y-3 px-5 py-4">
+          <input
+            type="text"
+            name="website"
+            tabIndex={-1}
+            autoComplete="off"
+            aria-hidden="true"
+            value={website}
+            onChange={(e) => setWebsite(e.target.value)}
+            className="hidden"
+          />
           {!inquiryEmail && (
             <div className="rounded-lg border border-amber-200 bg-amber-50 p-3 text-xs text-amber-800">
               {t("missingHostEmail")}
@@ -230,7 +298,16 @@ export function InquiryDialog({
             />
           </label>
 
-          <p className="text-[11px] text-kiwi-500">{t("mailtoNote")}</p>
+          {status === "error" ? (
+            <div className="rounded-lg border border-amber-200 bg-amber-50 p-3 text-xs text-amber-800" role="alert">
+              {t("sendFailed")}{" "}
+              <button type="button" onClick={openMailApp} className="font-medium underline underline-offset-2">
+                {t("openEmail")}
+              </button>
+            </div>
+          ) : (
+            <p className="text-[11px] text-kiwi-500">{t("sendNote")}</p>
+          )}
 
           <div className="flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
             <button
@@ -242,13 +319,14 @@ export function InquiryDialog({
             </button>
             <button
               type="submit"
-              disabled={!canSubmit}
+              disabled={!canSubmit || status === "sending"}
               className="rounded-full bg-kiwi-600 px-4 py-2 text-sm font-medium text-white hover:bg-kiwi-700 disabled:cursor-not-allowed disabled:bg-kiwi-300"
             >
-              {t("openEmail")}
+              {status === "sending" ? t("sending") : t("send")}
             </button>
           </div>
         </form>
+        )}
       </div>
     </div>
   );

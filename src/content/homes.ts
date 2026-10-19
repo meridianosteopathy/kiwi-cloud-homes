@@ -1,36 +1,41 @@
 /**
  * Per-home settings the host edits by hand.
  *
- * The booking engine (Beds24, or Hostaway before the switch) holds the bookable
- * facts for each house: price, calendar, photos, amenities. This file holds the
- * few things the engine has nowhere to put:
+ * In STANDALONE mode (BOOKING_BACKEND=standalone, the current setup) the
+ * website has no booking engine behind it, so this file is the source of
+ * every fact a house card shows: name, photos, bedrooms, capacity, "from"
+ * price, amenities, address and both descriptions. Taken dates come from the
+ * iCal feed(s) of the home's channel app, configured as an environment
+ * variable named after the home's `key` (see DEPLOY.md). Guests send an
+ * inquiry; there is no online payment.
  *
- *   - the Mandarin description (engines store one description per listing,
- *     usually the English copy)
- *   - the 360° tour URL
- *   - the map coordinates, which the /school page uses to work out how far
- *     each school is from that particular house
- *   - bedroom and bathroom counts, and fallback photos, which Beds24's API does
- *     not supply (Hostaway did)
+ * With a booking engine (Beds24, or Hostaway before the switch) the engine
+ * holds the bookable facts and this file only adds what it cannot: the
+ * Mandarin description, the 360° tour URL, the map coordinates the /school
+ * page uses for distances, and bedroom and bathroom counts plus fallback
+ * photos where the engine has no field for them.
  *
  * ────────────────────────────────────────────────────────────────────────
- * HOW TO ADD A HOUSE
+ * HOW TO ADD A HOUSE (standalone mode)
  * ────────────────────────────────────────────────────────────────────────
- * The house itself only needs to exist in the booking engine; the website
- * picks it up automatically and it becomes bookable straight away. You come
- * here to give it Chinese copy, a tour link, school distances, and (on Beds24)
- * its bedroom and bathroom counts.
- *
- *   1. Find the listing id. Beds24: the property id shown in the dashboard
- *      (Settings -> Properties, or the number in the address bar). Hostaway:
- *      .../listings/123456 -> the id is 123456.
- *   2. Copy one of the blocks below, paste it at the end of the list.
- *   3. Put the id in `match`. (The listing's name works too, but the id never
- *      changes when you rename the house, so prefer the id.) A house can carry
- *      both its old Hostaway id and its new Beds24 id during the switch.
- *   4. Fill in what you have. Anything you leave out just falls back to what
- *      the engine returns; nothing breaks.
+ *   1. Copy one of the blocks below and paste it at the end of the list.
+ *   2. Give it a short `key` (letters, digits, dashes). It becomes the
+ *      house's id on the site and the name of its iCal variable:
+ *      key "bealey-ave" -> ICAL_BEALEY_AVE.
+ *   3. Fill in `name` (the house is listed only once it has one), then the
+ *      facts: bedrooms, bathrooms, maxGuests, fromPrice, amenities, address,
+ *      photos and descriptions. Leave out anything you do not know yet; the
+ *      card hides what is missing and shows "price on request" for a house
+ *      with no fromPrice.
+ *   4. In Netlify, add ICAL_<KEY> with the iCal export link(s) of the house.
  *   5. Commit + push + merge.
+ *
+ * HOW TO ADD A HOUSE (with a booking engine)
+ *   The house only needs to exist in the engine; the site picks it up. Put
+ *   its listing id in `match` (Beds24 property id, or Hostaway listing id;
+ *   both during a switch), then add Chinese copy, a tour link, coordinates
+ *   and, on Beds24, bedrooms and bathrooms. Anything left out falls back to
+ *   what the engine returns.
  *
  * To find a house's coordinates: open Google Maps, right-click the house,
  * click the numbers at the top of the menu (that copies them), and paste;
@@ -47,10 +52,31 @@ export interface HomeProfile {
   key: string;
   /**
    * Listing ids (preferred) and/or listing names that identify this house in
-   * the booking engine: Beds24 property ids, Hostaway listing ids, or both.
-   * Names are matched case- and space-insensitively.
+   * a booking engine: Beds24 property ids, Hostaway listing ids, or both.
+   * Names are matched case- and space-insensitively. The `key` always
+   * matches too, which is what standalone mode uses.
    */
   match: string[];
+  /**
+   * Standalone mode: the display name guests see. A house is listed only
+   * when this is set.
+   */
+  name?: string;
+  /** Standalone mode: nightly "from" price in `currency`. Leave out for "price on request". */
+  fromPrice?: number;
+  /** ISO 4217 code; default NZD. */
+  currency?: string;
+  /** Standalone mode: flat cleaning fee per stay, used in the estimate only. */
+  cleaningFee?: number;
+  /** Standalone mode: how many guests the house sleeps. Leave out if unsure; the card hides the line. */
+  maxGuests?: number;
+  /** Standalone mode: minimum and maximum nights per stay. */
+  minNights?: number;
+  maxNights?: number;
+  /** Standalone mode: amenity names shown under the card. */
+  amenities?: string[];
+  /** Standalone mode: shown as "City · Region"; the street is optional. */
+  address?: { line1?: string; city: string; region?: string; country?: string };
   /**
    * Bedroom and bathroom counts shown on the property card. Hostaway supplied
    * these from the listing; Beds24 has no such fields, so fill them in here
@@ -99,11 +125,32 @@ export const HOMES: HomeProfile[] = [
     // The trailing entry is the mock client's id, so `HOSTAWAY_USE_MOCK=true`
     // local runs get this copy too.
     match: ["384499", "mock-halswell"],
+    name: "Modern Home: 2 Ensuites, 17 Min to City & CHC Airport",
+    // Facts for standalone mode. CHECK: confirm capacity and add the price
+    // and cleaning fee; the card says "price on request" until fromPrice is set.
+    bedrooms: 3,
+    bathrooms: 2,
+    maxGuests: 6,
+    minNights: 2,
+    amenities: [
+      "Wifi",
+      "Kitchen",
+      "Dedicated workspace",
+      "Washer",
+      "Dryer",
+      "Heating",
+      "Heat pump",
+      "Free parking on premises",
+      "Backyard and garden",
+    ],
+    address: { city: "Halswell, Christchurch", region: "Canterbury", country: "New Zealand" },
     coordinates: { lat: -43.5788, lng: 172.562 },
     description: {
       "zh-CN":
         "位于基督城西南区 Halswell, Cashmere High 与 Halswell School 学区内。开车前往 Riccarton、市中心 (CBD) 与 Lincoln 都很便利。\n\n房屋专为中长期入住设计:完整厨房与餐厅、独立办公区、舒适沙发、安静的卧室,以及高速 Wi-Fi、洗衣机、烘干机、暖气、热泵齐全。后院与花园适合带孩子放松,免费停车位充足。\n\n房东本地居住,沟通方便:看校、就医、生活采购、附近活动推荐,都可随时联系。",
-      // en: undefined → keep the Hostaway-returned English description.
+      // Written from the Chinese copy for standalone mode (the Hostaway copy
+      // is no longer available). Edit freely.
+      en: "In Halswell, south-west Christchurch, in zone for Cashmere High and Halswell School, with an easy drive to Riccarton, the city centre and Lincoln.\n\nSet up for longer stays: a full kitchen and dining area, a separate workspace, a comfortable lounge and quiet bedrooms, with fast Wi-Fi, washer, dryer, heating and a heat pump. A backyard and garden for the kids, and plenty of free parking.\n\nThe host lives locally and is easy to reach for school visits, medical appointments, shopping and tips on what is on nearby.",
     },
     // Hidden until we have a real Matterport / Kuula scan for this property.
     tourUrl: "",
@@ -119,6 +166,25 @@ export const HOMES: HomeProfile[] = [
     // Hostaway 576705 — "Super king bed & free parking, central CHC".
     // Unit 12 / 106 Bealey Avenue, Christchurch Central, Christchurch 8013.
     match: ["576705", "mock-riccarton"],
+    name: "Super king bed & free parking, central CHC",
+    // Facts for standalone mode, taken from the description below. CHECK:
+    // confirm and add the price and cleaning fee; the card says "price on
+    // request" until fromPrice is set.
+    bedrooms: 2,
+    bathrooms: 1,
+    maxGuests: 4,
+    minNights: 2,
+    amenities: [
+      "Wifi",
+      "Kitchen",
+      "Washer",
+      "Free parking on premises",
+      "Self check-in with keypad",
+      "Balcony",
+      "Private courtyard",
+      "Separate guest toilet",
+    ],
+    address: { line1: "106 Bealey Avenue", city: "Christchurch Central", region: "Canterbury", country: "New Zealand" },
     // APPROXIMATE — estimated from the street address, not measured, so it
     // may be a few hundred metres out along Bealey Avenue. To correct it:
     // Google Maps → right-click the building → click the numbers at the top
@@ -154,20 +220,22 @@ export interface HomeIdentity {
 }
 
 /**
- * Finds the profile for a listing, by id first and then by name.
- * Returns undefined for a house that hasn't been given a block above — which
- * is a normal state, not an error.
+ * Finds the profile for a listing: by its `key` (standalone mode), then by
+ * engine id, then by name. Returns undefined for a house that hasn't been
+ * given a block above — which is a normal state, not an error.
  */
 export function homeProfileFor(
   listing: HomeIdentity,
 ): HomeProfile | undefined {
   const id = normalize(listing.id);
   const name = normalize(listing.name);
-  return HOMES.find((home) =>
-    home.match.some((m) => {
-      const key = normalize(m);
-      return key === id || key === name;
-    }),
+  return HOMES.find(
+    (home) =>
+      normalize(home.key) === id ||
+      home.match.some((m) => {
+        const key = normalize(m);
+        return key === id || key === name;
+      }),
   );
 }
 
