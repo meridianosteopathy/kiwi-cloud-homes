@@ -186,7 +186,7 @@ small edit to the per-home file, with no code change:
    price or the cleaning fee. Per-date minimum stays, no-check-in and
    no-check-out days from the Beds24 calendar are honoured. If a house shows
    no photos, add them to `src/content/homes.ts`. Then run the end-to-end
-   test booking (section 6) and confirm the booking appears in Beds24 with
+   test booking (below) and confirm the booking appears in Beds24 with
    source *Kiwi Cloud Homes website*, the Stripe payment reference (`pi_…`)
    in its notes and `custom1` field, an accommodation charge, a cleaning-fee
    charge and a payment line, and that the dates block on Airbnb and
