@@ -105,6 +105,8 @@ function dateRange(startISO: string, endISO: string): string[] {
 
 export function createMockClient(): HostawayClient {
   return {
+    capabilities: { directBooking: true, liveAvailability: true },
+
     async listListings() {
       return MOCK_LISTINGS;
     },

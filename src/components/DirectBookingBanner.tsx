@@ -9,7 +9,7 @@ import { useTranslations } from "next-intl";
  * displayed price). Wording stays soft ("around", "typically") so we don't
  * overpromise.
  */
-export function DirectBookingBanner() {
+export function DirectBookingBanner({ directBooking = true }: { directBooking?: boolean }) {
   const t = useTranslations("DirectBooking");
 
   return (
@@ -35,21 +35,25 @@ export function DirectBookingBanner() {
           </span>
           <div>
             <h3 className="text-base font-semibold text-kiwi-900">
-              {t("title")}
+              {t(directBooking ? "title" : "titleInquiry")}
             </h3>
-            <p className="mt-1 text-sm text-kiwi-800">{t("subtitle")}</p>
+            <p className="mt-1 text-sm text-kiwi-800">
+              {t(directBooking ? "subtitle" : "subtitleInquiry")}
+            </p>
           </div>
         </div>
 
-        <div className="flex shrink-0 items-center gap-2 self-start sm:self-center">
-          <span className="rounded-full bg-kiwi-600 px-3 py-1 text-xs font-semibold text-white">
-            {t("savingsBadge")}
-          </span>
-        </div>
+        {directBooking && (
+          <div className="flex shrink-0 items-center gap-2 self-start sm:self-center">
+            <span className="rounded-full bg-kiwi-600 px-3 py-1 text-xs font-semibold text-white">
+              {t("savingsBadge")}
+            </span>
+          </div>
+        )}
       </div>
 
       <p className="mt-3 text-[11px] leading-relaxed text-kiwi-700">
-        {t("disclaimer")}
+        {t(directBooking ? "disclaimer" : "disclaimerInquiry")}
       </p>
     </section>
   );

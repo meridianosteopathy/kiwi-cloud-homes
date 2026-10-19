@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
-    "import:schools": "node scripts/import-schools.mjs"
+    "import:schools": "node scripts/import-schools.mjs",
+    "beds24:setup": "node scripts/beds24-setup.mjs"
   },
   "dependencies": {
     "@stripe/react-stripe-js": "^6.3.0",

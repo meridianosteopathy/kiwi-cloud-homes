@@ -57,18 +57,38 @@ export async function generateMetadata({
 }
 
 /**
- * Absolute base for OG/Twitter image URLs — social scrapers can't follow
- * relative paths. Set NEXT_PUBLIC_SITE_URL once a custom domain is live;
- * until then we fall back to the Vercel-provided production hostname, and
- * to localhost for local dev.
+ * Absolute base for OG/Twitter image URLs. Social scrapers cannot follow
+ * relative paths, so we need a real origin.
+ *
+ * Resolution order:
+ *   1. NEXT_PUBLIC_SITE_URL, set explicitly once a custom domain is live
+ *   2. VERCEL_PROJECT_PRODUCTION_URL, provided by Vercel (hostname only)
+ *   3. URL, as Netlify would provide it if the site were ever hosted there
+ *   4. localhost, for local development
+ *
+ * This runs while static pages are prerendered, so it must never throw: a
+ * mistyped environment variable (for example a hostname without https://)
+ * would otherwise fail the whole build. Bare hostnames get https:// added
+ * and anything that still is not a valid URL is skipped with a warning.
  */
-function siteUrl() {
-  const explicit = process.env.NEXT_PUBLIC_SITE_URL;
-  if (explicit) return new URL(explicit);
-
-  const vercel = process.env.VERCEL_PROJECT_PRODUCTION_URL;
-  if (vercel) return new URL(`https://${vercel}`);
-
+function siteUrl(): URL {
+  const candidates: Array<[string, string | undefined]> = [
+    ["NEXT_PUBLIC_SITE_URL", process.env.NEXT_PUBLIC_SITE_URL],
+    ["VERCEL_PROJECT_PRODUCTION_URL", process.env.VERCEL_PROJECT_PRODUCTION_URL],
+    ["URL", process.env.URL],
+  ];
+  for (const [name, raw] of candidates) {
+    const value = raw?.trim();
+    if (!value) continue;
+    const withScheme = /^https?:\/\//i.test(value) ? value : `https://${value}`;
+    try {
+      return new URL(withScheme);
+    } catch {
+      console.warn(
+        `[layout] ignoring ${name}=${JSON.stringify(raw)}: not a valid URL`,
+      );
+    }
+  }
   return new URL("http://localhost:3000");
 }
 

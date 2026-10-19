@@ -1,5 +1,11 @@
 import type Stripe from "stripe";
-import { getHostawayClient, type ReservationResult } from "@/lib/hostaway";
+import { homeProfileFor } from "@/content/homes";
+import {
+  getHostawayClient,
+  ReservationRejectedError,
+  type HostawayClient,
+  type ReservationResult,
+} from "@/lib/hostaway";
 
 /**
  * Splits a free-form display name into first/last, since Hostaway wants both.
@@ -77,17 +83,13 @@ export async function reserveFromPaymentIntent(
   const total = fromMinor(pi.amount_received, pi.currency);
 
   const client = getHostawayClient();
-  // The site now lists several homes, so listing_id decides which calendar
-  // this reservation lands on. Re-check it here: metadata is written by us,
-  // but a stale PaymentIntent could name a listing that has since been
-  // removed from the site, and creating a booking on it would be wrong.
-  if (!(await client.isConfiguredListing(listingId))) {
-    throw new ReservationMetadataError(
-      `PaymentIntent ${pi.id} names listing ${listingId}, which this site doesn't list.`,
-    );
-  }
-  return client.createReservation({
-    listingId,
+  // The site lists several homes, so listing_id decides which calendar this
+  // reservation lands on. Re-check it here: metadata is written by us, but a
+  // PaymentIntent created before an engine switch carries the old engine's
+  // id, and a stale one could name a listing since removed from the site.
+  const resolvedListingId = await resolveListingId(client, listingId, pi.id);
+  const result = await client.createReservation({
+    listingId: resolvedListingId,
     guestFirstName: first,
     guestLastName: last,
     guestEmail,
@@ -98,4 +100,39 @@ export async function reserveFromPaymentIntent(
     currency: pi.currency.toUpperCase(),
     externalRef: pi.id,
   });
+  return { ...result, listingId: resolvedListingId };
+}
+
+/**
+ * The configured listing this PaymentIntent belongs to. Normally the
+ * metadata id itself. When it is not one the current engine knows (the site
+ * switched from Hostaway to Beds24 while this checkout was open), fall back
+ * to the home profile in src/content/homes.ts, whose `match` list carries
+ * both engines' ids, and use the id the current engine does know.
+ *
+ * Throws ReservationRejectedError, not ReservationMetadataError: the guest
+ * has paid, and the webhook must alert the owner rather than silently ack.
+ */
+async function resolveListingId(
+  client: HostawayClient,
+  listingId: string,
+  paymentIntentId: string,
+): Promise<string> {
+  if (await client.isConfiguredListing(listingId)) return listingId;
+  const profile = homeProfileFor({ id: listingId, name: "" });
+  for (const candidate of profile?.match ?? []) {
+    if (candidate === listingId) continue;
+    if (await client.isConfiguredListing(candidate)) {
+      console.warn(
+        `[booking] PaymentIntent ${paymentIntentId} names listing ${listingId}; booking it as ${candidate} (same home, current engine).`,
+      );
+      return candidate;
+    }
+  }
+  throw new ReservationRejectedError(
+    "unknown_listing",
+    `PaymentIntent ${paymentIntentId} names listing ${listingId}, which the current booking engine doesn't list` +
+      (profile ? ` (home "${profile.key}" has no id the engine knows; add it to its match list in src/content/homes.ts)` : "") +
+      ".",
+  );
 }

@@ -1,5 +1,5 @@
 import { useTranslations } from "next-intl";
-import type { HostawayListing } from "@/lib/hostaway";
+import { getHostawayClient, type HostawayListing } from "@/lib/hostaway";
 import { PropertyCard } from "./PropertyCard";
 
 type Props = {
@@ -26,6 +26,9 @@ export function PropertyList({
   defaultCheckOut = null,
 }: Props) {
   const t = useTranslations("Homes");
+  // Whether guests can pay here or send an inquiry instead; decided by the
+  // booking backend, not by the page.
+  const directBooking = getHostawayClient().capabilities.directBooking;
 
   if (listings.length === 0) {
     return (
@@ -66,6 +69,7 @@ export function PropertyList({
           <PropertyCard
             listing={listing}
             inquiryEmail={inquiryEmail}
+            directBooking={directBooking}
             defaultCheckIn={defaultCheckIn}
             defaultCheckOut={defaultCheckOut}
           />

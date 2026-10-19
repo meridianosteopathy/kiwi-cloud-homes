@@ -40,7 +40,9 @@
     "intro": "无论您是来观光、商务出差,还是来探望亲友,这里都将是您在新西兰理想的落脚点。",
     "features": {
       "dates": "灵活选择入住与退房日期,实时查看价格与空房",
-      "inquiry": "可直接预订,也可与房东沟通议价"
+      "inquiry": "可直接预订,也可与房东沟通议价",
+      "datesInquiry": "查看空房日期,把您的入住日期发给房东",
+      "inquiryOnly": "直接联系房东,由房东确认价格与空房,无平台费用"
     },
     "cta": "查看房源详情"
   },
@@ -181,7 +183,19 @@
     "bookNow": "立即预订",
     "inquire": "发送询问",
     "minNightsHint": "至少入住 {count} 晚",
-    "testModeNotice": "测试模式 · 暂不会扣款,可使用 Stripe 测试卡 4242 4242 4242 4242。"
+    "testModeNotice": "测试模式 · 暂不会扣款,可使用 Stripe 测试卡 4242 4242 4242 4242。",
+    "fromPrice": "{price} 起",
+    "quoteError": {
+      "unavailable": "该房源在所选日期不可预订,请换个日期。",
+      "no_check_in": "该房源当天不能入住,请选择其他入住日期。",
+      "no_check_out": "该房源当天不能退房,请选择其他退房日期。",
+      "below_min_nights": "所选日期未达到该房源此期间的最少入住天数。",
+      "above_max_nights": "入住天数超过了该房源在所选日期允许的上限。",
+      "guests_over_capacity": "人数超过了该房源可容纳的上限。"
+    },
+    "titleInquiry": "查看日期并咨询",
+    "priceOnRequest": "价格面议",
+    "estimateInquiryNote": "仅供参考,房东回复时确认最终价格。"
   },
   "DatePicker": {
     "title": "选择日期",
@@ -194,9 +208,11 @@
     "apply": "确定",
     "close": "关闭",
     "loadingAvailability": "正在加载房态…",
-    "availabilityFallback": "暂时无法加载房态,所选日期将在预订时再次确认。",
+    "availabilityFallback": "暂时无法加载房态。您可以先选择日期,房东会再确认。",
     "minNightsHint": "至少入住 {count} 晚",
-    "minNightsTooltip": "至少 {count} 晚"
+    "minNightsTooltip": "至少 {count} 晚",
+    "noCheckInHint": "当天不能入住,请选择其他入住日期。",
+    "noCheckOutHint": "当天不能退房,请选择其他退房日期。"
   },
   "PropertyImages": {
     "openGallery": "查看全部照片",
@@ -230,7 +246,10 @@
     "title": "您正在与房东直接预订",
     "subtitle": "比 Airbnb / Booking.com 通常便宜约 10–15%,因为这里没有平台手续费。",
     "savingsBadge": "约省 10–15%",
-    "disclaimer": "Airbnb 会向客人加收约 14–16% 的服务费,Booking.com 也会将平台佣金计入显示价格。在本站直接预订可绕过这些费用,价格更透明。"
+    "disclaimer": "Airbnb 会向客人加收约 14–16% 的服务费,Booking.com 也会将平台佣金计入显示价格。在本站直接预订可绕过这些费用,价格更透明。",
+    "titleInquiry": "直接与房东联系",
+    "subtitleInquiry": "无额外平台费用:房东直接报价,通常低于 Airbnb / Booking.com 的价格。",
+    "disclaimerInquiry": "Airbnb 会额外收取约 14–16% 的客人服务费,Booking.com 则将平台佣金计入显示价格。直接与房东联系可省去这两项。"
   },
   "Checkout": {
     "title": {
@@ -250,7 +269,7 @@
     "total": "总计",
     "yourName": "您的姓名",
     "yourEmail": "您的邮箱",
-    "testModeNotice": "测试模式 · 这是 Stripe 测试环境,使用测试卡号 4242 4242 4242 4242(任意有效期与 CVC),不会发生真实扣款。注意:测试支付完成后,房东的 Hostaway 日历仍会创建真实的预订条目(因为 Hostaway 没有沙盒环境)。",
+    "testModeNotice": "测试模式 · 这是 Stripe 测试环境,使用测试卡号 4242 4242 4242 4242(任意有效期与 CVC),不会发生真实扣款。注意:测试支付完成后,房东的真实日历仍会创建真实的预订条目(因为预订系统没有沙盒环境)。",
     "missingStripeKey": "未配置 Stripe 密钥(NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY)。请联系网站管理员。",
     "continueToPayment": "前往支付",
     "cancellationSummary": "入住日 5 天前可免费取消,更接近入住日则退还住宿费用的 50%。",
@@ -285,7 +304,16 @@
     "cancel": "取消",
     "close": "关闭",
     "missingHostEmail": "暂未配置房东邮箱(INQUIRY_EMAIL),发送按钮已禁用。请联系网站管理员。",
-    "mailtoNote": "点击\"打开邮件应用发送\",您本机的邮件应用会打开一封预填好的邮件;您可以再次审核后点发送。"
+    "mailtoNote": "点击\"打开邮件应用发送\",您本机的邮件应用会打开一封预填好的邮件;您可以再次审核后点发送。",
+    "send": "发送消息",
+    "sending": "发送中…",
+    "sentTitle": "消息已发送",
+    "sentBody": "房东已收到您的消息,将通过邮件回复至 {email}。我们已向您发送一封简短的确认邮件。",
+    "sendFailed": "暂时无法发送消息。",
+    "sendNote": "我们会把您的消息发送给房东,并给您一封确认邮件。",
+    "mailtoFallback": "本站暂未开通直接发送,您的消息将通过您自己的邮件应用发送至 {email},内容已为您填好。",
+    "invalid": "请检查填写内容:有效的邮箱、晚于入住日期的退房日期,以及 1 至 50 位客人。",
+    "tooMany": "一小时内发送的消息过多,请稍后再试,或直接发邮件给房东。"
   },
   "Amenities": {
     "title": "房源配套",
@@ -294,7 +322,7 @@
     "close": "关闭"
   },
   "Footer": {
-    "rights": "© {year} Kiwi Cloud Homes · 服务由 Hostaway 提供",
+    "rights": "© {year} Kiwi Cloud Homes",
     "cancellationPolicy": "退订政策"
   },
   "CancellationPolicy": {

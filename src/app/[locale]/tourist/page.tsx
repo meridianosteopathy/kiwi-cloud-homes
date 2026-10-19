@@ -16,17 +16,26 @@ export default async function TouristPage({
   const { locale } = await params;
   setRequestLocale(locale);
 
-  const listings = await getHostawayClient().listListings();
+  const client = getHostawayClient();
+  const listings = await client.listListings();
   const inquiryEmail = process.env.INQUIRY_EMAIL || null;
-  return <TouristJourney listings={listings} inquiryEmail={inquiryEmail} />;
+  return (
+    <TouristJourney
+      listings={listings}
+      inquiryEmail={inquiryEmail}
+      directBooking={client.capabilities.directBooking}
+    />
+  );
 }
 
 function TouristJourney({
   listings,
   inquiryEmail,
+  directBooking,
 }: {
   listings: HostawayListing[];
   inquiryEmail: string | null;
+  directBooking: boolean;
 }) {
   const t = useTranslations("Tourist");
 
@@ -40,15 +49,15 @@ function TouristJourney({
       </header>
 
       <div className="mx-auto mt-10 max-w-3xl">
-        <DirectBookingBanner />
+        <DirectBookingBanner directBooking={directBooking} />
       </div>
 
       <ul className="mx-auto mt-6 grid max-w-3xl gap-3 text-sm text-kiwi-800">
         <li className="rounded-xl border border-kiwi-100 bg-white p-4">
-          {t("features.dates")}
+          {t(directBooking ? "features.dates" : "features.datesInquiry")}
         </li>
         <li className="rounded-xl border border-kiwi-100 bg-white p-4">
-          {t("features.inquiry")}
+          {t(directBooking ? "features.inquiry" : "features.inquiryOnly")}
         </li>
       </ul>
 

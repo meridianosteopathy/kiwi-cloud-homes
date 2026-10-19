@@ -94,6 +94,8 @@ export function createLiveClient(): HostawayClient {
   readCredentials();
 
   return {
+    capabilities: { directBooking: true, liveAvailability: true },
+
     async listListings() {
       const ids = await resolveListingIds();
       const settled = await Promise.allSettled(ids.map(fetchListing));

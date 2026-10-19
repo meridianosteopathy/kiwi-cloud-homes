@@ -48,6 +48,12 @@ export interface HostawayListing {
   minNights: number;
   /** Maximum nights per booking (Hostaway `maxNights`). 0 / Infinity if not set. */
   maxNights: number;
+  /**
+   * How per-day minimum/maximum stay rules combine over a stay (Beds24
+   * `restrictionStrategy`): "firstNight" applies the arrival night's rule,
+   * "stayThrough" the strictest rule of any night. Unset means stayThrough.
+   */
+  minStayStrategy?: "firstNight" | "stayThrough";
   images: ListingImage[];
   amenities: Amenity[];
   address: HostawayAddress;
@@ -62,6 +68,12 @@ export interface AvailabilityDay {
   price: HostawayPrice;
   /** Per-day minimum stay rule (Hostaway `minimumStay`); 0/undefined = use listing default. */
   minimumStay?: number;
+  /** Per-day maximum stay rule; 0/undefined = use listing default. */
+  maximumStay?: number;
+  /** The host does not allow a stay to start on this day (Beds24 override noCheckIn). */
+  noCheckIn?: boolean;
+  /** The host does not allow a stay to end on this day (Beds24 override noCheckOut). */
+  noCheckOut?: boolean;
 }
 
 export interface InquiryInput {
@@ -104,9 +116,28 @@ export interface ReservationResult {
   /** Whether Hostaway recognised this externalRef and returned an existing
    *  reservation rather than creating a new one. */
   alreadyExisted?: boolean;
+  /**
+   * The configured listing the reservation was written to. Set by
+   * reserveFromPaymentIntent, which may translate a PaymentIntent's listing
+   * id across an engine switch; downstream code (the confirmation email)
+   * should prefer it over the PaymentIntent metadata.
+   */
+  listingId?: string;
+}
+
+export interface BookingCapabilities {
+  /**
+   * Guests can pay and book on the site: the checkout is shown and the
+   * payment route accepts requests. False on the standalone backend, where
+   * guests send an inquiry instead.
+   */
+  directBooking: boolean;
+  /** The calendar comes from a live source (engine API or iCal feeds). */
+  liveAvailability: boolean;
 }
 
 export interface HostawayClient {
+  readonly capabilities: BookingCapabilities;
   /**
    * Every listing the site is configured to show, in display order.
    *

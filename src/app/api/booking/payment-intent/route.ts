@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { computeQuote, QuoteError } from "@/lib/booking/quote";
+import { getHostawayClient } from "@/lib/hostaway";
 import { getStripe, StripeConfigError } from "@/lib/stripe/server";
 
 export const dynamic = "force-dynamic";
@@ -25,6 +26,15 @@ export async function POST(req: Request) {
   const parsed = parseBody(body);
   if ("error" in parsed) {
     return NextResponse.json({ error: parsed.error }, { status: 400 });
+  }
+
+  // On the standalone backend there is no calendar to write a booking to, so
+  // taking a payment would be taking money for nothing.
+  if (!getHostawayClient().capabilities.directBooking) {
+    return NextResponse.json(
+      { error: "Direct booking is turned off on this site; please send an inquiry instead." },
+      { status: 403 },
+    );
   }
 
   let quote;

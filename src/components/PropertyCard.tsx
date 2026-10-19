@@ -14,6 +14,8 @@ import { PropertyImages } from "./PropertyImages";
 type Props = {
   listing: HostawayListing;
   inquiryEmail: string | null;
+  /** False when the site takes inquiries only (no checkout). */
+  directBooking?: boolean;
   defaultCheckIn?: string | null;
   defaultCheckOut?: string | null;
 };
@@ -21,6 +23,7 @@ type Props = {
 export function PropertyCard({
   listing,
   inquiryEmail,
+  directBooking = true,
   defaultCheckIn = null,
   defaultCheckOut = null,
 }: Props) {
@@ -57,9 +60,11 @@ export function PropertyCard({
           </header>
 
           <ul className="flex flex-wrap gap-x-4 gap-y-1 text-sm text-kiwi-700">
-            <li>{bedroomsLabel ?? t("bedrooms", { count: listing.bedrooms })}</li>
-            <li>{t("bathrooms", { count: listing.bathrooms })}</li>
-            <li>{t("maxGuests", { count: listing.maxGuests })}</li>
+            {(bedroomsLabel || listing.bedrooms > 0) && (
+              <li>{bedroomsLabel ?? t("bedrooms", { count: listing.bedrooms })}</li>
+            )}
+            {listing.bathrooms > 0 && <li>{t("bathrooms", { count: listing.bathrooms })}</li>}
+            {listing.maxGuests > 0 && <li>{t("maxGuests", { count: listing.maxGuests })}</li>}
           </ul>
 
           {supermarket && (
@@ -85,10 +90,12 @@ export function PropertyCard({
           listingId={listing.id}
           listingName={listing.name}
           basePrice={listing.basePrice}
+          cleaningFee={listing.cleaningFee}
           maxGuests={listing.maxGuests}
           minNights={listing.minNights}
           maxNights={listing.maxNights}
           inquiryEmail={inquiryEmail}
+          directBooking={directBooking}
           defaultCheckIn={defaultCheckIn}
           defaultCheckOut={defaultCheckOut}
         />
