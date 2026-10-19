@@ -45,7 +45,7 @@ Variables from the Hostaway and Stripe days (`HOSTAWAY_*`, `STRIPE_*`,
 `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY`) are not used in standalone mode and can
 be deleted. Keep them only if paid bookings come back (section 6).
 
-### Running without a booking engine (standalone mode)
+## 3. Running without a booking engine (standalone mode)
 
 This is the current setup: Hospitable's free plan is the inbox and calendar
 for Airbnb and Booking.com, and the website shows the houses, greys out taken
@@ -194,7 +194,7 @@ small edit to the per-home file, with no code change:
 
 To go back, set `BOOKING_BACKEND` to `hostaway` and redeploy.
 
-## 5. Create the Stripe test webhook
+### Stripe test webhook
 
 1. Stripe Dashboard → **Test mode** on → **Developers → Webhooks → Add
    endpoint**.
@@ -206,7 +206,7 @@ To go back, set `BOOKING_BACKEND` to `hostaway` and redeploy.
    `STRIPE_WEBHOOK_SECRET`, value the `whsec_…`, Production and Preview.
 6. **Deployments → ⋯ on the latest → Redeploy**.
 
-## 6. End-to-end test
+### End-to-end test
 
 1. In the booking engine the site is running on (Hostaway, or Beds24 after
    the switch), **block off a fake date range** (a month two years out). The
@@ -239,7 +239,7 @@ If anything fails, **Vercel → Logs → Functions** shows the server-side
 log lines (`[booking/webhook] …`). Look soon after the failure; free-plan
 logs are kept only briefly.
 
-## 8. Going live
+### Going live
 
 1. **Stripe:** toggle off Test mode → **Developers → API keys**: copy the
    **live** publishable and secret keys.

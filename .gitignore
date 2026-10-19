@@ -23,4 +23,3 @@ data/raw/*.csv
 data/raw/*.xlsx
 !data/raw/.gitkeep
 
-# Netlify local build output

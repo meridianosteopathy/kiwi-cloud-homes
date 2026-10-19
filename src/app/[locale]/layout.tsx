@@ -63,7 +63,7 @@ export async function generateMetadata({
  * Resolution order:
  *   1. NEXT_PUBLIC_SITE_URL, set explicitly once a custom domain is live
  *   2. VERCEL_PROJECT_PRODUCTION_URL, provided by Vercel (hostname only)
- *   3. URL, provided by Netlify (full URL of the site's primary domain)
+ *   3. URL, as Netlify would provide it if the site were ever hosted there
  *   4. localhost, for local development
  *
  * This runs while static pages are prerendered, so it must never throw: a

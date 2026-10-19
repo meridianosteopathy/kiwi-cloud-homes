@@ -39,9 +39,10 @@ function recordHit(key: string): void {
   if (RECENT.size > 5000) RECENT.clear();
 }
 
-/** The caller's address as Netlify reports it, else the first forwarded hop. */
+/** The caller's address as the host reports it (Vercel, then Netlify), else the first forwarded hop. */
 function callerIp(req: Request): string {
   return (
+    req.headers.get("x-real-ip")?.trim() ||
     req.headers.get("x-nf-client-connection-ip")?.trim() ||
     req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
     "unknown"

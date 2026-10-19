@@ -27,7 +27,7 @@
  *      photos and descriptions. Leave out anything you do not know yet; the
  *      card hides what is missing and shows "price on request" for a house
  *      with no fromPrice.
- *   4. In Netlify, add ICAL_<KEY> with the iCal export link(s) of the house.
+ *   4. In Vercel, add ICAL_<KEY> with the iCal export link(s) of the house.
  *      Hospitable's feed includes reservations, Owner Stays and Manual
  *      Bookings, but not plain manual blocks: record your own stays as an
  *      "Owner Stay" there, or list them under `blockedDates` here.
