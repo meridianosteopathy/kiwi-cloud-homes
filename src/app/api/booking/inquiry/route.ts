@@ -13,20 +13,39 @@ const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
  * fall back to a mailto link.
  *
  * Abuse limits are deliberately simple: a hidden honeypot field, field
- * length caps, and a small per-address allowance per instance.
+ * length caps, and small per-instance allowances (per caller address, per
+ * guest email, and overall) that are charged only once an email was sent,
+ * so a misconfigured mail provider does not turn into a misleading 429.
  */
 const RECENT = new Map<string, number[]>();
 const WINDOW_MS = 60 * 60_000;
-const MAX_PER_WINDOW = 8;
+const MAX_PER_KEY = 8;
+const MAX_GLOBAL = 30;
+const GLOBAL_KEY = "*all*";
 
-function allow(key: string): boolean {
+function recentHits(key: string): number[] {
   const now = Date.now();
   const hits = (RECENT.get(key) ?? []).filter((t) => now - t < WINDOW_MS);
-  if (hits.length >= MAX_PER_WINDOW) return false;
-  hits.push(now);
   RECENT.set(key, hits);
+  return hits;
+}
+
+function withinAllowance(key: string): boolean {
+  return recentHits(key).length < (key === GLOBAL_KEY ? MAX_GLOBAL : MAX_PER_KEY);
+}
+
+function recordHit(key: string): void {
+  recentHits(key).push(Date.now());
   if (RECENT.size > 5000) RECENT.clear();
-  return true;
+}
+
+/** The caller's address as Netlify reports it, else the first forwarded hop. */
+function callerIp(req: Request): string {
+  return (
+    req.headers.get("x-nf-client-connection-ip")?.trim() ||
+    req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
+    "unknown"
+  );
 }
 
 export async function POST(req: Request) {
@@ -43,9 +62,10 @@ export async function POST(req: Request) {
     return NextResponse.json({ ok: true });
   }
 
-  const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
-  if (!allow(ip) || !allow(parsed.email.toLowerCase())) {
-    return NextResponse.json({ error: "Too many messages; please try again later." }, { status: 429 });
+  const ip = callerIp(req);
+  const emailKey = parsed.email.toLowerCase();
+  if (!withinAllowance(ip) || !withinAllowance(emailKey) || !withinAllowance(GLOBAL_KEY)) {
+    return NextResponse.json({ error: "too_many" }, { status: 429 });
   }
 
   let listingName = parsed.listingName;
@@ -62,13 +82,17 @@ export async function POST(req: Request) {
 
   const result = await sendInquiryEmail({ ...parsed, listingName });
   if (result.skipped) {
+    // Which variable is missing stays in the server log, not in the response.
     console.warn(`[booking/inquiry] not sent: ${result.skipped}`);
-    return NextResponse.json({ error: "not_configured", detail: result.skipped }, { status: 503 });
+    return NextResponse.json({ error: "not_configured" }, { status: 503 });
   }
   if (result.error) {
     console.error(`[booking/inquiry] send failed: ${result.error}`);
     return NextResponse.json({ error: "send_failed" }, { status: 502 });
   }
+  recordHit(ip);
+  recordHit(emailKey);
+  recordHit(GLOBAL_KEY);
   console.log(`[booking/inquiry] delivered inquiry for ${parsed.listingId} (${result.id})`);
   return NextResponse.json({ ok: true, id: result.id });
 }

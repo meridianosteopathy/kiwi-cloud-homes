@@ -51,7 +51,11 @@ export interface HomeCoordinates {
 }
 
 export interface HomeProfile {
-  /** Internal label — only ever seen by you, in this file. */
+  /**
+   * Short id for the house (letters, digits, dashes). In standalone mode it
+   * is the house's public id: it appears in the page address, in inquiry
+   * emails and in the name of its iCal variable, so keep it plain.
+   */
   key: string;
   /**
    * Listing ids (preferred) and/or listing names that identify this house in
@@ -69,7 +73,11 @@ export interface HomeProfile {
   fromPrice?: number;
   /** ISO 4217 code; default NZD. */
   currency?: string;
-  /** Standalone mode: flat cleaning fee per stay, used in the estimate only. */
+  /**
+   * Standalone mode: flat cleaning fee per stay. Shown as a line in the
+   * guest's estimate ("from" price × nights + cleaning fee); the final
+   * price is whatever you quote in your reply.
+   */
   cleaningFee?: number;
   /** Standalone mode: how many guests the house sleeps. Leave out if unsure; the card hides the line. */
   maxGuests?: number;
@@ -90,8 +98,8 @@ export interface HomeProfile {
   blockedDates?: Array<{ from: string; to: string; note?: string }>;
   /**
    * Bedroom and bathroom counts shown on the property card. Hostaway supplied
-   * these from the listing; Beds24 has no such fields, so fill them in here
-   * once the house runs on Beds24. Leave out to show 0.
+   * these from the listing; Beds24 has no such fields, and standalone mode
+   * reads them from here. Leave out and the card hides the line.
    */
   bedrooms?: number;
   bathrooms?: number;

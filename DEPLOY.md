@@ -130,13 +130,15 @@ dates and takes inquiries by email. Nothing is paid online.
    your own stays in Hospitable as an *Owner Stay* (which also blocks Airbnb
    and Booking.com), and when a website inquiry becomes a booking, enter it
    as a *Manual Booking*. For anything else, list the nights under
-   `blockedDates` in `src/content/homes.ts`. The inquiry step is always
-   where you confirm.
+   `blockedDates` in `src/content/homes.ts`. If a feed cannot be read at
+   all, the date picker says so instead of guessing, and the inquiry still
+   goes through. The inquiry step is always where you confirm.
 3. **Inquiries arrive by email.** With `BREVO_API_KEY`, `EMAIL_FROM_ADDRESS`
    and `INQUIRY_EMAIL` set, the "Send message" button emails you the guest's
-   dates and message with the guest as reply-to, and copies the guest. If
-   Brevo is not configured the button falls back to opening the guest's own
-   mail app, as before.
+   dates and message with the guest as reply-to, and sends the guest a short
+   confirmation in their language (their own message is not echoed back, so
+   the form cannot be used to relay spam). If Brevo is not configured the
+   dialog explains that and opens the guest's own mail app instead.
 4. **Stripe is not used** in this mode: the checkout is hidden and the
    payment route refuses requests. The Stripe variables can stay empty.
 5. Check `/tourist`: both houses, "price on request" or the from-price, taken

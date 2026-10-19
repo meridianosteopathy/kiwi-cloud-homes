@@ -26,12 +26,41 @@ export function icalEnvName(homeKey: string): string {
   return "ICAL_" + homeKey.toUpperCase().replace(/[^A-Z0-9]+/g, "_").replace(/^_+|_+$/g, "");
 }
 
+const warnedTokens = new Set<string>();
+
+/**
+ * The feed links configured for a home. Accepts http(s) and webcal links
+ * (webcal is what calendar apps' "subscribe" buttons hand out; it is https
+ * underneath), tolerates surrounding quotes, and says so when a value is
+ * dropped, so a pasted link that does not work is never mistaken for
+ * "nothing configured".
+ */
 export function icalUrlsFor(homeKey: string): string[] {
   const raw = process.env[icalEnvName(homeKey)] ?? "";
-  return raw
-    .split(/[\s,]+/)
-    .map((s) => s.trim())
-    .filter((s) => /^https?:\/\//i.test(s));
+  const out: string[] = [];
+  for (const token of raw.split(/[\s,]+/)) {
+    let s = token.trim().replace(/^["']+|["']+$/g, "");
+    if (!s) continue;
+    s = s.replace(/^webcal:\/\//i, "https://");
+    let url: URL | null = null;
+    try {
+      url = new URL(s);
+    } catch {
+      url = null;
+    }
+    if (!url || !/^https?:$/.test(url.protocol)) {
+      const mark = `${homeKey}:${s}`;
+      if (!warnedTokens.has(mark)) {
+        warnedTokens.add(mark);
+        console.warn(
+          `[standalone] ignoring a value in ${icalEnvName(homeKey)}: not an http(s) or webcal link (starts "${s.split(/[/?#]/)[0].slice(0, 20)}").`,
+        );
+      }
+      continue;
+    }
+    out.push(url.toString());
+  }
+  return out;
 }
 
 async function fetchEvents(url: string): Promise<IcsEvent[]> {
@@ -51,7 +80,8 @@ async function fetchEvents(url: string): Promise<IcsEvent[]> {
     cache.set(url, { events, fetchedAt: now });
     return events;
   } catch (err) {
-    const reason = err instanceof Error ? err.message : String(err);
+    // Node's own fetch errors can quote the full URL; keep the secret out of the logs.
+    const reason = (err instanceof Error ? err.message : String(err)).split(url).join(redact(url));
     if (hit && now - hit.fetchedAt < STALE_MAX_MS) {
       console.warn(`[standalone] iCal feed ${redact(url)} failed (${reason}); using the copy from ${Math.round((now - hit.fetchedAt) / 60_000)} min ago.`);
       return hit.events;
@@ -82,7 +112,12 @@ export async function blockedNightsFor(homeKey: string, start: string, end: stri
   const urls = icalUrlsFor(homeKey);
   if (urls.length === 0) {
     if (!warnedNoFeeds.has(homeKey)) {
-      console.warn(`[standalone] no iCal feed configured for "${homeKey}" (set ${icalEnvName(homeKey)}); every date shows as available.`);
+      const raw = (process.env[icalEnvName(homeKey)] ?? "").trim();
+      console.warn(
+        raw
+          ? `[standalone] ${icalEnvName(homeKey)} is set but holds no usable link; every date for "${homeKey}" shows as available.`
+          : `[standalone] no iCal feed configured for "${homeKey}" (set ${icalEnvName(homeKey)}); every date shows as available.`,
+      );
       warnedNoFeeds.add(homeKey);
     }
     return { nights: new Set(), feeds: 0, failed: 0 };

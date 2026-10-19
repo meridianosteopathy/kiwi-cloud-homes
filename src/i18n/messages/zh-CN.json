@@ -208,7 +208,7 @@
     "apply": "确定",
     "close": "关闭",
     "loadingAvailability": "正在加载房态…",
-    "availabilityFallback": "暂时无法加载房态,所选日期将在预订时再次确认。",
+    "availabilityFallback": "暂时无法加载房态。您可以先选择日期,房东会再确认。",
     "minNightsHint": "至少入住 {count} 晚",
     "minNightsTooltip": "至少 {count} 晚",
     "noCheckInHint": "当天不能入住,请选择其他入住日期。",
@@ -247,7 +247,9 @@
     "subtitle": "比 Airbnb / Booking.com 通常便宜约 10–15%,因为这里没有平台手续费。",
     "savingsBadge": "约省 10–15%",
     "disclaimer": "Airbnb 会向客人加收约 14–16% 的服务费,Booking.com 也会将平台佣金计入显示价格。在本站直接预订可绕过这些费用,价格更透明。",
-    "titleInquiry": "直接与房东联系"
+    "titleInquiry": "直接与房东联系",
+    "subtitleInquiry": "无额外平台费用:房东直接报价,通常低于 Airbnb / Booking.com 的价格。",
+    "disclaimerInquiry": "Airbnb 会额外收取约 14–16% 的客人服务费,Booking.com 则将平台佣金计入显示价格。直接与房东联系可省去这两项。"
   },
   "Checkout": {
     "title": {
@@ -306,9 +308,12 @@
     "send": "发送消息",
     "sending": "发送中…",
     "sentTitle": "消息已发送",
-    "sentBody": "房东已收到您的消息,将通过邮件回复至 {email},并已向您发送一份副本。",
+    "sentBody": "房东已收到您的消息,将通过邮件回复至 {email}。我们已向您发送一封简短的确认邮件。",
     "sendFailed": "暂时无法发送消息。",
-    "sendNote": "我们会把您的消息发送给房东,并给您一份副本。"
+    "sendNote": "我们会把您的消息发送给房东,并给您一封确认邮件。",
+    "mailtoFallback": "本站暂未开通直接发送,您的消息将通过您自己的邮件应用发送至 {email},内容已为您填好。",
+    "invalid": "请检查填写内容:有效的邮箱、晚于入住日期的退房日期,以及 1 至 50 位客人。",
+    "tooMany": "一小时内发送的消息过多,请稍后再试,或直接发邮件给房东。"
   },
   "Amenities": {
     "title": "房源配套",
@@ -317,7 +322,7 @@
     "close": "关闭"
   },
   "Footer": {
-    "rights": "© {year} Kiwi Cloud Homes · 服务由 Hostaway 提供",
+    "rights": "© {year} Kiwi Cloud Homes",
     "cancellationPolicy": "退订政策"
   },
   "CancellationPolicy": {

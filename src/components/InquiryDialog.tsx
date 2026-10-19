@@ -18,6 +18,13 @@ function todayISO(): string {
   return new Date().toISOString().slice(0, 10);
 }
 
+function addOneDay(iso: string): string {
+  const d = new Date(iso + "T00:00:00Z");
+  if (Number.isNaN(d.getTime())) return iso;
+  d.setUTCDate(d.getUTCDate() + 1);
+  return d.toISOString().slice(0, 10);
+}
+
 function composeMailto(opts: {
   to: string;
   subject: string;
@@ -48,7 +55,9 @@ export function InquiryDialog({
   const [message, setMessage] = useState("");
   // Hidden field a person never sees; bots fill it and the server drops those.
   const [website, setWebsite] = useState("");
-  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
+  // mailto: email is not set up on the server, so the guest's own mail app is the way.
+  // invalid: the server rejected the details; tooMany: the hourly allowance is used up.
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "mailto" | "invalid" | "tooMany" | "error">("idle");
 
   const dialogRef = useRef<HTMLDivElement>(null);
   const closeBtnRef = useRef<HTMLButtonElement>(null);
@@ -126,8 +135,15 @@ export function InquiryDialog({
         return;
       }
       if (res.status === 503) {
-        setStatus("idle");
-        openMailApp();
+        setStatus("mailto");
+        return;
+      }
+      if (res.status === 400 || res.status === 404) {
+        setStatus("invalid");
+        return;
+      }
+      if (res.status === 429) {
+        setStatus("tooMany");
         return;
       }
       setStatus("error");
@@ -135,6 +151,9 @@ export function InquiryDialog({
       setStatus("error");
     }
   }
+
+  // The check-out picker never offers a day on or before check-in.
+  const minCheckOut = checkIn ? addOneDay(checkIn) : minDate;
 
   const inputClass =
     "w-full rounded-lg border border-kiwi-200 bg-white px-3 py-2 text-sm text-kiwi-900 shadow-sm focus:border-kiwi-500 focus:outline-none focus:ring-2 focus:ring-kiwi-200";
@@ -263,7 +282,7 @@ export function InquiryDialog({
               <input
                 required
                 type="date"
-                min={checkIn || minDate}
+                min={minCheckOut}
                 value={checkOut}
                 onChange={(e) => setCheckOut(e.target.value)}
                 className={inputClass}
@@ -298,7 +317,27 @@ export function InquiryDialog({
             />
           </label>
 
-          {status === "error" ? (
+          {status === "mailto" ? (
+            <div className="space-y-2 rounded-lg border border-kiwi-200 bg-kiwi-50 p-3 text-xs text-kiwi-800" role="status">
+              <p>{t("mailtoFallback", { email: inquiryEmail ?? "" })}</p>
+              <button
+                type="button"
+                onClick={openMailApp}
+                className="rounded-full bg-kiwi-600 px-3 py-1.5 text-xs font-medium text-white hover:bg-kiwi-700"
+              >
+                {t("openEmail")}
+              </button>
+              <p className="text-[11px] text-kiwi-600">{t("mailtoNote")}</p>
+            </div>
+          ) : status === "invalid" ? (
+            <div className="rounded-lg border border-amber-200 bg-amber-50 p-3 text-xs text-amber-800" role="alert">
+              {t("invalid")}
+            </div>
+          ) : status === "tooMany" ? (
+            <div className="rounded-lg border border-amber-200 bg-amber-50 p-3 text-xs text-amber-800" role="alert">
+              {t("tooMany")}
+            </div>
+          ) : status === "error" ? (
             <div className="rounded-lg border border-amber-200 bg-amber-50 p-3 text-xs text-amber-800" role="alert">
               {t("sendFailed")}{" "}
               <button type="button" onClick={openMailApp} className="font-medium underline underline-offset-2">
@@ -317,13 +356,15 @@ export function InquiryDialog({
             >
               {t("cancel")}
             </button>
-            <button
-              type="submit"
-              disabled={!canSubmit || status === "sending"}
-              className="rounded-full bg-kiwi-600 px-4 py-2 text-sm font-medium text-white hover:bg-kiwi-700 disabled:cursor-not-allowed disabled:bg-kiwi-300"
-            >
-              {status === "sending" ? t("sending") : t("send")}
-            </button>
+            {status !== "mailto" && (
+              <button
+                type="submit"
+                disabled={!canSubmit || status === "sending"}
+                className="rounded-full bg-kiwi-600 px-4 py-2 text-sm font-medium text-white hover:bg-kiwi-700 disabled:cursor-not-allowed disabled:bg-kiwi-300"
+              >
+                {status === "sending" ? t("sending") : t("send")}
+              </button>
+            )}
           </div>
         </form>
         )}

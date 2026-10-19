@@ -1,8 +1,11 @@
 /**
- * Inquiry email — a guest's message from the website, delivered to the
- * owner's inbox with the guest as reply-to, and a copy to the guest so they
- * have a record. Replaces the mailto link when Brevo is configured; the
- * dialog falls back to mailto when it is not.
+ * Inquiry emails — a guest's message from the website, delivered to the
+ * owner's inbox with the guest as reply-to, plus a short fixed-text
+ * acknowledgement to the guest in their language. The guest never receives
+ * the free-form message back: the form is public, so echoing arbitrary text
+ * to an arbitrary address would turn the site into a mail relay. Replaces
+ * the mailto link when Brevo is configured; the dialog falls back to mailto
+ * when it is not.
  */
 
 const BREVO_ENDPOINT = "https://api.brevo.com/v3/smtp/email";
@@ -64,31 +67,35 @@ ${rows
   return { subject, html, text };
 }
 
-export async function sendInquiryEmail(
-  input: InquiryEmailInput,
-): Promise<{ id?: string; skipped?: string; error?: string }> {
-  const apiKey = process.env.BREVO_API_KEY;
-  if (!apiKey) return { skipped: "BREVO_API_KEY not configured" };
-  const from = process.env.EMAIL_FROM_ADDRESS?.trim();
-  if (!from) return { skipped: "EMAIL_FROM_ADDRESS not configured" };
-  const to = process.env.INQUIRY_EMAIL?.trim();
-  if (!to) return { skipped: "INQUIRY_EMAIL not configured" };
+const ACK_COPY = {
+  en: {
+    subject: (listing: string) => `[Kiwi Cloud Homes] We received your message about ${listing}`,
+    body: (i: InquiryEmailInput) =>
+      `Hi ${i.name},\n\nThank you for your message about ${i.listingName} for ${i.checkIn} to ${i.checkOut} (${i.guests} guest${i.guests === 1 ? "" : "s"}).\n\nThe host will reply to this address soon. If you want to add anything, just reply to this email.\n\nKiwi Cloud Homes`,
+  },
+  "zh-CN": {
+    subject: (listing: string) => `[Kiwi Cloud Homes] 我们已收到您关于 ${listing} 的咨询`,
+    body: (i: InquiryEmailInput) =>
+      `${i.name},您好!\n\n我们已收到您关于 ${i.listingName} 的咨询(${i.checkIn} 至 ${i.checkOut},${i.guests} 位客人)。\n\n房东会尽快回复到此邮箱。如需补充信息,直接回复本邮件即可。\n\nKiwi Cloud Homes 云端之家`,
+  },
+} as const;
 
-  const { subject, html, text } = renderInquiry(input);
+/** The guest's acknowledgement: fixed wording in their language, no free-form text echoed. */
+export function renderAcknowledgement(input: InquiryEmailInput): { subject: string; html: string; text: string } {
+  const copy = ACK_COPY[input.locale] ?? ACK_COPY.en;
+  const text = copy.body(input);
+  const html = `<!doctype html><html><body style="font-family:Arial,Helvetica,sans-serif;font-size:15px;color:#1E4E79;"><p style="white-space:pre-wrap;">${escapeHtml(text)}</p></body></html>`;
+  return { subject: copy.subject(input.listingName), html, text };
+}
+
+type SendResult = { id?: string; skipped?: string; error?: string };
+
+async function brevoSend(apiKey: string, payload: Record<string, unknown>): Promise<SendResult> {
   try {
     const res = await fetch(BREVO_ENDPOINT, {
       method: "POST",
       headers: { "api-key": apiKey, "content-type": "application/json", accept: "application/json" },
-      body: JSON.stringify({
-        sender: { email: from, name: "Kiwi Cloud Homes" },
-        to: [{ email: to }],
-        cc: [{ email: input.email, name: input.name }],
-        replyTo: { email: input.email, name: input.name },
-        subject,
-        htmlContent: html,
-        textContent: text,
-        tags: ["inquiry", `locale:${input.locale}`],
-      }),
+      body: JSON.stringify(payload),
     });
     if (!res.ok) {
       const body = await res.text().catch(() => "");
@@ -99,4 +106,45 @@ export async function sendInquiryEmail(
   } catch (err) {
     return { error: err instanceof Error ? err.message : String(err) };
   }
+}
+
+/**
+ * Delivers the inquiry to the owner; on success also sends the guest a short
+ * acknowledgement (its failure is logged, not returned: the inquiry itself
+ * got through).
+ */
+export async function sendInquiryEmail(input: InquiryEmailInput): Promise<SendResult> {
+  const apiKey = process.env.BREVO_API_KEY;
+  if (!apiKey) return { skipped: "BREVO_API_KEY not configured" };
+  const from = process.env.EMAIL_FROM_ADDRESS?.trim();
+  if (!from) return { skipped: "EMAIL_FROM_ADDRESS not configured" };
+  const to = process.env.INQUIRY_EMAIL?.trim();
+  if (!to) return { skipped: "INQUIRY_EMAIL not configured" };
+
+  const owner = renderInquiry(input);
+  const sent = await brevoSend(apiKey, {
+    sender: { email: from, name: "Kiwi Cloud Homes" },
+    to: [{ email: to }],
+    replyTo: { email: input.email, name: input.name },
+    subject: owner.subject,
+    htmlContent: owner.html,
+    textContent: owner.text,
+    tags: ["inquiry", `locale:${input.locale}`],
+  });
+  if (!sent.id) return sent;
+
+  const ack = renderAcknowledgement(input);
+  const copy = await brevoSend(apiKey, {
+    sender: { email: from, name: input.locale === "zh-CN" ? "Kiwi Cloud Homes 云端之家" : "Kiwi Cloud Homes" },
+    to: [{ email: input.email, name: input.name }],
+    replyTo: { email: process.env.EMAIL_REPLY_TO?.trim() || to },
+    subject: ack.subject,
+    htmlContent: ack.html,
+    textContent: ack.text,
+    tags: ["inquiry-ack", `locale:${input.locale}`],
+  });
+  if (!copy.id) {
+    console.warn(`[inquiry] acknowledgement to the guest not sent: ${copy.error ?? copy.skipped}`);
+  }
+  return sent;
 }

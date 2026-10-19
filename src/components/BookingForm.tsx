@@ -11,6 +11,8 @@ type Props = {
   listingId: string;
   listingName: string;
   basePrice: { amount: number; currency: string };
+  /** Flat cleaning fee per stay, shown as a line in the estimate. */
+  cleaningFee?: number;
   maxGuests: number;
   minNights: number;
   maxNights: number;
@@ -58,6 +60,7 @@ export function BookingForm({
   listingId,
   listingName,
   basePrice,
+  cleaningFee = 0,
   maxGuests,
   minNights,
   maxNights,
@@ -109,6 +112,7 @@ export function BookingForm({
     if (!canBook || !directBooking) {
       setQuote(null);
       setQuoteRefusal(null);
+      setQuoteLoading(false);
       return;
     }
     const controller = new AbortController();
@@ -298,6 +302,20 @@ export function BookingForm({
                   {quoteLoading ? t("calculating") : priceLabel(nights * basePrice.amount)}
                 </dd>
               </div>
+              {cleaningFee > 0 && (
+                <>
+                  <div className="flex items-baseline justify-between">
+                    <dt className="text-kiwi-700">{t("lineLabel.cleaning")}</dt>
+                    <dd className="tabular-nums text-kiwi-900">{priceLabel(cleaningFee)}</dd>
+                  </div>
+                  <div className="flex items-baseline justify-between border-t border-kiwi-100 pt-1 font-semibold">
+                    <dt className="text-kiwi-900">{t("estimatedTotal")}</dt>
+                    <dd className="tabular-nums text-kiwi-900">
+                      {quoteLoading ? t("calculating") : priceLabel(nights * basePrice.amount + cleaningFee)}
+                    </dd>
+                  </div>
+                </>
+              )}
               <p className="pt-1 text-[11px] text-kiwi-600">
                 {t(directBooking ? "estimateNote" : "estimateInquiryNote")}
               </p>

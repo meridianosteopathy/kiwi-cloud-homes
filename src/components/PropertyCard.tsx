@@ -90,6 +90,7 @@ export function PropertyCard({
           listingId={listing.id}
           listingName={listing.name}
           basePrice={listing.basePrice}
+          cleaningFee={listing.cleaningFee}
           maxGuests={listing.maxGuests}
           minNights={listing.minNights}
           maxNights={listing.maxNights}

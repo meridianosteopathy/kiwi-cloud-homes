@@ -208,7 +208,7 @@
     "apply": "Apply",
     "close": "Close",
     "loadingAvailability": "Loading availability…",
-    "availabilityFallback": "Availability couldn't load — your dates will be confirmed at checkout.",
+    "availabilityFallback": "Availability couldn't load right now. Pick your dates anyway; the host will confirm them.",
     "minNightsHint": "Minimum stay: {count, plural, one {# night} other {# nights}}",
     "minNightsTooltip": "{count}-night minimum",
     "noCheckInHint": "Check-in isn't possible on that day. Pick another arrival day.",
@@ -247,7 +247,9 @@
     "subtitle": "Typically around 10–15% cheaper than Airbnb / Booking.com — no platform fees added on top.",
     "savingsBadge": "Save ~10–15%",
     "disclaimer": "Airbnb adds a ~14–16% guest service fee, and Booking.com bakes platform commission into the displayed price. Booking direct here skips both.",
-    "titleInquiry": "Deal direct with the host"
+    "titleInquiry": "Deal direct with the host",
+    "subtitleInquiry": "No platform fees on top: the host quotes you directly, usually below the Airbnb / Booking.com price.",
+    "disclaimerInquiry": "Airbnb adds a ~14–16% guest service fee, and Booking.com bakes platform commission into the displayed price. Dealing with the host directly skips both."
   },
   "Checkout": {
     "title": {
@@ -306,9 +308,12 @@
     "send": "Send message",
     "sending": "Sending…",
     "sentTitle": "Message sent",
-    "sentBody": "The host has your message and will reply by email to {email}. A copy has been sent to you.",
+    "sentBody": "The host has your message and will reply by email to {email}. We've sent you a short confirmation.",
     "sendFailed": "We couldn't send your message just now.",
-    "sendNote": "We email your message to the host and send you a copy."
+    "sendNote": "We email your message to the host and send you a confirmation.",
+    "mailtoFallback": "Sending from this site isn't set up yet, so your message goes from your own email app to {email}. It will open with everything filled in.",
+    "invalid": "Please check your details: a valid email, a check-out after the check-in, and between 1 and 50 guests.",
+    "tooMany": "Too many messages in the last hour. Please try again later, or email the host directly."
   },
   "Amenities": {
     "title": "What this place offers",
@@ -317,7 +322,7 @@
     "close": "Close"
   },
   "Footer": {
-    "rights": "© {year} Kiwi Cloud Homes · Powered by Hostaway",
+    "rights": "© {year} Kiwi Cloud Homes",
     "cancellationPolicy": "Cancellation policy"
   },
   "CancellationPolicy": {

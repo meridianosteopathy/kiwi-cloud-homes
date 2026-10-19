@@ -82,7 +82,12 @@ export function createStandaloneClient(): HostawayClient {
       if (!home) throw new StandaloneError(`"${listingId}" is not one of the homes in src/content/homes.ts.`);
       const { nights, feeds, failed } = await blockedNightsFor(home.key, start, end);
       if (failed > 0) {
-        console.warn(`[standalone] ${failed} of ${feeds} feed(s) for "${home.key}" unavailable; showing what the rest say.`);
+        // Better to say "couldn't load" than to show taken nights as free:
+        // the availability route answers 502, the date picker shows its
+        // fallback notice, and the inquiry still goes through.
+        throw new StandaloneError(
+          `${failed} of ${feeds} calendar feed(s) for "${home.key}" could not be read and no recent copy exists.`,
+        );
       }
       const today = NZ_DATE.format(new Date());
       const price = { amount: home.fromPrice ?? 0, currency: home.currency ?? DEFAULT_CURRENCY };
