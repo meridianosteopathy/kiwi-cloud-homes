@@ -113,15 +113,18 @@ dates and takes inquiries by email. Nothing is paid online.
    and both descriptions. A house with no `fromPrice` shows "price on
    request". Edit, commit and merge; the site updates on the next deploy.
 2. **Taken dates come from iCal links.** In Hospitable go to **Properties →
-   the house → Export calendar → Copy iCal link** (first check that this
-   section exists on the free plan; no help page says so in writing). In
-   Netlify add a variable per house named after its key, `ICAL_HALSWELL` and
-   `ICAL_BEALEY_AVE`, with the link; several links can be comma-separated,
-   so Airbnb's own export link can be added as a second source. The links
-   contain a secret and the feed carries guest names, so they go only into
-   Netlify; the website reads them on the server and shows nothing but
-   taken dates. If a link ever leaks, use Hospitable's *Revoke calendar
-   access* and paste the new link.
+   the house → Export calendar → Copy iCal link** (confirmed available on the
+   free Essentials plan, October 2026; the link looks like
+   `https://api.hospitable.com/v1/properties/reservations.ics?key=…&token=…`).
+   In Netlify add a variable per house named after its key, `ICAL_HALSWELL`
+   (Modern Home) and `ICAL_BEALEY_AVE` (Super king bed), with the link;
+   several links can be comma-separated, so Airbnb's own export link can be
+   added as a second source. The links contain a secret and the feed carries
+   guest names, so they go only into Netlify, never into the repo, chat or
+   email; the website reads them on the server and shows nothing but taken
+   dates. If a link is ever shared anywhere else, use Hospitable's *Revoke
+   calendar access* (the three-dots menu next to the link) and paste the new
+   link into Netlify.
 
    Two things to know about Hospitable's feed: it refreshes about every 40
    minutes, and the site re-reads it every ten, so a booking made on Airbnb

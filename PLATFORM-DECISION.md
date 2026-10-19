@@ -16,6 +16,8 @@ After discussion the owner chose the zero-cost route:
   emails inquiries to the owner. The Stripe checkout is switched off, not
   removed.
 - **Monthly software cost:** NZD 0 (Hospitable free, Netlify free, Brevo free).
+- **Confirmed on the owner's account (19 October 2026):** Hospitable's free
+  plan does provide the per-property iCal export link the website reads.
 - **Kept for later:** the Beds24 adapter and the paid-booking flow stay in the
   codebase behind `BOOKING_BACKEND`, so paid direct bookings can be turned
   back on in a later phase without rebuilding.
