@@ -91,7 +91,9 @@ export const HOMES: HomeProfile[] = [
     name: "Modern Home: 2 Ensuites, 17 Min to City & CHC Air",
     address: { city: "Halswell, Christchurch", region: "Canterbury" },
     bedrooms: 2,
-    // bathrooms + maxGuests not set yet: the real numbers lived in Hostaway.
+    // Both bathrooms are ensuites.
+    bathrooms: 2,
+    maxGuests: 5,
     amenities: [
       "Wifi",
       "Kitchen",
@@ -129,10 +131,9 @@ export const HOMES: HomeProfile[] = [
     name: "Super king bed & free parking, central CHC",
     address: { city: "Christchurch Central", region: "Canterbury" },
     bedrooms: 2,
-    // Two double bedrooms; the description is written for four guests.
+    // One main bathroom (not ensuite); the separate guest WC isn't counted.
+    bathrooms: 1,
     maxGuests: 4,
-    // bathrooms not set yet: the main bathroom plus a separate guest WC
-    // doesn't map cleanly onto one number.
     amenities: [
       "Kitchen",
       "Free parking on premises",
