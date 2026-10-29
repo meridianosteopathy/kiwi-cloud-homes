@@ -1,34 +1,23 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { useFormatter, useLocale, useTranslations } from "next-intl";
-import { isStripeTestMode } from "@/lib/stripe/mode";
-import { CheckoutDialog } from "./CheckoutDialog";
+import { useLocale, useTranslations } from "next-intl";
 import { DateRangeModal } from "./DateRangeModal";
 import { InquiryDialog } from "./InquiryDialog";
 
 type Props = {
   listingId: string;
   listingName: string;
-  basePrice: { amount: number; currency: string };
-  maxGuests: number;
+  /** Null when the home's capacity isn't set. */
+  maxGuests: number | null;
   minNights: number;
-  maxNights: number;
   inquiryEmail: string | null;
   defaultCheckIn: string | null;
   defaultCheckOut: string | null;
 };
 
-type QuoteResponse = {
-  nights: number;
-  currency: string;
-  total: number;
-  breakdown: Array<{
-    label: "nightly" | "cleaning";
-    amount: number;
-    meta?: { nights?: number; nightly?: number };
-  }>;
-};
+/** Upper bound for the guest picker when a home's capacity isn't set. */
+const GUEST_PICKER_FALLBACK = 6;
 
 function nightsBetween(checkIn: string, checkOut: string): number {
   if (!checkIn || !checkOut) return 0;
@@ -49,27 +38,27 @@ function formatDate(iso: string, locale: string): string {
   });
 }
 
+/**
+ * Inquiry-only booking panel: the guest picks dates + party size and sends
+ * them to the host, who confirms availability and price by reply. There's no
+ * online payment and no live calendar behind it.
+ */
 export function BookingForm({
   listingId,
   listingName,
-  basePrice,
   maxGuests,
   minNights,
-  maxNights,
   inquiryEmail,
   defaultCheckIn,
   defaultCheckOut,
 }: Props) {
   const t = useTranslations("Booking");
-  const format = useFormatter();
   const locale = useLocale();
-  const testMode = isStripeTestMode();
 
   const [checkIn, setCheckIn] = useState(defaultCheckIn ?? "");
   const [checkOut, setCheckOut] = useState(defaultCheckOut ?? "");
   const [guests, setGuests] = useState(Math.min(2, maxGuests || 2));
   const [showInquiry, setShowInquiry] = useState(false);
-  const [showCheckout, setShowCheckout] = useState(false);
   const [showDates, setShowDates] = useState(false);
 
   // When the school journey changes ?month, the page passes new defaults
@@ -82,50 +71,6 @@ export function BookingForm({
 
   const nights = useMemo(() => nightsBetween(checkIn, checkOut), [checkIn, checkOut]);
   const meetsMin = nights >= minNights;
-  const meetsMax = !(maxNights > 0 && nights > maxNights);
-  const canBook = nights > 0 && meetsMin && meetsMax;
-
-  // Live quote so the breakdown matches what the checkout modal will show.
-  // Falls back to listing.basePrice when the dates aren't yet valid or
-  // the request fails — same shape, different (less accurate) source.
-  const [quote, setQuote] = useState<QuoteResponse | null>(null);
-  const [quoteLoading, setQuoteLoading] = useState(false);
-
-  useEffect(() => {
-    if (!canBook) {
-      setQuote(null);
-      return;
-    }
-    const controller = new AbortController();
-    setQuoteLoading(true);
-    fetch("/api/booking/quote", {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify({ listingId, checkIn, checkOut, guests }),
-      signal: controller.signal,
-    })
-      .then(async (res) => {
-        if (!res.ok) throw new Error(`${res.status}`);
-        return (await res.json()) as QuoteResponse;
-      })
-      .then((q) => {
-        setQuote(q);
-        setQuoteLoading(false);
-      })
-      .catch((err) => {
-        if (err.name === "AbortError") return;
-        setQuote(null);
-        setQuoteLoading(false);
-      });
-    return () => controller.abort();
-  }, [canBook, listingId, checkIn, checkOut, guests]);
-
-  const priceLabel = (amount: number) =>
-    format.number(amount, {
-      style: "currency",
-      currency: quote?.currency || basePrice.currency,
-      maximumFractionDigits: 0,
-    });
 
   const inputClass =
     "w-full rounded-lg border border-kiwi-200 bg-white px-3 py-2 text-sm text-kiwi-900 shadow-sm focus:border-kiwi-500 focus:outline-none focus:ring-2 focus:ring-kiwi-200";
@@ -140,14 +85,8 @@ export function BookingForm({
 
   return (
     <section className="rounded-2xl border border-kiwi-200 bg-white p-5 shadow-sm">
-      <header className="mb-4 flex items-baseline justify-between gap-3">
+      <header className="mb-4">
         <h3 className="text-lg font-semibold text-kiwi-900">{t("title")}</h3>
-        <div className="text-right">
-          <div className="text-base font-semibold text-kiwi-900">
-            {priceLabel(basePrice.amount)}
-          </div>
-          <div className="text-xs text-kiwi-600">{t("perNight")}</div>
-        </div>
       </header>
 
       <div className="grid grid-cols-2 gap-2">
@@ -209,77 +148,27 @@ export function BookingForm({
           onChange={(e) => setGuests(Number(e.target.value))}
           className={inputClass}
         >
-          {Array.from({ length: Math.max(maxGuests, 1) }, (_, i) => i + 1).map(
-            (n) => (
-              <option key={n} value={n}>
-                {t("guestCount", { count: n })}
-              </option>
-            ),
-          )}
+          {Array.from(
+            { length: Math.max(maxGuests ?? GUEST_PICKER_FALLBACK, 1) },
+            (_, i) => i + 1,
+          ).map((n) => (
+            <option key={n} value={n}>
+              {t("guestCount", { count: n })}
+            </option>
+          ))}
         </select>
       </label>
 
-      {nights > 0 && (
-        <dl className="mt-4 space-y-1 rounded-lg bg-kiwi-50/60 p-3 text-sm">
-          {quote ? (
-            <>
-              {quote.breakdown.map((line, i) => (
-                <div key={i} className="flex items-baseline justify-between">
-                  <dt className="text-kiwi-700">
-                    {line.label === "nightly" && line.meta?.nightly !== undefined
-                      ? t("breakdown", {
-                          price: priceLabel(line.meta.nightly),
-                          nights: line.meta.nights ?? quote.nights,
-                        })
-                      : t(`lineLabel.${line.label}`)}
-                  </dt>
-                  <dd className="tabular-nums text-kiwi-900">{priceLabel(line.amount)}</dd>
-                </div>
-              ))}
-              <div className="flex items-baseline justify-between border-t border-kiwi-100 pt-1 font-semibold">
-                <dt className="text-kiwi-900">{t("total")}</dt>
-                <dd className="tabular-nums text-kiwi-900">{priceLabel(quote.total)}</dd>
-              </div>
-            </>
-          ) : (
-            <>
-              <div className="flex items-baseline justify-between">
-                <dt className="text-kiwi-700">
-                  {t("breakdown", { price: priceLabel(basePrice.amount), nights })}
-                </dt>
-                <dd className="tabular-nums text-kiwi-900">
-                  {quoteLoading ? t("calculating") : priceLabel(nights * basePrice.amount)}
-                </dd>
-              </div>
-              <p className="pt-1 text-[11px] text-kiwi-600">{t("estimateNote")}</p>
-            </>
-          )}
-        </dl>
-      )}
-
-      <div className="mt-4 flex flex-col gap-2 sm:flex-row">
-        <button
-          type="button"
-          onClick={() => setShowCheckout(true)}
-          disabled={!canBook}
-          className="flex-1 rounded-full bg-kiwi-600 px-4 py-2 text-sm font-medium text-white hover:bg-kiwi-700 disabled:cursor-not-allowed disabled:bg-kiwi-300"
-        >
-          {t("bookNow")}
-        </button>
-        <button
-          type="button"
-          onClick={() => setShowInquiry(true)}
-          className="flex-1 rounded-full border border-kiwi-600 px-4 py-2 text-sm font-medium text-kiwi-700 hover:bg-kiwi-50"
-        >
-          {t("inquire")}
-        </button>
-      </div>
-
-      {testMode && (
-        <p className="mt-2 text-center text-[11px] text-amber-700">
-          {t("testModeNotice")}
-        </p>
-      )}
+      <button
+        type="button"
+        onClick={() => setShowInquiry(true)}
+        className="mt-4 w-full rounded-full bg-kiwi-600 px-4 py-2 text-sm font-medium text-white hover:bg-kiwi-700"
+      >
+        {t("inquire")}
+      </button>
+      <p className="mt-2 text-center text-[11px] text-kiwi-600">
+        {t("inquiryNote")}
+      </p>
 
       {showDates && (
         <DateRangeModal
@@ -287,6 +176,7 @@ export function BookingForm({
           initialCheckIn={checkIn || null}
           initialCheckOut={checkOut || null}
           minNights={minNights}
+          checkAvailability={false}
           onClose={() => setShowDates(false)}
           onApply={applyDates}
         />
@@ -302,17 +192,6 @@ export function BookingForm({
           initialGuests={guests}
           locale={locale}
           onClose={() => setShowInquiry(false)}
-        />
-      )}
-
-      {showCheckout && (
-        <CheckoutDialog
-          listingId={listingId}
-          listingName={listingName}
-          initialCheckIn={checkIn}
-          initialCheckOut={checkOut}
-          initialGuests={guests}
-          onClose={() => setShowCheckout(false)}
         />
       )}
     </section>

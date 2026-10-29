@@ -1,9 +1,9 @@
 import { useTranslations } from "next-intl";
-import type { HostawayListing } from "@/lib/hostaway";
+import type { HomeListing } from "@/content/homes";
 import { PropertyCard } from "./PropertyCard";
 
 type Props = {
-  listings: HostawayListing[];
+  listings: HomeListing[];
   inquiryEmail: string | null;
   defaultCheckIn?: string | null;
   defaultCheckOut?: string | null;

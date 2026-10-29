@@ -4,15 +4,15 @@ import {
   resolveBedroomsLabel,
   resolveDescription,
   resolveTourUrl,
+  type HomeListing,
 } from "@/content/homes";
-import type { HostawayListing } from "@/lib/hostaway";
 import { nearestSupermarket } from "@/lib/supermarkets";
 import { BookingForm } from "./BookingForm";
 import { PropertyAmenities } from "./PropertyAmenities";
 import { PropertyImages } from "./PropertyImages";
 
 type Props = {
-  listing: HostawayListing;
+  listing: HomeListing;
   inquiryEmail: string | null;
   defaultCheckIn?: string | null;
   defaultCheckOut?: string | null;
@@ -27,7 +27,7 @@ export function PropertyCard({
   const t = useTranslations("Property");
   const locale = useLocale();
   const description = resolveDescription(listing, locale, listing.description);
-  const tourUrl = resolveTourUrl(listing, listing.tourUrl);
+  const tourUrl = resolveTourUrl(listing);
   const bedroomsLabel = resolveBedroomsLabel(listing, locale);
   const coordinates = homeCoordinates(listing);
   const supermarket = coordinates ? nearestSupermarket(coordinates) : null;
@@ -58,8 +58,12 @@ export function PropertyCard({
 
           <ul className="flex flex-wrap gap-x-4 gap-y-1 text-sm text-kiwi-700">
             <li>{bedroomsLabel ?? t("bedrooms", { count: listing.bedrooms })}</li>
-            <li>{t("bathrooms", { count: listing.bathrooms })}</li>
-            <li>{t("maxGuests", { count: listing.maxGuests })}</li>
+            {listing.bathrooms !== null && (
+              <li>{t("bathrooms", { count: listing.bathrooms })}</li>
+            )}
+            {listing.maxGuests !== null && (
+              <li>{t("maxGuests", { count: listing.maxGuests })}</li>
+            )}
           </ul>
 
           {supermarket && (
@@ -84,10 +88,8 @@ export function PropertyCard({
         <BookingForm
           listingId={listing.id}
           listingName={listing.name}
-          basePrice={listing.basePrice}
           maxGuests={listing.maxGuests}
           minNights={listing.minNights}
-          maxNights={listing.maxNights}
           inquiryEmail={inquiryEmail}
           defaultCheckIn={defaultCheckIn}
           defaultCheckOut={defaultCheckOut}

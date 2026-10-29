@@ -39,8 +39,8 @@
     "title": "为旅客准备的云端之家",
     "intro": "无论您是来观光、商务出差,还是来探望亲友,这里都将是您在新西兰理想的落脚点。",
     "features": {
-      "dates": "灵活选择入住与退房日期,实时查看价格与空房",
-      "inquiry": "可直接预订,也可与房东沟通议价"
+      "dates": "选好入住与退房日期,直接发给房东",
+      "inquiry": "房东会亲自回复,确认空房与价格"
     },
     "cta": "查看房源详情"
   },
@@ -147,7 +147,7 @@
   },
   "Homes": {
     "title": "我们的房源({count} 处)",
-    "subtitle": "每处房源都有各自的日历、价格与预订流程,请选择最适合此次行程的一处。",
+    "subtitle": "每处房源各有特色,请选择最适合此次行程的一处,再向房东咨询日期。",
     "jumpLabel": "跳转到房源",
     "none": "目前暂无可预订的房源,请稍后再来查看。"
   },
@@ -162,7 +162,7 @@
     "nearestSupermarket": "最近的中国超市:{name},车程约 {minutes} 分钟"
   },
   "Booking": {
-    "title": "预订入住",
+    "title": "咨询空房",
     "perNight": "每晚",
     "checkIn": "入住日期",
     "checkOut": "退房日期",
@@ -180,12 +180,13 @@
     "estimateNote": "最终价格(含清洁费)在结账时显示。",
     "bookNow": "立即预订",
     "inquire": "发送询问",
+    "inquiryNote": "房东会通过邮件回复,确认空房与价格,不会产生任何费用。",
     "minNightsHint": "至少入住 {count} 晚",
     "testModeNotice": "测试模式 · 暂不会扣款,可使用 Stripe 测试卡 4242 4242 4242 4242。"
   },
   "DatePicker": {
     "title": "选择日期",
-    "subtitle": "选择入住与退房日期以查看准确价格",
+    "subtitle": "选择入住与退房日期",
     "checkIn": "入住",
     "checkOut": "退房",
     "addDate": "添加日期",
@@ -194,7 +195,7 @@
     "apply": "确定",
     "close": "关闭",
     "loadingAvailability": "正在加载房态…",
-    "availabilityFallback": "暂时无法加载房态,所选日期将在预订时再次确认。",
+    "availabilityFallback": "暂时无法加载房态,房东会再与您确认日期。",
     "minNightsHint": "至少入住 {count} 晚",
     "minNightsTooltip": "至少 {count} 晚"
   },
@@ -294,7 +295,7 @@
     "close": "关闭"
   },
   "Footer": {
-    "rights": "© {year} Kiwi Cloud Homes · 服务由 Hostaway 提供",
+    "rights": "© {year} Kiwi Cloud Homes",
     "cancellationPolicy": "退订政策"
   },
   "CancellationPolicy": {
