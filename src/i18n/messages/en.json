@@ -153,8 +153,8 @@
   },
   "Property": {
     "perNight": "per night",
-    "bedrooms": "{count} bedrooms",
-    "bathrooms": "{count} bathrooms",
+    "bedrooms": "{count, plural, one {# bedroom} other {# bedrooms}}",
+    "bathrooms": "{count, plural, one {# bathroom} other {# bathrooms}}",
     "maxGuests": "Sleeps up to {count}",
     "viewDetails": "View property",
     "inquire": "Message the host",
