@@ -39,8 +39,8 @@
     "title": "A cloud home for your trip",
     "intro": "Whether you're sightseeing, on business, or visiting family, this is a comfortable base in New Zealand.",
     "features": {
-      "dates": "Pick check-in and check-out dates, with live pricing and availability",
-      "inquiry": "Book direct, or message the host to negotiate"
+      "dates": "Pick your check-in and check-out dates and send them straight to the host",
+      "inquiry": "The host replies personally to confirm availability and price"
     },
     "cta": "View the property"
   },
@@ -147,7 +147,7 @@
   },
   "Homes": {
     "title": "Our homes ({count})",
-    "subtitle": "Each home has its own calendar, price and booking — pick the one that suits your trip.",
+    "subtitle": "Each home is a little different — pick the one that suits your trip, then ask the host about your dates.",
     "jumpLabel": "Jump to a home",
     "none": "No homes are listed right now. Please check back soon."
   },
@@ -162,7 +162,7 @@
     "nearestSupermarket": "Nearest Chinese supermarket: {name}, approx. {minutes} min drive"
   },
   "Booking": {
-    "title": "Book your stay",
+    "title": "Check availability",
     "perNight": "per night",
     "checkIn": "Check-in",
     "checkOut": "Check-out",
@@ -180,12 +180,13 @@
     "estimateNote": "Final price (including cleaning fee) calculated at checkout.",
     "bookNow": "Book now",
     "inquire": "Send inquiry",
+    "inquiryNote": "The host will reply by email to confirm availability and price. Nothing is charged.",
     "minNightsHint": "Minimum stay: {count, plural, one {# night} other {# nights}}",
     "testModeNotice": "Test mode — no real charges. Use Stripe test card 4242 4242 4242 4242 to try the flow."
   },
   "DatePicker": {
     "title": "Select dates",
-    "subtitle": "Add your travel dates for exact pricing",
+    "subtitle": "Add your travel dates",
     "checkIn": "Check-in",
     "checkOut": "Check-out",
     "addDate": "Add date",
@@ -194,7 +195,7 @@
     "apply": "Apply",
     "close": "Close",
     "loadingAvailability": "Loading availability…",
-    "availabilityFallback": "Availability couldn't load — your dates will be confirmed at checkout.",
+    "availabilityFallback": "Availability couldn't load — the host will confirm your dates.",
     "minNightsHint": "Minimum stay: {count, plural, one {# night} other {# nights}}",
     "minNightsTooltip": "{count}-night minimum"
   },
@@ -294,7 +295,7 @@
     "close": "Close"
   },
   "Footer": {
-    "rights": "© {year} Kiwi Cloud Homes · Powered by Hostaway",
+    "rights": "© {year} Kiwi Cloud Homes",
     "cancellationPolicy": "Cancellation policy"
   },
   "CancellationPolicy": {

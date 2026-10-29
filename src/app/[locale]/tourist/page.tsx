@@ -2,11 +2,7 @@ import { setRequestLocale } from "next-intl/server";
 import { useTranslations } from "next-intl";
 import { DirectBookingBanner } from "@/components/DirectBookingBanner";
 import { PropertyList } from "@/components/PropertyList";
-import { getHostawayClient, type HostawayListing } from "@/lib/hostaway";
-
-// Listing/price/availability are live data — render per request so the page
-// reflects the current Hostaway state and the build never blocks on the API.
-export const dynamic = "force-dynamic";
+import { homeListings, type HomeListing } from "@/content/homes";
 
 export default async function TouristPage({
   params,
@@ -16,7 +12,7 @@ export default async function TouristPage({
   const { locale } = await params;
   setRequestLocale(locale);
 
-  const listings = await getHostawayClient().listListings();
+  const listings = homeListings();
   const inquiryEmail = process.env.INQUIRY_EMAIL || null;
   return <TouristJourney listings={listings} inquiryEmail={inquiryEmail} />;
 }
@@ -25,7 +21,7 @@ function TouristJourney({
   listings,
   inquiryEmail,
 }: {
-  listings: HostawayListing[];
+  listings: HomeListing[];
   inquiryEmail: string | null;
 }) {
   const t = useTranslations("Tourist");

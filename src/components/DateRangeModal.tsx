@@ -13,6 +13,9 @@ type Props = {
   initialCheckOut: string | null;
   /** Minimum nights enforced by Hostaway; default 1. */
   minNights?: number;
+  /** Grey out booked nights from /api/booking/availability. Off while no
+   *  calendar source is connected; the host confirms dates by reply. */
+  checkAvailability: boolean;
   onClose: () => void;
   /** Called with ISO YYYY-MM-DD strings (or null to clear). */
   onApply: (checkIn: string | null, checkOut: string | null) => void;
@@ -52,6 +55,7 @@ export function DateRangeModal({
   initialCheckIn,
   initialCheckOut,
   minNights = 1,
+  checkAvailability,
   onClose,
   onApply,
 }: Props) {
@@ -65,7 +69,7 @@ export function DateRangeModal({
   });
 
   const [unavailable, setUnavailable] = useState<Date[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(checkAvailability);
   const [loadError, setLoadError] = useState(false);
 
   // Airbnb-style: two months side-by-side on desktop, single month on
@@ -94,6 +98,7 @@ export function DateRangeModal({
 
   // Fetch host calendar so unavailable nights can be greyed out upfront.
   useEffect(() => {
+    if (!checkAvailability) return;
     let cancelled = false;
     const start = toISO(startOfToday());
     const end = toISO(addDays(startOfToday(), AVAILABILITY_DAYS));
@@ -126,7 +131,7 @@ export function DateRangeModal({
     return () => {
       cancelled = true;
     };
-  }, [listingId]);
+  }, [checkAvailability, listingId]);
 
   const disabled: Matcher[] = useMemo(
     () => [{ before: startOfToday() }, ...unavailable],

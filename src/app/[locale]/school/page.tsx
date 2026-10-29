@@ -4,15 +4,15 @@ import { PropertyList } from "@/components/PropertyList";
 import { SchoolMatch } from "@/components/SchoolMatch";
 import { SchoolSearch } from "@/components/SchoolSearch";
 import { SeasonalGuide } from "@/components/SeasonalGuide";
-import { homeSummary, type HomeSummary } from "@/content/homes";
+import {
+  homeListings,
+  homeSummary,
+  type HomeListing,
+  type HomeSummary,
+} from "@/content/homes";
 import { defaultDatesForMonth } from "@/lib/dates";
-import { getHostawayClient, type HostawayListing } from "@/lib/hostaway";
 import { distanceFrom, findSchool, type School } from "@/lib/schools";
 import { findSeason, type SeasonId } from "@/lib/seasons";
-
-// Listing/price/availability are live data — render per request so the page
-// reflects the current Hostaway state and the build never blocks on the API.
-export const dynamic = "force-dynamic";
 
 type SearchParams = Record<string, string | string[] | undefined>;
 
@@ -27,9 +27,9 @@ function pickString(sp: SearchParams, key: string): string | null {
  * Homes we can't measure keep their configured order, after the rest.
  */
 function orderByDistanceToSchool(
-  listings: HostawayListing[],
+  listings: HomeListing[],
   schoolId: string | null,
-): HostawayListing[] {
+): HomeListing[] {
   const school = schoolId ? findSchool(schoolId) : undefined;
   if (!school) return listings;
 
@@ -44,7 +44,7 @@ function orderByDistanceToSchool(
 }
 
 function distanceToSchool(
-  listing: HostawayListing,
+  listing: HomeListing,
   school: School,
 ): number | null {
   const coordinates = homeSummary(listing).coordinates;
@@ -78,7 +78,7 @@ export default async function SchoolPage({
       : null;
 
   const { checkIn, checkOut } = defaultDatesForMonth(month);
-  const listings = await getHostawayClient().listListings();
+  const listings = homeListings();
   const inquiryEmail = process.env.INQUIRY_EMAIL || null;
 
   return (
@@ -105,7 +105,7 @@ function SchoolJourney({
   defaultCheckOut,
   inquiryEmail,
 }: {
-  listings: HostawayListing[];
+  listings: HomeListing[];
   homes: HomeSummary[];
   schoolId: string | null;
   seasonId: SeasonId | null;
